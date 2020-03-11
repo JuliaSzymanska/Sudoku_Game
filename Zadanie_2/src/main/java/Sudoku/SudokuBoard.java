@@ -30,13 +30,13 @@ public class SudokuBoard {
 
     private boolean check(int number, int row, int column) {
         for (int i = 0; i < 9; i++) {
-            if (board[i][column] == number) return false;
-            if (board[row][i] == number) return false;
+            if (board[i][column] == number) {return false;}
+            if (board[row][i] == number) {return false;}
         }
         int sectionR = row / 3, sectionC = column / 3;
         for (int i = sectionR; i < sectionR + 3; i++) {
             for (int j = sectionC; j < sectionC + 3; j++) {
-                if (board[i][j] == number) return false;
+                if (board[i][j] == number){ return false;}
             }
         }
         return true;
