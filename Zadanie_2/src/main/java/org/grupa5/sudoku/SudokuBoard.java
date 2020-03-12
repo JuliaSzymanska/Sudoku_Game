@@ -154,14 +154,14 @@ public class SudokuBoard {
             }
         }
         Random rand = new Random();
-        int random_value = rand.nextInt(9) + 1;
+        int randomVal = rand.nextInt(9) + 1;
         int randomX = rand.nextInt(3);
         int randomY = rand.nextInt(3);
-        while (!this.check(begX + randomX, begY + randomY, random_value)) {
-            random_value = rand.nextInt(9) + 1;
+        while (!this.check(begX + randomX, begY + randomY, randomVal)) {
+            randomVal = rand.nextInt(9) + 1;
         }
 
-        this.board[begX + randomX][begY + randomY] = random_value;
+        this.board[begX + randomX][begY + randomY] = randomVal;
 
     }
 
