@@ -16,13 +16,6 @@ public class SudokuBoard {
         return board;
     }
 
-    /**
-     * @param board the board to set
-     */
-    public void setBoard(int[][] board) {
-        this.board = board;
-    }
-
     public void fillBoard() {
         int row = 0, column = 0;
         boolean numberFounded = false;
