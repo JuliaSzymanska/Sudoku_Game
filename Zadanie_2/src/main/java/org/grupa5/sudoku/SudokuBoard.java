@@ -13,31 +13,50 @@ public class SudokuBoard {
         return board;
     }
 
-    public void fillBoard(){
-
+    public void resetBoard() {  
+        this.board = new int[9][9];       
     }
 
-    public boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis https://codepumpkin.com/sudoku-solver-using-backtracking/
-    for(int row=0; row<9; row++) {
-        for(int col=0; col<9; col++) {
-            if(this.board[row][col]==0) {
-                for(int number=1; number<=9; number++) {
-                    if(this.check(row, col, number)) {
-                        this.board[row][col] = number;
-                        if(solveSudoku()) {
-                            return true;
-                        }
-                        else {
-                            this.board[row][col] = 0;
+    /**
+     * Fills the board in a random way with every usage.
+     * Starts by filling every sector in the board
+     * in a random space with a random number.
+     * The board is divided into 9 sectors
+     * 3x3 each.
+     * After this randomisation the board is solved using a backtracking algorithm.
+     */
+    public void fillBoard() {
+        for (int i = 0; i <= 8; i++) {
+            this.randomFillSector(i);
+        }
+        this.solveSudoku();
+    }
+
+    /**
+     * solves sudoku recursively using the backtracking algorithm
+     */
+
+    public boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
+                                   // https://codepumpkin.com/sudoku-solver-using-backtracking/
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (this.board[row][col] == 0) {
+                    for (int number = 1; number <= 9; number++) {
+                        if (this.check(row, col, number)) {
+                            this.board[row][col] = number;
+                            if (solveSudoku()) {
+                                return true;
+                            } else {
+                                this.board[row][col] = 0;
+                            }
                         }
                     }
+                    return false;
                 }
-                return false;
             }
         }
+        return true;
     }
-    return true;
-}
 
     /**
      * Board is divided into 9 sectors, counting from top left to bottom right. [
@@ -147,23 +166,12 @@ public class SudokuBoard {
 
     public static void main(String[] args) {
         SudokuBoard plansza = new SudokuBoard();
-        for (int i = 0; i <= 8; i++) {
-            plansza.randomFillSector(i);
-        }
+        plansza.fillBoard();
         for (int[] x : plansza.board) {
             for (int y : x) {
                 System.out.print(y + " ");
             }
             System.out.println();
         }
-        System.out.println();
-        plansza.solveSudoku();
-        for (int[] x : plansza.board) {
-            for (int y : x) {
-                System.out.print(y + " ");
-            }
-            System.out.println();
-        }
-
     }
 }
