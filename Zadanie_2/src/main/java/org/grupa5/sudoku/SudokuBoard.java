@@ -1,9 +1,6 @@
 package org.grupa5.sudoku;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
-
 
 public class SudokuBoard {
 
@@ -16,37 +13,39 @@ public class SudokuBoard {
         return board;
     }
 
-    public void fillBoard() {
-        int row = 0, column = 0;
-        boolean numberFounded = false;
-        Random rand = new Random();
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
-        for (int i = 1; i < 10; i++) {
-            numbers.add(i);
-        }
-        while (!numbers.isEmpty() || !numberFounded) {
-            int number = numbers.get(rand.nextInt(numbers.size()));
-            if (check(number, row, column)) {
-                board[row][column] = number;
-                numberFounded = true;
-                break;
-            } else {
-                numbers.remove(number);
-            }
+    public void fillBoard(){
 
-        }
     }
 
+    public boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis https://codepumpkin.com/sudoku-solver-using-backtracking/
+    for(int row=0; row<9; row++) {
+        for(int col=0; col<9; col++) {
+            if(this.board[row][col]==0) {
+                for(int number=1; number<=9; number++) {
+                    if(this.check(row, col, number)) {
+                        this.board[row][col] = number;
+                        if(solveSudoku()) {
+                            return true;
+                        }
+                        else {
+                            this.board[row][col] = 0;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
     /**
-     * Board is divided into 9 sectors, counting from top left to bottom right.
-     * [
-     * [0, 1 ,2]
-     * [3, 4, 5]
-     * [6, 7, 8]
-     * ]
+     * Board is divided into 9 sectors, counting from top left to bottom right. [
+     * [0, 1 ,2] [3, 4, 5] [6, 7, 8] ]
      * 
      * this method fills a random space in selected sector with a random number
-     * usage - init 9 sectors with one random number each in random position
+     * usage - loop over all sectors and init them with one random number each in
+     * random position
      * 
      * @param sectorNr number of sector to set.
      * 
@@ -61,18 +60,18 @@ public class SudokuBoard {
 
         int begX = (sectorNr / 3) * 3;
         int begY = (sectorNr % 3) * 3;
-        for(int i = begX; i < begX + 2; i++) {
-            for(int j = begY; j < begY + 2; j++) {
-                if (this.board[i][j]!=0) {
+        for (int i = begX; i < begX + 2; i++) {
+            for (int j = begY; j < begY + 2; j++) {
+                if (this.board[i][j] != 0) {
                     return; // if part of board is init, return.
                 }
             }
         }
         Random rand = new Random();
-        int random_value =  rand.nextInt(9) + 1;
+        int random_value = rand.nextInt(9) + 1;
         int randomX = rand.nextInt(3);
         int randomY = rand.nextInt(3);
-        while(!this.check(begX + randomX, begY + randomY, random_value)){
+        while (!this.check(begX + randomX, begY + randomY, random_value)) {
             random_value = rand.nextInt(9) + 1;
         }
 
@@ -81,10 +80,10 @@ public class SudokuBoard {
     }
 
     private boolean checkCol(int col, int value) {
-        if (col < 0 || col > 8){
+        if (col < 0 || col > 8) {
             throw new IndexOutOfBoundsException("col has to be in range 0 - 8");
         }
-        for(int i = 0; i <= 8; i++){
+        for (int i = 0; i <= 8; i++) {
             if (this.board[i][col] == value) {
                 return false;
             }
@@ -93,10 +92,10 @@ public class SudokuBoard {
     }
 
     private boolean checkRow(int row, int value) {
-        if (row < 0 || row > 8){
+        if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("col has to be in range 0 - 8");
         }
-        for(int i = 0; i <= 8; i++){
+        for (int i = 0; i <= 8; i++) {
             if (this.board[row][i] == value) {
                 return false;
             }
@@ -110,8 +109,8 @@ public class SudokuBoard {
         }
         int begX = (sectorNr / 3) * 3;
         int begY = (sectorNr % 3) * 3;
-        for(int i = begX; i < begX + 2; i++) {
-            for(int j = begY; j < begY + 2; j++) {
+        for (int i = begX; i < begX + 2; i++) {
+            for (int j = begY; j < begY + 2; j++) {
                 if (this.board[i][j] == value) {
                     return false;
                 }
@@ -124,7 +123,8 @@ public class SudokuBoard {
         return (row / 3) * 3 + col % 3;
     }
 
-    // TODO: to można zoptymalizować jakoś ładnie, bo akutalnie to jakbyśmy chcieli sprawdzić całego boarda to dużo byśmy operacji powtarzali 
+    // TODO: to można zoptymalizować jakoś ładnie, bo akutalnie to jakbyśmy chcieli
+    // sprawdzić całego boarda to dużo byśmy operacji powtarzali
     private boolean check(int row, int column, int number) {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("col has to be in range 0 - 8");
@@ -134,12 +134,12 @@ public class SudokuBoard {
         }
         if (!this.checkCol(column, number)) {
             return false;
-        };
+        }
+        ;
         if (!this.checkRow(row, number)) {
             return false;
         }
-        int sectorNr = getSectorNumber(row, column);
-        if (!this.checkSector(sectorNr, number)) {
+        if (!this.checkSector(getSectorNumber(row, column), number)) {
             return false;
         }
         return true;
@@ -156,5 +156,14 @@ public class SudokuBoard {
             }
             System.out.println();
         }
+        System.out.println();
+        plansza.solveSudoku();
+        for (int[] x : plansza.board) {
+            for (int y : x) {
+                System.out.print(y + " ");
+            }
+            System.out.println();
+        }
+
     }
 }
