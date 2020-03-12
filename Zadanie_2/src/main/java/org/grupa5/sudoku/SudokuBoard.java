@@ -79,6 +79,9 @@ public class SudokuBoard {
         int random_value =  rand.nextInt(9) + 1;
         int randomX = rand.nextInt(3);
         int randomY = rand.nextInt(3);
+        while(!this.check(begX + randomX, begY + randomY, random_value)){
+            random_value = rand.nextInt(9) + 1;
+        }
 
         this.board[begX + randomX][begY + randomY] = random_value;
 
@@ -154,7 +157,6 @@ public class SudokuBoard {
         for (int i = 0; i <= 8; i++) {
             plansza.randomFillSector(i);
         }
-        plansza.board[1][6] = 123;
         for (int[] x : plansza.board) {
             for (int y : x) {
                 System.out.print(y + " ");
