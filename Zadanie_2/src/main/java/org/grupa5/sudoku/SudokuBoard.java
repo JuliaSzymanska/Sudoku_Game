@@ -13,23 +13,90 @@ public class SudokuBoard {
         return board;
     }
 
-    public void resetBoard() {  
-        this.board = new int[9][9];       
+    public void resetBoard() {
+        this.board = new int[9][9];
     }
 
-    /**
-     * Fills the board in a random way with every usage.
-     * Starts by filling every sector in the board
-     * in a random space with a random number.
-     * The board is divided into 9 sectors
-     * 3x3 each.
-     * After this randomisation the board is solved using a backtracking algorithm.
+    /*
+     * Fills the board in a random way with every usage. Starts by filling every
+     * sector in the board in a random space with a random number. The board is
+     * divided into 9 sectors 3x3 each. After this randomisation the board is solved
+     * using a backtracking algorithm.
+     * Then the board is randomly mixed.
      */
     public void fillBoard() {
         for (int i = 0; i <= 8; i++) {
             this.randomFillSector(i);
         }
         this.solveSudoku();
+        this.mixBoard();
+    }
+
+    public void mixBoard() {
+        Random rand = new Random();
+        int howManyColumnShuffle = rand.nextInt(100);
+        int randomCol;
+        int randomCol2;
+        for (int i = 0; i < howManyColumnShuffle; i++) {
+            randomCol = rand.nextInt(9);
+            do {
+                randomCol2 = rand.nextInt(3);
+                // TODO: zrobić to w jakiś sposób który nie zabija moich oczu :p
+                if (randomCol > 2 && randomCol <= 5) {
+                    randomCol2 += 3;
+                }
+                else if (randomCol > 5 && randomCol <= 8) {
+                    randomCol2 +=6;
+                }
+            } while (randomCol == randomCol2);
+            this.shuffleColumn(randomCol, randomCol2);
+        }
+        int howManyRowShuffle = rand.nextInt(100);
+        int randomRow;
+        int randomRow2;
+        for (int i = 0; i < howManyRowShuffle; i++) {
+            randomRow = rand.nextInt(9);
+            do {
+                randomRow2 = rand.nextInt(3);
+                if (randomRow > 2 && randomRow <= 5) {
+                    randomRow2 += 3;
+                }
+                else if (randomRow > 5 && randomRow <= 8) {
+                    randomRow2 += 6;
+                }
+        } while (randomRow == randomRow2);
+        this.shuffleRow(randomRow, randomRow2);
+    }
+}
+
+    public void shuffleColumn(int col1, int col2) {
+        if (col1 < 0 || col1 > 8) {
+            throw new IndexOutOfBoundsException("col1 has to be in range 0 - 8");
+        }
+        if (col2 < 0 || col2 > 8) {
+            throw new IndexOutOfBoundsException("col2 has to be in range 0 - 8");
+        }
+        int prevCol;
+        for (int x = 0; x <= 8; x++) {
+            prevCol = this.board[x][col1];
+            this.board[x][col1] = this.board[x][col2];
+            this.board[x][col2] = prevCol;
+        }
+    }
+
+    public void shuffleRow(int row1, int row2) {
+        if (row1 < 0 || row1 > 8) {
+            throw new IndexOutOfBoundsException("row1 has to be in range 0 - 8");
+        }
+        if (row2 < 0 || row2 > 8) {
+            throw new IndexOutOfBoundsException("row2 has to be in range 0 - 8");
+        }
+        int prevRow;
+        for (int x = 0; x <= 8; x++) {
+            prevRow = this.board[row1][x];
+            this.board[row1][x] = this.board[row2][x];
+            this.board[row2][x] = prevRow;
+        }
     }
 
     /**
@@ -100,7 +167,7 @@ public class SudokuBoard {
 
     private boolean checkCol(int col, int value) {
         if (col < 0 || col > 8) {
-            throw new IndexOutOfBoundsException("col has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("row has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
             if (this.board[i][col] == value) {
@@ -112,7 +179,7 @@ public class SudokuBoard {
 
     private boolean checkRow(int row, int value) {
         if (row < 0 || row > 8) {
-            throw new IndexOutOfBoundsException("col has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("row has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
             if (this.board[row][i] == value) {
@@ -164,14 +231,27 @@ public class SudokuBoard {
         return true;
     }
 
-    public static void main(String[] args) {
-        SudokuBoard plansza = new SudokuBoard();
-        plansza.fillBoard();
-        for (int[] x : plansza.board) {
+    public void printSudoku() {
+        System.out.printf("X ");
+        for (int i = 0; i <= 8; i++) {
+            System.out.printf((char) ('a' + i) + " ");
+        }
+        System.out.println();
+        int counter = 0;
+        for (int[] x : this.board) {
+            System.out.printf((char) ('a' + counter) + " ");
             for (int y : x) {
                 System.out.print(y + " ");
             }
             System.out.println();
+            counter++;
         }
+
+    }
+
+    public static void main(String[] args) {
+        SudokuBoard plansza = new SudokuBoard();
+        plansza.fillBoard();
+        plansza.printSudoku();
     }
 }
