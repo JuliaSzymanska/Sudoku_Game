@@ -153,7 +153,7 @@ public class SudokuBoard {
         for (int i = begX; i < begX + 2; i++) {
             for (int j = begY; j < begY + 2; j++) {
                 if (this.board[i][j] != 0) {
-                    return; // if part of board is init, return.
+                    return; // if sector is init, return.
                 }
             }
         }
@@ -199,8 +199,8 @@ public class SudokuBoard {
         }
         int begX = (sectorNr / 3) * 3;
         int begY = (sectorNr % 3) * 3;
-        for (int i = begX; i < begX + 2; i++) {
-            for (int j = begY; j < begY + 2; j++) {
+        for (int i = begX; i <= begX + 2; i++) {
+            for (int j = begY; j <= begY + 2; j++) {
                 if (this.board[i][j] == value) {
                     return false;
                 }
@@ -210,7 +210,18 @@ public class SudokuBoard {
     }
 
     private int getSectorNumber(int row, int col) {
-        return (row / 3) * 3 + col % 3;
+        int sectorNr = (row / 3) * 3;
+        if (col <= 2){
+
+        }
+        else if (col <= 5){
+            sectorNr += 1;
+        }
+        else {
+            sectorNr += 2;
+        }
+
+        return sectorNr;
     }
 
     // TODO: to można zoptymalizować jakoś ładnie, bo akutalnie to jakbyśmy chcieli
@@ -252,6 +263,7 @@ public class SudokuBoard {
         }
 
     }
+
 
     public static void main(String[] args) {
         SudokuBoard plansza = new SudokuBoard();
