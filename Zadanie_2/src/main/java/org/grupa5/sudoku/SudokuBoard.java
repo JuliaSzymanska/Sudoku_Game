@@ -126,8 +126,12 @@ public class SudokuBoard {
     }
 
     /**
-     * Board is divided into 9 sectors, counting from top left to bottom right. [
-     * [0, 1 ,2] [3, 4, 5] [6, 7, 8] ]
+     * Board is divided into 9 sectors, counting from top left to bottom right. 
+     * [
+     * [0, 1 ,2] 
+     * [3, 4, 5]
+     * [6, 7, 8] 
+     * ]
      * 
      * this method fills a random space in selected sector with a random number
      * usage - loop over all sectors and init them with one random number each in
