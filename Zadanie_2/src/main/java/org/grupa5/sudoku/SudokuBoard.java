@@ -21,7 +21,7 @@ public class SudokuBoard {
      * Fills the board in a random way with every usage. Starts by filling every
      * sector in the board in a random space with a random number. The board is
      * divided into 9 sectors 3x3 each. After this randomisation the board is solved
-     * using a backtracking algorithm. Then the board is randomly mixed.
+     * using a backtracking algorithm. Then the board is randomly mixed
      */
     public void fillBoard() {
         for (int i = 0; i <= 8; i++) {
@@ -97,7 +97,7 @@ public class SudokuBoard {
      * solves sudoku recursively using the backtracking algorithm
      */
 
-    public boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
+    public boolean solveSudoku() { // TODO: usun link, zmien trochę alogrytm zeby byl autorski choc odrobine, dodaj ladny opis
                                    // https://codepumpkin.com/sudoku-solver-using-backtracking/
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
@@ -202,7 +202,8 @@ public class SudokuBoard {
     private int getSectorNumber(int row, int col) {
         int sectorNr = (row / 3) * 3;
         if (col <= 2) {
-
+        // TODO: to na 100% da się zrobić w jakiś sposób po prostu licząć wynik i od razu zwracając bez żadnych głupich ifów
+        // ale ja jak próbowałem to się bugowało w niektórych przypadkach, trzeba do tego wrócić
         } else if (col <= 5) {
             sectorNr += 1;
         } else {
