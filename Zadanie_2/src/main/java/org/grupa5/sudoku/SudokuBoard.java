@@ -98,7 +98,7 @@ public class SudokuBoard {
      */
 
     public boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
-                                   // https://codepumpkin.com/sudoku-solver-using-backtracking/
+        // https://codepumpkin.com/sudoku-solver-using-backtracking/
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (this.board[row][col] == 0) {
@@ -122,17 +122,16 @@ public class SudokuBoard {
     /**
      * Board is divided into 9 sectors, counting from top left to bottom right. [
      * [0, 1 ,2] [3, 4, 5] [6, 7, 8] ]
-     * 
+     * <p>
      * this method fills a random space in selected sector with a random number
      * usage - loop over all sectors and init them with one random number each in
      * random position
-     * 
+     *
      * @param sectorNr number of sector to set.
-     * 
      */
     private void randomFillSector(int sectorNr) {
         if (sectorNr < 0 || sectorNr > 8) {
-            throw new IndexOutOfBoundsException("sectorNr has to be in range from 0 to 8");
+            throw new IndexOutOfBoundsException("Sector number (sectorNr) has to be in range from 0 to 8");
         }
 
         // sectorNr / 3 * 3 - for 0 - 2 : 0; 3 - 5 : 3; 6 - 8 : 6;
@@ -154,14 +153,12 @@ public class SudokuBoard {
         while (!this.check(begX + randomX, begY + randomY, randomVal)) {
             randomVal = rand.nextInt(9) + 1;
         }
-
         this.board[begX + randomX][begY + randomY] = randomVal;
-
     }
 
     private boolean checkCol(int col, int value) {
         if (col < 0 || col > 8) {
-            throw new IndexOutOfBoundsException("row has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
             if (this.board[i][col] == value) {
@@ -173,7 +170,7 @@ public class SudokuBoard {
 
     private boolean checkRow(int row, int value) {
         if (row < 0 || row > 8) {
-            throw new IndexOutOfBoundsException("row has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
             if (this.board[row][i] == value) {
@@ -187,8 +184,7 @@ public class SudokuBoard {
         if (sectorNr < 0 || sectorNr > 8) {
             throw new IndexOutOfBoundsException("sectorNr has to be in range from 0 to 8");
         }
-        int begX = (sectorNr / 3) * 3;
-        int begY = (sectorNr % 3) * 3;
+        int begX = (sectorNr / 3) * 3, begY = (sectorNr % 3) * 3;
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
                 if (this.board[i][j] == value) {
@@ -201,14 +197,12 @@ public class SudokuBoard {
 
     private int getSectorNumber(int row, int col) {
         int sectorNr = (row / 3) * 3;
-        if (col <= 2) {
-
-        } else if (col <= 5) {
-            sectorNr += 1;
-        } else {
-            sectorNr += 2;
-        }
-
+        sectorNr += col / 3;
+//        if (col >= 3 && col <= 5) {
+//            sectorNr += 1;
+//        } else {
+//            sectorNr += 2;
+//        }
         return sectorNr;
     }
 
@@ -216,21 +210,21 @@ public class SudokuBoard {
     // sprawdzić całego boarda to dużo byśmy operacji powtarzali
     private boolean check(int row, int column, int number) {
         if (row < 0 || row > 8) {
-            throw new IndexOutOfBoundsException("col has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
         }
         if (column < 0 || column > 8) {
-            throw new IndexOutOfBoundsException("col has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
-        if (!this.checkCol(column, number)) {
+        if (!this.checkCol(column, number) | !this.checkRow(row, number) | !this.checkSector(getSectorNumber(row, column), number)) {
             return false;
         }
-        ;
-        if (!this.checkRow(row, number)) {
-            return false;
-        }
-        if (!this.checkSector(getSectorNumber(row, column), number)) {
-            return false;
-        }
+//        ;
+//        if (!this.checkRow(row, number)) {
+//            return false;
+//        }
+//        if (!this.checkSector(getSectorNumber(row, column), number)) {
+//            return false;
+//        }
         return true;
     }
 
