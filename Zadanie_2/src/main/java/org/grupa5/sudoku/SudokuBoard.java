@@ -17,7 +17,7 @@ public class SudokuBoard {
         this.board = new int[9][9];
     }
 
-    /*
+    /**
      * Fills the board in a random way with every usage. Starts by filling every
      * sector in the board in a random space with a random number. The board is
      * divided into 9 sectors 3x3 each. After this randomisation the board is solved
@@ -63,7 +63,7 @@ public class SudokuBoard {
         }
     }
 
-    public void shuffleColumn(int col1, int col2) {
+    private void shuffleColumn(int col1, int col2) {
         if (col1 < 0 || col1 > 8) {
             throw new IndexOutOfBoundsException("col1 has to be in range 0 - 8");
         }
@@ -78,7 +78,7 @@ public class SudokuBoard {
         }
     }
 
-    public void shuffleRow(int row1, int row2) {
+    private void shuffleRow(int row1, int row2) {
         if (row1 < 0 || row1 > 8) {
             throw new IndexOutOfBoundsException("row1 has to be in range 0 - 8");
         }
