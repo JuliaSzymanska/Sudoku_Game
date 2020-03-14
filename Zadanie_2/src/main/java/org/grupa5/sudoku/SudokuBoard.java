@@ -21,8 +21,7 @@ public class SudokuBoard {
      * Fills the board in a random way with every usage. Starts by filling every
      * sector in the board in a random space with a random number. The board is
      * divided into 9 sectors 3x3 each. After this randomisation the board is solved
-     * using a backtracking algorithm.
-     * Then the board is randomly mixed.
+     * using a backtracking algorithm. Then the board is randomly mixed.
      */
     public void fillBoard() {
         for (int i = 0; i <= 8; i++) {
@@ -34,40 +33,35 @@ public class SudokuBoard {
 
     public void mixBoard() {
         Random rand = new Random();
-        int howManyColumnShuffle = rand.nextInt(100);
+        int howManyShuffle = rand.nextInt(100);
         int randomCol;
         int randomCol2;
-        for (int i = 0; i < howManyColumnShuffle; i++) {
+        int randomRow;
+        int randomRow2;
+        for (int i = 0; i < howManyShuffle; i++) {
             randomCol = rand.nextInt(9);
+            randomRow = rand.nextInt(9);
             do {
                 randomCol2 = rand.nextInt(3);
                 // TODO: zrobić to w jakiś sposób który nie zabija moich oczu :p
                 if (randomCol > 2 && randomCol <= 5) {
                     randomCol2 += 3;
-                }
-                else if (randomCol > 5 && randomCol <= 8) {
-                    randomCol2 +=6;
+                } else if (randomCol > 5 && randomCol <= 8) {
+                    randomCol2 += 6;
                 }
             } while (randomCol == randomCol2);
-            this.shuffleColumn(randomCol, randomCol2);
-        }
-        int howManyRowShuffle = rand.nextInt(100);
-        int randomRow;
-        int randomRow2;
-        for (int i = 0; i < howManyRowShuffle; i++) {
-            randomRow = rand.nextInt(9);
             do {
                 randomRow2 = rand.nextInt(3);
                 if (randomRow > 2 && randomRow <= 5) {
                     randomRow2 += 3;
-                }
-                else if (randomRow > 5 && randomRow <= 8) {
+                } else if (randomRow > 5 && randomRow <= 8) {
                     randomRow2 += 6;
                 }
-        } while (randomRow == randomRow2);
-        this.shuffleRow(randomRow, randomRow2);
+            } while (randomRow == randomRow2);
+            this.shuffleColumn(randomCol, randomCol2);
+            this.shuffleRow(randomRow, randomRow2);
+        }
     }
-}
 
     public void shuffleColumn(int col1, int col2) {
         if (col1 < 0 || col1 > 8) {
@@ -126,12 +120,8 @@ public class SudokuBoard {
     }
 
     /**
-     * Board is divided into 9 sectors, counting from top left to bottom right. 
-     * [
-     * [0, 1 ,2] 
-     * [3, 4, 5]
-     * [6, 7, 8] 
-     * ]
+     * Board is divided into 9 sectors, counting from top left to bottom right. [
+     * [0, 1 ,2] [3, 4, 5] [6, 7, 8] ]
      * 
      * this method fills a random space in selected sector with a random number
      * usage - loop over all sectors and init them with one random number each in
@@ -211,13 +201,11 @@ public class SudokuBoard {
 
     private int getSectorNumber(int row, int col) {
         int sectorNr = (row / 3) * 3;
-        if (col <= 2){
+        if (col <= 2) {
 
-        }
-        else if (col <= 5){
+        } else if (col <= 5) {
             sectorNr += 1;
-        }
-        else {
+        } else {
             sectorNr += 2;
         }
 
@@ -263,7 +251,6 @@ public class SudokuBoard {
         }
 
     }
-
 
     public static void main(String[] args) {
         SudokuBoard plansza = new SudokuBoard();
