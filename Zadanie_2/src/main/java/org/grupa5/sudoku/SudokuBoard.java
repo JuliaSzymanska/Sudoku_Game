@@ -44,19 +44,21 @@ public class SudokuBoard {
             do {
                 randomCol2 = rand.nextInt(3);
                 // TODO: zrobić to w jakiś sposób który nie zabija moich oczu :p
-                if (randomCol > 2 && randomCol <= 5) {
-                    randomCol2 += 3;
-                } else if (randomCol > 5 && randomCol <= 8) {
-                    randomCol2 += 6;
-                }
+//                if (randomCol > 2 && randomCol <= 5) {
+//                    randomCol2 += 3;
+//                } else if (randomCol > 5 && randomCol <= 8) {
+//                    randomCol2 += 6;
+//                }
+                randomCol2 += (randomCol / 3) * 3;
             } while (randomCol == randomCol2);
             do {
                 randomRow2 = rand.nextInt(3);
-                if (randomRow > 2 && randomRow <= 5) {
-                    randomRow2 += 3;
-                } else if (randomRow > 5 && randomRow <= 8) {
-                    randomRow2 += 6;
-                }
+//                if (randomRow > 2 && randomRow <= 5) {
+//                    randomRow2 += 3;
+//                } else if (randomRow > 5 && randomRow <= 8) {
+//                    randomRow2 += 6;
+//                }
+                randomRow2 += (randomRow / 3) * 3;
             } while (randomRow == randomRow2);
             this.shuffleColumn(randomCol, randomCol2);
             this.shuffleRow(randomRow, randomRow2);
@@ -65,10 +67,10 @@ public class SudokuBoard {
 
     private void shuffleColumn(int col1, int col2) {
         if (col1 < 0 || col1 > 8) {
-            throw new IndexOutOfBoundsException("col1 has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Column col1 has to be in range 0 - 8");
         }
         if (col2 < 0 || col2 > 8) {
-            throw new IndexOutOfBoundsException("col2 has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Column col2 has to be in range 0 - 8");
         }
         int prevCol;
         for (int x = 0; x <= 8; x++) {
@@ -80,10 +82,10 @@ public class SudokuBoard {
 
     private void shuffleRow(int row1, int row2) {
         if (row1 < 0 || row1 > 8) {
-            throw new IndexOutOfBoundsException("row1 has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Row row1 has to be in range 0 - 8");
         }
         if (row2 < 0 || row2 > 8) {
-            throw new IndexOutOfBoundsException("row2 has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Row row2 has to be in range 0 - 8");
         }
         int prevRow;
         for (int x = 0; x <= 8; x++) {
@@ -97,8 +99,7 @@ public class SudokuBoard {
      * solves sudoku recursively using the backtracking algorithm
      */
 
-    public boolean solveSudoku() { // TODO: usun link, zmien trochę alogrytm zeby byl autorski choc odrobine, dodaj ladny opis
-                                   // https://codepumpkin.com/sudoku-solver-using-backtracking/
+    public boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (this.board[row][col] == 0) {
@@ -122,17 +123,16 @@ public class SudokuBoard {
     /**
      * Board is divided into 9 sectors, counting from top left to bottom right. [
      * [0, 1 ,2] [3, 4, 5] [6, 7, 8] ]
-     * 
+     * <p>
      * this method fills a random space in selected sector with a random number
      * usage - loop over all sectors and init them with one random number each in
      * random position
-     * 
+     *
      * @param sectorNr number of sector to set.
-     * 
      */
     private void randomFillSector(int sectorNr) {
         if (sectorNr < 0 || sectorNr > 8) {
-            throw new IndexOutOfBoundsException("sectorNr has to be in range from 0 to 8");
+            throw new IndexOutOfBoundsException("Sector number (sectorNr) has to be in range from 0 to 8");
         }
 
         // sectorNr / 3 * 3 - for 0 - 2 : 0; 3 - 5 : 3; 6 - 8 : 6;
@@ -154,14 +154,12 @@ public class SudokuBoard {
         while (!this.check(begX + randomX, begY + randomY, randomVal)) {
             randomVal = rand.nextInt(9) + 1;
         }
-
         this.board[begX + randomX][begY + randomY] = randomVal;
-
     }
 
     private boolean checkCol(int col, int value) {
         if (col < 0 || col > 8) {
-            throw new IndexOutOfBoundsException("row has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
             if (this.board[i][col] == value) {
@@ -173,7 +171,7 @@ public class SudokuBoard {
 
     private boolean checkRow(int row, int value) {
         if (row < 0 || row > 8) {
-            throw new IndexOutOfBoundsException("row has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
             if (this.board[row][i] == value) {
@@ -185,10 +183,9 @@ public class SudokuBoard {
 
     private boolean checkSector(int sectorNr, int value) {
         if (sectorNr < 0 || sectorNr > 8) {
-            throw new IndexOutOfBoundsException("sectorNr has to be in range from 0 to 8");
+            throw new IndexOutOfBoundsException("Sector sectorNr has to be in range from 0 to 8");
         }
-        int begX = (sectorNr / 3) * 3;
-        int begY = (sectorNr % 3) * 3;
+        int begX = (sectorNr / 3) * 3, begY = (sectorNr % 3) * 3;
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
                 if (this.board[i][j] == value) {
@@ -201,15 +198,12 @@ public class SudokuBoard {
 
     private int getSectorNumber(int row, int col) {
         int sectorNr = (row / 3) * 3;
-        if (col <= 2) {
-        // TODO: to na 100% da się zrobić w jakiś sposób po prostu licząć wynik i od razu zwracając bez żadnych głupich ifów
-        // ale ja jak próbowałem to się bugowało w niektórych przypadkach, trzeba do tego wrócić
-        } else if (col <= 5) {
-            sectorNr += 1;
-        } else {
-            sectorNr += 2;
-        }
-
+        sectorNr += col / 3;
+//        if (col >= 3 && col <= 5) {
+//            sectorNr += 1;
+//        } else {
+//            sectorNr += 2;
+//        }
         return sectorNr;
     }
 
@@ -217,21 +211,21 @@ public class SudokuBoard {
     // sprawdzić całego boarda to dużo byśmy operacji powtarzali
     private boolean check(int row, int column, int number) {
         if (row < 0 || row > 8) {
-            throw new IndexOutOfBoundsException("col has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
         }
         if (column < 0 || column > 8) {
-            throw new IndexOutOfBoundsException("col has to be in range 0 - 8");
+            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
-        if (!this.checkCol(column, number)) {
+        if (!this.checkCol(column, number) | !this.checkRow(row, number) | !this.checkSector(getSectorNumber(row, column), number)) {
             return false;
         }
-        ;
-        if (!this.checkRow(row, number)) {
-            return false;
-        }
-        if (!this.checkSector(getSectorNumber(row, column), number)) {
-            return false;
-        }
+//        ;
+//        if (!this.checkRow(row, number)) {
+//            return false;
+//        }
+//        if (!this.checkSector(getSectorNumber(row, column), number)) {
+//            return false;
+//        }
         return true;
     }
 
@@ -254,8 +248,8 @@ public class SudokuBoard {
     }
 
     public static void main(String[] args) {
-        SudokuBoard plansza = new SudokuBoard();
-        plansza.fillBoard();
-        plansza.printSudoku();
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.fillBoard();
+        sudoku.printSudoku();
     }
 }

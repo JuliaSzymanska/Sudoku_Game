@@ -46,7 +46,7 @@
             </plugin>
         </plugins>
     </reporting>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -83,7 +83,7 @@
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.18</version>
+                        <version>8.30</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -138,10 +138,10 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.5.2</version>
+            <version>5.6.0</version>
         </dependency>
     </dependencies>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
