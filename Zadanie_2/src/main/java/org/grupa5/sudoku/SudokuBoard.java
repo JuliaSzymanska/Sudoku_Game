@@ -31,7 +31,7 @@ public class SudokuBoard {
         this.mixBoard();
     }
 
-    public void mixBoard() {
+    private void mixBoard() {
         Random rand = new Random();
         int howManyShuffle = rand.nextInt(100);
         int randomCol;
@@ -65,7 +65,7 @@ public class SudokuBoard {
         }
     }
 
-    public void shuffleColumn(int col1, int col2) {
+    private void shuffleColumn(int col1, int col2) {
         if (col1 < 0 || col1 > 8) {
             throw new IndexOutOfBoundsException("Column col1 has to be in range 0 - 8");
         }
@@ -80,7 +80,7 @@ public class SudokuBoard {
         }
     }
 
-    public void shuffleRow(int row1, int row2) {
+    private void shuffleRow(int row1, int row2) {
         if (row1 < 0 || row1 > 8) {
             throw new IndexOutOfBoundsException("Row row1 has to be in range 0 - 8");
         }
@@ -99,7 +99,7 @@ public class SudokuBoard {
      * solves sudoku recursively using the backtracking algorithm
      */
 
-    public boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
+    private boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (this.board[row][col] == 0) {

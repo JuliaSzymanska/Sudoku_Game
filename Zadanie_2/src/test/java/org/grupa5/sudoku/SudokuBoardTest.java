@@ -49,8 +49,25 @@ public class SudokuBoardTest {
         sudoku.fillBoard();
         board2 = sudoku.getBoard();
         assertNotEquals(board1, board2);
-
     }
 
+    @Test
+    void resetBoardTest() {
+        int[][] board;
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.fillBoard();
+        sudoku.resetBoard();
+        boolean check = false;
+        board = sudoku.getBoard();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != 0) {
+                    check = true;
+                }
+            }
+        }
+        assertFalse(check);
+    }
+// TODO: Zrobic test dla getBoard
 
 }
