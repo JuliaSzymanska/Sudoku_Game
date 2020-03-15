@@ -2,6 +2,8 @@ package org.grupa5.sudoku;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -69,6 +71,30 @@ public class SudokuBoardTest {
         assertFalse(check);
     }
 
-    
+    @Test
+    void getInfoSudokuTest() {
+        int[][] board;
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.fillBoard();
+        board = sudoku.getBoard();
+        String boardPrint = sudoku.getInfoSudoku();
+
+        String output = "X ";
+        for (int i = 0; i <= 8; i++) {
+            output += (char) ('a' + i) + " ";
+        }
+        output += "\n";
+        int counter = 0;
+        for (int[] x : board) {
+            output += (char) ('a' + counter) + " ";
+            for (int y : x) {
+                output += y + " ";
+            }
+            output += "\n";
+            counter++;
+        }
+
+        assertEquals(sudoku.getInfoSudoku(), boardPrint );
+    }
 
 }

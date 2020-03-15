@@ -1,6 +1,7 @@
 package org.grupa5.sudoku;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class SudokuBoard {
 
@@ -229,27 +230,40 @@ public class SudokuBoard {
         return true;
     }
 
-    public void printSudoku() {
-        System.out.printf("X ");
+    public String getInfoSudoku() {
+        String output = "X ";
+//        Stream<String> stream= Stream.of("X ");
+//        System.out.printf("X ");
         for (int i = 0; i <= 8; i++) {
-            System.out.printf((char) ('a' + i) + " ");
+//            System.out.printf((char) ('a' + i) + " ");
+            output += (char) ('a' + i) + " ";
+//                stream = Stream.concat(stream, Stream.of((char) ('a' + i) + " "));
         }
-        System.out.println();
+//        System.out.println();
+        output += "\n";
+//        stream = Stream.concat(stream, Stream.of("\n"));
         int counter = 0;
         for (int[] x : this.board) {
-            System.out.printf((char) ('a' + counter) + " ");
+//            System.out.printf((char) ('a' + counter) + " ");
+            output += (char) ('a' + counter) + " ";
+//            stream = Stream.concat(stream, Stream.of((char) ('a' + counter) + " "));
             for (int y : x) {
-                System.out.print(y + " ");
+//                System.out.print(y + " ");
+                output += y + " ";
+//                stream = Stream.concat(stream, Stream.of(y + " "));
             }
-            System.out.println();
+//            System.out.println();
+            output += "\n";
+//            stream = Stream.concat(stream, Stream.of("\n"));
             counter++;
         }
-
+        return output;
     }
 
     public static void main(String[] args) {
         SudokuBoard sudoku = new SudokuBoard();
         sudoku.fillBoard();
-        sudoku.printSudoku();
+        String output = sudoku.getInfoSudoku();
+        System.out.println(output);
     }
 }
