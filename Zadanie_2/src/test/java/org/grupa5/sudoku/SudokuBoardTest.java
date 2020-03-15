@@ -68,6 +68,5 @@ public class SudokuBoardTest {
         }
         assertFalse(check);
     }
-// TODO: Zrobic test dla getBoard
 
 }
