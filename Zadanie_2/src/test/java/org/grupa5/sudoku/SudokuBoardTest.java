@@ -89,7 +89,7 @@ public class SudokuBoardTest {
             output.append("\n");
             counter++;
         }
-        assertEquals(sudoku.getInfoSudoku(), output.toString() );
+        assertEquals(sudoku.getInfoSudoku(), output.toString());
     }
 
 }
