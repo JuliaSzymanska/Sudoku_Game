@@ -2,7 +2,6 @@ package org.grupa5.sudoku;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.stream.Stream;
 
 public class SudokuBoard {
 
@@ -91,7 +90,7 @@ public class SudokuBoard {
      * Solves sudoku recursively using the backtracking algorithm.
      */
 
-    private boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
+    private boolean solveSudoku() {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (this.board[row][col] == 0) {
@@ -194,7 +193,7 @@ public class SudokuBoard {
         sectorNr += col / 3;
         return sectorNr;
     }
-    
+
     private boolean check(int row, int column, int number) {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
