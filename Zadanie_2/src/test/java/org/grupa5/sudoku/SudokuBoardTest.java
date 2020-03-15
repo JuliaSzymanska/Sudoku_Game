@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit test for simple App.
+ * Testing methods: fillBoard, getInfoSudoku, resetBoard.
+ * Also check if two generated sudoku boards are not the same.
  */
 public class SudokuBoardTest {
 
@@ -39,7 +41,7 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void chekcEqualityTest() {
+    void checkEqualityTest() {
         int[][] board1, board2;
         SudokuBoard sudoku = new SudokuBoard();
         sudoku.fillBoard();
