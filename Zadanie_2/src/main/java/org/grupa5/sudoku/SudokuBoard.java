@@ -1,16 +1,19 @@
 package org.grupa5.sudoku;
 
+import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class SudokuBoard {
 
     private int[][] board = new int[9][9];
 
     /**
-     * @return the board
+     * Return copy of the board.
      */
     public int[][] getBoard() {
-        return board;
+        int[][] copy = Arrays.stream(this.board).map(int[]::clone).toArray(int[][]::new);
+        return copy;
     }
 
     public void resetBoard() {
@@ -19,9 +22,9 @@ public class SudokuBoard {
 
     /**
      * Fills the board in a random way with every usage. Starts by filling every
-     * sector in the board in a random space with a random number. The board is
-     * divided into 9 sectors 3x3 each. After this randomisation the board is solved
-     * using a backtracking algorithm. Then the board is randomly mixed
+     * sector in the board in a random space with a random number. The board is.
+     * divided into 9 sectors 3x3 each. After this randomisation the board is solved.
+     * using a backtracking algorithm. Then the board is randomly mixed.
      */
     public void fillBoard() {
         for (int i = 0; i <= 8; i++) {
@@ -43,21 +46,10 @@ public class SudokuBoard {
             randomRow = rand.nextInt(9);
             do {
                 randomCol2 = rand.nextInt(3);
-                // TODO: zrobić to w jakiś sposób który nie zabija moich oczu :p
-//                if (randomCol > 2 && randomCol <= 5) {
-//                    randomCol2 += 3;
-//                } else if (randomCol > 5 && randomCol <= 8) {
-//                    randomCol2 += 6;
-//                }
                 randomCol2 += (randomCol / 3) * 3;
             } while (randomCol == randomCol2);
             do {
                 randomRow2 = rand.nextInt(3);
-//                if (randomRow > 2 && randomRow <= 5) {
-//                    randomRow2 += 3;
-//                } else if (randomRow > 5 && randomRow <= 8) {
-//                    randomRow2 += 6;
-//                }
                 randomRow2 += (randomRow / 3) * 3;
             } while (randomRow == randomRow2);
             this.shuffleColumn(randomCol, randomCol2);
@@ -96,7 +88,7 @@ public class SudokuBoard {
     }
 
     /**
-     * solves sudoku recursively using the backtracking algorithm
+     * Solves sudoku recursively using the backtracking algorithm.
      */
 
     private boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
@@ -123,7 +115,6 @@ public class SudokuBoard {
     /**
      * Board is divided into 9 sectors, counting from top left to bottom right. [
      * [0, 1 ,2] [3, 4, 5] [6, 7, 8] ]
-     * <p>
      * this method fills a random space in selected sector with a random number
      * usage - loop over all sectors and init them with one random number each in
      * random position
@@ -132,7 +123,8 @@ public class SudokuBoard {
      */
     private void randomFillSector(int sectorNr) {
         if (sectorNr < 0 || sectorNr > 8) {
-            throw new IndexOutOfBoundsException("Sector number (sectorNr) has to be in range from 0 to 8");
+            throw new IndexOutOfBoundsException(
+                    "Sector number (sectorNr) has to be in range from 0 to 8");
         }
 
         // sectorNr / 3 * 3 - for 0 - 2 : 0; 3 - 5 : 3; 6 - 8 : 6;
@@ -185,7 +177,8 @@ public class SudokuBoard {
         if (sectorNr < 0 || sectorNr > 8) {
             throw new IndexOutOfBoundsException("Sector sectorNr has to be in range from 0 to 8");
         }
-        int begX = (sectorNr / 3) * 3, begY = (sectorNr % 3) * 3;
+        int begX = (sectorNr / 3) * 3;
+        int begY = (sectorNr % 3) * 3;
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
                 if (this.board[i][j] == value) {
@@ -199,16 +192,9 @@ public class SudokuBoard {
     private int getSectorNumber(int row, int col) {
         int sectorNr = (row / 3) * 3;
         sectorNr += col / 3;
-//        if (col >= 3 && col <= 5) {
-//            sectorNr += 1;
-//        } else {
-//            sectorNr += 2;
-//        }
         return sectorNr;
     }
-
-    // TODO: to można zoptymalizować jakoś ładnie, bo akutalnie to jakbyśmy chcieli
-    // sprawdzić całego boarda to dużo byśmy operacji powtarzali
+    
     private boolean check(int row, int column, int number) {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
@@ -216,40 +202,40 @@ public class SudokuBoard {
         if (column < 0 || column > 8) {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
-        if (!this.checkCol(column, number) | !this.checkRow(row, number) | !this.checkSector(getSectorNumber(row, column), number)) {
-            return false;
-        }
-//        ;
-//        if (!this.checkRow(row, number)) {
-//            return false;
-//        }
-//        if (!this.checkSector(getSectorNumber(row, column), number)) {
-//            return false;
-//        }
-        return true;
+        return this.checkCol(column, number) && this.checkRow(row, number)
+                && this.checkSector(getSectorNumber(row, column), number);
     }
 
-    public void printSudoku() {
-        System.out.printf("X ");
+    /**
+     * Write all board's numbers to StringBuilder and then converted to String.
+     */
+
+    public String getInfoSudoku() {
+        StringBuilder output = new StringBuilder("X ");
         for (int i = 0; i <= 8; i++) {
-            System.out.printf((char) ('a' + i) + " ");
+            output.append((char) ('a' + i)).append(" ");
         }
-        System.out.println();
+        output.append("\n");
         int counter = 0;
         for (int[] x : this.board) {
-            System.out.printf((char) ('a' + counter) + " ");
+            output.append((char) ('a' + counter)).append(" ");
             for (int y : x) {
-                System.out.print(y + " ");
+                output.append(y).append(" ");
             }
-            System.out.println();
+            output.append("\n");
             counter++;
         }
-
+        return output.toString();
     }
+
+    /**
+     * Main method to use class Sudoku.
+     */
 
     public static void main(String[] args) {
         SudokuBoard sudoku = new SudokuBoard();
         sudoku.fillBoard();
-        sudoku.printSudoku();
+        String output = sudoku.getInfoSudoku();
+        System.out.println(output);
     }
 }
