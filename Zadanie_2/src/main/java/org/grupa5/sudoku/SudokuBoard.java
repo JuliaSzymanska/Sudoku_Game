@@ -44,21 +44,10 @@ public class SudokuBoard {
             randomRow = rand.nextInt(9);
             do {
                 randomCol2 = rand.nextInt(3);
-                // TODO: zrobić to w jakiś sposób który nie zabija moich oczu :p
-//                if (randomCol > 2 && randomCol <= 5) {
-//                    randomCol2 += 3;
-//                } else if (randomCol > 5 && randomCol <= 8) {
-//                    randomCol2 += 6;
-//                }
                 randomCol2 += (randomCol / 3) * 3;
             } while (randomCol == randomCol2);
             do {
                 randomRow2 = rand.nextInt(3);
-//                if (randomRow > 2 && randomRow <= 5) {
-//                    randomRow2 += 3;
-//                } else if (randomRow > 5 && randomRow <= 8) {
-//                    randomRow2 += 6;
-//                }
                 randomRow2 += (randomRow / 3) * 3;
             } while (randomRow == randomRow2);
             this.shuffleColumn(randomCol, randomCol2);
@@ -200,11 +189,6 @@ public class SudokuBoard {
     private int getSectorNumber(int row, int col) {
         int sectorNr = (row / 3) * 3;
         sectorNr += col / 3;
-//        if (col >= 3 && col <= 5) {
-//            sectorNr += 1;
-//        } else {
-//            sectorNr += 2;
-//        }
         return sectorNr;
     }
 
@@ -220,41 +204,22 @@ public class SudokuBoard {
         if (!this.checkCol(column, number) | !this.checkRow(row, number) | !this.checkSector(getSectorNumber(row, column), number)) {
             return false;
         }
-//        ;
-//        if (!this.checkRow(row, number)) {
-//            return false;
-//        }
-//        if (!this.checkSector(getSectorNumber(row, column), number)) {
-//            return false;
-//        }
         return true;
     }
 
     public String getInfoSudoku() {
         String output = "X ";
-//        Stream<String> stream= Stream.of("X ");
-//        System.out.printf("X ");
         for (int i = 0; i <= 8; i++) {
-//            System.out.printf((char) ('a' + i) + " ");
             output += (char) ('a' + i) + " ";
-//                stream = Stream.concat(stream, Stream.of((char) ('a' + i) + " "));
         }
-//        System.out.println();
         output += "\n";
-//        stream = Stream.concat(stream, Stream.of("\n"));
         int counter = 0;
         for (int[] x : this.board) {
-//            System.out.printf((char) ('a' + counter) + " ");
             output += (char) ('a' + counter) + " ";
-//            stream = Stream.concat(stream, Stream.of((char) ('a' + counter) + " "));
             for (int y : x) {
-//                System.out.print(y + " ");
                 output += y + " ";
-//                stream = Stream.concat(stream, Stream.of(y + " "));
             }
-//            System.out.println();
             output += "\n";
-//            stream = Stream.concat(stream, Stream.of("\n"));
             counter++;
         }
         return output;
