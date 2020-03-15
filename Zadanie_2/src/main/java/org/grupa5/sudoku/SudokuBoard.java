@@ -31,7 +31,7 @@ public class SudokuBoard {
         this.mixBoard();
     }
 
-    public void mixBoard() {
+    private void mixBoard() {
         Random rand = new Random();
         int howManyShuffle = rand.nextInt(100);
         int randomCol;
@@ -99,7 +99,7 @@ public class SudokuBoard {
      * solves sudoku recursively using the backtracking algorithm
      */
 
-    public boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
+    private boolean solveSudoku() { // TODO: usun link, zmien alogrytm, dodaj ladny opis
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (this.board[row][col] == 0) {
