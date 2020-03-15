@@ -77,24 +77,23 @@ public class SudokuBoardTest {
         SudokuBoard sudoku = new SudokuBoard();
         sudoku.fillBoard();
         board = sudoku.getBoard();
-        String boardPrint = sudoku.getInfoSudoku();
 
-        String output = "X ";
+        StringBuilder output = new StringBuilder("X ");
         for (int i = 0; i <= 8; i++) {
-            output += (char) ('a' + i) + " ";
+            output.append((char) ('a' + i)).append(" ");
         }
-        output += "\n";
+        output.append("\n");
         int counter = 0;
         for (int[] x : board) {
-            output += (char) ('a' + counter) + " ";
+            output.append((char) ('a' + counter)).append(" ");
             for (int y : x) {
-                output += y + " ";
+                output.append(y).append(" ");
             }
-            output += "\n";
+            output.append("\n");
             counter++;
         }
 
-        assertEquals(sudoku.getInfoSudoku(), boardPrint );
+        assertEquals(sudoku.getInfoSudoku(), output.toString() );
     }
 
 }
