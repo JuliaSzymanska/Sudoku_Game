@@ -57,8 +57,8 @@ public class SudokuBoardTest {
         SudokuBoard sudoku = new SudokuBoard();
         sudoku.fillBoard();
         sudoku.resetBoard();
-        boolean check = false;
         board = sudoku.getBoard();
+        boolean check = false;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] != 0) {
@@ -68,6 +68,7 @@ public class SudokuBoardTest {
         }
         assertFalse(check);
     }
-// TODO: Zrobic test dla getBoard
+
+    
 
 }
