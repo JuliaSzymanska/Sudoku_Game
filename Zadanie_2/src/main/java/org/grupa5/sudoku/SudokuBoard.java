@@ -210,21 +210,22 @@ public class SudokuBoard {
     }
 
     public String getInfoSudoku() {
-        String output = "X ";
+        StringBuilder output = new StringBuilder("X ");
         for (int i = 0; i <= 8; i++) {
-            output += (char) ('a' + i) + " ";
+            output.append((char) ('a' + i) + " ");
         }
-        output += "\n";
+        output.append("\n");
         int counter = 0;
         for (int[] x : this.board) {
-            output += (char) ('a' + counter) + " ";
+            output.append((char) ('a' + counter) + " ");
             for (int y : x) {
-                output += y + " ";
+                output.append(y + " ");
             }
-            output += "\n";
+            output.append("\n");
             counter++;
         }
-        return output;
+        String string = output.toString();
+        return string;
     }
 
     public static void main(String[] args) {
