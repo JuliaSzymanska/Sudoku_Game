@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -11,7 +12,8 @@ public class SudokuBoard {
      * @return the board
      */
     public int[][] getBoard() {
-        return board;
+        int[][] copy = Arrays.stream(this.board).map(int[]::clone).toArray(int[][]::new);
+        return copy;
     }
 
     public void resetBoard() {
