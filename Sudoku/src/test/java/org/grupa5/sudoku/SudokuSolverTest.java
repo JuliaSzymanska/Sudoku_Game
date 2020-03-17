@@ -38,6 +38,20 @@ public class SudokuSolverTest {
             assertTrue(check);
         }
    }
+
+   @Test
+   void noRepeatsTest() {
+       int [][] board1, board2;
+       SudokuBoard sudoku = new SudokuBoard();
+       SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
+       Wypelniacz.solve(sudoku);
+       board1 = sudoku.getBoard();
+       sudoku.resetBoard();
+       Wypelniacz.solve(sudoku);
+       board2 = sudoku.getBoard();
+       assertNotEquals(board1, board2);
+
+   }
         
    
 }
