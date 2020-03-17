@@ -31,13 +31,13 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             }
         }
         Random rand = new Random();
-//        int randomVal = rand.nextInt(9) + 1;
+        int randomVal = rand.nextInt(9) + 1;
         int randomX = rand.nextInt(3);
         int randomY = rand.nextInt(3);
-        board.set(begX + randomX, begY + randomY, rand.nextInt(9) + 1);
-        while (board.get(begX + randomX, begY + randomY) == 0) {
-//            randomVal = rand.nextInt(9) + 1;
-            board.set(begX + randomX, begY + randomY, rand.nextInt(9) + 1);
+        board.set(begX + randomX, begY + randomY, randomVal);
+        while (board.get(begX + randomX, begY + randomY) != randomVal) {
+            randomVal = rand.nextInt(9) + 1;
+            board.set(begX + randomX, begY + randomY, randomVal);
         }
 //        this.board[begX + randomX][begY + randomY] = randomVal;
     }
@@ -95,29 +95,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         }
     }
 
-//    private boolean solveSudoku(SudokuBoard board) {
-////        for (int row = 0; row < 9; row++) {
-////            for (int col = 0; col < 9; col++) {
-////                if (board.get(row, col) == 0) {
-////                    for (int number = 1; number <= 9; number++) {
-////                        board.set(row, col, number);
-////                        if (board.get(row, col) != 0) {
-//////                            board[row][col] = number;
-////                            if (solveSudoku(board)) {
-////                                return true;
-////                            }
-//////                            else {
-//////                                board.set(row, col, 0); //[row][col] = 0;
-//////                            }
-////                        }
-////                    }
-////                    return false;
-////                }
-////            }
-////        }
-////        return true;
-////    }
-
         private boolean solveSudoku(SudokuBoard board) {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
@@ -125,7 +102,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                     for (int number = 1; number <= 9; number++) {
                         board.set(row,col,number);
                         if (board.get(row,col) == number) {
-                            if (solveSudoku(board)) {
+                            if (this.solveSudoku(board)) {
                                 return true;
                             } else {
                                 board.set(row,col, 0); // [row][col] = 0;
