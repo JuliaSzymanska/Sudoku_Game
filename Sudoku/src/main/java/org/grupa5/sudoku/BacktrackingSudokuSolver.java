@@ -116,6 +116,9 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return true;
     }
 
+    /**
+     * Main method to create filled sudoku board.
+     */
 
     public static void main(String[] args) {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
