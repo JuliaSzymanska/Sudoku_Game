@@ -1,4 +1,5 @@
 package org.grupa5.sudoku;
 
-public class SudokuSolver {
+public interface SudokuSolver {
+    public void solve(SudokuBoard board);
 }
