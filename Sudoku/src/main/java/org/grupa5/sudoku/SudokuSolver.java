@@ -6,5 +6,5 @@ public interface SudokuSolver {
      * It is a method in interface, which solve sudoku.
      */
 
-    public void solve(SudokuBoard board);
+    void solve(SudokuBoard board);
 }
