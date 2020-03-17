@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
 * Unit test for simple App.
-* Testing methods: fillBoard, getInfoSudoku, resetBoard.
-* Also check if two generated sudoku boards are not the same.
+* Testing SudokuSolver interface implementations
+* Checking if SudokuSolver generates a valid Sudoku board and whether two generated boards are different from eachother.
 */
 public class SudokuSolverTest {
 

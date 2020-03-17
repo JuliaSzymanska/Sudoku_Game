@@ -6,8 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
 * Unit test for simple App.
-* Testing methods: fillBoard, getInfoSudoku, resetBoard.
-* Also check if two generated sudoku boards are not the same.
+* Testing methods: getInfoSudoku, resetBoard.
 */
 public class SudokuBoardTest {
 
@@ -53,6 +52,14 @@ public class SudokuBoardTest {
            counter++;
        }
        assertEquals(sudoku.getInfoSudoku(), output.toString());
+   }
+
+   @Test
+   void getterAndSetterTest() {
+        SudokuBoard sudoku = new SudokuBoard();
+        assertEquals(sudoku.get(2, 2), 0);
+        sudoku.set(2, 2, 2137);
+        assertEquals(sudoku.get(2, 2), 2137);
    }
 
 }
