@@ -31,24 +31,16 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             }
         }
         Random rand = new Random();
-        int randomVal = rand.nextInt(9) + 1;
+//        int randomVal = rand.nextInt(9) + 1;
         int randomX = rand.nextInt(3);
         int randomY = rand.nextInt(3);
-        board.set(begX + randomX, begY + randomY, randomVal);
-        while (board.get(begX + randomX, begY + randomY) != 0) {
-            randomVal = rand.nextInt(9) + 1;
-            board.set(begX + randomX, begY + randomY, randomVal);
+        board.set(begX + randomX, begY + randomY, rand.nextInt(9) + 1);
+        while (board.get(begX + randomX, begY + randomY) == 0) {
+//            randomVal = rand.nextInt(9) + 1;
+            board.set(begX + randomX, begY + randomY, rand.nextInt(9) + 1);
         }
 //        this.board[begX + randomX][begY + randomY] = randomVal;
     }
-
-//    public void fillBoard() {
-//        for (int i = 0; i <= 8; i++) {
-//            this.randomFillSector(i);
-//        }
-//        this.solveSudoku();
-//        this.mixBoard();
-//    }
 
     private void mixBoard(SudokuBoard board) {
         Random rand = new Random();
@@ -103,36 +95,57 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         }
     }
 
-    private boolean solveSudoku(SudokuBoard board) {
+//    private boolean solveSudoku(SudokuBoard board) {
+////        for (int row = 0; row < 9; row++) {
+////            for (int col = 0; col < 9; col++) {
+////                if (board.get(row, col) == 0) {
+////                    for (int number = 1; number <= 9; number++) {
+////                        board.set(row, col, number);
+////                        if (board.get(row, col) != 0) {
+//////                            board[row][col] = number;
+////                            if (solveSudoku(board)) {
+////                                return true;
+////                            }
+//////                            else {
+//////                                board.set(row, col, 0); //[row][col] = 0;
+//////                            }
+////                        }
+////                    }
+////                    return false;
+////                }
+////            }
+////        }
+////        return true;
+////    }
+
+        private boolean solveSudoku(SudokuBoard board) {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (board.get(row, col) == 0) {
+                if (board.get(row,col) == 0) {
                     for (int number = 1; number <= 9; number++) {
-                        board.set(row, col, number);
-                        if (board.get(row, col) != 0) {
-//                            board[row][col] = number;
+                        board.set(row,col,number);
+                        if (board.get(row,col) == number) {
                             if (solveSudoku(board)) {
                                 return true;
-                            }
-//                            else {
-//                                board.set(row, col, 0); //[row][col] = 0;
-//                            }
+                            } else {
+                                board.set(row,col, 0); // [row][col] = 0;
                             }
                         }
-                        return false;
                     }
+                    return false;
                 }
             }
-            return true;
         }
+        return true;
+    }
 
 
-        public static void main (String[]args){
-            BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-            SudokuBoard sudoku = new SudokuBoard();
-            solver.solve(sudoku);
-            System.out.println(sudoku.getInfoSudoku());
-        }
+    public static void main(String[] args) {
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard sudoku = new SudokuBoard();
+        solver.solve(sudoku);
+        System.out.println(sudoku.getInfoSudoku());
+    }
 
 
 }
