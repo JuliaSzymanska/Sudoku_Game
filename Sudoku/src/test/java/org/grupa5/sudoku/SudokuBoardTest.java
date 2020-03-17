@@ -60,6 +60,12 @@ public class SudokuBoardTest {
         assertEquals(sudoku.get(2, 2), 0);
         sudoku.set(2, 2, 2137);
         assertEquals(sudoku.get(2, 2), 2137);
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.get(9, 9);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(9, 9, 1337);
+        });
    }
 
 }
