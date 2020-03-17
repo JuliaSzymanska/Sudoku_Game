@@ -3,6 +3,14 @@ package org.grupa5.sudoku;
 import java.util.Random;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
+
+    /**
+     * Fills the board in a random way with every usage. Starts by filling every.
+     * sector in the board in a random space with a random number. The board is.
+     * divided into 9 sectors 3x3 each. After this randomisation the board is solved.
+     * using a backtracking algorithm. Then the board is randomly mixed.
+     */
+
     @Override
     public void solve(SudokuBoard board) {
         for (int i = 0; i <= 8; i++) {
@@ -11,6 +19,17 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         this.solveSudoku(board);
         this.mixBoard(board);
     }
+
+    /**
+     * Board is divided into 9 sectors, counting from top left to bottom right.
+     * [0, 1 ,2] [3, 4, 5] [6, 7, 8] ].
+     * this method fills a random space in selected sector with a random number.
+     * usage - loop over all sectors and init them with one random number each in.
+     * random position.
+     *
+     * @param sectorNr number of sector to set.
+     * @param board    is an object of SudokuBoard class
+     */
 
     private void randomFillSector(int sectorNr, SudokuBoard board) {
         if (sectorNr < 0 || sectorNr > 8) {
@@ -39,8 +58,11 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             randomVal = rand.nextInt(9) + 1;
             board.set(begX + randomX, begY + randomY, randomVal);
         }
-//        this.board[begX + randomX][begY + randomY] = randomVal;
     }
+
+    /**
+     * Method mix rows and columns.
+     */
 
     private void mixBoard(SudokuBoard board) {
         Random rand = new Random();
@@ -65,6 +87,10 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         }
     }
 
+    /**
+     * Method mix columns.
+     */
+
     private void shuffleColumn(int col1, int col2, SudokuBoard board) {
         if (col1 < 0 || col1 > 8) {
             throw new IndexOutOfBoundsException("Column col1 has to be in range 0 - 8");
@@ -75,10 +101,14 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         int prevCol;
         for (int x = 0; x <= 8; x++) {
             prevCol = board.get(x, col1);
-            board.set(x, col1, board.get(x, col2)); // [x][col1] = this.board[x][col2];
-            board.set(x, col2, prevCol);  //[x][col2] = prevCol;
+            board.set(x, col1, board.get(x, col2));
+            board.set(x, col2, prevCol);
         }
     }
+
+    /**
+     * Method mix rows.
+     */
 
     private void shuffleRow(int row1, int row2, SudokuBoard board) {
         if (row1 < 0 || row1 > 8) {
@@ -89,23 +119,27 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         }
         int prevRow;
         for (int x = 0; x <= 8; x++) {
-            prevRow = board.get(row1, x); // this.board[row1][x];
-            board.set(row1, x, board.get(row2, x)); // [row1][x] = this.board[row2][x];
-            board.set(row2, x, prevRow); //[row2][x] = prevRow;
+            prevRow = board.get(row1, x);
+            board.set(row1, x, board.get(row2, x));
+            board.set(row2, x, prevRow);
         }
     }
 
-        private boolean solveSudoku(SudokuBoard board) {
+    /**
+     * Solve sudoku filled with some numbers.
+     */
+
+    private boolean solveSudoku(SudokuBoard board) {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (board.get(row,col) == 0) {
+                if (board.get(row, col) == 0) {
                     for (int number = 1; number <= 9; number++) {
-                        board.set(row,col,number);
-                        if (board.get(row,col) == number) {
+                        board.set(row, col, number);
+                        if (board.get(row, col) == number) {
                             if (this.solveSudoku(board)) {
                                 return true;
                             } else {
-                                board.set(row,col, 0); // [row][col] = 0;
+                                board.set(row, col, 0);
                             }
                         }
                     }

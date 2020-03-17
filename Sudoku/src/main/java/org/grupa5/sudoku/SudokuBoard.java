@@ -1,7 +1,6 @@
 package org.grupa5.sudoku;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public class SudokuBoard {
 
@@ -15,29 +14,35 @@ public class SudokuBoard {
         return copy;
     }
 
-    /*
-     * Board is divided into 9 sectors, counting from top left to bottom right. [
-     * [0, 1 ,2] [3, 4, 5] [6, 7, 8] ]
-     * this method fills a random space in selected sector with a random number
-     * usage - loop over all sectors and init them with one random number each in
-     * random position
-     *
-     * @param sectorNr number of sector to set.
+    /**
+     * Return int from board at [x][y] position.
      */
 
-    public int get(int x, int y){
+    public int get(int x, int y) {
         return board[x][y];
     }
 
-    public void set(int x, int y, int value){
-        if(checkBoard(x,y,value)){
+    /**
+     * Set value at [x][y] position in board.
+     */
+
+    public void set(int x, int y, int value) {
+        if (checkBoard(x, y, value)) {
             this.board[x][y] = value;
         }
     }
 
+    /**
+     * Reset board, fill with 0.
+     */
+
     public void resetBoard() {
         this.board = new int[9][9];
     }
+
+    /**
+     * Check if value can be set at col.
+     */
 
     private boolean checkCol(int col, int value) {
         if (col < 0 || col > 8) {
@@ -51,6 +56,10 @@ public class SudokuBoard {
         return true;
     }
 
+    /**
+     * Check if value can be set at row.
+     */
+
     private boolean checkRow(int row, int value) {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
@@ -62,6 +71,10 @@ public class SudokuBoard {
         }
         return true;
     }
+
+    /**
+     * Check if value can be set at sectorNr.
+     */
 
     private boolean checkSector(int sectorNr, int value) {
         if (sectorNr < 0 || sectorNr > 8) {
@@ -79,11 +92,19 @@ public class SudokuBoard {
         return true;
     }
 
+    /**
+     * Return the number of sector in which is object at posinion [row][col].
+     */
+
     private int getSectorNumber(int row, int col) {
         int sectorNr = (row / 3) * 3;
         sectorNr += col / 3;
         return sectorNr;
     }
+
+    /**
+     * Check if number can be set at position [row][column].
+     */
 
     private boolean checkBoard(int row, int column, int number) {
         if (row < 0 || row > 8) {
@@ -92,7 +113,7 @@ public class SudokuBoard {
         if (column < 0 || column > 8) {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
-        if(number == 0)
+        if (number == 0)
             return true;
         return this.checkCol(column, number) && this.checkRow(row, number)
                 && this.checkSector(getSectorNumber(row, column), number);
