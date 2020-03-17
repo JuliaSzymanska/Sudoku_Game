@@ -113,8 +113,9 @@ public class SudokuBoard {
         if (column < 0 || column > 8) {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
-        if (number == 0)
+        if (number == 0) {
             return true;
+        }
         return this.checkCol(column, number) && this.checkRow(row, number)
                 && this.checkSector(getSectorNumber(row, column), number);
     }
