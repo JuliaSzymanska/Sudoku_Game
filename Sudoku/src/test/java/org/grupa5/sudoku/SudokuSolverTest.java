@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* Unit test for simple App.
-* Testing SudokuSolver interface implementations
-* Checking if SudokuSolver generates a valid Sudoku board and whether two generated boards are different from eachother.
-*/
+ * Unit test for simple App. Testing SudokuSolver interface implementations
+ * Checking if SudokuSolver generates a valid Sudoku board and whether two
+ * generated boards are different from eachother.
+ */
 public class SudokuSolverTest {
 
     private boolean checkCol(int col, SudokuBoard board) {
@@ -21,7 +21,7 @@ public class SudokuSolverTest {
         }
         List<Integer> list = new ArrayList<Integer>();
         for (int i = 0; i <= 8; i++) {
-            if (list.contains(board.get(i, col)) ) {
+            if (list.contains(board.get(i, col))) {
                 return false;
             }
             list.add(board.get(i, col));
@@ -35,7 +35,7 @@ public class SudokuSolverTest {
         }
         List<Integer> list = new ArrayList<Integer>();
         for (int i = 0; i <= 8; i++) {
-            if (list.contains(board.get(row, i)) ) {
+            if (list.contains(board.get(row, i))) {
                 return false;
             }
             list.add(board.get(row, i));
@@ -52,7 +52,7 @@ public class SudokuSolverTest {
         List<Integer> list = new ArrayList<Integer>();
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
-                if (list.contains(board.get(i, j)) ) {
+                if (list.contains(board.get(i, j))) {
                     return false;
                 }
                 list.add(board.get(i, j));
@@ -82,8 +82,8 @@ public class SudokuSolverTest {
                 && this.checkSector(getSectorNumber(row, column), board);
     }
 
-   @Test
-   void solveSudokuTest() {
+    @Test
+    void solveSudokuTest() {
         SudokuBoard Plansza = new SudokuBoard();
         SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
         Wypelniacz.solve(Plansza);
@@ -92,19 +92,17 @@ public class SudokuSolverTest {
                 assertTrue(checkBoard(i, j, Plansza));
             }
         }
-   }
+    }
 
-   @Test
-   void noRepeatsTest() {
-       SudokuBoard sudoku = new SudokuBoard();
-       SudokuBoard sudoku2 = new SudokuBoard();
-       SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
-       Wypelniacz.solve(sudoku);
-       Wypelniacz.solve(sudoku2);
-       assertNotEquals(sudoku, sudoku2);
+    @Test
+    void noRepeatsTest() {
+        SudokuBoard sudoku = new SudokuBoard();
+        SudokuBoard sudoku2 = new SudokuBoard();
+        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
+        Wypelniacz.solve(sudoku);
+        Wypelniacz.solve(sudoku2);
+        assertNotEquals(sudoku, sudoku2);
 
-   }
-        
-   
+    }
+
 }
-

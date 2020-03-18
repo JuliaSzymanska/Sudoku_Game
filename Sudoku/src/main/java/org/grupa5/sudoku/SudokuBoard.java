@@ -15,7 +15,7 @@ public class SudokuBoard {
     }
 
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         if (other == null) {
             return false;
         }
