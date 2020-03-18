@@ -41,15 +41,13 @@ public class SudokuSolverTest {
 
    @Test
    void noRepeatsTest() {
-       int [][] board1, board2;
        SudokuBoard sudoku = new SudokuBoard();
+       SudokuBoard sudoku2 = new SudokuBoard();
        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
        Wypelniacz.solve(sudoku);
-       board1 = sudoku.getBoard();
        sudoku.resetBoard();
-       Wypelniacz.solve(sudoku);
-       board2 = sudoku.getBoard();
-       assertNotEquals(board1, board2);
+       Wypelniacz.solve(sudoku2);
+       assertNotEquals(sudoku, sudoku2);
 
    }
         

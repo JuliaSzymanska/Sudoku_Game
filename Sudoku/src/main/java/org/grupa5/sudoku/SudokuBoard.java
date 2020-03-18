@@ -14,6 +14,21 @@ public class SudokuBoard {
         return copy;
     }
 
+    @Override
+    public boolean equals(Object other){
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof SudokuBoard)) {
+            return false;
+        }
+        SudokuBoard plansza = (SudokuBoard)other;
+        return Arrays.deepEquals(plansza.getBoard(), this.getBoard());
+    }
+
     /**
      * Return int from board at [x][y] position.
      */
