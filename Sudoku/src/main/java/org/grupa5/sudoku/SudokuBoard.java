@@ -135,26 +135,26 @@ public class SudokuBoard {
                 && this.checkSector(getSectorNumber(row, column), number);
     }
 
-    //    /**
-    //     * Write all board's numbers to StringBuilder and then converted to String.
-    //     */
-    //
-    //    public String getInfoSudoku() {
-    //        StringBuilder output = new StringBuilder("X ");
-    //        for (int i = 0; i <= 8; i++) {
-    //            output.append((char) ('a' + i)).append(" ");
-    //        }
-    //        output.append("\n");
-    //        int counter = 0;
-    //        for (int[] x : this.board) {
-    //            output.append((char) ('a' + counter)).append(" ");
-    //            for (int y : x) {
-    //                output.append(y).append(" ");
-    //            }
-    //            output.append("\n");
-    //            counter++;
-    //        }
-    //        return output.toString();
-    //    }
+       /**
+        * Write all board's numbers to StringBuilder and then converted to String.
+        */
+    
+       public String getInfoSudoku() {
+           StringBuilder output = new StringBuilder("X ");
+           for (int i = 0; i <= 8; i++) {
+               output.append((char) ('a' + i)).append(" ");
+           }
+           output.append("\n");
+           int counter = 0;
+           for (int[] x : this.board) {
+               output.append((char) ('a' + counter)).append(" ");
+               for (int y : x) {
+                   output.append(y).append(" ");
+               }
+               output.append("\n");
+               counter++;
+           }
+           return output.toString();
+       }
 
 }
