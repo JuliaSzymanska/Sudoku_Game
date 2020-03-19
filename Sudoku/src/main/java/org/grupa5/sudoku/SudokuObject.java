@@ -12,9 +12,9 @@ import java.util.List;
 
 public class SudokuObject {
 
-    private SudokuField[] object;
+    private ArrayList<SudokuField> object;
 
-    SudokuObject(SudokuField[] table) {
+    SudokuObject(ArrayList<SudokuField> table) {
         this.object = table;
     }
 

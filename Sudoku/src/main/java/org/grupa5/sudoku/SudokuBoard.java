@@ -1,27 +1,39 @@
 package org.grupa5.sudoku;
 
-import java.util.Arrays;
+// import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+// import java.util.Arrays;
 
 public class SudokuBoard {
 
-    private SudokuField[][] board;
+    private ArrayList<ArrayList<SudokuField>> board;
+    //Todo: dodaj listy kolumn, rzędów, boxów, chyba że masz lepszy pomysł jak to zrobić :)
 
     public SudokuBoard() {
-        SudokuField[][] plansza = new SudokuField[9][9];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                plansza[i][j] = new SudokuField();
-            }
-        }
-        this.board = plansza;
+        this.resetBoard();
     }
+
+    // TODO: zrób to
+    // public SudokuObject getColumn(int col) {
+
+    // }
+
+    // public SudokuObject getRow(int row) {
+        
+    // }
+
+    // public SudokuObject getSector(int row, int col) {
+        
+    // }
 
     /**
      * A simple getter that returns copy of the 'board' variable.
      * @return copy of the board.
      */
-    public SudokuField[][] getBoard() {
-        SudokuField[][] copy = Arrays.stream(this.board).map(SudokuField[]::clone).toArray(SudokuField[][]::new);
+    public ArrayList<ArrayList<SudokuField>> getBoard() {
+        ArrayList<ArrayList<SudokuField>> copy = new ArrayList<>(
+        this.board.stream().map(x -> new ArrayList<>(x)).collect(Collectors.toList()));
         return copy;
     }
 
@@ -37,7 +49,14 @@ public class SudokuBoard {
             return false;
         }
         SudokuBoard plansza = (SudokuBoard)other;
-        return Arrays.deepEquals(plansza.getBoard(), this.getBoard());
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (plansza.get(i, j) != this.get(i, j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -45,8 +64,7 @@ public class SudokuBoard {
      */
 
     public int get(int x, int y) {
-        System.out.println(x + " " + y);
-        return this.board[x][y].getFieldValue();
+        return this.board.get(x).get(y).getFieldValue();
     }
 
     /**
@@ -55,7 +73,7 @@ public class SudokuBoard {
 
     public void set(int x, int y, int value) {
         if (checkBoard(x, y, value)) {
-            this.board[x][y].setFieldValue(value);
+            this.board.get(x).get(y).setFieldValue(value);
         }
     }
 
@@ -64,19 +82,30 @@ public class SudokuBoard {
      */
 
     public void resetBoard() {
-        this.board = new SudokuField[9][9];
+        ArrayList<ArrayList<SudokuField>> plansza = new ArrayList<ArrayList<SudokuField>>();
+        //SudokuField[][] plansza = new SudokuField[9][9];
+        for (int i = 0; i < 9; i++) {
+            plansza.add(new ArrayList<SudokuField>());
+            for (int j = 0; j < 9; j++) {
+                plansza.get(i).add(new SudokuField());
+            }
+        }
+        this.board = plansza;
+        //TODO: dodaj tworzenie odpowiednich instancji listy rzędów, kolumn i boxów
     }
 
     /**
      * Check if value can be set at col.
      */
 
+    // TODO: usun to i używaj metod z klas kolumn / rzędów / boxów
+
     private boolean checkCol(int col, int value) {
         if (col < 0 || col > 8) {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
-            if (this.board[i][col].getFieldValue() == value) {
+            if (this.board.get(i).get(col).getFieldValue() == value) {
                 return false;
             }
         }
@@ -87,12 +116,14 @@ public class SudokuBoard {
      * Check if value can be set at row.
      */
 
+    // TODO: usun to i używaj metod z klas kolumn / rzędów / boxów
+
     private boolean checkRow(int row, int value) {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
-            if (this.board[row][i].getFieldValue() == value) {
+            if (this.board.get(row).get(i).getFieldValue() == value) {
                 return false;
             }
         }
@@ -103,6 +134,8 @@ public class SudokuBoard {
      * Check if value can be set at sectorNr.
      */
 
+    // TODO: usun to i używaj metod z klas kolumn / rzędów / boxów
+
     private boolean checkSector(int sectorNr, int value) {
         if (sectorNr < 0 || sectorNr > 8) {
             throw new IndexOutOfBoundsException("Sector sectorNr has to be in range from 0 to 8");
@@ -111,7 +144,7 @@ public class SudokuBoard {
         int begY = (sectorNr % 3) * 3;
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
-                if (this.board[i][j].getFieldValue() == value) {
+                if (this.board.get(i).get(j).getFieldValue() == value) {
                     return false;
                 }
             }
@@ -143,6 +176,7 @@ public class SudokuBoard {
         if (number == 0) {
             return true;
         }
+        // TODO : podmien na getCol(col).verify(), getRow(row).verify(), getBox(row, col).verify()
         return this.checkCol(column, number) && this.checkRow(row, number)
                 && this.checkSector(getSectorNumber(row, column), number);
     }
@@ -158,7 +192,7 @@ public class SudokuBoard {
            }
            output.append("\n");
            int counter = 0;
-           for (SudokuField[] x : this.board) {
+           for (ArrayList<SudokuField> x : this.board) {
                output.append((char) ('a' + counter)).append(" ");
                for (SudokuField y : x) {
                    output.append(y.getFieldValue()).append(" ");
