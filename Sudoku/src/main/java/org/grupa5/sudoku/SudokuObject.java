@@ -5,15 +5,19 @@ import java.util.List;
 
 public class SudokuObject {
 
-    private int[] object = new int[9];
+    private List<SudokuField> object;
+
+    SudokuObject(ArrayList<SudokuField> lista) {
+        this.object = lista;
+    }
 
     public boolean verify() {
         List<Integer> list = new ArrayList<Integer>();
-        for (int x : object) {
-            if (list.contains(x)) {
+        for (SudokuField x : object) {
+            if (list.contains(x.getFieldValue())) {
                 return false;
             }
-            list.add(x);
+            list.add(x.getFieldValue());
         }
         return true;
     }

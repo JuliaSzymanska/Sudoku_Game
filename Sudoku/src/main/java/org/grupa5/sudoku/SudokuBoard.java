@@ -7,7 +7,7 @@ public class SudokuBoard {
     private int[][] board = new int[9][9];
 
     /**
-     * Return copy of the board.
+     * @return copy of the board.
      */
     public int[][] getBoard() {
         int[][] copy = Arrays.stream(this.board).map(int[]::clone).toArray(int[][]::new);
