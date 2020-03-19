@@ -3,13 +3,25 @@ package org.grupa5.sudoku;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class can represent three types of objects in sudoku:
+ * Row,
+ * Column,
+ * Box.
+ */
+
 public class SudokuObject {
 
-    private List<SudokuField> object;
+    private SudokuField[] object;
 
-    SudokuObject(ArrayList<SudokuField> lista) {
-        this.object = lista;
+    SudokuObject(SudokuField[] table) {
+        this.object = table;
     }
+
+    /**
+     * Verifies whether the structure is valid.
+     * @return False if the structure has duplicate numbers otherwise return True.
+     */
 
     public boolean verify() {
         List<Integer> list = new ArrayList<Integer>();

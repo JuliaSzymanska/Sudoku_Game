@@ -4,7 +4,7 @@ package org.grupa5.sudoku;
 
 public class SudokuField {
 
-    private int value;
+    private int value = 0;
 
     /**
      * A simple getter.
@@ -13,6 +13,21 @@ public class SudokuField {
 
     public int getFieldValue() {
         return this.value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof SudokuField)) {
+            return false;
+        }
+        SudokuField plansza = (SudokuField)other;
+        return this.getFieldValue() == plansza.getFieldValue();
     }
 
     /**

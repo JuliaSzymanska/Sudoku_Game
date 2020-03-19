@@ -4,13 +4,24 @@ import java.util.Arrays;
 
 public class SudokuBoard {
 
-    private int[][] board = new int[9][9];
+    private SudokuField[][] board;
+
+    public SudokuBoard() {
+        SudokuField[][] plansza = new SudokuField[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                plansza[i][j] = new SudokuField();
+            }
+        }
+        this.board = plansza;
+    }
 
     /**
+     * A simple getter that returns copy of the 'board' variable.
      * @return copy of the board.
      */
-    public int[][] getBoard() {
-        int[][] copy = Arrays.stream(this.board).map(int[]::clone).toArray(int[][]::new);
+    public SudokuField[][] getBoard() {
+        SudokuField[][] copy = Arrays.stream(this.board).map(SudokuField[]::clone).toArray(SudokuField[][]::new);
         return copy;
     }
 
@@ -34,7 +45,8 @@ public class SudokuBoard {
      */
 
     public int get(int x, int y) {
-        return board[x][y];
+        System.out.println(x + " " + y);
+        return this.board[x][y].getFieldValue();
     }
 
     /**
@@ -43,7 +55,7 @@ public class SudokuBoard {
 
     public void set(int x, int y, int value) {
         if (checkBoard(x, y, value)) {
-            this.board[x][y] = value;
+            this.board[x][y].setFieldValue(value);
         }
     }
 
@@ -52,7 +64,7 @@ public class SudokuBoard {
      */
 
     public void resetBoard() {
-        this.board = new int[9][9];
+        this.board = new SudokuField[9][9];
     }
 
     /**
@@ -64,7 +76,7 @@ public class SudokuBoard {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
-            if (this.board[i][col] == value) {
+            if (this.board[i][col].getFieldValue() == value) {
                 return false;
             }
         }
@@ -80,7 +92,7 @@ public class SudokuBoard {
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
         }
         for (int i = 0; i <= 8; i++) {
-            if (this.board[row][i] == value) {
+            if (this.board[row][i].getFieldValue() == value) {
                 return false;
             }
         }
@@ -99,7 +111,7 @@ public class SudokuBoard {
         int begY = (sectorNr % 3) * 3;
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
-                if (this.board[i][j] == value) {
+                if (this.board[i][j].getFieldValue() == value) {
                     return false;
                 }
             }
@@ -146,10 +158,10 @@ public class SudokuBoard {
            }
            output.append("\n");
            int counter = 0;
-           for (int[] x : this.board) {
+           for (SudokuField[] x : this.board) {
                output.append((char) ('a' + counter)).append(" ");
-               for (int y : x) {
-                   output.append(y).append(" ");
+               for (SudokuField y : x) {
+                   output.append(y.getFieldValue()).append(" ");
                }
                output.append("\n");
                counter++;
