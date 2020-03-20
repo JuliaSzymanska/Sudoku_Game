@@ -6,16 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class SudokuBoard {
-<<<<<<< HEAD
-    //    private SudokuField[][] board = new SudokuField[9][9];
-    //    private ArrayList<ArrayList<SudokuField>> board;
-=======
-    // TODO: możesz to zmienić na 1D array ale mnie się nie chciało :) 1D array
-    // będzie wygodniejszy
-    private ArrayList<ArrayList<SudokuField>> board;
-    // TODO: dodaj listy kolumn, rzędów, boxów, chyba że masz lepszy pomysł jak to
-    // zrobić :)
->>>>>>> d90685e062db7430399c6700cd5139a533aa7961
 
     public SudokuBoard() {
         for (int i = 0; i < 9; i++) {
@@ -40,12 +30,12 @@ public class SudokuBoard {
         return new SudokuColumn(board.get(column));
     }
 
-<<<<<<< HEAD
+
     public SudokuRow getRow(int row) {
         return new SudokuRow(board.get(row));
     }
 
-    public SudokuObject getSector(int row, int column) {
+    public SudokuObject getBox(int row, int column) {
         int sectorNr = this.getSectorNumber(row, column);
         int begX = (sectorNr / 3) * 3;
         int begY = (sectorNr % 3) * 3;
@@ -83,27 +73,7 @@ public class SudokuBoard {
                 copy.get(i).set(j, new SudokuField());
             }
         }
-//        for(int i = 0;i < 9; i++){
         Collections.copy(copy, board);
-//        }
-=======
-    // public SudokuObject getRow(int row) {
-
-    // }
-
-    // public SudokuObject getSector(int row, int col) {
-
-    // }
-
-    /**
-     * A simple getter that returns copy of the 'board' variable.
-     * 
-     * @return copy of the board.
-     */
-    public ArrayList<ArrayList<SudokuField>> getBoard() {
-        ArrayList<ArrayList<SudokuField>> copy = new ArrayList<>(
-                this.board.stream().map(x -> new ArrayList<>(x)).collect(Collectors.toList()));
->>>>>>> d90685e062db7430399c6700cd5139a533aa7961
         return copy;
     }
 
@@ -152,32 +122,11 @@ public class SudokuBoard {
      */
 
     public void resetBoard() {
-<<<<<<< HEAD
-//        List<List<SudokuField>> plansza = Arrays.asList(
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]));
-=======
-        ArrayList<ArrayList<SudokuField>> plansza = new ArrayList<ArrayList<SudokuField>>();
-        // SudokuField[][] plansza = new SudokuField[9][9];
->>>>>>> d90685e062db7430399c6700cd5139a533aa7961
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 board.get(i).set(j, new SudokuField());
             }
         }
-<<<<<<< HEAD
-//        this.board = plansza;
-=======
-        this.board = plansza;
-        // TODO: dodaj tworzenie odpowiednich instancji listy rzędów, kolumn i boxów
->>>>>>> d90685e062db7430399c6700cd5139a533aa7961
     }
 
     /**
@@ -248,7 +197,7 @@ public class SudokuBoard {
     /**
      * Check if number can be set at position [row][column].
      */
-
+    // TODO: trzeba to jakoś zamienić chwilowo nie ma pomysłu
     private boolean checkBoard(int row, int column, int number) {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
@@ -259,9 +208,11 @@ public class SudokuBoard {
         if (number == 0) {
             return true;
         }
+//        board.get(row).set(column, number);
         // TODO : podmien na getCol(col).verify(), getRow(row).verify(), getBox(row,
         // col).verify()
-        return this.checkCol(column, number) && this.checkRow(row, number)
+        return// getColumn(column).verify() && getRow(row).verify() && getBox(row, column).verify();
+                this.checkCol(column, number) && this.checkRow(row, number)
                 && this.checkSector(getSectorNumber(row, column), number);
     }
 
@@ -269,7 +220,6 @@ public class SudokuBoard {
      * Write all board's numbers to StringBuilder and then converted to String.
      */
 
-<<<<<<< HEAD
 //       public String getInfoSudoku() {
 //           StringBuilder output = new StringBuilder("X ");
 //           for (int i = 0; i <= 8; i++) {
@@ -287,25 +237,5 @@ public class SudokuBoard {
 //           }
 //           return output.toString();
 //       }
-=======
-     // To tu zostaje ( :
-    public String getInfoSudoku() {
-        StringBuilder output = new StringBuilder("X ");
-        for (int i = 0; i <= 8; i++) {
-            output.append((char) ('a' + i)).append(" ");
-        }
-        output.append("\n");
-        int counter = 0;
-        for (ArrayList<SudokuField> x : this.board) {
-            output.append((char) ('a' + counter)).append(" ");
-            for (SudokuField y : x) {
-                output.append(y.getFieldValue()).append(" ");
-            }
-            output.append("\n");
-            counter++;
-        }
-        return output.toString();
-    }
->>>>>>> d90685e062db7430399c6700cd5139a533aa7961
 
 }
