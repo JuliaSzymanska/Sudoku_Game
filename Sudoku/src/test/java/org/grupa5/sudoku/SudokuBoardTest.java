@@ -46,6 +46,21 @@ public class SudokuBoardTest {
         assertFalse(check);
     }
 
+    @Test
+    void getRowTest() {
+        List<List<SudokuField>> board;
+        SudokuBoard sudoku = new SudokuBoard();
+        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
+        Wypelniacz.solve(sudoku);
+        board = sudoku.getBoard();
+        SudokuRow row = new SudokuRow(board.get(0));
+        SudokuRow row2 = sudoku.getRow(0);
+        for (int i = 0; i < 9; i++) {
+        }
+        // TODO: Make equals method.
+//        assertEquals(row, row2);
+    }
+
 //    @Test
 //    void getInfoSudokuTest() {
 //        ArrayList<ArrayList<SudokuField>> board;

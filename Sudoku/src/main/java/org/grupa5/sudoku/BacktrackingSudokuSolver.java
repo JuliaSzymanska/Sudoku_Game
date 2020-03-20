@@ -150,16 +150,16 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return true;
     }
 
-       /**
-        * Main method to create filled sudoku board.
-        */
-    
-       public static void main(String[] args) {
-           SudokuSolver solver = new BacktrackingSudokuSolver();
-           SudokuBoard sudoku = new SudokuBoard();
-           solver.solve(sudoku);
+    /**
+     * Main method to create filled sudoku board.
+     */
+
+    public static void main(String[] args) {
+        SudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard sudoku = new SudokuBoard();
+        solver.solve(sudoku);
 //           System.out.println(sudoku.getInfoSudoku());
-       }
-    
+    }
+
 
 }

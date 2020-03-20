@@ -2,6 +2,7 @@ package org.grupa5.sudoku;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class SudokuObject {
 
     /**
      * Verifies whether the structure is valid.
+     *
      * @return False if the structure has duplicate numbers otherwise return True.
      */
 
@@ -41,4 +43,26 @@ public class SudokuObject {
         }
         return true;
     }
+
+    // TODO: Make equals method.
+//    @Override
+//    public boolean equals(SudokuObject other) {
+//        if (other == null) {
+//            return false;
+//        }
+//        if (other == this) {
+//            return true;
+//        }
+//        SudokuObject object = (SudokuObject) other;
+//        for(SudokuField o : object)
+//
+//        for (int i = 0; i < 9; i++) {
+//            for (int j = 0; j < 9; j++) {
+//                if (object != this.get(i, j)) {
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
 }

@@ -213,7 +213,7 @@ public class SudokuBoard {
         // col).verify()
         return// getColumn(column).verify() && getRow(row).verify() && getBox(row, column).verify();
                 this.checkCol(column, number) && this.checkRow(row, number)
-                && this.checkSector(getSectorNumber(row, column), number);
+                        && this.checkSector(getSectorNumber(row, column), number);
     }
 
     /**
