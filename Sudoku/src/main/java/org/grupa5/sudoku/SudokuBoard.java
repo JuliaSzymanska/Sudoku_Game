@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 // import java.util.Arrays;
 
 public class SudokuBoard {
-
+    // TODO: możesz to zmienić na 1D array ale mnie się nie chciało :) 1D array
+    // będzie wygodniejszy
     private ArrayList<ArrayList<SudokuField>> board;
-    //Todo: dodaj listy kolumn, rzędów, boxów, chyba że masz lepszy pomysł jak to zrobić :)
+    // TODO: dodaj listy kolumn, rzędów, boxów, chyba że masz lepszy pomysł jak to
+    // zrobić :)
 
     public SudokuBoard() {
         this.resetBoard();
@@ -20,20 +22,21 @@ public class SudokuBoard {
     // }
 
     // public SudokuObject getRow(int row) {
-        
+
     // }
 
     // public SudokuObject getSector(int row, int col) {
-        
+
     // }
 
     /**
      * A simple getter that returns copy of the 'board' variable.
+     * 
      * @return copy of the board.
      */
     public ArrayList<ArrayList<SudokuField>> getBoard() {
         ArrayList<ArrayList<SudokuField>> copy = new ArrayList<>(
-        this.board.stream().map(x -> new ArrayList<>(x)).collect(Collectors.toList()));
+                this.board.stream().map(x -> new ArrayList<>(x)).collect(Collectors.toList()));
         return copy;
     }
 
@@ -48,7 +51,7 @@ public class SudokuBoard {
         if (!(other instanceof SudokuBoard)) {
             return false;
         }
-        SudokuBoard plansza = (SudokuBoard)other;
+        SudokuBoard plansza = (SudokuBoard) other;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (plansza.get(i, j) != this.get(i, j)) {
@@ -83,7 +86,7 @@ public class SudokuBoard {
 
     public void resetBoard() {
         ArrayList<ArrayList<SudokuField>> plansza = new ArrayList<ArrayList<SudokuField>>();
-        //SudokuField[][] plansza = new SudokuField[9][9];
+        // SudokuField[][] plansza = new SudokuField[9][9];
         for (int i = 0; i < 9; i++) {
             plansza.add(new ArrayList<SudokuField>());
             for (int j = 0; j < 9; j++) {
@@ -91,7 +94,7 @@ public class SudokuBoard {
             }
         }
         this.board = plansza;
-        //TODO: dodaj tworzenie odpowiednich instancji listy rzędów, kolumn i boxów
+        // TODO: dodaj tworzenie odpowiednich instancji listy rzędów, kolumn i boxów
     }
 
     /**
@@ -176,31 +179,33 @@ public class SudokuBoard {
         if (number == 0) {
             return true;
         }
-        // TODO : podmien na getCol(col).verify(), getRow(row).verify(), getBox(row, col).verify()
+        // TODO : podmien na getCol(col).verify(), getRow(row).verify(), getBox(row,
+        // col).verify()
         return this.checkCol(column, number) && this.checkRow(row, number)
                 && this.checkSector(getSectorNumber(row, column), number);
     }
 
-       /**
-        * Write all board's numbers to StringBuilder and then converted to String.
-        */
-    
-       public String getInfoSudoku() {
-           StringBuilder output = new StringBuilder("X ");
-           for (int i = 0; i <= 8; i++) {
-               output.append((char) ('a' + i)).append(" ");
-           }
-           output.append("\n");
-           int counter = 0;
-           for (ArrayList<SudokuField> x : this.board) {
-               output.append((char) ('a' + counter)).append(" ");
-               for (SudokuField y : x) {
-                   output.append(y.getFieldValue()).append(" ");
-               }
-               output.append("\n");
-               counter++;
-           }
-           return output.toString();
-       }
+    /**
+     * Write all board's numbers to StringBuilder and then converted to String.
+     */
+
+     // To tu zostaje ( :
+    public String getInfoSudoku() {
+        StringBuilder output = new StringBuilder("X ");
+        for (int i = 0; i <= 8; i++) {
+            output.append((char) ('a' + i)).append(" ");
+        }
+        output.append("\n");
+        int counter = 0;
+        for (ArrayList<SudokuField> x : this.board) {
+            output.append((char) ('a' + counter)).append(" ");
+            for (SudokuField y : x) {
+                output.append(y.getFieldValue()).append(" ");
+            }
+            output.append("\n");
+            counter++;
+        }
+        return output.toString();
+    }
 
 }
