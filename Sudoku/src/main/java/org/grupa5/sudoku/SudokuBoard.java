@@ -1,39 +1,59 @@
 package org.grupa5.sudoku;
-
 // import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 // import java.util.Arrays;
 
 public class SudokuBoard {
-
-    private ArrayList<ArrayList<SudokuField>> board;
-    //Todo: dodaj listy kolumn, rzędów, boxów, chyba że masz lepszy pomysł jak to zrobić :)
-
-    public SudokuBoard() {
-        this.resetBoard();
-    }
+    //    private SudokuField[][] board = new SudokuField[9][9];
+    //    private ArrayList<ArrayList<SudokuField>> board;
+    private List<List<SudokuField>> board = Arrays.asList(
+        Arrays.asList(new SudokuField[9]),
+        Arrays.asList(new SudokuField[9]),
+        Arrays.asList(new SudokuField[9]),
+        Arrays.asList(new SudokuField[9]),
+        Arrays.asList(new SudokuField[9]),
+        Arrays.asList(new SudokuField[9]),
+        Arrays.asList(new SudokuField[9]),
+        Arrays.asList(new SudokuField[9]),
+        Arrays.asList(new SudokuField[9]));
 
     // TODO: zrób to
-    // public SudokuObject getColumn(int col) {
+     public SudokuColumn getColumn(int column) {
+         return new SudokuColumn(board.get(column));
+     }
 
-    // }
+     public SudokuRow getRow(int row) {
+         return new SudokuRow(board.get(row));
+     }
 
-    // public SudokuObject getRow(int row) {
-        
-    // }
-
-    // public SudokuObject getSector(int row, int col) {
-        
-    // }
+     public SudokuObject getSector(int row, int column) {
+        int sectorNr = this.getSectorNumber(row, column);
+         int begX = (sectorNr / 3) * 3;
+         int begY = (sectorNr % 3) * 3;
+         int k = 0;
+         List<SudokuField> box = Arrays.asList(new SudokuField[9]);
+         for (int i = begX; i <= begX + 2; i++) {
+             for (int j = begY; j <= begY + 2; j++) {
+                box.set(k, board.get(i).get(j));
+                k++;
+             }
+         }
+         return new SudokuBox(box);
+     }
 
     /**
      * A simple getter that returns copy of the 'board' variable.
      * @return copy of the board.
      */
-    public ArrayList<ArrayList<SudokuField>> getBoard() {
-        ArrayList<ArrayList<SudokuField>> copy = new ArrayList<>(
-        this.board.stream().map(x -> new ArrayList<>(x)).collect(Collectors.toList()));
+    public List<List<SudokuField>>  getBoard() {
+//        ArrayList<ArrayList<SudokuField>> copy = new ArrayList<>(
+//        this.board.stream().map(x -> new ArrayList<>(x)).collect(Collectors.toList()));
+        List<List<SudokuField>> copy = Arrays.asList();
+        Collections.copy(copy, board);
         return copy;
     }
 

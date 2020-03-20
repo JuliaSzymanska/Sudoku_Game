@@ -1,6 +1,7 @@
 package org.grupa5.sudoku;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,11 +12,18 @@ import java.util.List;
  */
 
 public class SudokuObject {
+    private List<SudokuField> object;
 
-    private ArrayList<SudokuField> object;
-
-    SudokuObject(ArrayList<SudokuField> table) {
-        this.object = table;
+    SudokuObject(List<SudokuField> table) {
+        this.object = Arrays.asList(table.get(0),
+                table.get(1),
+                table.get(2),
+                table.get(3),
+                table.get(4),
+                table.get(5),
+                table.get(6),
+                table.get(7),
+                table.get(8));
     }
 
     /**
@@ -23,7 +31,7 @@ public class SudokuObject {
      * @return False if the structure has duplicate numbers otherwise return True.
      */
 
-    public boolean verify() {
+    protected boolean verify() {
         List<Integer> list = new ArrayList<Integer>();
         for (SudokuField x : object) {
             if (list.contains(x.getFieldValue())) {
