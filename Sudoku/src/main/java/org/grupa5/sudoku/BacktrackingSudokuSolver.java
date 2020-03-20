@@ -158,7 +158,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
            SudokuSolver solver = new BacktrackingSudokuSolver();
            SudokuBoard sudoku = new SudokuBoard();
            solver.solve(sudoku);
-           System.out.println(sudoku.getInfoSudoku());
+//           System.out.println(sudoku.getInfoSudoku());
        }
     
 

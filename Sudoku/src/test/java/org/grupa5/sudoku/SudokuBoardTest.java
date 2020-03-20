@@ -3,17 +3,28 @@ package org.grupa5.sudoku;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit test for simple App. Testing methods: getInfoSudoku, resetBoard.
+ * Unit test for simple App. Testing methods: resetBoard.
  */
 public class SudokuBoardTest {
 
     @Test
     void resetBoardTest() {
-        ArrayList<ArrayList<SudokuField>> board;
+        List<List<SudokuField>> board; // = Arrays.asList(
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]));
         SudokuBoard sudoku = new SudokuBoard();
         SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
         Wypelniacz.solve(sudoku);
@@ -30,30 +41,30 @@ public class SudokuBoardTest {
         assertFalse(check);
     }
 
-    @Test
-    void getInfoSudokuTest() {
-        ArrayList<ArrayList<SudokuField>> board;
-        SudokuBoard sudoku = new SudokuBoard();
-        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
-        Wypelniacz.solve(sudoku);
-        board = sudoku.getBoard();
-
-        StringBuilder output = new StringBuilder("X ");
-        for (int i = 0; i <= 8; i++) {
-            output.append((char) ('a' + i)).append(" ");
-        }
-        output.append("\n");
-        int counter = 0;
-        for (ArrayList<SudokuField> x : board) {
-            output.append((char) ('a' + counter)).append(" ");
-            for (SudokuField y : x) {
-                output.append(y.getFieldValue()).append(" ");
-            }
-            output.append("\n");
-            counter++;
-        }
-        assertEquals(sudoku.getInfoSudoku(), output.toString());
-    }
+//    @Test
+//    void getInfoSudokuTest() {
+//        ArrayList<ArrayList<SudokuField>> board;
+//        SudokuBoard sudoku = new SudokuBoard();
+//        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
+//        Wypelniacz.solve(sudoku);
+//        board = sudoku.getBoard();
+//
+//        StringBuilder output = new StringBuilder("X ");
+//        for (int i = 0; i <= 8; i++) {
+//            output.append((char) ('a' + i)).append(" ");
+//        }
+//        output.append("\n");
+//        int counter = 0;
+//        for (ArrayList<SudokuField> x : board) {
+//            output.append((char) ('a' + counter)).append(" ");
+//            for (SudokuField y : x) {
+//                output.append(y.getFieldValue()).append(" ");
+//            }
+//            output.append("\n");
+//            counter++;
+//        }
+//        assertEquals(sudoku.getInfoSudoku(), output.toString());
+//    }
 
     @Test
     void getterAndSetterTest() {
