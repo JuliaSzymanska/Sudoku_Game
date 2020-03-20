@@ -9,9 +9,9 @@ public class SudokuBoard {
     //    private SudokuField[][] board = new SudokuField[9][9];
     //    private ArrayList<ArrayList<SudokuField>> board;
 
-    public SudokuBoard(){
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
+    public SudokuBoard() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 board.get(i).set(j, new SudokuField());
             }
         }
@@ -59,8 +59,24 @@ public class SudokuBoard {
     public List<List<SudokuField>> getBoard() {
 //        ArrayList<ArrayList<SudokuField>> copy = new ArrayList<>(
 //        this.board.stream().map(x -> new ArrayList<>(x)).collect(Collectors.toList()));
-        List<List<SudokuField>> copy = Arrays.asList();
+        List<List<SudokuField>> copy = Arrays.asList(
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]));
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                copy.get(i).set(j, new SudokuField());
+            }
+        }
+//        for(int i = 0;i < 9; i++){
         Collections.copy(copy, board);
+//        }
         return copy;
     }
 
@@ -109,17 +125,22 @@ public class SudokuBoard {
      */
 
     public void resetBoard() {
-        List<List<SudokuField>> plansza = Arrays.asList(
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]));
-        this.board = plansza;
+//        List<List<SudokuField>> plansza = Arrays.asList(
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]),
+//                Arrays.asList(new SudokuField[9]));
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                board.get(i).set(j, new SudokuField());
+            }
+        }
+//        this.board = plansza;
     }
 
     /**

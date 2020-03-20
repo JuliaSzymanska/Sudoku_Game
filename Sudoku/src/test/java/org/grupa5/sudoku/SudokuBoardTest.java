@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,25 +16,29 @@ public class SudokuBoardTest {
 
     @Test
     void resetBoardTest() {
-        List<List<SudokuField>> board; // = Arrays.asList(
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]),
-//                Arrays.asList(new SudokuField[9]));
+        List<List<SudokuField>> board = Arrays.asList(
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]),
+                Arrays.asList(new SudokuField[9]));
         SudokuBoard sudoku = new SudokuBoard();
         SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
         Wypelniacz.solve(sudoku);
         sudoku.resetBoard();
-        board = sudoku.getBoard();
+//        Collections.copy(board, sudoku.getBoard());
+//        for(int i = 0;i < 7; i++){
+//            Collections.copy(board.get(i), sudoku.getBoard().get(i));
+//        }
+//        board = sudoku.getBoard();
         boolean check = false;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (board.get(i).get(j).getFieldValue() != 0) {
+                if (sudoku.getBoard().get(i).get(j).getFieldValue() != 0) {
                     check = true;
                 }
             }
