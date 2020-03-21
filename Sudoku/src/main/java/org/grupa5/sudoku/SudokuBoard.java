@@ -26,13 +26,13 @@ public class SudokuBoard {
             Arrays.asList(new SudokuField[9]),
             Arrays.asList(new SudokuField[9]));
 
-    public SudokuColumn getColumn(int column) {
-        return new SudokuColumn(board.get(column));
+    public SudokuObject getColumn(int column) {
+        return new SudokuObject(board.get(column));
     }
 
 
-    public SudokuRow getRow(int row) {
-        return new SudokuRow(board.get(row));
+    public SudokuObject getRow(int row) {
+        return new SudokuObject(board.get(row));
     }
 
     public SudokuObject getBox(int row, int column) {
@@ -47,7 +47,7 @@ public class SudokuBoard {
                 k++;
             }
         }
-        return new SudokuBox(box);
+        return new SudokuObject(box);
     }
 
     /**
