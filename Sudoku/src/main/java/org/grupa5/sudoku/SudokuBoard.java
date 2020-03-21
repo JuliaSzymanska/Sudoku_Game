@@ -21,7 +21,7 @@ public class SudokuBoard {
                 Arrays.asList(new SudokuField[9]),
                 Arrays.asList(new SudokuField[9]),
                 Arrays.asList(new SudokuField[9]));
-        this.resetBoard();
+        this.resetBoard(this.board);
     }
 
     private List<List<SudokuField>> board;
@@ -33,8 +33,6 @@ public class SudokuBoard {
      */
 
     public List<List<SudokuField>> getBoard() {
-        //ArrayList<ArrayList<SudokuField>> copy = new ArrayList<>(
-        //this.board.stream().map(x -> new ArrayList<>(x)).collect(Collectors.toList()));
         List<List<SudokuField>> copy = Arrays.asList(
                 Arrays.asList(new SudokuField[9]),
                 Arrays.asList(new SudokuField[9]),
@@ -45,11 +43,7 @@ public class SudokuBoard {
                 Arrays.asList(new SudokuField[9]),
                 Arrays.asList(new SudokuField[9]),
                 Arrays.asList(new SudokuField[9]));
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                copy.get(i).set(j, new SudokuField());
-            }
-        }
+        resetBoard(copy);
         Collections.copy(copy, board);
         return copy;
     }
@@ -128,8 +122,10 @@ public class SudokuBoard {
      */
 
     public void set(int x, int y, int value) {
-        if (checkBoard(x, y, value)) {
-            this.board.get(x).get(y).setFieldValue(value);
+        int temp = this.board.get(x).get(y).getFieldValue();
+        this.board.get(x).get(y).setFieldValue(value);
+        if (!checkBoard(x, y, value)) {
+            this.board.get(x).get(y).setFieldValue(temp);
         }
     }
 
@@ -137,7 +133,7 @@ public class SudokuBoard {
      * Reset board, fill with 0.
      */
 
-    public void resetBoard() {
+    public void resetBoard(List<List<SudokuField>> board) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 board.get(i).set(j, new SudokuField());
@@ -146,64 +142,8 @@ public class SudokuBoard {
     }
 
     /**
-     * Check if value can be set at col.
-     */
-
-    // TODO: usun to i używaj metod z klas kolumn / rzędów / boxów
-    private boolean checkCol(int col, int value) {
-        if (col < 0 || col > 8) {
-            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
-        }
-        for (int i = 0; i <= 8; i++) {
-            if (this.board.get(i).get(col).getFieldValue() == value) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Check if value can be set at row.
-     */
-
-    // TODO: usun to i używaj metod z klas kolumn / rzędów / boxów
-    private boolean checkRow(int row, int value) {
-        if (row < 0 || row > 8) {
-            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
-        }
-        for (int i = 0; i <= 8; i++) {
-            if (this.board.get(row).get(i).getFieldValue() == value) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Check if value can be set at sectorNr.
-     */
-
-    // TODO: usun to i używaj metod z klas kolumn / rzędów / boxów
-    private boolean checkSector(int sectorNr, int value) {
-        if (sectorNr < 0 || sectorNr > 8) {
-            throw new IndexOutOfBoundsException("Sector sectorNr has to be in range from 0 to 8");
-        }
-        int begX = (sectorNr / 3) * 3;
-        int begY = (sectorNr % 3) * 3;
-        for (int i = begX; i <= begX + 2; i++) {
-            for (int j = begY; j <= begY + 2; j++) {
-                if (this.board.get(i).get(j).getFieldValue() == value) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
      * Check if number can be set at position [row][column].
      */
-    // TODO: trzeba to jakoś zamienić chwilowo nie ma pomysłu
     private boolean checkBoard(int row, int column, int number) {
         if (row < 0 || row > 8) {
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
@@ -214,12 +154,7 @@ public class SudokuBoard {
         if (number == 0) {
             return true;
         }
-        //board.get(row).set(column, number);
-        // TODO : podmien na getCol(col).verify(), getRow(row).verify(), getBox(row,
-        // col).verify()
-        //return getColumn(column).verify() && getRow(row).verify() && getBox(row, column).verify();
-        return this.checkCol(column, number) && this.checkRow(row, number)
-                        && this.checkSector(getSectorNumber(row, column), number);
+        return getRow(row).verify() && getColumn(column).verify() && getBox(row, column).verify();
     }
 
     @Override
@@ -248,22 +183,21 @@ public class SudokuBoard {
      * Write all board's numbers to StringBuilder and then converted to String.
      */
 
-    //       public String getInfoSudoku() {
-    //           StringBuilder output = new StringBuilder("X ");
-    //           for (int i = 0; i <= 8; i++) {
-    //               output.append((char) ('a' + i)).append(" ");
-    //           }
-    //           output.append("\n");
-    //           int counter = 0;
-    //           for (ArrayList<SudokuField> x : this.board) {
-    //               output.append((char) ('a' + counter)).append(" ");
-    //               for (SudokuField y : x) {
-    //                   output.append(y.getFieldValue()).append(" ");
-    //               }
-    //               output.append("\n");
-    //               counter++;
-    //           }
-    //           return output.toString();
-    //       }
-
+    //    public String getInfoSudoku() {
+    //        StringBuilder output = new StringBuilder("X ");
+    //        for (int i = 0; i <= 8; i++) {
+    //            output.append((char) ('a' + i)).append(" ");
+    //        }
+    //        output.append("\n");
+    //        int counter = 0;
+    //        for (ArrayList<SudokuField> x : this.board) {
+    //            output.append((char) ('a' + counter)).append(" ");
+    //            for (SudokuField y : x) {
+    //                output.append(y.getFieldValue()).append(" ");
+    //            }
+    //            output.append("\n");
+    //            counter++;
+    //        }
+    //        return output.toString();
+    //    }
 }

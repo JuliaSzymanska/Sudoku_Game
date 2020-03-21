@@ -12,19 +12,12 @@ import java.util.List;
  */
 
 public class SudokuObject {
-    private List<SudokuField> object;
+    private List<SudokuField> object = Arrays.asList(new SudokuField[9]);
 
     SudokuObject(List<SudokuField> table) {
-        this.object = Arrays.asList(
-                table.get(0),
-                table.get(1),
-                table.get(2),
-                table.get(3),
-                table.get(4),
-                table.get(5),
-                table.get(6),
-                table.get(7),
-                table.get(8));
+        for (int i = 0; i < 9; i++) {
+            this.object.set(i, table.get(i));
+        }
     }
 
     /**
@@ -36,7 +29,7 @@ public class SudokuObject {
     protected boolean verify() {
         List<Integer> list = new ArrayList<Integer>();
         for (SudokuField x : object) {
-            if (list.contains(x.getFieldValue())) {
+            if (list.contains(x.getFieldValue()) && x.getFieldValue() != 0) {
                 return false;
             }
             list.add(x.getFieldValue());

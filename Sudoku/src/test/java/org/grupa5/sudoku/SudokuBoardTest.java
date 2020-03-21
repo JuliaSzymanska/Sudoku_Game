@@ -16,25 +16,12 @@ public class SudokuBoardTest {
 
     @Test
     void resetBoardTest() {
-        List<List<SudokuField>> board = Arrays.asList(
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]));
+        List<List<SudokuField>> board;
         SudokuBoard sudoku = new SudokuBoard();
         SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
         Wypelniacz.solve(sudoku);
-        sudoku.resetBoard();
-//        Collections.copy(board, sudoku.getBoard());
-//        for(int i = 0;i < 7; i++){
-//            Collections.copy(board.get(i), sudoku.getBoard().get(i));
-//        }
-//        board = sudoku.getBoard();
+        board = sudoku.getBoard();
+        sudoku.resetBoard(board);
         boolean check = false;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
