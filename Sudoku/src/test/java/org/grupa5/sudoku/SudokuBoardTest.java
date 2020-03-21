@@ -55,8 +55,6 @@ public class SudokuBoardTest {
         board = sudoku.getBoard();
         SudokuObject row = new SudokuObject(board.get(0));
         SudokuObject row2 = sudoku.getRow(0);
-        for (int i = 0; i < 9; i++) {
-        }
         assertEquals(row, row2);
     }
 
@@ -67,19 +65,47 @@ public class SudokuBoardTest {
         SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
         Wypelniacz.solve(sudoku);
         board = sudoku.getBoard();
-        List<SudokuField> col = Arrays.asList(
-                board.get(0).get(0),
-                board.get(1).get(0),
-                board.get(2).get(0),
-                board.get(3).get(0),
-                board.get(4).get(0),
-                board.get(5).get(0),
-                board.get(6).get(0),
-                board.get(7).get(0),
-                board.get(8).get(0));
+        List<SudokuField> col = Arrays.asList(new SudokuField[9]);
+        for (int i = 0; i < 9; i++) {
+            col.set(i, board.get(i).get(0));
+        }
         SudokuObject column = new SudokuObject(col);
         SudokuObject column2 = sudoku.getColumn(0);
         assertEquals(column, column2);
+    }
+
+    @Test
+    void getBoxTest() {
+        List<List<SudokuField>> board;
+        SudokuBoard sudoku = new SudokuBoard();
+        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
+        Wypelniacz.solve(sudoku);
+        board = sudoku.getBoard();
+        List<SudokuField> bo = Arrays.asList(new SudokuField[9]);
+        int k = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                bo.set(k, board.get(i).get(j));
+                k++;
+            }
+        }
+        SudokuObject box = new SudokuObject(bo);
+        SudokuObject box2 = sudoku.getBox(0, 0);
+        assertEquals(box, box2);
+    }
+
+    @Test
+    void getterAndSetterTest() {
+        SudokuBoard sudoku = new SudokuBoard();
+        assertEquals(sudoku.get(2, 2), 0);
+        sudoku.set(2, 2, 2);
+        assertEquals(sudoku.get(2, 2), 2);
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.get(9, 9);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(9, 9, 1337);
+        });
     }
 
 //    @Test
@@ -106,19 +132,5 @@ public class SudokuBoardTest {
 //        }
 //        assertEquals(sudoku.getInfoSudoku(), output.toString());
 //    }
-
-    @Test
-    void getterAndSetterTest() {
-        SudokuBoard sudoku = new SudokuBoard();
-        assertEquals(sudoku.get(2, 2), 0);
-        sudoku.set(2, 2, 2137);
-        assertEquals(sudoku.get(2, 2), 2137);
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            sudoku.get(9, 9);
-        });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            sudoku.set(9, 9, 1337);
-        });
-    }
 
 }

@@ -56,7 +56,6 @@ public class SudokuSolverTest {
                     return false;
                 }
                 list.add(board.get(i, j));
-                // System.out.println(list);
             }
         }
         return true;
