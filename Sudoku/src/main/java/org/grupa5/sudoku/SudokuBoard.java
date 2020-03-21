@@ -1,6 +1,4 @@
 package org.grupa5.sudoku;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -26,8 +24,19 @@ public class SudokuBoard {
             Arrays.asList(new SudokuField[9]),
             Arrays.asList(new SudokuField[9]));
 
+    // TODO: jeśli masz lepszy pomysł na tą metodę, to śmiało :)
     public SudokuObject getColumn(int column) {
-        return new SudokuObject(board.get(column));
+        List<SudokuField> col = Arrays.asList(
+                board.get(0).get(column),
+                board.get(1).get(column),
+                board.get(2).get(column),
+                board.get(3).get(column),
+                board.get(4).get(column),
+                board.get(5).get(column),
+                board.get(6).get(column),
+                board.get(7).get(column),
+                board.get(8).get(column));
+        return new SudokuObject(col);
     }
 
 

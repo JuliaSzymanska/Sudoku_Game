@@ -53,12 +53,33 @@ public class SudokuBoardTest {
         SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
         Wypelniacz.solve(sudoku);
         board = sudoku.getBoard();
-        SudokuRow row = new SudokuRow(board.get(0));
-        SudokuRow row2 = sudoku.getRow(0);
+        SudokuObject row = new SudokuObject(board.get(0));
+        SudokuObject row2 = sudoku.getRow(0);
         for (int i = 0; i < 9; i++) {
         }
-        // TODO: Make equals method.
-//        assertEquals(row, row2);
+        assertEquals(row, row2);
+    }
+
+    @Test
+    void getColumnTest() {
+        List<List<SudokuField>> board;
+        SudokuBoard sudoku = new SudokuBoard();
+        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
+        Wypelniacz.solve(sudoku);
+        board = sudoku.getBoard();
+        List<SudokuField> col = Arrays.asList(
+                board.get(0).get(0),
+                board.get(1).get(0),
+                board.get(2).get(0),
+                board.get(3).get(0),
+                board.get(4).get(0),
+                board.get(5).get(0),
+                board.get(6).get(0),
+                board.get(7).get(0),
+                board.get(8).get(0));
+        SudokuObject column = new SudokuObject(col);
+        SudokuObject column2 = sudoku.getColumn(0);
+        assertEquals(column, column2);
     }
 
 //    @Test

@@ -65,4 +65,25 @@ public class SudokuObject {
 //        }
 //        return true;
 //    }
+//}
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+        if (!(object instanceof SudokuObject)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members
+        SudokuObject sudokuObject = (SudokuObject) object;
+
+        for (int j = 0; j < 9; j++) {
+            if (sudokuObject.object.get(j) != this.object.get(j)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
