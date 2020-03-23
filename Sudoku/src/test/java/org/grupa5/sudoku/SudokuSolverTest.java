@@ -56,7 +56,6 @@ public class SudokuSolverTest {
                     return false;
                 }
                 list.add(board.get(i, j));
-                // System.out.println(list);
             }
         }
         return true;
@@ -85,8 +84,7 @@ public class SudokuSolverTest {
     @Test
     void solveSudokuTest() {
         SudokuBoard Plansza = new SudokuBoard();
-        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
-        Wypelniacz.solve(Plansza);
+        Plansza.solveGame();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 assertTrue(checkBoard(i, j, Plansza));
@@ -98,9 +96,8 @@ public class SudokuSolverTest {
     void noRepeatsTest() {
         SudokuBoard sudoku = new SudokuBoard();
         SudokuBoard sudoku2 = new SudokuBoard();
-        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
-        Wypelniacz.solve(sudoku);
-        Wypelniacz.solve(sudoku2);
+        sudoku.solveGame();
+        sudoku2.solveGame();
         assertNotEquals(sudoku, sudoku2);
 
     }

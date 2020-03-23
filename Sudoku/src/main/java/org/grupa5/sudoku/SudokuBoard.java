@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class SudokuBoard {
 
     private int[][] board = new int[9][9];
+    private SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
 
     /**
      * Return copy of the board.
@@ -12,6 +13,14 @@ public class SudokuBoard {
     public int[][] getBoard() {
         int[][] copy = Arrays.stream(this.board).map(int[]::clone).toArray(int[][]::new);
         return copy;
+    }
+
+    /**
+     * This method solve sudoku board using method solve form SudokuSolver interface.
+     */
+
+    public void solveGame() {
+        sudokuSolver.solve(this);
     }
 
     @Override
@@ -25,7 +34,7 @@ public class SudokuBoard {
         if (!(other instanceof SudokuBoard)) {
             return false;
         }
-        SudokuBoard plansza = (SudokuBoard)other;
+        SudokuBoard plansza = (SudokuBoard) other;
         return Arrays.deepEquals(plansza.getBoard(), this.getBoard());
     }
 
@@ -135,26 +144,37 @@ public class SudokuBoard {
                 && this.checkSector(getSectorNumber(row, column), number);
     }
 
-    //    /**
-    //     * Write all board's numbers to StringBuilder and then converted to String.
-    //     */
-    //
-    //    public String getInfoSudoku() {
-    //        StringBuilder output = new StringBuilder("X ");
-    //        for (int i = 0; i <= 8; i++) {
-    //            output.append((char) ('a' + i)).append(" ");
-    //        }
-    //        output.append("\n");
-    //        int counter = 0;
-    //        for (int[] x : this.board) {
-    //            output.append((char) ('a' + counter)).append(" ");
-    //            for (int y : x) {
-    //                output.append(y).append(" ");
-    //            }
-    //            output.append("\n");
-    //            counter++;
-    //        }
-    //        return output.toString();
-    //    }
+    /**
+     * Write all board's numbers to StringBuilder and then converted to String.
+     */
+
+    public String getInfoSudoku() {
+        StringBuilder output = new StringBuilder("X ");
+        for (int i = 0; i <= 8; i++) {
+            output.append((char) ('a' + i)).append(" ");
+        }
+        output.append("\n");
+        int counter = 0;
+        for (int[] x : this.board) {
+            output.append((char) ('a' + counter)).append(" ");
+            for (int y : x) {
+                output.append(y).append(" ");
+            }
+            output.append("\n");
+            counter++;
+        }
+        return output.toString();
+    }
+
+    /**
+     * Main method to create filled sudoku board.
+     */
+
+    public static void main(String[] args) {
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.solveGame();
+        System.out.println(sudoku.getInfoSudoku());
+    }
+
 
 }
