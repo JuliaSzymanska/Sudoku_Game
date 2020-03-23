@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit test for simple App. Testing methods: resetBoard.
+ * Unit test for simple App. Testing methods: resetBoard and getters.
  */
 public class SudokuBoardTest {
 
