@@ -135,6 +135,12 @@ public class SudokuBoard {
      */
 
     public int get(int x, int y) {
+        if (x < 0 || x > 8) {
+            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
+        }
+        if (y < 0 || y > 8) {
+            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
+        }
         return this.board.get(x).get(y).getFieldValue();
     }
 
@@ -143,6 +149,15 @@ public class SudokuBoard {
      */
 
     public void set(int x, int y, int value) {
+        if (x < 0 || x > 8) {
+            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
+        }
+        if (y < 0 || y > 8) {
+            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
+        }
+        if (value < 0 || value > 9) {
+            throw new IndexOutOfBoundsException("Number has to be in range 0 - 9");
+        }
         int temp = this.board.get(x).get(y).getFieldValue();
         this.board.get(x).get(y).setFieldValue(value);
         if (!checkBoard(x, y, value)) {
@@ -166,12 +181,6 @@ public class SudokuBoard {
      * Check if number can be set at position [row][column].
      */
     private boolean checkBoard(int row, int column, int number) {
-        if (row < 0 || row > 8) {
-            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
-        }
-        if (column < 0 || column > 8) {
-            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
-        }
         if (number == 0) {
             return true;
         }

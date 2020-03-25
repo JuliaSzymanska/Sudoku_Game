@@ -80,11 +80,51 @@ public class SudokuBoardTest {
         sudoku.set(2, 2, 2);
         assertEquals(sudoku.get(2, 2), 2);
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            sudoku.get(9, 9);
+            sudoku.get(9, 7);
         });
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            sudoku.set(9, 9, 1337);
+            sudoku.get(7, 9);
         });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.get(-1, 7);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.get(7, -1);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(7, 7, 10);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(10, 7, 3);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(7, 10, 3);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(7, 7, -1);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(-1, 7, 3);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(7, -1, 3);
+        });
+    }
+
+    @Test
+    void equalsTest() {
+        SudokuBoard sudoku1 = new SudokuBoard();
+        SudokuBoard sudoku2 = new SudokuBoard();
+        assertNotEquals(sudoku1, null);
+        assertEquals(sudoku1, sudoku1);
+        assertNotEquals(sudoku1, 1);
+        sudoku1.solveGame();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                sudoku2.set(i, j, sudoku1.get(i,j));
+            }
+        }
+        assertEquals(sudoku1, sudoku2);
     }
 
 //    @Test
