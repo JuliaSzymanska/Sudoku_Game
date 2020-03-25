@@ -208,27 +208,27 @@ public class SudokuBoard {
     //  * Write all board's numbers to StringBuilder and then converted to String.
     //  */
 
-//    public String getInfoSudoku() {
-//        StringBuilder output = new StringBuilder("X ");
-//        for (int i = 0; i <= 8; i++) {
-//            output.append((char) ('a' + i)).append(" ");
-//        }
-//        output.append("\n");
-//        int counter = 0;
-//        for (List<SudokuField> x : this.board) {
-//            output.append((char) ('a' + counter)).append(" ");
-//            for (SudokuField y : x) {
-//                output.append(y.getFieldValue()).append(" ");
-//            }
-//            output.append("\n");
-//            counter++;
-//        }
-//        return output.toString();
-//    }
-//
-//    public static void main(String[] args) {
-//        SudokuBoard plansza = new SudokuBoard();
-//        plansza.solveGame();
-//        System.out.println(plansza.getInfoSudoku());
-//    }
+    //    public String getInfoSudoku() {
+    //        StringBuilder output = new StringBuilder("X ");
+    //        for (int i = 0; i <= 8; i++) {
+    //            output.append((char) ('a' + i)).append(" ");
+    //        }
+    //        output.append("\n");
+    //        int counter = 0;
+    //        for (List<SudokuField> x : this.board) {
+    //            output.append((char) ('a' + counter)).append(" ");
+    //            for (SudokuField y : x) {
+    //                output.append(y.getFieldValue()).append(" ");
+    //            }
+    //            output.append("\n");
+    //            counter++;
+    //        }
+    //        return output.toString();
+    //    }
+    //
+    //    public static void main(String[] args) {
+    //        SudokuBoard plansza = new SudokuBoard();
+    //        plansza.solveGame();
+    //        System.out.println(plansza.getInfoSudoku());
+    //    }
 }
