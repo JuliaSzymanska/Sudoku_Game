@@ -32,7 +32,7 @@ public class SudokuSolverTest {
         Plansza.solveGame();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                assertTrue(checkBoard(i, j, Plansza));
+                assertTrue(checkBoard(i, j, Plansza) && Plansza.get(i, j) != 0);
             }
         }
     }
