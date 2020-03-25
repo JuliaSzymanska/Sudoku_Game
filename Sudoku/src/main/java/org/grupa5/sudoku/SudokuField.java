@@ -14,6 +14,7 @@ public class SudokuField {
     public int getFieldValue() {
         return this.value;
     }
+
     /**
      * Constructor
      * init the field 'value' to this param.

@@ -22,8 +22,8 @@ public class SudokuSolverTest {
         if (column < 0 || column > 8) {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
-        return board.getBox(row, column).verify() && 
-        board.getRow(row).verify() && board.getColumn(column).verify();
+        return board.getBox(row, column).verify() &&
+                board.getRow(row).verify() && board.getColumn(column).verify();
     }
 
     @Test

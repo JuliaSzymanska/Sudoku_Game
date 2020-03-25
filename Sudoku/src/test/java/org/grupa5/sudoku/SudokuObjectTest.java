@@ -14,8 +14,8 @@ class SudokuObjectTest {
         List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
         List<SudokuField> list2 = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
-                list1.set(i, new SudokuField(i + 1));
-                list2.set(i, new SudokuField(i + 1));
+            list1.set(i, new SudokuField(i + 1));
+            list2.set(i, new SudokuField(i + 1));
         }
         SudokuObject sudoku1 = new SudokuObject(list1);
         SudokuObject sudoku2 = new SudokuObject(list2);
@@ -30,14 +30,14 @@ class SudokuObjectTest {
 
     @Test
     void verifyTest() {
-    List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
-    for (int i = 0; i < 9; i++) {
-        list1.set(i, new SudokuField(i + 1));
-    }
-    SudokuObject sudoku1 = new SudokuObject(list1);
-    assertTrue(sudoku1.verify());
-    list1.set(4, new SudokuField(9));
-    sudoku1 = new SudokuObject(list1);
-    assertFalse(sudoku1.verify());
+        List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
+        for (int i = 0; i < 9; i++) {
+            list1.set(i, new SudokuField(i + 1));
+        }
+        SudokuObject sudoku1 = new SudokuObject(list1);
+        assertTrue(sudoku1.verify());
+        list1.set(4, new SudokuField(9));
+        sudoku1 = new SudokuObject(list1);
+        assertFalse(sudoku1.verify());
     }
 }

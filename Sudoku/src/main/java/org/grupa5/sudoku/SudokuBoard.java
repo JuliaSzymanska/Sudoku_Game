@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SudokuBoard {
-    
+
     private List<List<SudokuField>> board;
 
     private SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
@@ -56,7 +56,7 @@ public class SudokuBoard {
         resetBoard(copy);
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-               copy.get(i).get(j).setFieldValue(board.get(i).get(j).getFieldValue());
+                copy.get(i).get(j).setFieldValue(board.get(i).get(j).getFieldValue());
             }
         }
         return copy;
@@ -115,10 +115,9 @@ public class SudokuBoard {
 
     /**
      * Gets the number of sector that contains object of positions row, col.
-     * 
+     *
      * @param row first coordinate
-     * @param col second coordinate 
-     * 
+     * @param col second coordinate
      * @return the number of sector that contains [row][col].
      */
 
@@ -178,7 +177,7 @@ public class SudokuBoard {
     /**
      * Check if number can be set at position [row][column].
      */
-    
+
     private boolean checkBoard(int row, int column) {
         return getRow(row).verify() && getColumn(column).verify() && getBox(row, column).verify();
     }

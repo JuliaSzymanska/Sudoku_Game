@@ -2,9 +2,7 @@ package org.grupa5.sudoku;
 
 import org.junit.jupiter.api.Test;
 
-// import java.util.ArrayList;
 import java.util.Arrays;
-// import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -74,11 +72,9 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void getterAndSetterTest() {
+    void getterTest() {
         SudokuBoard sudoku = new SudokuBoard();
         assertEquals(sudoku.get(2, 2), 0);
-        sudoku.set(2, 2, 2);
-        assertEquals(sudoku.get(2, 2), 2);
         assertThrows(IndexOutOfBoundsException.class, () -> {
             sudoku.get(9, 7);
         });
@@ -91,7 +87,13 @@ public class SudokuBoardTest {
         assertThrows(IndexOutOfBoundsException.class, () -> {
             sudoku.get(7, -1);
         });
-        
+    }
+
+    @Test
+    void setterTest() {
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.set(2, 2, 2);
+        assertEquals(sudoku.get(2, 2), 2);
         assertThrows(IndexOutOfBoundsException.class, () -> {
             sudoku.set(10, 7, 3);
         });
@@ -104,7 +106,6 @@ public class SudokuBoardTest {
         assertThrows(IndexOutOfBoundsException.class, () -> {
             sudoku.set(7, -1, 3);
         });
-
         assertThrows(IllegalArgumentException.class, () -> {
             sudoku.set(7, 7, -1);
         });
@@ -123,7 +124,7 @@ public class SudokuBoardTest {
         sudoku1.solveGame();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                sudoku2.set(i, j, sudoku1.get(i,j));
+                sudoku2.set(i, j, sudoku1.get(i, j));
             }
         }
         assertEquals(sudoku1, sudoku2);
