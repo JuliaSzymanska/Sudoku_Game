@@ -36,7 +36,7 @@ public class SudokuBoardTest {
         board = sudoku.getBoard();
         SudokuObject row = new SudokuObject(board.get(0));
         SudokuObject row2 = sudoku.getRow(0);
-         assertEquals(row, row2);
+        assertEquals(row, row2);
     }
 
     @Test
@@ -91,9 +91,7 @@ public class SudokuBoardTest {
         assertThrows(IndexOutOfBoundsException.class, () -> {
             sudoku.get(7, -1);
         });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            sudoku.set(7, 7, 10);
-        });
+        
         assertThrows(IndexOutOfBoundsException.class, () -> {
             sudoku.set(10, 7, 3);
         });
@@ -101,13 +99,17 @@ public class SudokuBoardTest {
             sudoku.set(7, 10, 3);
         });
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            sudoku.set(7, 7, -1);
-        });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
             sudoku.set(-1, 7, 3);
         });
         assertThrows(IndexOutOfBoundsException.class, () -> {
             sudoku.set(7, -1, 3);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            sudoku.set(7, 7, -1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            sudoku.set(7, 7, 10);
         });
     }
 

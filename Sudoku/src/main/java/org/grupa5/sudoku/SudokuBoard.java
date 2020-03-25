@@ -156,7 +156,7 @@ public class SudokuBoard {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
         if (value < 0 || value > 9) {
-            throw new IndexOutOfBoundsException("Number has to be in range 0 - 9");
+            throw new IllegalArgumentException("Number has to be in range 0 - 9");
         }
         int temp = this.board.get(x).get(y).getFieldValue();
         this.board.get(x).get(y).setFieldValue(value);
