@@ -12,9 +12,11 @@ import java.util.List;
  */
 
 public class SudokuObject {
-    private List<SudokuField> object = Arrays.asList(new SudokuField[9]);
+    
+    private List<SudokuField> object;
 
     SudokuObject(List<SudokuField> table) {
+        this.object = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
             this.object.set(i, table.get(i));
         }

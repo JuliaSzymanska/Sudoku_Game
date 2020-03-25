@@ -12,8 +12,15 @@ public class SudokuField {
      */
 
     public int getFieldValue() {
-
         return this.value;
+    }
+
+    public SudokuField(int value) {
+        this.value = value;
+    }
+
+    public SudokuField() {
+        this.value = 0;
     }
 
     @Override
@@ -43,5 +50,4 @@ public class SudokuField {
         }
         this.value = value;
     }
-
 }
