@@ -16,9 +16,9 @@ public class SudokuField {
     }
     /**
      * Constructor
-     * 
-     * @param value, init the field 'value' to this param.
+     * init the field 'value' to this param.
      */
+
     public SudokuField(int value) {
         this.value = value;
     }
