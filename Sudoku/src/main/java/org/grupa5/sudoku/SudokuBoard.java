@@ -11,7 +11,7 @@ public class SudokuBoard {
     private SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
 
     /**
-     * Constructor, which variable board ad list with fixed size [9][9].
+     * Fills the 'board' variable with a 2d fixed size dim [9][9] list.
      */
 
     public SudokuBoard() {
@@ -29,7 +29,7 @@ public class SudokuBoard {
     }
 
     /**
-     * This method solve sudoku board using method solve form SudokuSolver interface.
+     * Calls sudokuSolver.solve() on this object, solving the board.
      */
 
     public void solveGame() {
@@ -59,13 +59,6 @@ public class SudokuBoard {
                copy.get(i).get(j).setFieldValue(board.get(i).get(j).getFieldValue());
             }
         }
-        // Collections.copy(copy, board);
-        // for (int i = 0; i < 9 ; i++) {
-        //     for (int j = 0; j < 9 ; j++) {
-        //         System.out.print(copy.get(i).get(j).getFieldValue());
-        //     }
-        //     System.out.println("");
-        // }
         return copy;
     }
 
@@ -121,7 +114,12 @@ public class SudokuBoard {
     }
 
     /**
-     * Return the number of sector in which is object at posinion [row][col].
+     * Gets the number of sector that contains object of positions row, col.
+     * 
+     * @param row first coordinate
+     * @param col second coordinate 
+     * 
+     * @return the number of sector that contains [row][col].
      */
 
     private int getSectorNumber(int row, int col) {
@@ -180,6 +178,7 @@ public class SudokuBoard {
     /**
      * Check if number can be set at position [row][column].
      */
+    
     private boolean checkBoard(int row, int column, int number) {
         if (number == 0) {
             return true;

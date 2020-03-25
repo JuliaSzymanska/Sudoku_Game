@@ -15,58 +15,6 @@ import java.util.List;
  */
 public class SudokuSolverTest {
 
-    private boolean checkCol(int col, SudokuBoard board) {
-        if (col < 0 || col > 8) {
-            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
-        }
-        List<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i <= 8; i++) {
-            if (list.contains(board.get(i, col))) {
-                return false;
-            }
-            list.add(board.get(i, col));
-        }
-        return true;
-    }
-
-    private boolean checkRow(int row, SudokuBoard board) {
-        if (row < 0 || row > 8) {
-            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
-        }
-        List<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i <= 8; i++) {
-            if (list.contains(board.get(row, i))) {
-                return false;
-            }
-            list.add(board.get(row, i));
-        }
-        return true;
-    }
-
-    private boolean checkSector(int sectorNr, SudokuBoard board) {
-        if (sectorNr < 0 || sectorNr > 8) {
-            throw new IndexOutOfBoundsException("Sector sectorNr has to be in range from 0 to 8");
-        }
-        int begX = (sectorNr / 3) * 3;
-        int begY = (sectorNr % 3) * 3;
-        List<Integer> list = new ArrayList<Integer>();
-        for (int i = begX; i <= begX + 2; i++) {
-            for (int j = begY; j <= begY + 2; j++) {
-                if (list.contains(board.get(i, j))) {
-                    return false;
-                }
-                list.add(board.get(i, j));
-            }
-        }
-        return true;
-    }
-
-    private int getSectorNumber(int row, int col) {
-        int sectorNr = (row / 3) * 3;
-        sectorNr += col / 3;
-        return sectorNr;
-    }
-
     private boolean checkBoard(int row, int column, SudokuBoard board) {
         if (board == null) {
             throw new NullPointerException("SudokuBoard can't be null");
@@ -77,8 +25,8 @@ public class SudokuSolverTest {
         if (column < 0 || column > 8) {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
-        return this.checkCol(column, board) && this.checkRow(row, board)
-                && this.checkSector(getSectorNumber(row, column), board);
+        return board.getBox(row, column).verify() && 
+        board.getRow(row).verify() && board.getColumn(column).verify();
     }
 
     @Test

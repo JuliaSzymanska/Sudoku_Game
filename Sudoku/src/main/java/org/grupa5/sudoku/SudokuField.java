@@ -14,10 +14,18 @@ public class SudokuField {
     public int getFieldValue() {
         return this.value;
     }
-
+    /**
+     * Constructor
+     * 
+     * @param value, init the field 'value' to this param.
+     */
     public SudokuField(int value) {
         this.value = value;
     }
+
+    /**
+     * Default Constructor.
+     */
 
     public SudokuField() {
         this.value = 0;
