@@ -28,7 +28,8 @@ public class SudokuObject {
      * @return False if the structure has duplicate numbers otherwise return True.
      */
 
-    private boolean verify() {
+    // Julia tu było protected xD
+    public boolean verify() {
         List<Integer> list = new ArrayList<Integer>();
         for (SudokuField x : object) {
             if (list.contains(x.getFieldValue()) && x.getFieldValue() != 0) {
