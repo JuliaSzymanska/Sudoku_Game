@@ -54,8 +54,8 @@ public class SudokuBoard {
                 Arrays.asList(new SudokuField[9]),
                 Arrays.asList(new SudokuField[9]));
         resetBoard(copy);
-        for (int i = 0; i < 9 ; i++) {
-            for(int j = 0; j < 9; j++) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                copy.get(i).get(j).setFieldValue(board.get(i).get(j).getFieldValue());
             }
         }
@@ -200,32 +200,32 @@ public class SudokuBoard {
         return true;
     }
 
-    /*
-     * Write all board's numbers to StringBuilder and then converted to String.
-     */
+    // /**
+    //  * Write all board's numbers to StringBuilder and then converted to String.
+    //  */
 
-       public String getInfoSudoku() {
-           StringBuilder output = new StringBuilder("X ");
-           for (int i = 0; i <= 8; i++) {
-               output.append((char) ('a' + i)).append(" ");
-           }
-           output.append("\n");
-           int counter = 0;
-           for (List<SudokuField> x : this.board) {
-               output.append((char) ('a' + counter)).append(" ");
-               for (SudokuField y : x) {
-                   output.append(y.getFieldValue()).append(" ");
-               }
-               output.append("\n");
-               counter++;
-           }
-           return output.toString();
-       }
+    //    public String getInfoSudoku() {
+    //        StringBuilder output = new StringBuilder("X ");
+    //        for (int i = 0; i <= 8; i++) {
+    //            output.append((char) ('a' + i)).append(" ");
+    //        }
+    //        output.append("\n");
+    //        int counter = 0;
+    //        for (List<SudokuField> x : this.board) {
+    //            output.append((char) ('a' + counter)).append(" ");
+    //            for (SudokuField y : x) {
+    //                output.append(y.getFieldValue()).append(" ");
+    //            }
+    //            output.append("\n");
+    //            counter++;
+    //        }
+    //        return output.toString();
+    //    }
 
-    public static void main(String[] args) {
-        SudokuBoard plansza = new SudokuBoard();
-        plansza.solveGame();
-        plansza.getBoard().get(1).get(1).setFieldValue(42069);
-        System.out.println(plansza.getInfoSudoku());
-    }
+    // public static void main(String[] args) {
+    //     SudokuBoard plansza = new SudokuBoard();
+    //     plansza.solveGame();
+    //     plansza.getBoard().get(1).get(1).setFieldValue(42069);
+    //     System.out.println(plansza.getInfoSudoku());
+    // }
 }
