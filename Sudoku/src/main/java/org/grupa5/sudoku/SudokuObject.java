@@ -27,7 +27,7 @@ public class SudokuObject {
      *
      * @return False if the structure has duplicate numbers otherwise return True.
      */
-
+    
     public boolean verify() {
         List<Integer> list = new ArrayList<Integer>();
         for (SudokuField x : object) {
