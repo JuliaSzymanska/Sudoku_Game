@@ -158,7 +158,7 @@ public class SudokuBoard {
         }
         int temp = this.board.get(x).get(y).getFieldValue();
         this.board.get(x).get(y).setFieldValue(value);
-        if (!checkBoard(x, y, value)) {
+        if (!checkBoard(x, y)) {
             this.board.get(x).get(y).setFieldValue(temp);
         }
     }
@@ -179,10 +179,7 @@ public class SudokuBoard {
      * Check if number can be set at position [row][column].
      */
     
-    private boolean checkBoard(int row, int column, int number) {
-        if (number == 0) {
-            return true;
-        }
+    private boolean checkBoard(int row, int column) {
         return getRow(row).verify() && getColumn(column).verify() && getBox(row, column).verify();
     }
 
