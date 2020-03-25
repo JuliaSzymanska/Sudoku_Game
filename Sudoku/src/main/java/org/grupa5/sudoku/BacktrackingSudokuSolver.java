@@ -29,8 +29,8 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (board.get(row, col) == 0) {
-                    List<Integer> range;
-                    range = IntStream.range(1, 10).boxed().collect(Collectors.toList());
+                    List<Integer> range = 
+                    IntStream.range(1, 10).boxed().collect(Collectors.toList());
                     Collections.shuffle(range);
                     for (int number : range) {
                         board.set(row, col, number);
