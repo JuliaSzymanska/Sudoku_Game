@@ -54,7 +54,18 @@ public class SudokuBoard {
                 Arrays.asList(new SudokuField[9]),
                 Arrays.asList(new SudokuField[9]));
         resetBoard(copy);
-        Collections.copy(copy, board);
+        for (int i = 0; i < 9 ; i++) {
+            for(int j = 0; j < 9; j++) {
+               copy.get(i).get(j).setFieldValue(board.get(i).get(j).getFieldValue());
+            }
+        }
+        // Collections.copy(copy, board);
+        // for (int i = 0; i < 9 ; i++) {
+        //     for (int j = 0; j < 9 ; j++) {
+        //         System.out.print(copy.get(i).get(j).getFieldValue());
+        //     }
+        //     System.out.println("");
+        // }
         return copy;
     }
 
@@ -143,10 +154,10 @@ public class SudokuBoard {
      * Reset board, fill with 0.
      */
 
-    public void resetBoard(List<List<SudokuField>> board) {
+    public void resetBoard(List<List<SudokuField>> plansza) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                board.get(i).set(j, new SudokuField());
+                plansza.get(i).set(j, new SudokuField());
             }
         }
     }
@@ -193,21 +204,28 @@ public class SudokuBoard {
      * Write all board's numbers to StringBuilder and then converted to String.
      */
 
-    //    public String getInfoSudoku() {
-    //        StringBuilder output = new StringBuilder("X ");
-    //        for (int i = 0; i <= 8; i++) {
-    //            output.append((char) ('a' + i)).append(" ");
-    //        }
-    //        output.append("\n");
-    //        int counter = 0;
-    //        for (ArrayList<SudokuField> x : this.board) {
-    //            output.append((char) ('a' + counter)).append(" ");
-    //            for (SudokuField y : x) {
-    //                output.append(y.getFieldValue()).append(" ");
-    //            }
-    //            output.append("\n");
-    //            counter++;
-    //        }
-    //        return output.toString();
-    //    }
+       public String getInfoSudoku() {
+           StringBuilder output = new StringBuilder("X ");
+           for (int i = 0; i <= 8; i++) {
+               output.append((char) ('a' + i)).append(" ");
+           }
+           output.append("\n");
+           int counter = 0;
+           for (List<SudokuField> x : this.board) {
+               output.append((char) ('a' + counter)).append(" ");
+               for (SudokuField y : x) {
+                   output.append(y.getFieldValue()).append(" ");
+               }
+               output.append("\n");
+               counter++;
+           }
+           return output.toString();
+       }
+
+    public static void main(String[] args) {
+        SudokuBoard plansza = new SudokuBoard();
+        plansza.solveGame();
+        plansza.getBoard().get(1).get(1).setFieldValue(42069);
+        System.out.println(plansza.getInfoSudoku());
+    }
 }

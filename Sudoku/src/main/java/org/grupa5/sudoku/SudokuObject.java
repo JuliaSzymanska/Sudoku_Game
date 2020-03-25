@@ -38,16 +38,20 @@ public class SudokuObject {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object == this) {
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+            
+        }
+        if (other == this) {
             return true;
         }
-        if (!(object instanceof SudokuObject)) {
+        if (!(other instanceof SudokuObject)) {
             return false;
         }
-        SudokuObject sudokuObject = (SudokuObject) object;
+        SudokuObject sudokuObject = (SudokuObject) other;
         for (int j = 0; j < 9; j++) {
-            if (sudokuObject.object.get(j) != this.object.get(j)) {
+            if (sudokuObject.object.get(j).getFieldValue() != this.object.get(j).getFieldValue()) {
                 return false;
             }
         }

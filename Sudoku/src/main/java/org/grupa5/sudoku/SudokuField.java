@@ -39,7 +39,7 @@ public class SudokuField {
 
     public void setFieldValue(int value) {
         if (value < 0 || value > 9) {
-            throw new IndexOutOfBoundsException("Value has to be in range 0 - 9");
+            throw new IllegalArgumentException("Value has to be in range 0 - 9");
         }
         this.value = value;
     }

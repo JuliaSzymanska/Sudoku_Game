@@ -18,39 +18,32 @@ public class SudokuBoardTest {
     void resetBoardTest() {
         List<List<SudokuField>> board;
         SudokuBoard sudoku = new SudokuBoard();
-        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
-        Wypelniacz.solve(sudoku);
+        sudoku.solveGame();
         board = sudoku.getBoard();
         sudoku.resetBoard(board);
-        boolean check = false;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (sudoku.getBoard().get(i).get(j).getFieldValue() != 0) {
-                    check = true;
-                }
+                assertNotEquals(sudoku.getBoard().get(i).get(j).getFieldValue(), 0);
             }
         }
-        assertFalse(check);
     }
 
     @Test
     void getRowTest() {
         List<List<SudokuField>> board;
         SudokuBoard sudoku = new SudokuBoard();
-        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
-        Wypelniacz.solve(sudoku);
+        sudoku.solveGame();
         board = sudoku.getBoard();
         SudokuObject row = new SudokuObject(board.get(0));
         SudokuObject row2 = sudoku.getRow(0);
-        assertEquals(row, row2);
+         assertEquals(row, row2);
     }
 
     @Test
     void getColumnTest() {
         List<List<SudokuField>> board;
         SudokuBoard sudoku = new SudokuBoard();
-        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
-        Wypelniacz.solve(sudoku);
+        sudoku.solveGame();
         board = sudoku.getBoard();
         List<SudokuField> col = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
@@ -65,8 +58,7 @@ public class SudokuBoardTest {
     void getBoxTest() {
         List<List<SudokuField>> board;
         SudokuBoard sudoku = new SudokuBoard();
-        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
-        Wypelniacz.solve(sudoku);
+        sudoku.solveGame();
         board = sudoku.getBoard();
         List<SudokuField> bo = Arrays.asList(new SudokuField[9]);
         int k = 0;
