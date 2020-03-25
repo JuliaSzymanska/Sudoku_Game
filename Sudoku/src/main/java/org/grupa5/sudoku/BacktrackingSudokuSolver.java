@@ -32,11 +32,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
      */
 
     private void randomFillSector(int sectorNr, SudokuBoard board) {
-        if (sectorNr < 0 || sectorNr > 8) {
-            throw new IndexOutOfBoundsException(
-                    "Sector number (sectorNr) has to be in range from 0 to 8");
-        }
-
         // sectorNr / 3 * 3 - for 0 - 2 : 0; 3 - 5 : 3; 6 - 8 : 6;
         // sectorNr % 3 * 3 - for 0 : 0; 1 : 3; 2 : 6;
 
@@ -92,12 +87,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
      */
 
     private void shuffleColumn(int col1, int col2, SudokuBoard board) {
-        if (col1 < 0 || col1 > 8) {
-            throw new IndexOutOfBoundsException("Column col1 has to be in range 0 - 8");
-        }
-        if (col2 < 0 || col2 > 8) {
-            throw new IndexOutOfBoundsException("Column col2 has to be in range 0 - 8");
-        }
         int prevCol;
         for (int x = 0; x <= 8; x++) {
             prevCol = board.get(x, col1);
@@ -111,12 +100,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
      */
 
     private void shuffleRow(int row1, int row2, SudokuBoard board) {
-        if (row1 < 0 || row1 > 8) {
-            throw new IndexOutOfBoundsException("Row row1 has to be in range 0 - 8");
-        }
-        if (row2 < 0 || row2 > 8) {
-            throw new IndexOutOfBoundsException("Row row2 has to be in range 0 - 8");
-        }
         int prevRow;
         for (int x = 0; x <= 8; x++) {
             prevRow = board.get(row1, x);

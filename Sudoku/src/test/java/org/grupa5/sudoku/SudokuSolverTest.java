@@ -102,4 +102,12 @@ public class SudokuSolverTest {
 
     }
 
+    @Test
+    void randomFillSectorTest() {
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.solveGame();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        solver.solve(sudoku);
+    }
+
 }
