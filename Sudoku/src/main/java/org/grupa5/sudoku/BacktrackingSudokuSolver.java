@@ -20,18 +20,9 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
     }
 
     /**
-     * Board is divided into 9 sectors, counting from top left to bottom right.
-     * [0, 1 ,2] [3, 4, 5] [6, 7, 8] ].
-     * this method fills a random space in selected sector with a random number.
-     * usage - loop over all sectors and init them with one random number each in.
-     * random position.
-     *
-     * @param sectorNr number of sector to set.
-     * @param board    is an object of SudokuBoard class
-     */
-
-    /**
      * Solve sudoku filled with some numbers.
+     *
+     * @param board is an object of SudokuBoard class
      */
 
     private boolean solveSudoku(SudokuBoard board) {
