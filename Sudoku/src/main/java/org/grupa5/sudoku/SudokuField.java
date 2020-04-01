@@ -15,6 +15,10 @@ public class SudokuField {
         return this.value;
     }
 
+    public SudokuField(SudokuField sudokuField) {
+        this.value = sudokuField.value;
+    }
+
     /**
      * Constructor
      * init the field 'value' to this param.
