@@ -6,7 +6,8 @@ import java.util.List;
 public class SudokuBoard {
 
     private List<List<SudokuField>> board;
-
+    
+    // TODO: on chce to w konstrukotrze
     private SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
 
     /**
