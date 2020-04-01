@@ -71,14 +71,10 @@ public class SudokuBoard {
 
     public SudokuObject getColumn(int column) {
         List<SudokuField> col = Arrays.asList(new SudokuField[9]);
-        List<SudokuField> copy = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
-            col.set(i, board.get(i).get(column));
+            col.set(i, new SudokuField(board.get(i).get(column)));
         }
-        // TODO: przecież to nie kopiuje :(
-        // nie wiem jak to pomineliśmy przecież to samo fixowałem przy getBox()
-        Collections.copy(copy, col);
-        return new SudokuObject(copy);
+        return new SudokuObject(col);
     }
 
     /**
@@ -89,9 +85,9 @@ public class SudokuBoard {
 
     public SudokuObject getRow(int row) {
         List<SudokuField> copy = Arrays.asList(new SudokuField[9]);
-        // TODO: przecież to nie kopiuje :(
-        // nie wiem jak to pomineliśmy przecież to samo fixowałem przy getBox()
-        Collections.copy(copy, board.get(row));
+        for (int i = 0; i < 9; i++) {
+            copy.set(i, new SudokuField(board.get(row).get(i)));
+        }
         return new SudokuObject(copy);
     }
 
@@ -235,8 +231,9 @@ public class SudokuBoard {
     //        System.out.println(plansza.getInfoSudoku());
     //    }
 
-    // public static void main(String[] args) {
-    //     SudokuBoard plansza = new SudokuBoard();
-    //     plansza.getRow(1);
-    // }
+    public static void main(String[] args) {
+        SudokuBoard plansza = new SudokuBoard();
+        plansza.getRow(1);
+        plansza.getColumn(1);
+    }
 }
