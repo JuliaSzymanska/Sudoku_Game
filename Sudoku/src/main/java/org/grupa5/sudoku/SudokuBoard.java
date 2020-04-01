@@ -62,38 +62,39 @@ public class SudokuBoard {
     }
 
     /**
-     * A simple getter that returns copy of the specific column in the board variable.
-     *
-     * @return copy of the specific column.
+     * A simple getter that returns a column from 'board' List by index.
+     * @param column Specified column.
+     * @return column
      */
 
 
     public SudokuObject getColumn(int column) {
         SudokuField[] copyArray = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
-            copyArray[i] = new SudokuField(board.get(i).get(column));
+            copyArray[i] = board.get(i).get(column);
         }
         return new SudokuObject(Arrays.asList(copyArray));
     }
 
     /**
-     * A simple getter that returns copy of the specific row in the board variable.
-     *
-     * @return copy of the specific row.
+     * A simple getter that returns a row from 'board' List by index.
+     * @param row Specified row.
+     * @return Row.
      */
 
     public SudokuObject getRow(int row) {
         SudokuField[] copyArray = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
-            copyArray[i] = new SudokuField(board.get(row).get(i));
+            copyArray[i] = board.get(row).get(i);
         }
         return new SudokuObject(Arrays.asList(copyArray));
     }
 
     /**
-     * A simple getter that returns copy of the specific sector in the board variable.
-     *
-     * @return copy of the specific sector.
+     * A simple getter that returns a sector from 'board' List by index of row and column
+     * @param row Specified row.
+     * @param column Specified column.
+     * @return Sector.
      */
 
     public SudokuObject getBox(int row, int column) {
@@ -104,7 +105,7 @@ public class SudokuBoard {
         SudokuField[] copyArray = new SudokuField[9];
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
-                copyArray[k] = new SudokuField(board.get(i).get(j));
+                copyArray[k] = board.get(i).get(j);
                 k++;
             }
         }
