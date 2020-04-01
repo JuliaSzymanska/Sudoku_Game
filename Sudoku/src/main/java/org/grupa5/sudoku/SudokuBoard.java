@@ -70,11 +70,11 @@ public class SudokuBoard {
 
 
     public SudokuObject getColumn(int column) {
-        List<SudokuField> col = Arrays.asList(new SudokuField[9]);
+        SudokuField copyArray[] = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
-            col.set(i, new SudokuField(board.get(i).get(column)));
+            copyArray[i] = new SudokuField(board.get(i).get(column));
         }
-        return new SudokuObject(col);
+        return new SudokuObject(Arrays.asList(copyArray));
     }
 
     /**
@@ -84,11 +84,11 @@ public class SudokuBoard {
      */
 
     public SudokuObject getRow(int row) {
-        List<SudokuField> copy = Arrays.asList(new SudokuField[9]);
+        SudokuField copyArray[] = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
-            copy.set(i, new SudokuField(board.get(row).get(i)));
+            copyArray[i] = new SudokuField(board.get(row).get(i));
         }
-        return new SudokuObject(copy);
+        return new SudokuObject(Arrays.asList(copyArray));
     }
 
     /**
@@ -102,14 +102,14 @@ public class SudokuBoard {
         int begX = (sectorNr / 3) * 3;
         int begY = (sectorNr % 3) * 3;
         int k = 0;
-        List<SudokuField> box = Arrays.asList(new SudokuField[9]);
+        SudokuField copyArray[] = new SudokuField[9];
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
-                box.set(k, board.get(i).get(j));
+                copyArray[k] = new SudokuField(board.get(i).get(j));
                 k++;
             }
         }
-        return new SudokuObject(box);
+        return new SudokuObject(Arrays.asList(copyArray));
     }
 
     /**
