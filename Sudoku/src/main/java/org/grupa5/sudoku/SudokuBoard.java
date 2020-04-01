@@ -69,7 +69,7 @@ public class SudokuBoard {
 
 
     public SudokuObject getColumn(int column) {
-        SudokuField copyArray[] = new SudokuField[9];
+        SudokuField[] copyArray = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
             copyArray[i] = new SudokuField(board.get(i).get(column));
         }
@@ -83,7 +83,7 @@ public class SudokuBoard {
      */
 
     public SudokuObject getRow(int row) {
-        SudokuField copyArray[] = new SudokuField[9];
+        SudokuField[] copyArray = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
             copyArray[i] = new SudokuField(board.get(row).get(i));
         }
@@ -101,7 +101,7 @@ public class SudokuBoard {
         int begX = (sectorNr / 3) * 3;
         int begY = (sectorNr % 3) * 3;
         int k = 0;
-        SudokuField copyArray[] = new SudokuField[9];
+        SudokuField[] copyArray = new SudokuField[9];
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
                 copyArray[k] = new SudokuField(board.get(i).get(j));
