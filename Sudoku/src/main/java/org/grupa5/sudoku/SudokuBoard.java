@@ -231,9 +231,9 @@ public class SudokuBoard {
     //        System.out.println(plansza.getInfoSudoku());
     //    }
 
-    public static void main(String[] args) {
-        SudokuBoard plansza = new SudokuBoard();
-        plansza.getRow(1);
-        plansza.getColumn(1);
-    }
+    //    public static void main(String[] args) {
+    //        SudokuBoard plansza = new SudokuBoard();
+    //        plansza.getRow(1);
+    //        plansza.getColumn(1);
+    //    }
 }

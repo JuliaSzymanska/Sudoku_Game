@@ -6,17 +6,11 @@ public class SudokuField {
     private int value = 0;
 
     /**
-     * A simple getter.
-     *
-     * @return Value of member variable 'value'
+     * Default Constructor.
      */
 
-    public int getFieldValue() {
-        return this.value;
-    }
-
-    public SudokuField(SudokuField sudokuField) {
-        this.value = sudokuField.value;
+    public SudokuField() {
+        this.value = 0;
     }
 
     /**
@@ -29,11 +23,22 @@ public class SudokuField {
     }
 
     /**
-     * Default Constructor.
+     * Constructor
+     * init the field 'value' with value od sudokuField param.
      */
 
-    public SudokuField() {
-        this.value = 0;
+    public SudokuField(SudokuField sudokuField) {
+        this.value = sudokuField.value;
+    }
+
+    /**
+     * A simple getter.
+     *
+     * @return Value of member variable 'value'
+     */
+
+    public int getFieldValue() {
+        return this.value;
     }
 
     @Override
