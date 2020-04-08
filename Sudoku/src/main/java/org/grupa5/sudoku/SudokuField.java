@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import com.google.common.base.Objects;
 
 public class SudokuField {
 
@@ -68,4 +69,12 @@ public class SudokuField {
         }
         this.value = value;
     }
+
+    // TODO: to powinien być działający przykład hashcode b uildera przy użyciu guavy od googla.
+    // dodałem guavę do mavena 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(value);
+    }
+
 }

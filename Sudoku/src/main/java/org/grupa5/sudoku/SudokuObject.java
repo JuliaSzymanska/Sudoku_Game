@@ -22,6 +22,8 @@ public class SudokuObject {
         }
     }
 
+
+
     /**
      * Verifies whether the structure is valid.
      *
