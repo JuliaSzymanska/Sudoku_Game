@@ -10,6 +10,7 @@ public class SudokuBoard {
     
     // TODO: on chce to w konstrukotrze
     private SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
+    
 
     /**
      * Fills the 'board' variable with a 2d fixed size dim [9][9] list.
@@ -17,6 +18,7 @@ public class SudokuBoard {
 
     // TODO: Magiczne numerki w rozmiarze tablicy.
     // jakiś private final int BoardSize = rozmiar;
+    // Powiedział że stałe się pisze Dużymi literami które rozdziela się podkreślnikami
     // Przy okazji można tego boarda zamienić na inicjalizacje w loopie jak się nam bardzo chce
     // Mi się nie chce :p
     public SudokuBoard() {
