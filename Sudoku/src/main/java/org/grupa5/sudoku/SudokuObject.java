@@ -31,6 +31,10 @@ public class SudokuObject {
     public boolean verify() {
         List<Integer> list = new ArrayList<Integer>();
         for (SudokuField x : object) {
+            // to jest fajne, ale mówił że set zawiera każdą wartość tylko raz
+            // i jeśli próbujemy dodać coś co w nim już jest to zwróci false
+            // więc jeśli nam się bardzo nudzi to możemy to zmienić na jakieś if set.add() 
+            // z pominięciem 0 oczywiście
             if (list.contains(x.getFieldValue()) && x.getFieldValue() != 0) {
                 return false;
             }

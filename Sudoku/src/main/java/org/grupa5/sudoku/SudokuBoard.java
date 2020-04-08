@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SudokuBoard {
+    
 
+    // TODO: Niby mówił żeby nie robić 2d listy, ale już zrobiliśmy to chyba nie jest problem?
     private List<List<SudokuField>> board;
     
     // TODO: on chce to w konstrukotrze
@@ -14,6 +16,10 @@ public class SudokuBoard {
      * Fills the 'board' variable with a 2d fixed size dim [9][9] list.
      */
 
+    // TODO: Magiczne numerki w rozmiarze tablicy.
+    // jakiś private final int BoardSize = rozmiar;
+    // Przy okazji można tego boarda zamienić na inicjalizacje w loopie jak się nam bardzo chce
+    // Mi się nie chce :p
     public SudokuBoard() {
         board = Arrays.asList(
                 Arrays.asList(new SudokuField[9]),
