@@ -45,6 +45,8 @@ public class SudokuObject {
         return true;
     }
 
+    // TODO: Ja tak w sumie nie wiem czy to jest klasa modelu danych i czy potrzebujemy mieć w niej equals
+
     @Override
     public boolean equals(Object other) {
         if (other == null) {
