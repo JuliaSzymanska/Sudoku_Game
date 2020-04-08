@@ -5,7 +5,6 @@ import java.util.List;
 
 public class SudokuBoard {
     
-
     // TODO: Niby mówił żeby nie robić 2d listy, ale już zrobiliśmy to chyba nie jest problem?
     private List<List<SudokuField>> board;
     
@@ -89,6 +88,9 @@ public class SudokuBoard {
      * @return Row.
      */
 
+    // TODO: todo żeby się rzucało
+    // tutaj w tych get row col box dałem że się przepisują indeksy a nie tworzą się kopie
+    // bo tak mówił 1.04.2020
     public SudokuObject getRow(int row) {
         SudokuField[] copyArray = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
