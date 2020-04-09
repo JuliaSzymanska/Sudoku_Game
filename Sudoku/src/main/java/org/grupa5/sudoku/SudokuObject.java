@@ -35,8 +35,6 @@ public class SudokuObject {
         return true;
     }
 
-    // TODO: Ja tak w sumie nie wiem czy to jest klasa modelu danych i czy potrzebujemy mieć w niej equals
-
     @Override
     public boolean equals(Object other) {
         if (other == null) {
@@ -49,11 +47,16 @@ public class SudokuObject {
             return false;
         }
         SudokuObject sudokuObject = (SudokuObject) other;
-        for (int j = 0; j < 9; j++) {
-            if (sudokuObject.object.get(j).getFieldValue() != this.object.get(j).getFieldValue()) {
-                return false;
-            }
-        }
-        return true;
+        return Objects.equals(sudokuObject.object, this.object);
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toString(this.object);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.object);
     }
 }

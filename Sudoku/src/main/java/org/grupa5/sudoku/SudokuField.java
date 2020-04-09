@@ -42,21 +42,6 @@ public class SudokuField {
         return this.value;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof SudokuField)) {
-            return false;
-        }
-        SudokuField plansza = (SudokuField) other;
-        return this.getFieldValue() == plansza.getFieldValue();
-    }
-
     /**
      * A simple setter.
      *
@@ -70,11 +55,29 @@ public class SudokuField {
         this.value = value;
     }
 
-    // TODO: to powinien być działający przykład hashcode buildera przy użyciu guavy od googla.
-    // dodałem guavę do mavena 
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof SudokuField)) {
+            return false;
+        }
+        SudokuField liczba = (SudokuField) other;
+        return Objects.equals(liczba.getFieldValue(), this.value);
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toString(this.value);
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hashCode(value);
+        return Objects.hashCode(this.value);
     }
 
 }

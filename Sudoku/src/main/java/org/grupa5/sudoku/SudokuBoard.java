@@ -2,13 +2,13 @@ package org.grupa5.sudoku;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class SudokuBoard {
 
     private List<List<SudokuField>> board;
 
     private SudokuSolver sudokuSolver;
-    
 
     /**
      * Fills the 'board' variable with a 2d fixed size dim [9][9] list.
@@ -70,6 +70,7 @@ public class SudokuBoard {
 
     /**
      * A simple getter that returns a column from 'board' List by index.
+     *
      * @param column Specified column.
      * @return column
      */
@@ -85,6 +86,7 @@ public class SudokuBoard {
 
     /**
      * A simple getter that returns a row from 'board' List by index.
+     *
      * @param row Specified row.
      * @return Row.
      */
@@ -99,7 +101,8 @@ public class SudokuBoard {
 
     /**
      * A simple getter that returns a sector from 'board' List by index of row and column
-     * @param row Specified row.
+     *
+     * @param row    Specified row.
      * @param column Specified column.
      * @return Sector.
      */
@@ -200,47 +203,22 @@ public class SudokuBoard {
             return false;
         }
         SudokuBoard plansza = (SudokuBoard) other;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (plansza.get(i, j) != this.get(i, j)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return Objects.equals(plansza.getBoard(), this.board);
     }
 
-    // /**
-    //  * Write all board's numbers to StringBuilder and then converted to String.
-    //  */
+    @Override
+    public String toString() {
+        return Objects.toString(this.board);
+    }
 
-    //    public String getInfoSudoku() {
-    //        StringBuilder output = new StringBuilder("X ");
-    //        for (int i = 0; i <= 8; i++) {
-    //            output.append((char) ('a' + i)).append(" ");
-    //        }
-    //        output.append("\n");
-    //        int counter = 0;
-    //        for (List<SudokuField> x : this.board) {
-    //            output.append((char) ('a' + counter)).append(" ");
-    //            for (SudokuField y : x) {
-    //                output.append(y.getFieldValue()).append(" ");
-    //            }
-    //            output.append("\n");
-    //            counter++;
-    //        }
-    //        return output.toString();
-    //    }
-    //
-    //    public static void main(String[] args) {
-    //        SudokuBoard plansza = new SudokuBoard();
-    //        plansza.solveGame();
-    //        System.out.println(plansza.getInfoSudoku());
-    //    }
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.board);
+    }
 
-    //    public static void main(String[] args) {
-    //        SudokuBoard plansza = new SudokuBoard();
-    //        plansza.getRow(1);
-    //        plansza.getColumn(1);
-    //    }
+//    public static void main(String[] args) {
+//        SudokuBoard plansza = new SudokuBoard();
+//        plansza.solveGame();
+//        System.out.println(plansza.toString());
+//    }
 }
