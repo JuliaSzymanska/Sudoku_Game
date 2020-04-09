@@ -25,14 +25,14 @@ public class SudokuField {
         this.value = value;
     }
 
-//    /**
-//     * Constructor
-//     * init the field 'value' with value od sudokuField param.
-//     */
-//
-//    public SudokuField(SudokuField sudokuField) {
-//        this.value = sudokuField.value;
-//    }
+    //    /**
+    //     * Constructor
+    //     * init the field 'value' with value od sudokuField param.
+    //     */
+    //
+    //    public SudokuField(SudokuField sudokuField) {
+    //        this.value = sudokuField.value;
+    //    }
 
     /**
      * A simple getter.
