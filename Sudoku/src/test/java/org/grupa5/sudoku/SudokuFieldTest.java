@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class SudokuFieldTest {
+
+    // TODO: Zrob test do toString()
+
     @Test
     void setTest() {
         SudokuField field = new SudokuField();

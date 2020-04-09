@@ -130,29 +130,17 @@ public class SudokuBoardTest {
         assertEquals(sudoku1, sudoku2);
     }
 
-//    @Test
-//    void getInfoSudokuTest() {
-//        ArrayList<ArrayList<SudokuField>> board;
-//        SudokuBoard sudoku = new SudokuBoard();
-//        SudokuSolver Wypelniacz = new BacktrackingSudokuSolver();
-//        Wypelniacz.solve(sudoku);
-//        board = sudoku.getBoard();
-
-//        StringBuilder output = new StringBuilder("X ");
-//        for (int i = 0; i <= 8; i++) {
-//            output.append((char) ('a' + i)).append(" ");
-//        }
-//        output.append("\n");
-//        int counter = 0;
-//        for (ArrayList<SudokuField> x : board) {
-//            output.append((char) ('a' + counter)).append(" ");
-//            for (SudokuField y : x) {
-//                output.append(y.getFieldValue()).append(" ");
-//            }
-//            output.append("\n");
-//            counter++;
-//        }
-//        assertEquals(sudoku.getInfoSudoku(), output.toString());
-//    }
-
+    @Test
+    void hashCodeTest() {
+        SudokuBoard sudoku1 = new SudokuBoard();
+        sudoku1.solveGame();
+        SudokuBoard sudoku2 = new SudokuBoard();
+        sudoku2.solveGame();
+        SudokuBoard sudoku3 = new SudokuBoard();
+        sudoku3.solveGame();
+        SudokuBoard sudoku4;
+        sudoku4 = sudoku3;
+        assertNotEquals(sudoku1.hashCode(), sudoku2.hashCode());
+        assertEquals(sudoku3.hashCode(), sudoku4.hashCode());
+    }
 }

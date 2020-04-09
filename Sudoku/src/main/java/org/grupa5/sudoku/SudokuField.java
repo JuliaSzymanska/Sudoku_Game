@@ -1,6 +1,8 @@
 package org.grupa5.sudoku;
 
-import java.util.Objects;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SudokuField {
 
@@ -23,14 +25,14 @@ public class SudokuField {
         this.value = value;
     }
 
-    /**
-     * Constructor
-     * init the field 'value' with value od sudokuField param.
-     */
-
-    public SudokuField(SudokuField sudokuField) {
-        this.value = sudokuField.value;
-    }
+//    /**
+//     * Constructor
+//     * init the field 'value' with value od sudokuField param.
+//     */
+//
+//    public SudokuField(SudokuField sudokuField) {
+//        this.value = sudokuField.value;
+//    }
 
     /**
      * A simple getter.
@@ -67,17 +69,16 @@ public class SudokuField {
             return false;
         }
         SudokuField liczba = (SudokuField) other;
-        return Objects.equals(liczba.getFieldValue(), this.value);
+        return new EqualsBuilder().append(liczba.getFieldValue(), this.value).isEquals();
     }
 
     @Override
     public String toString() {
-        return Objects.toString(this.value);
+        return new ToStringBuilder(this).append(value).toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(this.value);
+        return new HashCodeBuilder().append(value).toHashCode();
     }
-
 }

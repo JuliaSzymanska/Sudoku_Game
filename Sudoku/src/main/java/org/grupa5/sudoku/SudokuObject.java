@@ -1,6 +1,13 @@
 package org.grupa5.sudoku;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * This class can represent three types of objects in sudoku:
@@ -29,8 +36,9 @@ public class SudokuObject {
     public boolean verify() {
         Set<Integer> setNumbers = new HashSet<Integer>();
         for (SudokuField x : object) {
-            if (!setNumbers.add(x.getFieldValue()) && x.getFieldValue() != 0)
+            if (!setNumbers.add(x.getFieldValue()) && x.getFieldValue() != 0) {
                 return false;
+            }
         }
         return true;
     }
@@ -47,16 +55,25 @@ public class SudokuObject {
             return false;
         }
         SudokuObject sudokuObject = (SudokuObject) other;
-        return Objects.equals(sudokuObject.object, this.object);
+        return new EqualsBuilder().append(this.object, sudokuObject.object).isEquals();
     }
 
     @Override
     public String toString() {
-        return Objects.toString(this.object);
+        return new ToStringBuilder(this).append(object).toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(this.object);
+        return new HashCodeBuilder().append(object).toHashCode();
     }
+
+    //    public static void main(String[] args) {
+    //        List<SudokuField> col = Arrays.asList(new SudokuField[9]);
+    //        for (int i = 0; i < 9; i++) {
+    //            col.set(i, new SudokuField(i));
+    //        }
+    //        SudokuObject field = new SudokuObject(col);
+    //        System.out.println(field.toString());
+    //    }
 }

@@ -2,7 +2,10 @@ package org.grupa5.sudoku;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SudokuBoard {
 
@@ -100,7 +103,7 @@ public class SudokuBoard {
     }
 
     /**
-     * A simple getter that returns a sector from 'board' List by index of row and column
+     * A simple getter that returns a sector from 'board' List by index of row and column.
      *
      * @param row    Specified row.
      * @param column Specified column.
@@ -203,22 +206,22 @@ public class SudokuBoard {
             return false;
         }
         SudokuBoard plansza = (SudokuBoard) other;
-        return Objects.equals(plansza.getBoard(), this.board);
+        return new EqualsBuilder().append(plansza.getBoard(), this.board).isEquals();
     }
 
     @Override
     public String toString() {
-        return Objects.toString(this.board);
+        return new ToStringBuilder(this).append(board).toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(this.board);
+        return new HashCodeBuilder().append(board).toHashCode();
     }
 
-//    public static void main(String[] args) {
-//        SudokuBoard plansza = new SudokuBoard();
-//        plansza.solveGame();
-//        System.out.println(plansza.toString());
-//    }
+    //    public static void main(String[] args) {
+    //        SudokuBoard plansza = new SudokuBoard();
+    //        plansza.solveGame();
+    //        System.out.println(plansza.toString());
+    //    }
 }
