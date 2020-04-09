@@ -1,8 +1,6 @@
 package org.grupa5.sudoku;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class can represent three types of objects in sudoku:
@@ -22,8 +20,6 @@ public class SudokuObject {
         }
     }
 
-
-
     /**
      * Verifies whether the structure is valid.
      *
@@ -31,16 +27,10 @@ public class SudokuObject {
      */
 
     public boolean verify() {
-        List<Integer> list = new ArrayList<Integer>();
+        Set<Integer> setNumbers = new HashSet<Integer>();
         for (SudokuField x : object) {
-            // to jest fajne, ale mówił że set zawiera każdą wartość tylko raz
-            // i jeśli próbujemy dodać coś co w nim już jest to zwróci false
-            // więc jeśli nam się bardzo nudzi to możemy to zmienić na jakieś if set.add() 
-            // z pominięciem 0 oczywiście
-            if (list.contains(x.getFieldValue()) && x.getFieldValue() != 0) {
+            if (!setNumbers.add(x.getFieldValue()) && x.getFieldValue() != 0)
                 return false;
-            }
-            list.add(x.getFieldValue());
         }
         return true;
     }
