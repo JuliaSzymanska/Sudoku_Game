@@ -24,7 +24,7 @@ public class SudokuObject {
 
     private List<SudokuField> object;
 
-    SudokuObject(List<SudokuField> table) {
+    public SudokuObject(List<SudokuField> table) {
         if (table.size() != SUDOKU_DIMENSIONS) {
             throw new IllegalArgumentException("List size has to be equal to " 
             + Integer.toString(SUDOKU_DIMENSIONS));
