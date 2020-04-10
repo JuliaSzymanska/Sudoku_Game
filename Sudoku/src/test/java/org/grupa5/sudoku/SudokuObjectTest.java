@@ -12,9 +12,7 @@ import com.jparams.verifier.tostring.ToStringVerifier;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SudokuObjectTest {
-
-    // TODO: Zrob test do toString()
-
+    
     @Test
     void equalsAndHashCodeTest() {
         List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
