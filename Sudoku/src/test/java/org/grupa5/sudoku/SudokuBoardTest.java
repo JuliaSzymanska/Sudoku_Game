@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import com.jparams.verifier.tostring.ToStringVerifier;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -115,32 +117,30 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void equalsTest() {
+    void equalsAndHashCodeTest() {
         SudokuBoard sudoku1 = new SudokuBoard();
         SudokuBoard sudoku2 = new SudokuBoard();
+
         assertNotEquals(sudoku1, null);
         assertEquals(sudoku1, sudoku1);
-        assertNotEquals(sudoku1, 1);
+        assertNotEquals(sudoku1, Object.class);
+        
         sudoku1.solveGame();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 sudoku2.set(i, j, sudoku1.get(i, j));
             }
         }
-        assertEquals(sudoku1, sudoku2);
+
+        assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
+        assertTrue(sudoku1.hashCode() == sudoku2.hashCode());
+        sudoku2.set(3, 3, 0);
+        assertNotEquals(sudoku1, sudoku2);
     }
 
     @Test
-    void hashCodeTest() {
-        SudokuBoard sudoku1 = new SudokuBoard();
-        sudoku1.solveGame();
-        SudokuBoard sudoku2 = new SudokuBoard();
-        sudoku2.solveGame();
-        SudokuBoard sudoku3 = new SudokuBoard();
-        sudoku3.solveGame();
-        SudokuBoard sudoku4;
-        sudoku4 = sudoku3;
-        assertNotEquals(sudoku1.hashCode(), sudoku2.hashCode());
-        assertEquals(sudoku3.hashCode(), sudoku4.hashCode());
+    public void testToString()
+    {
+        ToStringVerifier.forClass(SudokuBoard.class).verify();
     }
 }

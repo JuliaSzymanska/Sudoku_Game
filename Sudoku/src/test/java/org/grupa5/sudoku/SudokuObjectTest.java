@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.grupa5.sudoku.SudokuBoard.SUDOKU_DIMENSIONS;
+
+import com.jparams.verifier.tostring.ToStringVerifier;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SudokuObjectTest {
@@ -12,7 +16,7 @@ class SudokuObjectTest {
     // TODO: Zrob test do toString()
 
     @Test
-    void equalsTest() {
+    void equalsAndHashCodeTest() {
         List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
         List<SudokuField> list2 = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
@@ -21,10 +25,13 @@ class SudokuObjectTest {
         }
         SudokuObject sudoku1 = new SudokuObject(list1);
         SudokuObject sudoku2 = new SudokuObject(list2);
+
         assertNotEquals(sudoku1, null);
         assertEquals(sudoku1, sudoku1);
         assertNotEquals(sudoku1, Class.class);
-        assertEquals(sudoku1, sudoku2);
+        assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
+        assertTrue(sudoku1.hashCode() == sudoku2.hashCode());
+
         list2.set(4, new SudokuField(9));
         sudoku2 = new SudokuObject(list2);
         assertNotEquals(sudoku1, sudoku2);
@@ -32,8 +39,8 @@ class SudokuObjectTest {
 
     @Test
     void verifyTest() {
-        List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
-        for (int i = 0; i < 9; i++) {
+        List<SudokuField> list1 = Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]);
+        for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             list1.set(i, new SudokuField(i + 1));
         }
         SudokuObject sudoku1 = new SudokuObject(list1);
@@ -44,24 +51,19 @@ class SudokuObjectTest {
     }
 
     @Test
-    void hashCodeTest() {
-        List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
-        for (int i = 0; i < 9; i++) {
-            list1.set(i, new SudokuField(i + 1));
+    void exceptionTest() {
+        List<SudokuField> list = Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS + 1]);
+        for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
+            list.set(i, new SudokuField(i));
         }
-        List<SudokuField> list2 = Arrays.asList(new SudokuField[9]);
-        for (int i = 0; i < 9; i++) {
-            list1.set(i, new SudokuField(i *2));
-        }
-        List<SudokuField> list3 = Arrays.asList(new SudokuField[9]);
-        for (int i = 0; i < 9; i++) {
-            list1.set(i, new SudokuField(i + 1));
-        }
-        SudokuObject sudoku1 = new SudokuObject(list1);
-        SudokuObject sudoku2 = new SudokuObject(list2);
-        SudokuObject sudoku3 = new SudokuObject(list3);
-        SudokuObject sudoku4 = new SudokuObject(list3);
-        assertNotEquals(sudoku1.hashCode(), sudoku2.hashCode());
-        assertEquals(sudoku3.hashCode(), sudoku4.hashCode());
+        assertThrows(IllegalArgumentException.class, () -> {
+            new SudokuObject(list);
+        });
+    }
+
+    @Test
+    public void testToString()
+    {
+        ToStringVerifier.forClass(SudokuObject.class).verify();
     }
 }

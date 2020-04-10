@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class SudokuFieldTest {
 
-    // TODO: Zrob test do toString()
-
     @Test
     void setTest() {
         SudokuField field = new SudokuField();
@@ -21,16 +19,27 @@ public class SudokuFieldTest {
     }
 
     @Test
-    void equalsTest() {
-        SudokuField sudoku1 = new SudokuField();
-        sudoku1.setFieldValue(3);
-        SudokuField sudoku2 = new SudokuField();
+    void equalsAndHashCodeTest() {
+        SudokuField sudoku1 = new SudokuField(3);
+        SudokuField sudoku2 = new SudokuField(4);
+
         assertNotEquals(sudoku1, null);
         assertEquals(sudoku1, sudoku1);
         assertNotEquals(sudoku1, Class.class);
         assertNotEquals(sudoku1, sudoku2);
+        
         sudoku2.setFieldValue(3);
-        assertEquals(sudoku1, sudoku2);
+        assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
+        assertTrue(sudoku1.hashCode() == sudoku2.hashCode());
+        }
+
+    // Paczka którą używałem do testów toStringów dla innych obiektów nie wspiera stylu używanego w tym obiekcie.
+    @Test
+    public void testToString()
+    {
+        String expectedOut = "1234567890";
+        SudokuField field = new SudokuField(1234567890);
+        assertEquals(expectedOut, field.toString());
     }
 }
 

@@ -6,34 +6,32 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class SudokuBoard {
 
     private List<List<SudokuField>> board;
 
-    private SudokuSolver sudokuSolver;
+    /**
+     * Size of Sudoku row / column / box.
+     */
+
+    public static final int SUDOKU_DIMENSIONS = 9;
 
     /**
      * Fills the 'board' variable with a 2d fixed size dim [9][9] list.
      */
-
-    // TODO: Magiczne numerki w rozmiarze tablicy.
-    // jakiś private final int BoardSize = rozmiar;
-    // Powiedział że stałe się pisze Dużymi literami które rozdziela się podkreślnikami
-    // Przy okazji można tego boarda zamienić na inicjalizacje w loopie jak się nam bardzo chce
-    // Mi się nie chce :p
     public SudokuBoard() {
-        sudokuSolver = new BacktrackingSudokuSolver();
-        board = Arrays.asList(
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]));
+        this.board = Arrays.asList(
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]));
         this.resetBoard(this.board);
     }
 
@@ -42,6 +40,7 @@ public class SudokuBoard {
      */
 
     public void solveGame() {
+        SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
         sudokuSolver.solve(this);
     }
 
@@ -53,15 +52,15 @@ public class SudokuBoard {
 
     public List<List<SudokuField>> getBoard() {
         List<List<SudokuField>> copy = Arrays.asList(
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]),
-                Arrays.asList(new SudokuField[9]));
+            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]));
         resetBoard(copy);
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -81,7 +80,7 @@ public class SudokuBoard {
 
     public SudokuObject getColumn(int column) {
         SudokuField[] copyArray = new SudokuField[9];
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             copyArray[i] = board.get(i).get(column);
         }
         return new SudokuObject(Arrays.asList(copyArray));
@@ -95,8 +94,8 @@ public class SudokuBoard {
      */
 
     public SudokuObject getRow(int row) {
-        SudokuField[] copyArray = new SudokuField[9];
-        for (int i = 0; i < 9; i++) {
+        SudokuField[] copyArray = new SudokuField[SUDOKU_DIMENSIONS];
+        for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             copyArray[i] = board.get(row).get(i);
         }
         return new SudokuObject(Arrays.asList(copyArray));
@@ -115,7 +114,7 @@ public class SudokuBoard {
         int begX = (sectorNr / 3) * 3;
         int begY = (sectorNr % 3) * 3;
         int k = 0;
-        SudokuField[] copyArray = new SudokuField[9];
+        SudokuField[] copyArray = new SudokuField[SUDOKU_DIMENSIONS];
         for (int i = begX; i <= begX + 2; i++) {
             for (int j = begY; j <= begY + 2; j++) {
                 copyArray[k] = board.get(i).get(j);
@@ -144,10 +143,10 @@ public class SudokuBoard {
      */
 
     public int get(int x, int y) {
-        if (x < 0 || x > 8) {
+        if (x < 0 || x > SUDOKU_DIMENSIONS - 1) {
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
         }
-        if (y < 0 || y > 8) {
+        if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
         return this.board.get(x).get(y).getFieldValue();
@@ -158,10 +157,10 @@ public class SudokuBoard {
      */
 
     public void set(int x, int y, int value) {
-        if (x < 0 || x > 8) {
+        if (x < 0 || x > SUDOKU_DIMENSIONS - 1) {
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
         }
-        if (y < 0 || y > 8) {
+        if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
         if (value < 0 || value > 9) {
@@ -179,8 +178,8 @@ public class SudokuBoard {
      */
 
     public void resetBoard(List<List<SudokuField>> plansza) {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
+            for (int j = 0; j < SUDOKU_DIMENSIONS; j++) {
                 plansza.get(i).set(j, new SudokuField());
             }
         }
@@ -211,17 +210,13 @@ public class SudokuBoard {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append(board).toString();
+        ToStringStyle style = ToStringStyle.SHORT_PREFIX_STYLE;
+        return ToStringBuilder.reflectionToString(this, style);
     }
+
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(board).toHashCode();
     }
-
-    //    public static void main(String[] args) {
-    //        SudokuBoard plansza = new SudokuBoard();
-    //        plansza.solveGame();
-    //        System.out.println(plansza.toString());
-    //    }
 }

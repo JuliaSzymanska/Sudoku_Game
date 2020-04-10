@@ -3,6 +3,7 @@ package org.grupa5.sudoku;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class SudokuField {
 
@@ -25,14 +26,13 @@ public class SudokuField {
         this.value = value;
     }
 
-    //    /**
-    //     * Constructor
-    //     * init the field 'value' with value od sudokuField param.
-    //     */
-    //
-    //    public SudokuField(SudokuField sudokuField) {
-    //        this.value = sudokuField.value;
-    //    }
+    /**
+    * Copy constructor.
+    */
+    
+    public SudokuField(SudokuField sudokuField) {
+        this.value = sudokuField.value;
+    }
 
     /**
      * A simple getter.
@@ -74,8 +74,10 @@ public class SudokuField {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append(value).toString();
+        ToStringStyle style = ToStringStyle.SIMPLE_STYLE;
+        return ToStringBuilder.reflectionToString(this, style); 
     }
+
 
     @Override
     public int hashCode() {

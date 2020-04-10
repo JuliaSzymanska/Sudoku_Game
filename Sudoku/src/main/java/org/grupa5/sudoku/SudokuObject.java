@@ -1,5 +1,7 @@
 package org.grupa5.sudoku;
 
+import static org.grupa5.sudoku.SudokuBoard.SUDOKU_DIMENSIONS;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +10,8 @@ import java.util.Set;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 
 /**
  * This class can represent three types of objects in sudoku:
@@ -21,8 +25,12 @@ public class SudokuObject {
     private List<SudokuField> object;
 
     SudokuObject(List<SudokuField> table) {
-        this.object = Arrays.asList(new SudokuField[9]);
-        for (int i = 0; i < 9; i++) {
+        if (table.size() != SUDOKU_DIMENSIONS) {
+            throw new IllegalArgumentException("List size has to be equal to " 
+            + Integer.toString(SUDOKU_DIMENSIONS));
+        }
+        this.object = Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]);
+        for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             this.object.set(i, table.get(i));
         }
     }
@@ -60,20 +68,12 @@ public class SudokuObject {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append(object).toString();
+        ToStringStyle style = ToStringStyle.SHORT_PREFIX_STYLE;
+        return ToStringBuilder.reflectionToString(this, style);
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(object).toHashCode();
     }
-
-    //    public static void main(String[] args) {
-    //        List<SudokuField> col = Arrays.asList(new SudokuField[9]);
-    //        for (int i = 0; i < 9; i++) {
-    //            col.set(i, new SudokuField(i));
-    //        }
-    //        SudokuObject field = new SudokuObject(col);
-    //        System.out.println(field.toString());
-    //    }
 }
