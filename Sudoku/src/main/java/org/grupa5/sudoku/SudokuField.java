@@ -27,9 +27,9 @@ public class SudokuField {
     }
 
     /**
-    * Copy constructor.
-    */
-    
+     * Copy constructor.
+     */
+
     public SudokuField(SudokuField sudokuField) {
         this.value = sudokuField.value;
     }
@@ -74,10 +74,8 @@ public class SudokuField {
 
     @Override
     public String toString() {
-        ToStringStyle style = ToStringStyle.SIMPLE_STYLE;
-        return ToStringBuilder.reflectionToString(this, style); 
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
-
 
     @Override
     public int hashCode() {

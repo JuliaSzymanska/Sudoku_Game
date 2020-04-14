@@ -24,10 +24,15 @@ public class SudokuObject {
 
     private List<SudokuField> object;
 
+    /**
+     * Constructor
+     * init the field 'object' to this param.
+     */
+
     public SudokuObject(List<SudokuField> table) {
         if (table.size() != SUDOKU_DIMENSIONS) {
-            throw new IllegalArgumentException("List size has to be equal to " 
-            + Integer.toString(SUDOKU_DIMENSIONS));
+            throw new IllegalArgumentException("List size has to be equal to "
+                    + Integer.toString(SUDOKU_DIMENSIONS));
         }
         this.object = Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]);
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
@@ -68,8 +73,7 @@ public class SudokuObject {
 
     @Override
     public String toString() {
-        ToStringStyle style = ToStringStyle.SHORT_PREFIX_STYLE;
-        return ToStringBuilder.reflectionToString(this, style);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
     @Override

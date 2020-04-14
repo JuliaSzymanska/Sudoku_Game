@@ -21,6 +21,7 @@ public class SudokuBoard {
     /**
      * Fills the 'board' variable with a 2d fixed size dim [9][9] list.
      */
+
     public SudokuBoard() {
         this.board = Arrays.asList(
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
@@ -52,15 +53,15 @@ public class SudokuBoard {
 
     public List<List<SudokuField>> getBoard() {
         List<List<SudokuField>> copy = Arrays.asList(
-            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-            Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]));
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
+                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]));
         resetBoard(copy);
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -76,7 +77,6 @@ public class SudokuBoard {
      * @param column Specified column.
      * @return column
      */
-
 
     public SudokuObject getColumn(int column) {
         SudokuField[] copyArray = new SudokuField[9];
@@ -210,10 +210,8 @@ public class SudokuBoard {
 
     @Override
     public String toString() {
-        ToStringStyle style = ToStringStyle.SHORT_PREFIX_STYLE;
-        return ToStringBuilder.reflectionToString(this, style);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-
 
     @Override
     public int hashCode() {

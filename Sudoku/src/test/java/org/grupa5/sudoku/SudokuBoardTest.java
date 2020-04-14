@@ -124,7 +124,7 @@ public class SudokuBoardTest {
         assertNotEquals(sudoku1, null);
         assertEquals(sudoku1, sudoku1);
         assertNotEquals(sudoku1, Object.class);
-        
+
         sudoku1.solveGame();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -133,14 +133,13 @@ public class SudokuBoardTest {
         }
 
         assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
-        assertTrue(sudoku1.hashCode() == sudoku2.hashCode());
+        assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
         sudoku2.set(3, 3, 0);
         assertNotEquals(sudoku1, sudoku2);
     }
 
     @Test
-    public void testToString()
-    {
+    public void testToString() {
         ToStringVerifier.forClass(SudokuBoard.class).verify();
     }
 }

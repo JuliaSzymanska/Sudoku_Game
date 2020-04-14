@@ -16,6 +16,8 @@ public class SudokuFieldTest {
         assertThrows(IllegalArgumentException.class, () -> {
             field.setFieldValue(10);
         });
+        SudokuField field1 = new SudokuField(field);
+        assertEquals(field.getFieldValue(), field1.getFieldValue());
     }
 
     @Test
@@ -27,20 +29,16 @@ public class SudokuFieldTest {
         assertEquals(sudoku1, sudoku1);
         assertNotEquals(sudoku1, Class.class);
         assertNotEquals(sudoku1, sudoku2);
-        
+
         sudoku2.setFieldValue(3);
         assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
-        assertTrue(sudoku1.hashCode() == sudoku2.hashCode());
-        }
+        assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
+    }
 
-    // Paczka którą używałem do testów toStringów dla innych obiektów nie wspiera stylu używanego w tym obiekcie.
     @Test
-    public void testToString()
-    {
+    public void testToString() {
         String expectedOut = "1234567890";
         SudokuField field = new SudokuField(1234567890);
         assertEquals(expectedOut, field.toString());
     }
 }
-
-

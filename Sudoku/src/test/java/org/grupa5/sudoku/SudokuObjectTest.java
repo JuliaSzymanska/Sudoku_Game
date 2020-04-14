@@ -12,7 +12,7 @@ import com.jparams.verifier.tostring.ToStringVerifier;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SudokuObjectTest {
-    
+
     @Test
     void equalsAndHashCodeTest() {
         List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
@@ -28,7 +28,7 @@ class SudokuObjectTest {
         assertEquals(sudoku1, sudoku1);
         assertNotEquals(sudoku1, Class.class);
         assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
-        assertTrue(sudoku1.hashCode() == sudoku2.hashCode());
+        assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
 
         list2.set(4, new SudokuField(9));
         sudoku2 = new SudokuObject(list2);
@@ -60,8 +60,7 @@ class SudokuObjectTest {
     }
 
     @Test
-    public void testToString()
-    {
+    public void testToString() {
         ToStringVerifier.forClass(SudokuObject.class).verify();
     }
 }
