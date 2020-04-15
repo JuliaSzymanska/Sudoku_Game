@@ -193,6 +193,8 @@ public class SudokuBoard {
         return getRow(row).verify() && getColumn(column).verify() && getBox(row, column).verify();
     }
 
+    //wygenrowac te metody
+
     @Override
     public boolean equals(Object other) {
         if (other == null) {

@@ -116,6 +116,8 @@ public class SudokuBoardTest {
         });
     }
 
+    //Osobne testy i jeszcze sprawdzic ze jak hashcode jest rozne to boardy tez sa rozne
+
     @Test
     void equalsAndHashCodeTest() {
         SudokuBoard sudoku1 = new SudokuBoard();
