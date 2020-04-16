@@ -1,7 +1,9 @@
 package org.grupa5.sudoku.dao;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import org.grupa5.sudoku.SudokuBoard;
@@ -24,16 +26,41 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
             objectOut.writeObject(sudokuBoard);
         }
         catch (IOException e) {
-            // TODO: TO TRZEBA ZMIENIC TEN CATCH
+            // TODO: tutaj coś madrego
             e.printStackTrace();
         }        
     }
 
     @Override
     public SudokuBoard read() {
-        // TODO Auto-generated method stub
-        return null;
+        SudokuBoard sudokuBoard = null;
+        try (
+        FileInputStream fileIn = new FileInputStream(this.fileName);
+        ObjectInputStream objectIn = new ObjectInputStream(fileIn)
+        ) {
+            sudokuBoard = (SudokuBoard) objectIn.readObject();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            // TODO: tutaj tez coś madrego
+        } catch (IOException e) {
+            e.printStackTrace();
+            // TODO: tu też
+        }
+        return sudokuBoard;
     }
 
+    
+    // TODO: USUNAC MAINA!
+    public static void main(String[] args) {
+        SudokuBoard board = new SudokuBoard();
+        Dao dao = new FileSudokuBoardDao("plik.txt");
+        board.solveGame();
+        dao.write(board);
+        // TODO: to chyba nie tak powinno działać!
+        SudokuBoard board2 = (SudokuBoard) dao.read(); 
+        System.out.println(board.toString());
+        System.out.println(board2.toString());
+    }
 
 }
