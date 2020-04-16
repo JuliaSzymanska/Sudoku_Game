@@ -1,4 +1,4 @@
-package org.grupa5.sudoku;
+package org.grupa5.sudoku.dao;
 
 public interface Dao <T> {
     T read();
