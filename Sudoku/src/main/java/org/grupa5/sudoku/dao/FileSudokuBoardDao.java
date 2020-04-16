@@ -54,16 +54,10 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     // TODO: USUNAC MAINA!
     public static void main(String[] args) {
         SudokuBoard board = new SudokuBoard();
-        Dao dao = new FileSudokuBoardDao("plik.txt");
+        Dao<SudokuBoard> dao = new FileSudokuBoardDao("plik.txt");
         board.solveGame();
         dao.write(board);
-        // TODO: to chyba nie tak powinno działać!
-        // Tak w zasadzie to nie wiem jak to powinno dzialac
-        // Mądrych rzeczy jest ograniczona liczba 
-        // Może ten factory który jest w UML w zadaniu robi że to jest fajne i śliczne?
-        // Nie wiem ale się dowiem
-        // Kiedyś bo narazie mi się nie chce
-        SudokuBoard board2 = (SudokuBoard) dao.read(); 
+        SudokuBoard board2 = dao.read(); 
         System.out.println(board.toString());
         System.out.println(board2.toString());
     }
