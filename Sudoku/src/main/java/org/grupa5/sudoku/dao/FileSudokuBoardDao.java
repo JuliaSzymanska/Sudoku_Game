@@ -58,6 +58,11 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         board.solveGame();
         dao.write(board);
         // TODO: to chyba nie tak powinno działać!
+        // Tak w zasadzie to nie wiem jak to powinno dzialac
+        // Mądrych rzeczy jest ograniczona liczba 
+        // Może ten factory który jest w UML w zadaniu robi że to jest fajne i śliczne?
+        // Nie wiem ale się dowiem
+        // Kiedyś bo narazie mi się nie chce
         SudokuBoard board2 = (SudokuBoard) dao.read(); 
         System.out.println(board.toString());
         System.out.println(board2.toString());
