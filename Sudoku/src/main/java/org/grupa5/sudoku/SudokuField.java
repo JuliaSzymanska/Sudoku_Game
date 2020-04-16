@@ -1,12 +1,18 @@
 package org.grupa5.sudoku;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class SudokuField {
+public class SudokuField implements Serializable{
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -8191189448140138728L;
     private int value = 0;
 
     /**

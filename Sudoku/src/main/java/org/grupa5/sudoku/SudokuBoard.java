@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,7 +9,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class SudokuBoard {
+public class SudokuBoard implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6085934769542410051L;
 
     private List<List<SudokuField>> board;
 
