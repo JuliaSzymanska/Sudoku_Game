@@ -217,6 +217,6 @@ public class SudokuBoard {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(board).toHashCode();
+        return new HashCodeBuilder().append(this.board).toHashCode();
     }
 }
