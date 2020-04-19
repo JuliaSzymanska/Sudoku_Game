@@ -16,7 +16,6 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         this.fileName = fileName;
     }
 
-
     @Override
     public void write(SudokuBoard sudokuBoard) {
         try (
@@ -38,7 +37,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
                 ObjectInputStream objectIn = new ObjectInputStream(fileIn)
         ) {
             sudokuBoard = (SudokuBoard) objectIn.readObject();
-        } catch (ClassNotFoundException | IOException e) {
+        } catch(ClassNotFoundException | IOException e) {
             e.printStackTrace();
             // TODO: tutaj tez coś madrego
         } // TODO: tu też
@@ -46,6 +45,18 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         return sudokuBoard;
     }
 
+//    //TODO: zrobic zeby bylo dobrze, narazie nie mam pomyslu
+//    @Override
+//    protected void finalize() throws Throwable {
+//        try {
+//            System.out.println("Calling finalize() method of FinalizeMethodTest class");
+//        } catch(Throwable th){
+//            throw th;
+//        } finally {
+//            System.out.println("Calling finalize() method of Object class");
+//            super.finalize();
+//        }
+//    }
 
     // TODO: USUNAC MAINA!
     public static void main(String[] args) {
