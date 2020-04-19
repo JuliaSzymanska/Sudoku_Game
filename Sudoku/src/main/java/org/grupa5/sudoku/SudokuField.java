@@ -1,18 +1,14 @@
 package org.grupa5.sudoku;
 
-import java.io.Serializable;
+import java.io.*;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class SudokuField implements Serializable{
+public class SudokuField implements Externalizable {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = -8191189448140138728L;
     private int value = 0;
 
     /**
@@ -86,5 +82,15 @@ public class SudokuField implements Serializable{
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(value).toHashCode();
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeInt(value);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        value = in.readInt();
     }
 }

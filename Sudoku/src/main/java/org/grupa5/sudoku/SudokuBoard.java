@@ -1,6 +1,6 @@
 package org.grupa5.sudoku;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,12 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class SudokuBoard implements Serializable {
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 6085934769542410051L;
+public class SudokuBoard implements Externalizable {
 
     private List<List<SudokuField>> board;
 
@@ -224,5 +219,15 @@ public class SudokuBoard implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(this.board).toHashCode();
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(board);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        board = (List<List<SudokuField>>) in.readObject();
     }
 }
