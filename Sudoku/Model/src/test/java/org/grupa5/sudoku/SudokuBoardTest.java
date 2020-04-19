@@ -1,0 +1,147 @@
+package org.grupa5.sudoku;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import com.jparams.verifier.tostring.ToStringVerifier;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Unit test for simple App. Testing methods: resetBoard and getters.
+ */
+public class SudokuBoardTest {
+
+    @Test
+    void resetBoardTest() {
+        List<List<SudokuField>> board;
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.solveGame();
+        board = sudoku.getBoard();
+        sudoku.resetBoard(board);
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                assertNotEquals(sudoku.getBoard().get(i).get(j).getFieldValue(), 0);
+            }
+        }
+    }
+
+    @Test
+    void getRowTest() {
+        List<List<SudokuField>> board;
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.solveGame();
+        board = sudoku.getBoard();
+        SudokuObject row = new SudokuObject(board.get(0));
+        SudokuObject row2 = sudoku.getRow(0);
+        assertEquals(row, row2);
+    }
+
+    @Test
+    void getColumnTest() {
+        List<List<SudokuField>> board;
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.solveGame();
+        board = sudoku.getBoard();
+        List<SudokuField> col = Arrays.asList(new SudokuField[9]);
+        for (int i = 0; i < 9; i++) {
+            col.set(i, board.get(i).get(0));
+        }
+        SudokuObject column = new SudokuObject(col);
+        SudokuObject column2 = sudoku.getColumn(0);
+        assertEquals(column, column2);
+    }
+
+    @Test
+    void getBoxTest() {
+        List<List<SudokuField>> board;
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.solveGame();
+        board = sudoku.getBoard();
+        List<SudokuField> bo = Arrays.asList(new SudokuField[9]);
+        int k = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                bo.set(k, board.get(i).get(j));
+                k++;
+            }
+        }
+        SudokuObject box = new SudokuObject(bo);
+        SudokuObject box2 = sudoku.getBox(0, 0);
+        assertEquals(box, box2);
+    }
+
+    @Test
+    void getterTest() {
+        SudokuBoard sudoku = new SudokuBoard();
+        assertEquals(sudoku.get(2, 2), 0);
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.get(9, 7);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.get(7, 9);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.get(-1, 7);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.get(7, -1);
+        });
+    }
+
+    @Test
+    void setterTest() {
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.set(2, 2, 2);
+        assertEquals(sudoku.get(2, 2), 2);
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(10, 7, 3);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(7, 10, 3);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(-1, 7, 3);
+        });
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sudoku.set(7, -1, 3);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            sudoku.set(7, 7, -1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            sudoku.set(7, 7, 10);
+        });
+    }
+
+    //Osobne testy i jeszcze sprawdzic ze jak hashcode jest rozne to boardy tez sa rozne
+
+    @Test
+    void equalsAndHashCodeTest() {
+        SudokuBoard sudoku1 = new SudokuBoard();
+        SudokuBoard sudoku2 = new SudokuBoard();
+
+        assertNotEquals(sudoku1, null);
+        assertEquals(sudoku1, sudoku1);
+        assertNotEquals(sudoku1, Object.class);
+
+        sudoku1.solveGame();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                sudoku2.set(i, j, sudoku1.get(i, j));
+            }
+        }
+
+        assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
+        assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
+        sudoku2.set(3, 3, 0);
+        assertNotEquals(sudoku1, sudoku2);
+    }
+
+    @Test
+    public void testToString() {
+        ToStringVerifier.forClass(SudokuBoard.class).verify();
+    }
+}
