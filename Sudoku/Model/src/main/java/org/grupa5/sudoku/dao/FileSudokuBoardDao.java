@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 
 import org.grupa5.sudoku.SudokuBoard;
 
+
 public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
     private String fileName;
@@ -37,36 +38,40 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
                 ObjectInputStream objectIn = new ObjectInputStream(fileIn)
         ) {
             sudokuBoard = (SudokuBoard) objectIn.readObject();
-        } catch(ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             // TODO: tutaj tez coś madrego
-        } // TODO: tu też
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO: tu też
+            e.printStackTrace();
+        }
+
 
         return sudokuBoard;
     }
 
-//    //TODO: zrobic zeby bylo dobrze, narazie nie mam pomyslu
-//    @Override
-//    protected void finalize() throws Throwable {
-//        try {
-//            System.out.println("Calling finalize() method of FinalizeMethodTest class");
-//        } catch(Throwable th){
-//            throw th;
-//        } finally {
-//            System.out.println("Calling finalize() method of Object class");
-//            super.finalize();
-//        }
-//    }
+    //    //TODO: zrobic zeby bylo dobrze, narazie nie mam pomyslu
+    //    @Override
+    //    protected void finalize() throws Throwable {
+    //        try {
+    //            System.out.println("Calling finalize() method of FinalizeMethodTest class");
+    //        } catch(Throwable th){
+    //            throw th;
+    //        } finally {
+    //            System.out.println("Calling finalize() method of Object class");
+    //            super.finalize();
+    //        }
+    //    }
 
     // TODO: USUNAC MAINA!
-    public static void main(String[] args) {
-        SudokuBoard board = new SudokuBoard();
-        Dao<SudokuBoard> dao = new FileSudokuBoardDao("plik.txt");
-        board.solveGame();
-        dao.write(board);
-        SudokuBoard board2 = dao.read();
-        System.out.println(board.toString());
-        System.out.println(board2.toString());
-    }
+    //    public static void main(String[] args) {
+    //        SudokuBoard board = new SudokuBoard();
+    //        Dao<SudokuBoard> dao = new FileSudokuBoardDao("plik.txt");
+    //        board.solveGame();
+    //        dao.write(board);
+    //        SudokuBoard board2 = dao.read();
+    //        System.out.println(board.toString());
+    //        System.out.println(board2.toString());
+    //    }
 
 }
