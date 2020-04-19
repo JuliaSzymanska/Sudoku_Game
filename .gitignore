@@ -9,3 +9,7 @@ Sudoku/out/
 .vscode/
 settings.json
 plik.txt
+*.iml
+*.ipr
+*.iws
+*.txt
