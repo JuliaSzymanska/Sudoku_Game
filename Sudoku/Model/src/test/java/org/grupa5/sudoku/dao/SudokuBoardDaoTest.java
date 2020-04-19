@@ -1,19 +1,8 @@
 package org.grupa5.sudoku.dao;
 
-import org.apache.commons.lang3.builder.ToStringExclude;
 import org.grupa5.sudoku.SudokuBoard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.Arrays;
-import java.util.List;
-
-import com.jparams.verifier.tostring.ToStringVerifier;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuBoardDaoTest {
 
