@@ -8,6 +8,6 @@ public class SudokuBoardDaoFactoryTest {
     @Test
     void notNullTest () {
         SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
-        Assertions.assertNotNull(factory.getFileDao("Filename"));
+        Assertions.assertTrue(factory.getFileDao("FILENAME") instanceof FileSudokuBoardDao);
     }
 }

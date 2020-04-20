@@ -139,10 +139,14 @@ public class SudokuBoardTest {
 
     @Test
     void HashCodeTest() {
-        SudokuBoard sudoku1 = new SudokuBoard();
-        SudokuBoard sudoku2 = new SudokuBoard();
-        sudoku1.solveGame();
-        sudoku2.solveGame();
+        SudokuBoard sudoku1 = null;
+        SudokuBoard sudoku2 = null;
+        do {
+            sudoku1 = new SudokuBoard();
+            sudoku2 = new SudokuBoard();
+            sudoku1.solveGame();
+            sudoku2.solveGame();
+        } while (sudoku1.hashCode() == sudoku2.hashCode());
         assertNotEquals(sudoku1.hashCode(), sudoku2.hashCode());
         assertNotEquals(sudoku1, sudoku2);
     }
