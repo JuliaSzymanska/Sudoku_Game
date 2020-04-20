@@ -63,18 +63,18 @@ public class SudokuField implements Externalizable {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (other == this) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (!(other instanceof SudokuField)) {
+        if (o == null) {
             return false;
         }
-        SudokuField liczba = (SudokuField) other;
-        return new EqualsBuilder().append(liczba.getFieldValue(), this.value).isEquals();
+        if (!(o instanceof SudokuField)) {
+            return false;
+        }
+        SudokuField that = (SudokuField) o;
+        return new EqualsBuilder().append(that.getFieldValue(), this.value).isEquals();
     }
 
     @Override

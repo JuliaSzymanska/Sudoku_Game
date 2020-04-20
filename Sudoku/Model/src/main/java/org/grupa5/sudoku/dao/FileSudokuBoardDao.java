@@ -26,7 +26,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
             objectOut.writeObject(sudokuBoard);
         } catch (IOException e) {
             // TODO: tutaj coś madrego
-            e.printStackTrace();
+            System.out.print("Wyjatek IO");
         }
     }
 
@@ -40,13 +40,11 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
             sudokuBoard = (SudokuBoard) objectIn.readObject();
         } catch (ClassNotFoundException e) {
             // TODO: tutaj tez coś madrego
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO: tu też
-            e.printStackTrace();
+            System.out.print("Not found");
+        }  catch (IOException e) {
+            // TODO: tutaj coś madrego
+            System.out.print("Wyjatek IO");
         }
-
-
         return sudokuBoard;
     }
 

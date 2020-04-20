@@ -6,6 +6,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -197,21 +198,19 @@ public class SudokuBoard implements Externalizable {
         return getRow(row).verify() && getColumn(column).verify() && getBox(row, column).verify();
     }
 
-    //wygenrowac te metody
-
     @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (other == this) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (!(other instanceof SudokuBoard)) {
+        if (o == null) {
             return false;
         }
-        SudokuBoard plansza = (SudokuBoard) other;
-        return new EqualsBuilder().append(plansza.getBoard(), this.board).isEquals();
+        if (!(o instanceof SudokuBoard)) {
+            return false;
+        }
+        SudokuBoard that = (SudokuBoard) o;
+        return new EqualsBuilder().append(that.getBoard(), this.board).isEquals();
     }
 
     @Override

@@ -1,16 +1,23 @@
 package org.grupa5.sudoku.dao;
 
 import org.grupa5.sudoku.SudokuBoard;
+import org.grupa5.sudoku.SudokuField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuBoardDaoTest {
 
     private final String FILE_PATH = "file.txt";
-
+    private final String FAILURE_FILE_PATH = "/";
     private SudokuBoardDaoFactory fabryka = new SudokuBoardDaoFactory();
     private Dao<SudokuBoard> dao = fabryka.getFileDao(FILE_PATH);
-    private Dao<SudokuBoard> failureDao = fabryka.getFileDao("/");
+    private Dao<SudokuBoard> failureDao = fabryka.getFileDao(FAILURE_FILE_PATH);
     private SudokuBoard board = new SudokuBoard();
     private SudokuBoard board2 = null;
 
@@ -40,9 +47,57 @@ public class SudokuBoardDaoTest {
     //  widzialem cos takiego https://stackoverflow.com/questions/42508323/junit-for-both-try-and-catch-block-coverage
     //  do testowania catch blocków ale mi się to nie podoba.
     //  zostawiam nie zstestowane narazie
-//    @Test
-//    void sudokuBoardWriteExceptionTest() {
-//        failureDao.write(board);
-//    }
+    @Test
+    void sudokuBoardWriteExceptionTest() {
+//        File f = new File(FAILURE_FILE_PATH);
+//        if(!f.exists() || f.isDirectory()) {
+//            try {
+//                failureDao.write(board);
+//            } catch (Exception e) {
+//                fail("Should not have thrown any exception");
+//            }
+//        }
+        final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(myOut));
+        failureDao.write(board);
+        final String standardOutput = myOut.toString();
+        assertEquals("Wyjatek IO", standardOutput);
+    }
 
+    @Test
+    void sudokuBoardReadExceptionTest() {
+//        File f = new File(FAILURE_FILE_PATH);
+//        if(!f.exists() || f.isDirectory()) {
+//            try {
+//                failureDao.read();
+//            } catch (Exception e) {
+//                fail("Should not have thrown any exception");
+//            }
+//        }
+        final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(myOut));
+        failureDao.read();
+        final String standardOutput = myOut.toString();
+        assertEquals("Wyjatek IO", standardOutput);
+    }
+
+    @Test
+    void sudokuBoardReadClassNotFoundTest() {
+//        try (
+//                FileOutputStream fileOut = new FileOutputStream(FILE_PATH);
+//                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)
+//        ) {
+////            List<SudokuField> list = Arrays.asList(new SudokuField[9]);
+////            for (int i = 0; i < 9; i++) {
+////                list.set(i, new SudokuField(i));
+////            }
+////            int l = list.size();
+////            SudokuObject obj = new SudokuObject(list);
+//            SudokuField field = new SudokuField(9);
+//            objectOut.writeObject(field);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        dao.read();
+    }
 }

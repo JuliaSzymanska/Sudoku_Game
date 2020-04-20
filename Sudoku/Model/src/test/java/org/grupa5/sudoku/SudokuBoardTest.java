@@ -116,10 +116,8 @@ public class SudokuBoardTest {
         });
     }
 
-    //Osobne testy i jeszcze sprawdzic ze jak hashcode jest rozne to boardy tez sa rozne
-
     @Test
-    void equalsAndHashCodeTest() {
+    void equalsTest() {
         SudokuBoard sudoku1 = new SudokuBoard();
         SudokuBoard sudoku2 = new SudokuBoard();
 
@@ -135,8 +133,17 @@ public class SudokuBoardTest {
         }
 
         assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
-        assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
         sudoku2.set(3, 3, 0);
+        assertNotEquals(sudoku1, sudoku2);
+    }
+
+    @Test
+    void HashCodeTest() {
+        SudokuBoard sudoku1 = new SudokuBoard();
+        SudokuBoard sudoku2 = new SudokuBoard();
+        sudoku1.solveGame();
+        sudoku2.solveGame();
+        assertNotEquals(sudoku1.hashCode(), sudoku2.hashCode());
         assertNotEquals(sudoku1, sudoku2);
     }
 

@@ -57,18 +57,18 @@ public class SudokuObject {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-        if (other == this) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (!(other instanceof SudokuObject)) {
+        if (o == null) {
             return false;
         }
-        SudokuObject sudokuObject = (SudokuObject) other;
-        return new EqualsBuilder().append(this.object, sudokuObject.object).isEquals();
+        if (!(o instanceof SudokuObject)) {
+            return false;
+        }
+        SudokuObject that = (SudokuObject) o;
+        return new EqualsBuilder().append(this.object, that.object).isEquals();
     }
 
     @Override
@@ -76,7 +76,7 @@ public class SudokuObject {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
-    @Override
+        @Override
     public int hashCode() {
         return new HashCodeBuilder().append(object).toHashCode();
     }

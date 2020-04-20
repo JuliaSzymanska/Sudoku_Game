@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 /**
  * Unit test for simple App. Testing SudokuSolver interface implementations
  * Checking if SudokuSolver generates a valid Sudoku board and whether two
