@@ -11,6 +11,11 @@
          <font>
             <Font name="System Bold" size="27.0" />
          </font></Label>
+      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="first" prefWidth="172.19997787475586" text="Value" />
+        </columns>
+      </TableView>
         <Button fx:id="secondaryButton" onAction="#switchToPrimary" text="END GAME">
          <font>
             <Font size="28.0" />
