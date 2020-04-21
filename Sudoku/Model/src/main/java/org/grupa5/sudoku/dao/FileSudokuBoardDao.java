@@ -18,7 +18,9 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
 
-    //TODO: dałbym jakiś ładny komentarz dlaczego tutaj są narazie printy żeby się nie czepiał kwapi
+    // TODO: aktualnie w catch blockach jednynie wyprintowywujemy że doszło do wyjątku
+    //  prawdopodobnie znajdzie się tutaj nasz customowy wyjątek który będziemy potem
+    //  używać w grze do wykrywania czy nie udało się zapisać / odczytać gry aby poinformować gracza
     @Override
     public void write(SudokuBoard sudokuBoard) {
         try (
@@ -27,7 +29,6 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         ) {
             objectOut.writeObject(sudokuBoard);
         } catch (IOException e) {
-            // TODO: tutaj coś madrego
             System.out.print("Wyjatek IO");
         }
     }
@@ -41,37 +42,10 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         ) {
             sudokuBoard = (SudokuBoard) objectIn.readObject();
         } catch (ClassNotFoundException e) {
-            // TODO: tutaj tez coś madrego
             System.out.print("Not found");
         }  catch (IOException e) {
-            // TODO: tutaj coś madrego
             System.out.print("Wyjatek IO");
         }
         return sudokuBoard;
     }
-
-    //    //TODO: zrobic zeby bylo dobrze, narazie nie mam pomyslu
-    //    @Override
-    //    protected void finalize() throws Throwable {
-    //        try {
-    //            System.out.println("Calling finalize() method of FinalizeMethodTest class");
-    //        } catch(Throwable th){
-    //            throw th;
-    //        } finally {
-    //            System.out.println("Calling finalize() method of Object class");
-    //            super.finalize();
-    //        }
-    //    }
-
-    // TODO: USUNAC MAINA!
-    //    public static void main(String[] args) {
-    //        SudokuBoard board = new SudokuBoard();
-    //        Dao<SudokuBoard> dao = new FileSudokuBoardDao("plik.txt");
-    //        board.solveGame();
-    //        dao.write(board);
-    //        SudokuBoard board2 = dao.read();
-    //        System.out.println(board.toString());
-    //        System.out.println(board2.toString());
-    //    }
-
 }

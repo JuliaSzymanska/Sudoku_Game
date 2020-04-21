@@ -26,6 +26,7 @@ public class SudokuBoardDaoTest {
         dao.write(board);
         board2 = dao.read();
         Assertions.assertEquals(board, board2);
+        FileUtils.deleteQuietly(new File(FILE_PATH));
     }
 
     @Test
