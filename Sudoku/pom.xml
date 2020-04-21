@@ -20,12 +20,20 @@
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>3.0.0</version>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <excludes>**/module-info.java</excludes>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
                     <configLocation>../checkstyle2019.xml</configLocation>
+                        <excludes>**/module-info.java</excludes>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <linkXRef>false</linkXRef>
