@@ -21,7 +21,7 @@ public class SudokuFieldTest {
     }
 
     @Test
-    void equalsAndHashCodeTest() {
+    void equalsCodeTest() {
         SudokuField sudoku1 = new SudokuField(3);
         SudokuField sudoku2 = new SudokuField(4);
 
@@ -32,7 +32,14 @@ public class SudokuFieldTest {
 
         sudoku2.setFieldValue(3);
         assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
-        assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
+    }
+
+    @Test
+    void HashCodeTest() {
+        SudokuField sudoku1 = new SudokuField(3);
+        SudokuField sudoku2 = new SudokuField(4);
+        if(sudoku1.hashCode() != sudoku2.hashCode())
+            assertNotEquals(sudoku1, sudoku2);
     }
 
     @Test
