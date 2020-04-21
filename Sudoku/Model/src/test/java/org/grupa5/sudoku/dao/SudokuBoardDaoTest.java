@@ -1,14 +1,13 @@
 package org.grupa5.sudoku.dao;
 
 import org.grupa5.sudoku.SudokuBoard;
-import org.grupa5.sudoku.SudokuField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.apache.commons.io.FileUtils;
 
-import java.io.*;
-import java.util.Arrays;
-import java.util.List;
+import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,28 +36,9 @@ public class SudokuBoardDaoTest {
         Assertions.assertEquals(board, board2);
         FileUtils.deleteQuietly(new File(FILE_PATH));
     }
-    // TODO: Xd
-    // TODO: nie wiem co z tym fantem zrobić.
-    //  mamy te catch blocki
-    //  które nie bardzo wiem jak ztestować
-    //  generalnie to chce do tch catchy jeszcze coś dodac co by moglo pozwolić na ładne ztestowanei tego
-    //  myslalem żeby dodać jakiś nasz wyjątek który by był rzucany jak się nie uda np otworzyć pliku
-    //  i wtedy w gotowej grze taki wyjątek by się łapało i by był komnikat
-    //  "no zły plik wybrałeś byczku, wybierz inny"
-    //  ale narazie to nie wiem jeszcze
-    //  widzialem cos takiego https://stackoverflow.com/questions/42508323/junit-for-both-try-and-catch-block-coverage
-    //  do testowania catch blocków ale mi się to nie podoba.
-    //  zostawiam nie zstestowane narazie
+
     @Test
     void sudokuBoardWriteExceptionTest() {
-//        File f = new File(FAILURE_FILE_PATH);
-//        if(!f.exists() || f.isDirectory()) {
-//            try {
-//                failureDao.write(board);
-//            } catch (Exception e) {
-//                fail("Should not have thrown any exception");
-//            }
-//        }
         final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(myOut));
         failureDao.write(board);
@@ -68,14 +48,6 @@ public class SudokuBoardDaoTest {
 
     @Test
     void sudokuBoardReadExceptionTest() {
-//        File f = new File(FAILURE_FILE_PATH);
-//        if(!f.exists() || f.isDirectory()) {
-//            try {
-//                failureDao.read();
-//            } catch (Exception e) {
-//                fail("Should not have thrown any exception");
-//            }
-//        }
         final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(myOut));
         failureDao.read();
