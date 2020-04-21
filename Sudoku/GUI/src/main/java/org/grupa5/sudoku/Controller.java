@@ -1,4 +1,4 @@
-package org.grupa5.gui;
+package org.grupa5.sudoku;
 
 public class Controller {
 }

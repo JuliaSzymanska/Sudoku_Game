@@ -1,4 +1,4 @@
-package org.grupa5.gui;
+package org.grupa5.sudoku;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

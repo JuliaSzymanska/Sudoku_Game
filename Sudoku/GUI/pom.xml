@@ -12,6 +12,9 @@
     </parent>
     <artifactId>ViewProject</artifactId>
     <packaging>jar</packaging>
-    
+
+    <properties>
+        <main.class>org.grupa5.sudoku.Main</main.class>
+    </properties>
 
 </project>
