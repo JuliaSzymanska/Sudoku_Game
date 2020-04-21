@@ -51,14 +51,6 @@ public class SudokuBoardDaoTest {
     //  zostawiam nie zstestowane narazie
     @Test
     void sudokuBoardWriteExceptionTest() {
-//        File f = new File(FAILURE_FILE_PATH);
-//        if(!f.exists() || f.isDirectory()) {
-//            try {
-//                failureDao.write(board);
-//            } catch (Exception e) {
-//                fail("Should not have thrown any exception");
-//            }
-//        }
         final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(myOut));
         failureDao.write(board);
@@ -68,40 +60,10 @@ public class SudokuBoardDaoTest {
 
     @Test
     void sudokuBoardReadExceptionTest() {
-//        File f = new File(FAILURE_FILE_PATH);
-//        if(!f.exists() || f.isDirectory()) {
-//            try {
-//                failureDao.read();
-//            } catch (Exception e) {
-//                fail("Should not have thrown any exception");
-//            }
-//        }
         final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(myOut));
         failureDao.read();
         final String standardOutput = myOut.toString();
         assertEquals("Wyjatek IO", standardOutput);
-    }
-
-
-    // TODO: Zostawił bym to bo im więcej czytam o tym wyjątku tym mniej wiem jak to sprawdzić
-    @Test
-    void sudokuBoardReadClassNotFoundTest() {
-//        try (
-//                FileOutputStream fileOut = new FileOutputStream(FILE_PATH);
-//                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)
-//        ) {
-////            List<SudokuField> list = Arrays.asList(new SudokuField[9]);
-////            for (int i = 0; i < 9; i++) {
-////                list.set(i, new SudokuField(i));
-////            }
-////            int l = list.size();
-////            SudokuObject obj = new SudokuObject(list);
-//            SudokuField field = new SudokuField(9);
-//            objectOut.writeObject(field);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        dao.read();
     }
 }
