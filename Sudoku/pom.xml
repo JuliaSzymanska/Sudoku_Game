@@ -78,6 +78,7 @@
                 <version>3.0.0</version>
                 <configuration>
                     <configLocation>../checkstyle2019.xml</configLocation>
+                        <excludes>**/module-info.java</excludes>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
