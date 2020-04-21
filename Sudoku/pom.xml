@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>Model</module>
+        <module>GUI</module>
     </modules>
 
     <reporting>
@@ -158,6 +159,14 @@
             <artifactId>to-string-verifier</artifactId>
             <version>1.4.1</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+
 
 
     </dependencies>

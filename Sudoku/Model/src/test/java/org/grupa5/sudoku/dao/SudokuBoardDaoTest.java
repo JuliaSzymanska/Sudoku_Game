@@ -4,6 +4,7 @@ import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.util.Arrays;
@@ -34,6 +35,7 @@ public class SudokuBoardDaoTest {
         dao.write(board);
         board2 = dao.read();
         Assertions.assertEquals(board, board2);
+        FileUtils.deleteQuietly(new File(FILE_PATH));
     }
     // TODO: Xd
     // TODO: nie wiem co z tym fantem zrobić.
@@ -81,6 +83,8 @@ public class SudokuBoardDaoTest {
         assertEquals("Wyjatek IO", standardOutput);
     }
 
+
+    // TODO: Zostawił bym to bo im więcej czytam o tym wyjątku tym mniej wiem jak to sprawdzić
     @Test
     void sudokuBoardReadClassNotFoundTest() {
 //        try (

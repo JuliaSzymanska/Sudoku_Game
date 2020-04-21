@@ -17,6 +17,8 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         this.fileName = fileName;
     }
 
+
+    //TODO: dałbym jakiś ładny komentarz dlaczego tutaj są narazie printy żeby się nie czepiał kwapi
     @Override
     public void write(SudokuBoard sudokuBoard) {
         try (
