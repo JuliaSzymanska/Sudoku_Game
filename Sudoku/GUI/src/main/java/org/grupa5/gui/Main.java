@@ -1,4 +1,4 @@
-package sample;
+package org.grupa5.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
