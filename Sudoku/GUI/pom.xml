@@ -60,5 +60,6 @@
             </plugin>
         </plugins>
     </build>
+    <!-- TODO: chyab brakuje checkstyle dla GUI -->
 
 </project>

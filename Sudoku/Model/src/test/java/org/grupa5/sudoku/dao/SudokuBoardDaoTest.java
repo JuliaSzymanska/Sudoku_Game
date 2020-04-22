@@ -55,4 +55,7 @@ public class SudokuBoardDaoTest {
         final String standardOutput = myOut.toString();
         assertEquals("Wyjatek IO", standardOutput);
     }
+
+    // TODO: class not found exception można przetestować
+    //  serializując klase, modyfikując ją i próbować wtedy wczytać klasę.
 }
