@@ -43,6 +43,7 @@
         </plugins>
     </build>
 
+    <!-- TODO: dependencies, dependency menager -->
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>

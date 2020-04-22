@@ -53,6 +53,8 @@
         </plugins>
     </reporting>
 
+
+    <!-- TODO: pluginy w plugin menager w głównym pomie? ale co z tym biednym nie dzialającym checkstyle ._. -->
     <build>
         <plugins>
             <plugin>

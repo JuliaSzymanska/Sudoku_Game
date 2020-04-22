@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 public class SudokuBoardDaoFactoryTest {
 
+    // TODO: TO ma być statyczne
+    //  więc testy też musimy zmienić
     @Test
     void notNullTest () {
         SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();

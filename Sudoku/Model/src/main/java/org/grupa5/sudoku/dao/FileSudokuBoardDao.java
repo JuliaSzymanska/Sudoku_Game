@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import org.grupa5.sudoku.SudokuBoard;
 
 
+// TODO: coś mówił że to ma albo moze dziedziczyć po autocloseable?
+
 public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
     private String fileName;
@@ -29,6 +31,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         ) {
             objectOut.writeObject(sudokuBoard);
         } catch (IOException e) {
+            // TODO: bartek i piotrek rzucają runTimeException
             System.out.print("Wyjatek IO");
         }
     }
@@ -48,4 +51,6 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         }
         return sudokuBoard;
     }
+
+    //TODO: kwapi pokazywał overrided close i finalize
 }

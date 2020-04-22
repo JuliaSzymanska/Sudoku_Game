@@ -14,6 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class SudokuBoardTest {
 
+    //TODO: w całej strukturze plików tak myślę, że zmieniłbym żeby
+    // było org.grupa5.sudoku.model nie a potem w gui byśmy mieli
+    // org.grupa5.sudoku.gui czy coś
     @Test
     void resetBoardTest() {
         List<List<SudokuField>> board;
