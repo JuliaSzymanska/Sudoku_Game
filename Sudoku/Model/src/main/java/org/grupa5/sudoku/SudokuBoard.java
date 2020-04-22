@@ -228,6 +228,7 @@ public class SudokuBoard implements Externalizable {
         out.writeObject(board);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         board = (List<List<SudokuField>>) in.readObject();

@@ -43,6 +43,7 @@
         </plugins>
     </build>
 
+    <!-- TODO: dependencies, dependency menager -->
     <dependencies>
 
         <dependency>
@@ -70,8 +71,6 @@
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
         </dependency>
-
-
 
     </dependencies>
 
