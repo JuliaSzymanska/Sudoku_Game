@@ -58,4 +58,5 @@ public class SudokuBoardDaoTest {
 
     // TODO: class not found exception można przetestować
     //  serializując klase, modyfikując ją i próbować wtedy wczytać klasę.
+    //  ale no mówił żen ie trzeba
 }
