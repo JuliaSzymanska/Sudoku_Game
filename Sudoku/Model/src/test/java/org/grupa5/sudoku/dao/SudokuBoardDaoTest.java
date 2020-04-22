@@ -22,6 +22,12 @@ public class SudokuBoardDaoTest {
     private SudokuBoard board2 = null;
 
     @Test
+    void failureFileTest(){
+        File f = new File(FAILURE_FILE_PATH);
+        Assertions.assertFalse((f.exists() && !f.isDirectory()));
+    }
+
+    @Test
     void sudokuBoardWriteNotSolvedTest() {
         dao.write(board);
         board2 = dao.read();
