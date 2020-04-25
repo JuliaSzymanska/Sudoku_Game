@@ -245,14 +245,4 @@ public class SudokuBoard implements Externalizable, Cloneable {
         }
     }
 
-    public static void main(String[] args) throws CloneNotSupportedException {
-        SudokuBoard sudoku1 = new SudokuBoard();
-        sudoku1.solveGame();
-        SudokuBoard sudoku2 = sudoku1.clone();
-        System.out.println(sudoku1.toString());
-        System.out.println(sudoku2.toString());
-        System.out.println(sudoku1 == sudoku2);
-        System.out.println(sudoku1.getBox(1,5) == sudoku2.getBox(1,5));
-    }
-
 }

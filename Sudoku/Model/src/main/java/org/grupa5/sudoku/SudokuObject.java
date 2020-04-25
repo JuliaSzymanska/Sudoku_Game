@@ -95,22 +95,4 @@ public class SudokuObject implements Serializable, Cloneable {
             return null;
         }
     }
-
-    // TODO: Usunac main i klase getFirst
-//    public SudokuField getFirst(){
-//        return object.get(0);
-//    }
-
-//    public static void main(String[] args) throws CloneNotSupportedException {
-//        List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
-//        for (int i = 0; i < 9; i++) {
-//            list1.set(i, new SudokuField(i + 1));
-//        }
-//        SudokuObject sudoku1 = new SudokuObject(list1);
-//        SudokuObject sudoku2 = sudoku1.clone();
-//        System.out.print(sudoku1.toString());
-//        System.out.print(sudoku2.toString());
-//        System.out.print(sudoku1.getFirst() == sudoku2.getFirst());
-//    }
-
 }

@@ -74,4 +74,24 @@ class SudokuObjectTest {
     public void testToString() {
         ToStringVerifier.forClass(SudokuObject.class).verify();
     }
+
+    @Test
+    public void cloneTest() {
+        List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
+        List<SudokuField> list2 = Arrays.asList(new SudokuField[9]);
+        for (int i = 0; i < 9; i++) {
+            list1.set(i, new SudokuField(i + 1));
+            list1.set(i, new SudokuField(i + 3));
+        }
+        SudokuObject sudoku1 = new SudokuObject(list1);
+        SudokuObject sudoku2 = new SudokuObject(list2);
+        try {
+            sudoku2 = sudoku1.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(sudoku1, sudoku2);
+        assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
+        assertNotSame(sudoku1, sudoku2);
+    }
 }

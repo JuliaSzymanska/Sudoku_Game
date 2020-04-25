@@ -2,6 +2,9 @@ package org.grupa5.sudoku;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -47,5 +50,38 @@ public class SudokuFieldTest {
         String expectedOut = "1234567890";
         SudokuField field = new SudokuField(1234567890);
         assertEquals(expectedOut, field.toString());
+    }
+
+    @Test
+    public void cloneTest(){
+        SudokuField field1 = new SudokuField(1);
+        SudokuField field2 = new SudokuField();
+        try {
+            field2 = field1.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(field1, field2);
+        assertEquals(field1.hashCode(), field2.hashCode());
+        assertNotSame(field1, field2);
+
+//            System.out.println(field1.compareTo(field2));
+//            field2.setFieldValue(2);
+//            System.out.println(field1.compareTo(field2));
+//            System.out.println(field2.compareTo(field1));
+    }
+
+    @Test
+    public void compareToTest(){
+        SudokuField field1 = new SudokuField(1);
+        SudokuField field2 = new SudokuField(1);
+        assertEquals(field1, field2);
+        assertEquals(field1.compareTo(field2), 0);
+        field2.setFieldValue(3);
+        assertTrue(field1.getFieldValue() < field2.getFieldValue());
+        assertEquals(field1.compareTo(field2), -1);
+        field1.setFieldValue(6);
+        assertTrue(field1.getFieldValue() > field2.getFieldValue());
+        assertEquals(field1.compareTo(field2), 1);
     }
 }

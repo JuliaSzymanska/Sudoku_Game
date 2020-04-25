@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class SudokuField implements Externalizable, Cloneable {
+public class SudokuField implements Externalizable, Cloneable, Comparable {
 
     private int value = 0;
 
@@ -97,16 +97,29 @@ public class SudokuField implements Externalizable, Cloneable {
         value = in.readInt();
     }
 
-    public SudokuField clone() throws CloneNotSupportedException{
+    public SudokuField clone() throws CloneNotSupportedException {
         SudokuField copy = (SudokuField) super.clone();
         return copy;
     }
-//
-//        public static void main(String[] args) throws CloneNotSupportedException {
-//        SudokuField field1 = new SudokuField(1);
-//        SudokuField field2 = field1.clone();
-//        System.out.print(field1.toString());
-//        System.out.print(field1.toString());
-//        System.out.print(field1 == field2);
-//    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (o == null) {
+            System.out.print("Wyjatek null");
+        }
+        if (!(o instanceof SudokuField)) {
+            //TODO: czy na pewno ten wyjatek tutaj
+            throw new ClassCastException();
+        }
+        SudokuField that = (SudokuField) o;
+        if(this.equals(that)){
+            return 0;
+        }
+        else if(this.value < that.value){
+            return -1;
+        }
+        else {
+            return 1;
+        }
+    }
 }

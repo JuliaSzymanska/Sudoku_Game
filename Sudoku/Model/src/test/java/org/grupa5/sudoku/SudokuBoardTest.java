@@ -158,4 +158,23 @@ public class SudokuBoardTest {
     public void testToString() {
         ToStringVerifier.forClass(SudokuBoard.class).verify();
     }
+
+    @Test
+    public void cloneTest() {
+        SudokuBoard sudoku1 = new SudokuBoard();
+        SudokuBoard sudoku2 = new SudokuBoard();
+        sudoku1.solveGame();
+        try {
+            sudoku2 = sudoku1.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        assertEquals(sudoku1, sudoku2);
+        assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
+        assertNotSame(sudoku1, sudoku2);
+        assertEquals(sudoku1.getBox(1, 5), sudoku2.getBox(1, 5));
+        assertEquals(sudoku1.getBox(1, 5).hashCode(),sudoku2.getBox(1, 5).hashCode());
+        assertNotSame(sudoku1.getBox(1, 5), sudoku2.getBox(1, 5));
+    }
+
 }
