@@ -2,7 +2,8 @@ package org.grupa5.sudoku;
 
 import static org.grupa5.sudoku.SudokuBoard.SUDOKU_DIMENSIONS;
 
-import java.io.*;
+import java.io.Serializable;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -85,7 +86,7 @@ public class SudokuObject implements Serializable, Cloneable {
     /**
      * Clone objects.
      * @return Cloned SudokuObject
-     * @throws CloneNotSupportedException
+     * @throws CloneNotSupportedException when super throws.
      */
 
     public SudokuObject clone() throws CloneNotSupportedException {

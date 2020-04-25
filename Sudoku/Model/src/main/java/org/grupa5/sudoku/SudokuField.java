@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class SudokuField implements Externalizable, Cloneable, Comparable {
 
-    private int value = 0;
+    private int value;
 
     /**
      * Default Constructor.
@@ -93,16 +93,15 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
     }
 
     @Override
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    public void readExternal(ObjectInput in) throws IOException {
         value = in.readInt();
     }
 
     /**
      * Clone objects.
      * @return Cloned SudokuField
-     * @throws CloneNotSupportedException
+     * @throws CloneNotSupportedException when thrown by super implementation.
      */
-
     public SudokuField clone() throws CloneNotSupportedException {
         return (SudokuField) super.clone();
     }
@@ -110,11 +109,12 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
     @Override
     public int compareTo(Object o) {
         if (o == null) {
-            System.out.print("Wyjatek null");
+            //TODO: czy na pewno ten wyjatek tutaj
+            throw new NullPointerException("comparing to null");
         }
         if (!(o instanceof SudokuField)) {
-            //TODO: czy na pewno ten wyjatek tutaj
-            throw new ClassCastException();
+                //TODO: czy na pewno ten wyjatek tutaj
+                throw new ClassCastException();
         }
         SudokuField that = (SudokuField) o;
         if (this.equals(that)) {

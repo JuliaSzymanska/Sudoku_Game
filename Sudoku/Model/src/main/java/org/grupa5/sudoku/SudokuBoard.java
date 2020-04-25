@@ -1,9 +1,18 @@
 package org.grupa5.sudoku;
 
-import java.io.*;
+
+// TODO: Chce tylko powiedzieć że to jest porażka że Checkstyle każe mi to importować w ten sposób
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -49,7 +58,7 @@ public class SudokuBoard implements Externalizable, Cloneable {
     public void solveGame() {
         SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
         sudokuSolver.solve(this);
-        if (!this.isWholeBoardValid()) {
+        if (!this.isWholeBoardValidAndFilled()) {
             // TODO: pewnie kiedyś zamienimy to na własny wyjątek
             throw new RuntimeException("Generated wrong board layout");
         }
@@ -65,9 +74,8 @@ public class SudokuBoard implements Externalizable, Cloneable {
         try {
             SudokuBoard copyBoard = this.clone();
             return copyBoard.board;
-        }
-        // TODO: IDK czy tak dokładnie
-        catch (CloneNotSupportedException e) {
+        } catch (CloneNotSupportedException e) {
+            // TODO: IDK czy tak dokładnie
             throw new RuntimeException("was unable to copy Board");
         }
     }
@@ -169,7 +177,7 @@ public class SudokuBoard implements Externalizable, Cloneable {
         }
         int temp = this.board.get(x).get(y).getFieldValue();
         this.board.get(x).get(y).setFieldValue(value);
-        if (!checkBoard(x, y)) {
+        if (checkBoard(x, y)) {
             this.board.get(x).get(y).setFieldValue(temp);
         }
     }
@@ -191,7 +199,9 @@ public class SudokuBoard implements Externalizable, Cloneable {
      */
 
     private boolean checkBoard(int row, int column) {
-        return getRow(row).verify() && getColumn(column).verify() && getBox(row, column).verify();
+        return !getRow(row).verify()
+                || !getColumn(column).verify()
+                || !getBox(row, column).verify();
     }
 
     @Override
@@ -230,10 +240,10 @@ public class SudokuBoard implements Externalizable, Cloneable {
         board = (List<List<SudokuField>>) in.readObject();
     }
 
-    private boolean isBoardOnlyMadeOfZeros() {
-        for(List<SudokuField> i : this.board) {
-            for (SudokuField j : i) {
-                if (j.getFieldValue() != 0) {
+    private boolean isWholeBoardValid() {
+        for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
+            for (int j = 0; j < SUDOKU_DIMENSIONS; j++) {
+                if (this.checkBoard(i, j)) {
                     return false;
                 }
             }
@@ -241,28 +251,28 @@ public class SudokuBoard implements Externalizable, Cloneable {
         return true;
     }
 
-    private boolean isWholeBoardValid() {
-        //  zakładam że ta metoda będzie wykorzystywana by sprawdzić na koniec gry czy rzeczywiście
-        //  plansza jest właściwa lub do przetestowania wyniku sudokuSolvera
-        //  więc zakładam że w tym przypadku plansza jest valid TYLKO gdy jest valid oraz nie ma w niej zer.
-        for(int i = 0; i < SUDOKU_DIMENSIONS; i++) {
-            for (int j = 0; j < SUDOKU_DIMENSIONS; j++) {
-                if(!this.checkBoard(i, j) || this.get(i, j) == 0) {
+    private boolean isWholeBoardValidAndFilled() {
+        for (List<SudokuField> i : this.board) {
+            for (SudokuField j : i) {
+                if (j.getFieldValue() == 0) {
                     return false;
                 }
             }
         }
-        return true;
+        return isWholeBoardValid();
     }
 
     /**
      * Clone objects.
-     * @return Cloned SudokuBoard
-     * @throws CloneNotSupportedException
+     *
+     * @return Cloned SudokuBoard.
+     * @throws CloneNotSupportedException when the Board in invalid or when either
+     *      IOException or  ClassNotFoundException are caught.
      */
     public SudokuBoard clone() throws CloneNotSupportedException {
         if (!isWholeBoardValid()) {
-            throw new CloneNotSupportedException("SudokuBoard doesn't allow cloning non valid boards");
+            throw new CloneNotSupportedException(
+                    "SudokuBoard doesn't allow cloning non valid boards");
         }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
@@ -275,28 +285,6 @@ public class SudokuBoard implements Externalizable, Cloneable {
             // TODO: może jakoś tak?
             throw new CloneNotSupportedException("Was unable to generate a clone of SudokuBoard");
         }
-    }
-
-    public static void main(String[] args)  {
-        SudokuBoard board = new SudokuBoard();
-        SudokuBoard board2 = null;
-        try {
-            board2 = board.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(board);
-        System.out.println(board2);
-        board.solveGame();
-        board2.solveGame();
-        System.out.println(board);
-        System.out.println(board2);
-        try {
-            board2 = board.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(board2);
     }
 
 }

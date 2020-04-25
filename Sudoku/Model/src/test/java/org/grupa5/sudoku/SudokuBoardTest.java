@@ -122,13 +122,14 @@ public class SudokuBoardTest {
         });
     }
 
-    @Test
-    public void cloneExceptionTest() {
-        SudokuBoard sudoku = new SudokuBoard();
-        assertThrows(CloneNotSupportedException.class, () -> {
-            sudoku.clone();
-        });
-    }
+    // TODO: RZU WYJATEK
+//    @Test
+//    public void cloneExceptionTest() {
+//        SudokuBoard sudoku = new SudokuBoard();
+//        assertThrows(CloneNotSupportedException.class, () -> {
+//            sudoku.clone();
+//        });
+//    }
 
     @Test
     void equalsTest() {
@@ -177,13 +178,13 @@ public class SudokuBoardTest {
     @Test
     public void cloneTest() {
         SudokuBoard sudoku1 = new SudokuBoard();
-        SudokuBoard sudoku2 = new SudokuBoard();
+        SudokuBoard sudoku2 = null;
 
         sudoku1.solveGame();
         try {
             sudoku2 = sudoku1.clone();
         } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+            fail("exception thrown");
         }
         assertEquals(sudoku1, sudoku2);
         assertEquals(sudoku1.hashCode(), sudoku2.hashCode());

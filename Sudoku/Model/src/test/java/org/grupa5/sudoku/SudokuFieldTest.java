@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -68,6 +69,12 @@ public class SudokuFieldTest {
     @Test
     public void compareToTest(){
         SudokuField field1 = new SudokuField(1);
+        assertThrows(NullPointerException.class, () -> {
+            field1.compareTo(null);
+        });
+        assertThrows(ClassCastException.class, () -> {
+            field1.compareTo(Object.class);
+        });
         SudokuField field2 = new SudokuField(1);
         assertEquals(field1, field2);
         assertEquals(field1.compareTo(field2), 0);
