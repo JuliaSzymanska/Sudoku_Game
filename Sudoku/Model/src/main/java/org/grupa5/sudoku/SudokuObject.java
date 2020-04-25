@@ -2,6 +2,7 @@ package org.grupa5.sudoku;
 
 import static org.grupa5.sudoku.SudokuBoard.SUDOKU_DIMENSIONS;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +21,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * Box.
  */
 
-public class SudokuObject {
+public class SudokuObject implements Serializable, Cloneable {
 
     private List<SudokuField> object;
 
@@ -80,4 +81,36 @@ public class SudokuObject {
     public int hashCode() {
         return new HashCodeBuilder().append(object).toHashCode();
     }
+
+    public SudokuObject clone() throws CloneNotSupportedException{
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try{
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            objectOutputStream.writeObject(this);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+            return (SudokuObject) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // TODO: Usunac main i klase getFirst
+//    public SudokuField getFirst(){
+//        return object.get(0);
+//    }
+
+//    public static void main(String[] args) throws CloneNotSupportedException {
+//        List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
+//        for (int i = 0; i < 9; i++) {
+//            list1.set(i, new SudokuField(i + 1));
+//        }
+//        SudokuObject sudoku1 = new SudokuObject(list1);
+//        SudokuObject sudoku2 = sudoku1.clone();
+//        System.out.print(sudoku1.toString());
+//        System.out.print(sudoku2.toString());
+//        System.out.print(sudoku1.getFirst() == sudoku2.getFirst());
+//    }
+
 }

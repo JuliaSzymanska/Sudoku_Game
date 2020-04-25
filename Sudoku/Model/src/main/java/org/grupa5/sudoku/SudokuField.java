@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class SudokuField implements Externalizable {
+public class SudokuField implements Externalizable, Cloneable {
 
     private int value = 0;
 
@@ -96,4 +96,17 @@ public class SudokuField implements Externalizable {
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         value = in.readInt();
     }
+
+    public SudokuField clone() throws CloneNotSupportedException{
+        SudokuField copy = (SudokuField) super.clone();
+        return copy;
+    }
+//
+//        public static void main(String[] args) throws CloneNotSupportedException {
+//        SudokuField field1 = new SudokuField(1);
+//        SudokuField field2 = field1.clone();
+//        System.out.print(field1.toString());
+//        System.out.print(field1.toString());
+//        System.out.print(field1 == field2);
+//    }
 }

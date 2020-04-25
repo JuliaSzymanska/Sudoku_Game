@@ -1,9 +1,6 @@
 package org.grupa5.sudoku;
 
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +10,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class SudokuBoard implements Externalizable {
+public class SudokuBoard implements Externalizable, Cloneable {
 
     private List<List<SudokuField>> board;
 
@@ -233,4 +230,29 @@ public class SudokuBoard implements Externalizable {
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         board = (List<List<SudokuField>>) in.readObject();
     }
+
+    public SudokuBoard clone() throws CloneNotSupportedException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            objectOutputStream.writeObject(this);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+            return (SudokuBoard) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void main(String[] args) throws CloneNotSupportedException {
+        SudokuBoard sudoku1 = new SudokuBoard();
+        sudoku1.solveGame();
+        SudokuBoard sudoku2 = sudoku1.clone();
+        System.out.println(sudoku1.toString());
+        System.out.println(sudoku2.toString());
+        System.out.println(sudoku1 == sudoku2);
+        System.out.println(sudoku1.getBox(1,5) == sudoku2.getBox(1,5));
+    }
+
 }
