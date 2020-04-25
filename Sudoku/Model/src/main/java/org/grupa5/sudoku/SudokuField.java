@@ -104,8 +104,7 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
      */
 
     public SudokuField clone() throws CloneNotSupportedException {
-        SudokuField copy = (SudokuField) super.clone();
-        return copy;
+        return (SudokuField) super.clone();
     }
 
     @Override

@@ -89,16 +89,10 @@ public class SudokuObject implements Serializable, Cloneable {
      */
 
     public SudokuObject clone() throws CloneNotSupportedException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(this);
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-            return (SudokuObject) objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+        // TODO:
+        //  "Zanim to jednak zrobisz, to upewnij się czy naprawdę potrzebujesz pełnej kopii"
+        //   wg mnie nie potrzebujemy w tym obiekcie pełnej kopii bo jest niemodyfikowalny i
+        //   uzywa się go tylko do sprawdzenia czy ustawienie jest valid cnie
+        return (SudokuObject) super.clone();
     }
 }

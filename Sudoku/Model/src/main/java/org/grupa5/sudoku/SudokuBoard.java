@@ -25,7 +25,12 @@ public class SudokuBoard implements Externalizable, Cloneable {
      */
 
     public SudokuBoard() {
-        this.board = Arrays.asList(
+        this.board = createUninitializedBoard();
+        this.resetBoard(this.board);
+    }
+
+    private List<List<SudokuField>> createUninitializedBoard() {
+        return Arrays.asList(
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
@@ -35,7 +40,6 @@ public class SudokuBoard implements Externalizable, Cloneable {
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]));
-        this.resetBoard(this.board);
     }
 
     /**
@@ -45,6 +49,10 @@ public class SudokuBoard implements Externalizable, Cloneable {
     public void solveGame() {
         SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
         sudokuSolver.solve(this);
+        if (!this.isWholeBoardValid()) {
+            // TODO: pewnie kiedyś zamienimy to na własny wyjątek
+            throw new RuntimeException("Generated wrong board layout");
+        }
     }
 
     /**
@@ -54,23 +62,14 @@ public class SudokuBoard implements Externalizable, Cloneable {
      */
 
     public List<List<SudokuField>> getBoard() {
-        List<List<SudokuField>> copy = Arrays.asList(
-                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
-                Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]));
-        resetBoard(copy);
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                copy.get(i).get(j).setFieldValue(board.get(i).get(j).getFieldValue());
-            }
+        try {
+            SudokuBoard copyBoard = this.clone();
+            return copyBoard.board;
         }
-        return copy;
+        // TODO: IDK czy tak dokładnie
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException("was unable to copy Board");
+        }
     }
 
     /**
@@ -207,7 +206,7 @@ public class SudokuBoard implements Externalizable, Cloneable {
             return false;
         }
         SudokuBoard that = (SudokuBoard) o;
-        return new EqualsBuilder().append(that.getBoard(), this.board).isEquals();
+        return new EqualsBuilder().append(that.board, this.board).isEquals();
     }
 
     @Override
@@ -231,13 +230,40 @@ public class SudokuBoard implements Externalizable, Cloneable {
         board = (List<List<SudokuField>>) in.readObject();
     }
 
+    private boolean isBoardOnlyMadeOfZeros() {
+        for(List<SudokuField> i : this.board) {
+            for (SudokuField j : i) {
+                if (j.getFieldValue() != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean isWholeBoardValid() {
+        //  zakładam że ta metoda będzie wykorzystywana by sprawdzić na koniec gry czy rzeczywiście
+        //  plansza jest właściwa lub do przetestowania wyniku sudokuSolvera
+        //  więc zakładam że w tym przypadku plansza jest valid TYLKO gdy jest valid oraz nie ma w niej zer.
+        for(int i = 0; i < SUDOKU_DIMENSIONS; i++) {
+            for (int j = 0; j < SUDOKU_DIMENSIONS; j++) {
+                if(!this.checkBoard(i, j) || this.get(i, j) == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     /**
      * Clone objects.
      * @return Cloned SudokuBoard
      * @throws CloneNotSupportedException
      */
-
     public SudokuBoard clone() throws CloneNotSupportedException {
+        if (!isWholeBoardValid()) {
+            throw new CloneNotSupportedException("SudokuBoard doesn't allow cloning non valid boards");
+        }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
@@ -246,9 +272,31 @@ public class SudokuBoard implements Externalizable, Cloneable {
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             return (SudokuBoard) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
+            // TODO: może jakoś tak?
+            throw new CloneNotSupportedException("Was unable to generate a clone of SudokuBoard");
         }
+    }
+
+    public static void main(String[] args)  {
+        SudokuBoard board = new SudokuBoard();
+        SudokuBoard board2 = null;
+        try {
+            board2 = board.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(board);
+        System.out.println(board2);
+        board.solveGame();
+        board2.solveGame();
+        System.out.println(board);
+        System.out.println(board2);
+        try {
+            board2 = board.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(board2);
     }
 
 }

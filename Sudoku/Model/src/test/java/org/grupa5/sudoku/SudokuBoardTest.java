@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -13,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * Unit test for simple App. Testing methods: resetBoard and getters.
  */
 public class SudokuBoardTest {
+
+
 
     //TODO: w całej strukturze plików tak myślę, że zmieniłbym żeby
     // było org.grupa5.sudoku.model nie a potem w gui byśmy mieli
@@ -120,12 +123,22 @@ public class SudokuBoardTest {
     }
 
     @Test
+    public void cloneExceptionTest() {
+        SudokuBoard sudoku = new SudokuBoard();
+        assertThrows(CloneNotSupportedException.class, () -> {
+            sudoku.clone();
+        });
+    }
+
+    @Test
     void equalsTest() {
         SudokuBoard sudoku1 = new SudokuBoard();
         SudokuBoard sudoku2 = new SudokuBoard();
 
         assertNotEquals(sudoku1, null);
         assertEquals(sudoku1, sudoku1);
+        // assert not solved are equal
+        assertEquals(sudoku1, sudoku2);
         assertNotEquals(sudoku1, Object.class);
 
         sudoku1.solveGame();
@@ -159,10 +172,13 @@ public class SudokuBoardTest {
         ToStringVerifier.forClass(SudokuBoard.class).verify();
     }
 
+
+
     @Test
     public void cloneTest() {
         SudokuBoard sudoku1 = new SudokuBoard();
         SudokuBoard sudoku2 = new SudokuBoard();
+
         sudoku1.solveGame();
         try {
             sudoku2 = sudoku1.clone();
