@@ -11,7 +11,7 @@ import org.grupa5.sudoku.SudokuBoard;
 
 // TODO: coś mówił że to ma albo moze dziedziczyć po autocloseable?
 
-public class FileSudokuBoardDao implements Dao<SudokuBoard> {
+public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable{
 
     private String fileName;
 
@@ -52,5 +52,10 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         return sudokuBoard;
     }
 
-    //TODO: kwapi pokazywał overrided close i finalize
+    @Override
+    public void close() {
+        //TODO: kwapi pokazywał overrided close i finalize
+        // robimy to?
+    }
+
 }

@@ -122,7 +122,7 @@ public class SudokuBoardTest {
         });
     }
 
-    // TODO: RZU WYJATEK
+    // TODO: wykomentowany test odkomentowac jak juz to zrobimy zeby sie dalo testowac
 //    @Test
 //    public void cloneExceptionTest() {
 //        SudokuBoard sudoku = new SudokuBoard();

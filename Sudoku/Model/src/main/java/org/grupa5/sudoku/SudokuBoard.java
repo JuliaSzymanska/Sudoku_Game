@@ -270,6 +270,7 @@ public class SudokuBoard implements Externalizable, Cloneable {
      *      IOException or  ClassNotFoundException are caught.
      */
     public SudokuBoard clone() throws CloneNotSupportedException {
+        // TODO: nie umiem tego wykonac
         if (!isWholeBoardValid()) {
             throw new CloneNotSupportedException(
                     "SudokuBoard doesn't allow cloning non valid boards");
