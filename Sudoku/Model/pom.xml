@@ -13,9 +13,6 @@
     <artifactId>ModelProject</artifactId>
     <packaging>jar</packaging>
 
-
-    <!-- TODO: pluginy w plugin menager w głównym pomie? ale co z tym biednym nie dzialającym checkstyle ._. -->
-
     <reporting>
         <plugins>
             <plugin>
@@ -55,6 +52,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <configuration>
+                    <!-- TODO: tutaj Dżulka -->
                     <configLocation>../checkstyle2019.xml</configLocation>
                     <excludes>module-info.java</excludes>
                     <encoding>UTF-8</encoding>
@@ -82,6 +80,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <!-- TODO: tutaj Dżulka -->
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>

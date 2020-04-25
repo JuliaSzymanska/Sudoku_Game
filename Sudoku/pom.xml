@@ -43,6 +43,7 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>3.0.0</version>
                     <configuration>
+                        <!-- TODO: tutaj Dżulka -->
                         <configLocation>../checkstyle2019.xml</configLocation>
                         <excludes>module-info.java</excludes>
                         <encoding>UTF-8</encoding>
@@ -64,6 +65,7 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.8.3</version>
+                    <!-- TODO: tutaj Dżulka -->
                     <executions>
                         <execution>
                             <id>default-prepare-agent</id>
@@ -103,7 +105,6 @@
         </pluginManagement>
     </build>
 
-    <!-- TODO: dependencies, dependency menager -->
     <dependencyManagement>
         <dependencies>
             <dependency>
