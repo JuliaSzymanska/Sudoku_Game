@@ -43,7 +43,6 @@ public class SudokuSolverTest {
         sudoku.solveGame();
         sudoku2.solveGame();
         assertNotEquals(sudoku, sudoku2);
-
     }
 
     @Test

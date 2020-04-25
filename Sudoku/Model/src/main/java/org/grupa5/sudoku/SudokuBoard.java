@@ -231,6 +231,12 @@ public class SudokuBoard implements Externalizable, Cloneable {
         board = (List<List<SudokuField>>) in.readObject();
     }
 
+    /**
+     * Clone objects.
+     * @return Cloned SudokuBoard
+     * @throws CloneNotSupportedException
+     */
+
     public SudokuBoard clone() throws CloneNotSupportedException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {

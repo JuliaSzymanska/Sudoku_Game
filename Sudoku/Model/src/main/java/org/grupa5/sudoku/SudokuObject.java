@@ -77,14 +77,20 @@ public class SudokuObject implements Serializable, Cloneable {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
-        @Override
+    @Override
     public int hashCode() {
         return new HashCodeBuilder().append(object).toHashCode();
     }
 
-    public SudokuObject clone() throws CloneNotSupportedException{
+    /**
+     * Clone objects.
+     * @return Cloned SudokuObject
+     * @throws CloneNotSupportedException
+     */
+
+    public SudokuObject clone() throws CloneNotSupportedException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try{
+        try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(this);
             ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());

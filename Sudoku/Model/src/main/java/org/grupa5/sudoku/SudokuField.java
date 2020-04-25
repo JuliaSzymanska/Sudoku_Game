@@ -97,6 +97,12 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
         value = in.readInt();
     }
 
+    /**
+     * Clone objects.
+     * @return Cloned SudokuField
+     * @throws CloneNotSupportedException
+     */
+
     public SudokuField clone() throws CloneNotSupportedException {
         SudokuField copy = (SudokuField) super.clone();
         return copy;
@@ -112,13 +118,11 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
             throw new ClassCastException();
         }
         SudokuField that = (SudokuField) o;
-        if(this.equals(that)){
+        if (this.equals(that)) {
             return 0;
-        }
-        else if(this.value < that.value){
+        } else if (this.value < that.value) {
             return -1;
-        }
-        else {
+        } else {
             return 1;
         }
     }

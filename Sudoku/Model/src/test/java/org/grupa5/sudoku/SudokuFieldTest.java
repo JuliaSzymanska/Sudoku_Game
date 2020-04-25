@@ -32,7 +32,6 @@ public class SudokuFieldTest {
         assertEquals(sudoku1, sudoku1);
         assertNotEquals(sudoku1, Class.class);
         assertNotEquals(sudoku1, sudoku2);
-
         sudoku2.setFieldValue(3);
         assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
     }
@@ -64,11 +63,6 @@ public class SudokuFieldTest {
         assertEquals(field1, field2);
         assertEquals(field1.hashCode(), field2.hashCode());
         assertNotSame(field1, field2);
-
-//            System.out.println(field1.compareTo(field2));
-//            field2.setFieldValue(2);
-//            System.out.println(field1.compareTo(field2));
-//            System.out.println(field2.compareTo(field1));
     }
 
     @Test
