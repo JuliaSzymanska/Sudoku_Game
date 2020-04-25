@@ -11,7 +11,7 @@ import org.grupa5.sudoku.SudokuBoard;
 
 // TODO: coś mówił że to ma albo moze dziedziczyć po autocloseable?
 
-public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable{
+public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     private String fileName;
 
