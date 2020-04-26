@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SudokuObjectTest {
 
     @Test
-    void equalsCodeTest() throws CloneNotSupportedException {
+    void equalsCodeTest() {
         List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
         List<SudokuField> list2 = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
