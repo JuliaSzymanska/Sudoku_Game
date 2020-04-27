@@ -2,6 +2,8 @@ package org.grupa5.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -15,27 +17,31 @@ import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
 import org.grupa5.sudoku.SudokuObject;
 
-//public class SecondaryController implements Initializable {
+public class SecondaryController implements Initializable {
 
-public class SecondaryController {
+//public class SecondaryController {
 
     private SudokuBoard sudokuBoard = new SudokuBoard();
+
+    private List<SudokuField> sudokuFieldList = new ArrayList<SudokuField>(sudokuBoard.get(0, 0));
 //
-//    @FXML private TableView<SudokuField> tableView;
-//    @FXML private TableColumn<SudokuField, Integer> first;
+    @FXML private TableView<SudokuField> table1;
+    @FXML private TableColumn<SudokuField, Integer> column1;
+    private ObservableList<SudokuField> studentList;
 
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
     }
 
-//    @Override
-//    public void initialize(URL url, ResourceBundle rb) {
-//        first.setText("Value");
-//        sudokuBoard.solveGame();
-//        tableView.setItems(FXCollections.observableArrayList(new SudokuField(sudokuBoard.get(0,0))));
-//        first.setCellValueFactory(new PropertyValueFactory<SudokuField, Integer>("value"));
-//    }
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        column1.setText("Value");
+
+        sudokuBoard.solveGame();
+        table1.setItems(FXCollections.observableArrayList(new SudokuField(sudokuBoard.get(0,0))));
+        column1.setCellValueFactory(new PropertyValueFactory<SudokuField, Integer>("value"));
+    }
 
 //    public ObservableList<SudokuField> getFields(){
 //        sudokuBoard.solveGame();

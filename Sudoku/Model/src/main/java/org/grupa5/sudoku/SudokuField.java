@@ -39,6 +39,14 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
         this.value = sudokuField.value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     /**
      * A simple getter.
      *

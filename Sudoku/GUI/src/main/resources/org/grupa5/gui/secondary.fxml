@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="371.0" prefWidth="415.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
+<VBox alignment="CENTER" prefHeight="461.0" prefWidth="575.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
     <children>
         <Label text="SUDOKU">
          <font>
@@ -15,6 +15,11 @@
          <font>
             <Font size="28.0" />
          </font></Button>
+      <TableView id="table1" fx:id="table1" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn id="column1" fx:id="column1" onEditStart="#switchToPrimary" prefWidth="75.0" text="C1" />
+        </columns>
+      </TableView>
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
