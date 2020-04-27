@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -52,13 +53,13 @@ public class SecondaryController implements Initializable {
         for(int i = 0; i < numRows; i++) {
             for(int j = 0; j < numCols; j++) {
                 if(i == 0 && j == 0) {
-                    grid1.add(new TextField("X"), 0,0);
+                    grid1.add(new Label("X"), 0,0);
                 }
                 else if (i != 0 && j == 0) {
-                    grid1.add(new TextField("0" + Integer.toString(i)), i, j);
+                    grid1.add(new Label("0" + Integer.toString(i)), i, j);
                 }
                 else if (i == 0) {
-                    grid1.add(new TextField(Character.toString((char) (64 + j))), i, j);
+                    grid1.add(new Label(Character.toString((char) (64 + j))), i, j);
                 }
                 else {
                     int intToAdd = sudokuBoard.get(j - 1, i - 1);
@@ -68,11 +69,14 @@ public class SecondaryController implements Initializable {
             }
         }
 
-
         // CENTROWANIE
         for( Object i : grid1.getChildren()) {
-            if(i instanceof TextField)
+            if(i instanceof TextField) {
                 ((TextField) i).setAlignment(Pos.CENTER);
+            }
+            if(i instanceof Label) {
+                ((Label) i).setAlignment(Pos.CENTER);
+            }
         }
     }
 
