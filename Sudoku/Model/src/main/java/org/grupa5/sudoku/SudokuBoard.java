@@ -158,7 +158,7 @@ public class SudokuBoard implements Externalizable, Cloneable {
         if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
-        return this.board.get(x).get(y).getFieldValue();
+        return this.board.get(x).get(y).getValue();
     }
 
     /**
@@ -175,10 +175,10 @@ public class SudokuBoard implements Externalizable, Cloneable {
         if (value < 0 || value > 9) {
             throw new IllegalArgumentException("Number has to be in range 0 - 9");
         }
-        int temp = this.board.get(x).get(y).getFieldValue();
-        this.board.get(x).get(y).setFieldValue(value);
+        int temp = this.board.get(x).get(y).getValue();
+        this.board.get(x).get(y).setValue(value);
         if (checkBoard(x, y)) {
-            this.board.get(x).get(y).setFieldValue(temp);
+            this.board.get(x).get(y).setValue(temp);
         }
     }
 
@@ -254,7 +254,7 @@ public class SudokuBoard implements Externalizable, Cloneable {
     private boolean isWholeBoardValidAndFilled() {
         for (List<SudokuField> i : this.board) {
             for (SudokuField j : i) {
-                if (j.getFieldValue() == 0) {
+                if (j.getValue() == 0) {
                     return false;
                 }
             }

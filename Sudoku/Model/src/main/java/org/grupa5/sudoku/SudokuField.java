@@ -39,21 +39,13 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
         this.value = sudokuField.value;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     /**
      * A simple getter.
      *
      * @return Value of member variable 'value'
      */
 
-    public int getFieldValue() {
+    public int getValue() {
         return this.value;
     }
 
@@ -63,7 +55,7 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
      * @param value - Set the field 'value' to this param
      */
 
-    public void setFieldValue(int value) {
+    public void setValue(int value) {
         if (value < 0 || value > 9) {
             throw new IllegalArgumentException("Value has to be in range 0 - 9");
         }
@@ -82,7 +74,7 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
             return false;
         }
         SudokuField that = (SudokuField) o;
-        return new EqualsBuilder().append(that.getFieldValue(), this.value).isEquals();
+        return new EqualsBuilder().append(that.getValue(), this.value).isEquals();
     }
 
     @Override

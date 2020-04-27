@@ -1,10 +1,6 @@
 package org.grupa5.sudoku;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -15,13 +11,13 @@ public class SudokuFieldTest {
     void setTest() {
         SudokuField field = new SudokuField();
         assertThrows(IllegalArgumentException.class, () -> {
-            field.setFieldValue(-1);
+            field.setValue(-1);
         });
         assertThrows(IllegalArgumentException.class, () -> {
-            field.setFieldValue(10);
+            field.setValue(10);
         });
         SudokuField field1 = new SudokuField(field);
-        assertEquals(field.getFieldValue(), field1.getFieldValue());
+        assertEquals(field.getValue(), field1.getValue());
     }
 
     @Test
@@ -33,7 +29,7 @@ public class SudokuFieldTest {
         assertEquals(sudoku1, sudoku1);
         assertNotEquals(sudoku1, Class.class);
         assertNotEquals(sudoku1, sudoku2);
-        sudoku2.setFieldValue(3);
+        sudoku2.setValue(3);
         assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
     }
 
@@ -78,11 +74,11 @@ public class SudokuFieldTest {
         SudokuField field2 = new SudokuField(1);
         assertEquals(field1, field2);
         assertEquals(field1.compareTo(field2), 0);
-        field2.setFieldValue(3);
-        assertTrue(field1.getFieldValue() < field2.getFieldValue());
+        field2.setValue(3);
+        assertTrue(field1.getValue() < field2.getValue());
         assertEquals(field1.compareTo(field2), -1);
-        field1.setFieldValue(6);
-        assertTrue(field1.getFieldValue() > field2.getFieldValue());
+        field1.setValue(6);
+        assertTrue(field1.getValue() > field2.getValue());
         assertEquals(field1.compareTo(field2), 1);
     }
 }
