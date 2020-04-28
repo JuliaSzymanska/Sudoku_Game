@@ -5,13 +5,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="573.0" prefWidth="686.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
     <children>
-        <Label text="SUDOKU">
+      <Label text="Wybierz poziom trudności">
          <font>
-            <Font name="System Bold" size="27.0" />
-         </font></Label>
-        <Button fx:id="secondaryButton" onAction="#switchToPrimary" text="END GAME">
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="boxLevel" prefWidth="150.0" />
+        <Button fx:id="secondaryButton" onAction="#startGame" text="START GAME">
          <font>
             <Font size="28.0" />
          </font></Button>
