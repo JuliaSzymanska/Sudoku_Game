@@ -59,10 +59,6 @@ public class SudokuBoard implements Externalizable, Cloneable {
     public void solveGame() {
         SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
         sudokuSolver.solve(this);
-        if (!this.isWholeBoardValidAndFilled()) {
-            // TODO: pewnie kiedyś zamienimy to na własny wyjątek
-            throw new RuntimeException("Generated wrong board layout");
-        }
     }
 
     public void removeFields(int numberOfFields) {
@@ -253,17 +249,6 @@ public class SudokuBoard implements Externalizable, Cloneable {
             }
         }
         return true;
-    }
-
-    private boolean isWholeBoardValidAndFilled() {
-        for (List<SudokuField> i : this.board) {
-            for (SudokuField j : i) {
-                if (j.getValue() == 0) {
-                    return false;
-                }
-            }
-        }
-        return isWholeBoardValid();
     }
 
     /**

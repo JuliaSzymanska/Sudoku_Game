@@ -8,6 +8,11 @@ public class SudokuBoardDaoFactoryTest {
 
     @Test
     void notNullTest () {
-        Assertions.assertTrue(SudokuBoardDaoFactory.getFileDao("FILENAME").getClass().equals(FileSudokuBoardDao.class));
+        Assertions.assertEquals(SudokuBoardDaoFactory.getFileDao("FILENAME").getClass(), FileSudokuBoardDao.class);
+    }
+
+    @Test
+    void defaultConstructorTest(){
+        new SudokuBoardDaoFactory();
     }
 }
