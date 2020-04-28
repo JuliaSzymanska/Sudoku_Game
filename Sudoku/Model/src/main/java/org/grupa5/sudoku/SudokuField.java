@@ -109,11 +109,9 @@ public class SudokuField implements Externalizable, Cloneable, Comparable {
     @Override
     public int compareTo(Object o) {
         if (o == null) {
-            //TODO: czy na pewno ten wyjatek tutaj
             throw new NullPointerException("comparing to null");
         }
         if (!(o instanceof SudokuField)) {
-                //TODO: czy na pewno ten wyjatek tutaj
                 throw new ClassCastException();
         }
         SudokuField that = (SudokuField) o;

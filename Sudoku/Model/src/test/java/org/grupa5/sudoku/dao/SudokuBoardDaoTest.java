@@ -15,7 +15,6 @@ public class SudokuBoardDaoTest {
 
     private final String FILE_PATH = "file.txt";
     private final String FAILURE_FILE_PATH = "/";
-    private SudokuBoardDaoFactory fabryka = new SudokuBoardDaoFactory();
     private Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao(FILE_PATH);
     private Dao<SudokuBoard> failureDao = SudokuBoardDaoFactory.getFileDao(FAILURE_FILE_PATH);
     private SudokuBoard board = new SudokuBoard();
