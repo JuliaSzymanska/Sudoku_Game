@@ -48,7 +48,7 @@
                         <excludes>module-info.java</excludes>
                         <encoding>UTF-8</encoding>
                         <consoleOutput>true</consoleOutput>
-                        <failsOnError>true</failsOnError>
+                        <failsOnError>false</failsOnError>
                         <linkXRef>false</linkXRef>
                     </configuration>
                     <executions>
