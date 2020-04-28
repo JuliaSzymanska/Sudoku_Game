@@ -38,6 +38,10 @@ public class SudokuBoard implements Externalizable, Cloneable {
         this.resetBoard(this.board);
     }
 
+    public void resetField(int row, int column) {
+        this.board.get(row).get(column).setValue(0);
+    }
+
     private List<List<SudokuField>> createUninitializedBoard() {
         return Arrays.asList(
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]),
