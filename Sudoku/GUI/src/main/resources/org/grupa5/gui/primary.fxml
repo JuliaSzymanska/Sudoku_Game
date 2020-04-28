@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="371.0" prefWidth="415.0"  spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
+<VBox alignment="CENTER" prefHeight="371.0" prefWidth="415.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
    <children>
       <Label text="SUDOKU">
          <font>
@@ -16,7 +16,7 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <ComboBox prefWidth="200.0" prefHeight="28.0"/>
+      <ComboBox fx:id="boxLevel" prefHeight="28.0" prefWidth="200.0" />
       <Button fx:id="primaryButton" onAction="#switchToSecondary" text="START GAME">
          <font>
             <Font size="28.0" />

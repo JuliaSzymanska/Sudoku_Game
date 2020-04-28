@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import org.grupa5.sudoku.BacktrackingSudokuRemover;
 import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
 import org.grupa5.sudoku.SudokuObject;
@@ -26,26 +27,24 @@ public class SecondaryController implements Initializable {
 
 //public class SecondaryController {
 
+    private int numberOfFilds;
     private SudokuBoard sudokuBoard = new SudokuBoard();
 
     @FXML
     private GridPane grid1;
-
-//    private List<SudokuField> sudokuFieldList = new ArrayList<SudokuField>(sudokuBoard.get(0, 0));
-//
-//    @FXML private TableView<SudokuField> table1;
-//    @FXML private TableColumn<SudokuField, Integer> column1;
-//    @FXML private TableColumn<SudokuField, Integer> column2;
-//    private ObservableList<SudokuField> studentList;
 
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
     }
 
+    public void setNumberOfFields(int number){
+        this.numberOfFilds = number;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        sudokuBoard.solveGame();
+        new BacktrackingSudokuRemover(sudokuBoard, numberOfFilds);
         int numRows = grid1.getRowCount();
         int numCols = grid1.getColumnCount();
 

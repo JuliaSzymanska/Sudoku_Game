@@ -75,28 +75,28 @@ public class BacktrackingSudokuRemover implements SudokuRemover{
 
     }
 
-    public static void main(String[] args) {
-        SudokuBoard board = new SudokuBoard();
-        board.solveGame();
-        board.resetField(5, 5);
-        board.resetField(5, 4);
-        board.resetField(5, 3);
-        board.resetField(5, 2);
-        board.resetField(5, 1);
-        board.resetField(5, 0);
-        board.resetField(5, 6);
-        board.resetField(5, 7);
-        board.resetField(5, 8);
-        board.resetField(4, 5);
-        board.resetField(4, 4);
-        board.resetField(4, 3);
-        board.resetField(4, 2);
-        board.resetField(4, 1);
-        board.resetField(4, 0);
-        board.resetField(4, 6);
-        board.resetField(4, 7);
-        board.resetField(4, 8);
-        System.out.println(board);
-        SudokuRemover remover = new BacktrackingSudokuRemover(board, 0);
-    }
+//    public static void main(String[] args) {
+//        SudokuBoard board = new SudokuBoard();
+//        board.solveGame();
+//        board.resetField(5, 5);
+//        board.resetField(5, 4);
+//        board.resetField(5, 3);
+//        board.resetField(5, 2);
+//        board.resetField(5, 1);
+//        board.resetField(5, 0);
+//        board.resetField(5, 6);
+//        board.resetField(5, 7);
+//        board.resetField(5, 8);
+//        board.resetField(4, 5);
+//        board.resetField(4, 4);
+//        board.resetField(4, 3);
+//        board.resetField(4, 2);
+//        board.resetField(4, 1);
+//        board.resetField(4, 0);
+//        board.resetField(4, 6);
+//        board.resetField(4, 7);
+//        board.resetField(4, 8);
+//        System.out.println(board);
+//        SudokuRemover remover = new BacktrackingSudokuRemover(board, 0);
+//    }
 }
