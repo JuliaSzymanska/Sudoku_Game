@@ -68,7 +68,11 @@ public class BacktrackingSudokuRemover implements SudokuRemover {
                     for (int number : range) {
                         board.set(row, col, number);
                         if (board.get(row, col) == number) {
-                            board.set(row, col, 0);
+                            if (this.checkNumbOfCombinations(board)) {
+                                return true;
+                            } else {
+                                board.set(row, col, 0);
+                            }
                         }
                     }
                     return false;
