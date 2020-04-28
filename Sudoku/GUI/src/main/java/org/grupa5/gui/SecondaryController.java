@@ -2,30 +2,17 @@ package org.grupa5.gui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import org.grupa5.sudoku.BacktrackingSudokuRemover;
 import org.grupa5.sudoku.SudokuBoard;
-import org.grupa5.sudoku.SudokuField;
-import org.grupa5.sudoku.SudokuObject;
 
 public class SecondaryController implements Initializable {
-
-//public class SecondaryController {
 
     private int numberOfFilds;
     private SudokuBoard sudokuBoard = new SudokuBoard();
@@ -44,7 +31,10 @@ public class SecondaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        new BacktrackingSudokuRemover(sudokuBoard, numberOfFilds);
+        sudokuBoard.solveGame();
+        this.numberOfFilds = 50;
+        System.out.println(this.numberOfFilds);
+        sudokuBoard.removeFields(this.numberOfFilds);
         int numRows = grid1.getRowCount();
         int numCols = grid1.getColumnCount();
 
@@ -62,7 +52,11 @@ public class SecondaryController implements Initializable {
                 }
                 else {
                     int intToAdd = sudokuBoard.get(j - 1, i - 1);
-                    grid1.add(new TextField(Integer.toString(intToAdd)), i, j);
+                    if(sudokuBoard.get(j - 1, i - 1) == 0){
+                    grid1.add(new TextField(Integer.toString(intToAdd)), i, j);}
+                    else {
+                        grid1.add(new Label(Integer.toString(intToAdd)), i, j);
+                    }
                 }
 
             }
@@ -74,18 +68,10 @@ public class SecondaryController implements Initializable {
                 ((TextField) i).setAlignment(Pos.CENTER);
             }
             if(i instanceof Label) {
+                ((Label) i).setMaxWidth(Double.MAX_VALUE);
                 ((Label) i).setAlignment(Pos.CENTER);
             }
         }
     }
 
-
-//    public ObservableList<SudokuField> getFields(){
-//        sudokuBoard.solveGame();
-
-//        for(int i = 0; i < 9; i++){
-//            fields.add(new SudokuField(sudokuBoard.get(0,i)));
-//        }
-//        return FXCollections.observableArrayList(new SudokuField(sudokuBoard.get(0,0)));
-//    }
 }

@@ -45,6 +45,7 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private void switchToSecondary() throws IOException {
+        System.out.println(Level.Easy.getNumber());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
         Parent rootParent = (Parent) loader.load();
         SecondaryController second = loader.getController();
@@ -52,7 +53,6 @@ public class PrimaryController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(rootParent));
         stage.show();
-
 //        App.setRoot("secondary");
     }
 }

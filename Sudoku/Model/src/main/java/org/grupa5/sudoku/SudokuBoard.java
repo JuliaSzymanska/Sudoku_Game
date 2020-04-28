@@ -65,6 +65,10 @@ public class SudokuBoard implements Externalizable, Cloneable {
         }
     }
 
+    public void removeFields(int numberOfFields) {
+        new BacktrackingSudokuRemover(this, numberOfFields);
+    }
+
     /**
      * A simple getter that returns copy of the 'board' variable.
      *
