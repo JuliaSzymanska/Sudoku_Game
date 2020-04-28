@@ -98,6 +98,9 @@ public class SecondaryController implements Initializable {
         for( Object i : grid1.getChildren()) {
             if(i instanceof TextField) {
                 ((TextField) i).setAlignment(Pos.CENTER);
+                ((TextField) i).setMaxWidth(45);
+                ((TextField) i).setMaxHeight(45);
+
             }
             if(i instanceof Label) {
                 ((Label) i).setMaxWidth(Double.MAX_VALUE);

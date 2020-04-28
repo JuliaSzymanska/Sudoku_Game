@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="500" prefWidth="700" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
+<VBox alignment="CENTER" maxHeight="700.0" maxWidth="500.0" minHeight="700.0" minWidth="500.0" prefHeight="700.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
    <children>
       <Label text="SUDOKU">
          <font>
