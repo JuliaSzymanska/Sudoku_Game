@@ -16,8 +16,8 @@ public class SudokuBoardDaoTest {
     private final String FILE_PATH = "file.txt";
     private final String FAILURE_FILE_PATH = "/";
     private SudokuBoardDaoFactory fabryka = new SudokuBoardDaoFactory();
-    private Dao<SudokuBoard> dao = fabryka.getFileDao(FILE_PATH);
-    private Dao<SudokuBoard> failureDao = fabryka.getFileDao(FAILURE_FILE_PATH);
+    private Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao(FILE_PATH);
+    private Dao<SudokuBoard> failureDao = SudokuBoardDaoFactory.getFileDao(FAILURE_FILE_PATH);
     private SudokuBoard board = new SudokuBoard();
     private SudokuBoard board2 = null;
 
@@ -61,8 +61,4 @@ public class SudokuBoardDaoTest {
         final String standardOutput = myOut.toString();
         assertEquals("Wyjatek IO", standardOutput);
     }
-
-    // TODO: class not found exception można przetestować
-    //  serializując klase, modyfikując ją i próbować wtedy wczytać klasę.
-    //  ale no mówił żen ie trzeba
 }
