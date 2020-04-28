@@ -1,8 +1,5 @@
 package org.grupa5.sudoku;
 
-
-// TODO: Chce tylko powiedzieć że to jest porażka że Checkstyle każe mi to importować w ten sposób
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Externalizable;
@@ -75,7 +72,6 @@ public class SudokuBoard implements Externalizable, Cloneable {
             SudokuBoard copyBoard = this.clone();
             return copyBoard.board;
         } catch (CloneNotSupportedException e) {
-            // TODO: IDK czy tak dokładnie
             throw new RuntimeException("was unable to copy Board");
         }
     }
@@ -270,7 +266,6 @@ public class SudokuBoard implements Externalizable, Cloneable {
      *      IOException or  ClassNotFoundException are caught.
      */
     public SudokuBoard clone() throws CloneNotSupportedException {
-        // TODO: nie umiem tego wykonac
         if (!isWholeBoardValid()) {
             throw new CloneNotSupportedException(
                     "SudokuBoard doesn't allow cloning non valid boards");
@@ -283,7 +278,6 @@ public class SudokuBoard implements Externalizable, Cloneable {
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             return (SudokuBoard) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            // TODO: może jakoś tak?
             throw new CloneNotSupportedException("Was unable to generate a clone of SudokuBoard");
         }
     }
