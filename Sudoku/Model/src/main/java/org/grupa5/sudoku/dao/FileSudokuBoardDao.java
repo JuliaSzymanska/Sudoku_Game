@@ -8,9 +8,6 @@ import java.io.ObjectOutputStream;
 
 import org.grupa5.sudoku.SudokuBoard;
 
-
-// TODO: to ma albo moze dziedziczyć po autocloseable?
-
 public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
     private String fileName;
