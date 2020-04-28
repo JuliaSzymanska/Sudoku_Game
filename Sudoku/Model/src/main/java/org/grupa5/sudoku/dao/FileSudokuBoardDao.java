@@ -51,9 +51,4 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         return sudokuBoard;
     }
 
-//    @Override
-//    public void close() {
-//        //TODO: overrided close i finalize
-//    }
-
 }

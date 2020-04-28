@@ -6,6 +6,5 @@ public interface SudokuRemover {
      * It is a method in interface, which solve sudoku.
      *
      */
-
     void remove();
 }
