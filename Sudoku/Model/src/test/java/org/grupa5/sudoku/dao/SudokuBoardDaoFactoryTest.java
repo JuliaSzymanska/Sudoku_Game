@@ -11,8 +11,8 @@ public class SudokuBoardDaoFactoryTest {
         Assertions.assertEquals(SudokuBoardDaoFactory.getFileDao("FILENAME").getClass(), FileSudokuBoardDao.class);
     }
 
-    @Test
-    void defaultConstructorTest(){
-        new SudokuBoardDaoFactory();
-    }
+//    @Test
+//    void defaultConstructorTest(){
+//        new SudokuBoardDaoFactory();
+//    }
 }

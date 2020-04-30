@@ -75,6 +75,8 @@ public class SecondaryController implements Initializable {
         int numCols = grid1.getColumnCount();
 
         // Wypełnienie gridpane polami tekstowymi
+        // TODO: zrobić sliczne wyswietlanie jak na zdj które wysłąlem na mesku że na górze jest
+        //  kolumna i numer a po lewej jest rząd i numer
         for(int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
                 if (i == 0 && j == 0) {
