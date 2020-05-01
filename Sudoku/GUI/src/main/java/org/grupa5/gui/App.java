@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+// TODO: SZUKAM ZRODEL:
+//  http://ggoralski.pl/?p=1952
+
 /**
  * JavaFX App
  */
