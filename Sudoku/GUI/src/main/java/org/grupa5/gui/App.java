@@ -12,12 +12,13 @@ import java.net.URL;
 
 // TODO: SZUKAM ZRODEL:
 //  http://ggoralski.pl/?p=1952
+//  w filmiku na wikampie chłop modyfikuje klasę bazową to chyba nie bałdzo
+//  https://www.dummies.com/programming/java/javafx-binding-properties/
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-
 
     private static Scene scene;
 
