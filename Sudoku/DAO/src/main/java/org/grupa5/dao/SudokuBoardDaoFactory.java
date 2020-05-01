@@ -1,4 +1,4 @@
-package org.grupa5.sudoku.dao;
+package org.grupa5.dao;
 
 import org.grupa5.sudoku.SudokuBoard;
 

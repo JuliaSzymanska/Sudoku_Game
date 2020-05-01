@@ -1,4 +1,4 @@
-package org.grupa5.sudoku.dao;
+package org.grupa5.dao;
 
 import org.grupa5.sudoku.SudokuBoard;
 import org.junit.jupiter.api.Assertions;
@@ -49,7 +49,7 @@ public class SudokuBoardDaoTest {
         System.setOut(new PrintStream(myOut));
         failureDao.write(board);
         final String standardOutput = myOut.toString();
-        assertEquals("Wyjatek IO", standardOutput);
+        Assertions.assertEquals("Wyjatek IO", standardOutput);
     }
 
     @Test
@@ -58,6 +58,6 @@ public class SudokuBoardDaoTest {
         System.setOut(new PrintStream(myOut));
         failureDao.read();
         final String standardOutput = myOut.toString();
-        assertEquals("Wyjatek IO", standardOutput);
+        Assertions.assertEquals("Wyjatek IO", standardOutput);
     }
 }
