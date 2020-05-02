@@ -24,6 +24,7 @@ public class SecondaryController implements Initializable {
     private int numberOfFields;
     private SudokuBoard sudokuBoard = new SudokuBoard();
     private boolean flag = true;
+    private ResourceBundle resourceBundle;
 
 
     @FXML
@@ -77,7 +78,9 @@ public class SecondaryController implements Initializable {
             return;
         }
         flag = false;
-        secondaryButton.setText("END GAME");
+        // TODO: mam z tym problem
+//         secondaryButton.setText(resourceBundle.getString("end"));
+        secondaryButton.setText("fixME");
         this.numberOfFields = boxLevel.getSelectionModel().getSelectedItem().getNumber();
         sudokuBoard.solveGame();
         sudokuBoard.removeFields(this.numberOfFields);
@@ -126,6 +129,7 @@ public class SecondaryController implements Initializable {
         boxLevel.setItems( FXCollections.observableArrayList(Level.values()));
 //        boxLevel.getItems().addAll(Level.values());
         boxLevel.setValue(Level.Easy);
+        this.resourceBundle = rb;
     }
 
     // TODO: generalnie zapisywanie dziaa, ale no trzeba by chyba zrobic jakies wykrywanie że sie nie udało czy cos?

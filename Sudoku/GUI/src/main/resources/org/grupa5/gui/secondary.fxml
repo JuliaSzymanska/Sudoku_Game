@@ -17,8 +17,8 @@
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveSudokuToFile" text="Save Game " />
-      <Button fx:id="loadButton" mnemonicParsing="false" onAction="#readSudokuFromFile" text="Load Game" />
+      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveSudokuToFile" text="FIXME SAVE" />
+      <Button fx:id="loadButton" mnemonicParsing="false" onAction="#readSudokuFromFile" text="FIXME LOAD" />
       <GridPane fx:id="grid1" gridLinesVisible="true">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />
