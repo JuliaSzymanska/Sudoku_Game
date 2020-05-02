@@ -13,10 +13,12 @@
          </font>
       </Label>
       <ComboBox fx:id="boxLevel" prefWidth="150.0" />
-        <Button fx:id="secondaryButton" onAction="#startGame" text="START GAME">
+        <Button fx:id="secondaryButton" onAction="#startGame" text="%start">
          <font>
             <Font size="28.0" />
          </font></Button>
+      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveSudokuToFile" text="Save Game " />
+      <Button fx:id="loadButton" mnemonicParsing="false" onAction="#readSudokuFromFile" text="Load Game" />
       <GridPane fx:id="grid1" gridLinesVisible="true">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />

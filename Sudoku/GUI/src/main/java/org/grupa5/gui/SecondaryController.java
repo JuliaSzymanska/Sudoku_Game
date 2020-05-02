@@ -1,5 +1,6 @@
 package org.grupa5.gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +14,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.grupa5.dao.SudokuBoardDaoFactory;
 import org.grupa5.sudoku.SudokuBoard;
 
 public class SecondaryController implements Initializable {
@@ -46,6 +50,12 @@ public class SecondaryController implements Initializable {
 
     @FXML
     private Button secondaryButton;
+
+    @FXML
+    private Button saveButton;
+
+    @FXML
+    private Button loadButton;
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -118,4 +128,46 @@ public class SecondaryController implements Initializable {
         boxLevel.setValue(Level.Easy);
     }
 
+    // TODO: generalnie zapisywanie dziaa, ale no trzeba by chyba zrobic jakies wykrywanie że sie nie udało czy cos?
+    //  na przyklad że jak sie DAO wywali bo coś to wystakuje powiadomienie no nie zapisalismy
+
+    // TODO: przycisk do save nie chce żeby był tam gdzie jest, ale narazie jest
+    public void saveSudokuToFile() {
+        FileChooser fileChooser = new FileChooser();
+
+
+        // TODO: usun komentarze
+        // Set extension filter for text files
+        // DAO używa .txt
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if (file != null) {
+            SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
+        }
+    }
+
+    // TODO: to samo co przy save
+    //  ale generalnie "dziaa"
+
+    public void readSudokuFromFile() {
+        FileChooser fileChooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showOpenDialog(new Stage());
+
+        System.out.println(this.sudokuBoard);
+        if (file != null) {
+            // TODO: jesli wczytamy nie wlasciwy plik to board ustawi sie na NULL, no chyba zle, znowu te wyjatki
+            this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
+        }
+        System.out.println(this.sudokuBoard);
+    }
+
 }
+
+

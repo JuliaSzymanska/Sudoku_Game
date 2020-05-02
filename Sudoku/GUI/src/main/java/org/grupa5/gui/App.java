@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 // TODO: SZUKAM ZRODEL:
 //  http://ggoralski.pl/?p=1952
@@ -34,9 +36,20 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
+    // TODO: ustawic wszystkie stringi na takie brane z resource bundle
+
+    // TODO: dodać  zasób bazujący na ListResourceBundle
+
+    // TODO: dodać kontrolkę przełączającą resourceBundle
+
+    // TODO: dodać dwustronne wiązanie sudoku board i naszej planszy w gui
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", new Locale("en_EN"));
+        // TODO: dlaczego default loaduje jako PL? bo jesteśmy w pl?
+        // ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
+        // ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", new Locale("pl_PL"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"), resourceBundle);
         return fxmlLoader.load();
     }
 

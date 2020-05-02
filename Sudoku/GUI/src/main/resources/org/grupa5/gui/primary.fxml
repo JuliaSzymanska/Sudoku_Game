@@ -11,7 +11,7 @@
          <font>
             <Font name="System Bold" size="27.0" />
          </font></Label>
-      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="START GAME">
+      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="%start">
          <font>
             <Font size="28.0" />
          </font></Button>
