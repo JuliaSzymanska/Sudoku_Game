@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 
 import org.grupa5.sudoku.SudokuBoard;
 
+// TODO: ma implementowac AutoCloseable
 public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
     private String fileName;
