@@ -37,12 +37,15 @@ public class App extends Application {
     }
 
     // TODO: ustawic wszystkie stringi na takie brane z resource bundle
+    //  oraz dokonczyc sam resource bundle
 
     // TODO: dodać  zasób bazujący na ListResourceBundle
 
     // TODO: dodać kontrolkę przełączającą resourceBundle
 
     // TODO: dodać dwustronne wiązanie sudoku board i naszej planszy w gui
+
+    // TODO: zapis i wczytywanie prawie dokonczone, wiecej tam gdzie jest implementacja
 
     private static Parent loadFXML(String fxml) throws IOException {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", new Locale("en_EN"));
