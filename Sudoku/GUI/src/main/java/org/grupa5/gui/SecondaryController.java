@@ -24,7 +24,7 @@ public class SecondaryController implements Initializable {
     private int numberOfFields;
     private SudokuBoard sudokuBoard = new SudokuBoard();
     private boolean flag = true;
-    private ResourceBundle resourceBundle;
+//    private ResourceBundle resourceBundle;
 
 
     @FXML
@@ -129,7 +129,7 @@ public class SecondaryController implements Initializable {
         boxLevel.setItems( FXCollections.observableArrayList(Level.values()));
 //        boxLevel.getItems().addAll(Level.values());
         boxLevel.setValue(Level.Easy);
-        this.resourceBundle = rb;
+//        this.resourceBundle = rb;
     }
 
     // TODO: generalnie zapisywanie dziaa, ale no trzeba by chyba zrobic jakies wykrywanie że sie nie udało czy cos?

@@ -9,13 +9,9 @@ import javafx.fxml.Initializable;
 
 public class PrimaryController implements Initializable {
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        boxLevel.setItems( FXCollections.observableArrayList(Level.values()));
-
-
     }
 
     @FXML
