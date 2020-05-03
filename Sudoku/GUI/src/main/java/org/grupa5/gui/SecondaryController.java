@@ -163,7 +163,7 @@ public class SecondaryController implements Initializable {
         }
     }
 
-    // TODO: generalnie zapisywanie dziaa, ale no trzeba by chyba zrobic jakies wykrywanie że sie nie udało czy cos?
+    // TODO: generalnie zapisywanie dziala, ale no trzeba by chyba zrobic jakies wykrywanie że sie nie udało czy cos?
     //  na przyklad że jak sie DAO wywali bo coś to wystakuje powiadomienie no nie zapisalismy
 
     public void saveSudokuToFile() {
@@ -193,8 +193,6 @@ public class SecondaryController implements Initializable {
         }
         System.out.println(this.sudokuBoard);
     }
-
-    //TODO: naprawic zeby jezyk sie zmienial tez na pierwszym ekranie
 
     public void changeLanguage() {
         // TODO: tutaj też Dżulia popraw tego ifa na coś co ma sens ._. mój mózg dzisiaj to przerasta

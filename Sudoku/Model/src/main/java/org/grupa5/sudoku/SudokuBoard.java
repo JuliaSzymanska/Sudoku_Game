@@ -258,24 +258,18 @@ public class SudokuBoard implements Externalizable, Cloneable {
      * @throws CloneNotSupportedException when the Board in invalid or when either
      *      IOException or  ClassNotFoundException are caught.
      */
-    // TODO: chyba jednak clone override
-    // TODO: 'ta implementacja jest nie dobra'
-    // TODO: zmienic to na to jak kwapi mówił
     public SudokuBoard clone() throws CloneNotSupportedException {
         if (!isWholeBoardValid()) {
             throw new CloneNotSupportedException(
                     "SudokuBoard doesn't allow cloning non valid boards");
         }
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(this);
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-            return (SudokuBoard) objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            throw new CloneNotSupportedException("Was unable to generate a clone of SudokuBoard");
+        SudokuBoard cloneBoard = new SudokuBoard();
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                cloneBoard.set(i, j, this.get(i, j));
+            }
         }
+        return cloneBoard;
     }
 
 }
