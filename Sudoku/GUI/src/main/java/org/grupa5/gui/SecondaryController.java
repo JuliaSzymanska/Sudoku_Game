@@ -116,12 +116,17 @@ public class SecondaryController implements Initializable {
                     //  ale bliżej niż dalej
                     System.out.println(this.sudokuBoard.get(j - 1, i - 1));
                     System.out.println(sudokuFieldBinding.getValue().get(j - 1, i - 1));
-                    this.sudokuBoard.setDoUsuniecia(j- 1, i - 1, 9);
+                    this.sudokuBoard.setDoUsuniecia(j - 1, i - 1, 9);
                     System.out.println(this.sudokuBoard.get(j - 1, i - 1));
                     System.out.println(sudokuFieldBinding.getValue().get(j - 1, i - 1));
                     sudokuFieldBinding.getValue().setDoUsuniecia(j - 1, i - 1, 1);
                     System.out.println(this.sudokuBoard.get(j - 1,  i- 1));
                     System.out.println(sudokuFieldBinding.getValue().get(j - 1, i - 1));
+                    System.out.println(this.sudokuBoard.getField(j-1,i-1).toString() + " TO STRING");
+                    // TODO: mam plan
+                    //  trzeba zbindować sudokuFiledy
+                    //  i mieć w dupie zwracane value od nich
+                    //  kurna sudokuField ma toString
 
                     int intToAdd = sudokuBoard.get(j - 1, i - 1);
                     if (intToAdd != 0) {
