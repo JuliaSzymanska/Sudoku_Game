@@ -17,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import org.grupa5.dao.SudokuBoardDaoFactory;
 import org.grupa5.sudoku.SudokuBoard;
 
@@ -47,6 +49,8 @@ public class SecondaryController implements Initializable {
             this.number = number;
         }
     }
+
+    StringConverter<Integer> converter = new IntegerStringConverter();
 
     @FXML
     private GridPane grid1;
