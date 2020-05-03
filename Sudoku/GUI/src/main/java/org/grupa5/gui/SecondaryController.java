@@ -108,15 +108,20 @@ public class SecondaryController implements Initializable {
                 textField.setMaxWidth(45);
                 textField.setMaxHeight(45);
                 if (i != 0 && j != 0) {
-                    ObjectProperty<SudokuField> sudokuFieldObjectProperty = new SimpleObjectProperty<SudokuField>(sudokuBoard.getField(i - 1, j - 1));
-                    Binding<SudokuField> sudokuFieldBinding = Bindings.createObjectBinding(() ->
-                            sudokuFieldObjectProperty.get() == null ? null : sudokuFieldObjectProperty.get(), sudokuFieldObjectProperty);
-                    System.out.println("ostre JD");
-                    System.out.println(sudokuBoard.getField(i-1, j-1));
-                    System.out.println(sudokuFieldBinding.getValue().getValue());
-                    sudokuBoard.getField(i-1,j-1).setValue(9);
-                    System.out.println(sudokuBoard.getField(i-1, j-1));
-                    System.out.println(sudokuFieldBinding.getValue().getValue());
+                    ObjectProperty<SudokuBoard> sudokuBoardObjectProperty = new SimpleObjectProperty<SudokuBoard>(this.sudokuBoard);
+                    Binding<SudokuBoard> sudokuFieldBinding = Bindings.createObjectBinding(() ->
+                            sudokuBoardObjectProperty.get(), sudokuBoardObjectProperty);
+                    // TODO: już się wszystko ustawiam
+                    //  nie wiem ten binding to raczej nie jest to co on chce
+                    //  ale bliżej niż dalej
+                    System.out.println(this.sudokuBoard.get(j - 1, i - 1));
+                    System.out.println(sudokuFieldBinding.getValue().get(j - 1, i - 1));
+                    this.sudokuBoard.setDoUsuniecia(j- 1, i - 1, 9);
+                    System.out.println(this.sudokuBoard.get(j - 1, i - 1));
+                    System.out.println(sudokuFieldBinding.getValue().get(j - 1, i - 1));
+                    sudokuFieldBinding.getValue().setDoUsuniecia(j - 1, i - 1, 1);
+                    System.out.println(this.sudokuBoard.get(j - 1,  i- 1));
+                    System.out.println(sudokuFieldBinding.getValue().get(j - 1, i - 1));
 
                     int intToAdd = sudokuBoard.get(j - 1, i - 1);
                     if (intToAdd != 0) {

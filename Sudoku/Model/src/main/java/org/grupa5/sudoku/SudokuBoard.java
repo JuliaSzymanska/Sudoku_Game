@@ -186,6 +186,11 @@ public class SudokuBoard implements Externalizable, Cloneable {
         }
     }
 
+    // TODO: 03.05.2020 USUN
+    public void setDoUsuniecia(int x, int y, int value) {
+        this.board.get(x).get(y).setValue(value);
+    }
+
     /**
      * Reset board, fill with 0.
      */
@@ -260,7 +265,7 @@ public class SudokuBoard implements Externalizable, Cloneable {
      *
      * @return Cloned SudokuBoard.
      * @throws CloneNotSupportedException when the Board in invalid or when either
-     *      IOException or  ClassNotFoundException are caught.
+     *                                    IOException or  ClassNotFoundException are caught.
      */
     public SudokuBoard clone() throws CloneNotSupportedException {
         if (!isWholeBoardValid()) {
@@ -268,8 +273,8 @@ public class SudokuBoard implements Externalizable, Cloneable {
                     "SudokuBoard doesn't allow cloning non valid boards");
         }
         SudokuBoard cloneBoard = new SudokuBoard();
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 cloneBoard.set(i, j, this.get(i, j));
             }
         }
