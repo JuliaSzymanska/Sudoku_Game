@@ -260,6 +260,7 @@ public class SudokuBoard implements Externalizable, Cloneable {
      */
     // TODO: chyba jednak clone override
     // TODO: 'ta implementacja jest nie dobra'
+    // TODO: zmienic to na to jak kwapi mówił
     public SudokuBoard clone() throws CloneNotSupportedException {
         if (!isWholeBoardValid()) {
             throw new CloneNotSupportedException(
