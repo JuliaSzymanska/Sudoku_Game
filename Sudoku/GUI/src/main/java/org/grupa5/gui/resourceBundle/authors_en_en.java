@@ -6,7 +6,7 @@ public class authors_en_en extends ListResourceBundle {
 
     private static final Object[][] contents = {
             {"Authors: ", "Authors: "},
-            {"Julia Szymanska", "Julia Szymańska"},
+            {"Julia Szymanska", "Julia Szymanska"},
             {"Przemyslaw Zdrzalik", "Przemyslaw Zdrzalik"}
     };
 
