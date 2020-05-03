@@ -22,7 +22,6 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println(VariablesCollection.getLocale());
         ResourceBundle resourceAuthors
                 = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", VariablesCollection.getLocale());
         System.out.println(resourceAuthors);

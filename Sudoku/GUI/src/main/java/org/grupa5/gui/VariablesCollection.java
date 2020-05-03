@@ -29,6 +29,12 @@ public class VariablesCollection {
         VariablesCollection.locale = locale;
     }
 
+    // TODO: okropnie strasznie dziwne rzeczy się dzieją.
+    //  z jakiegoś powodu taki locale jest potem z małej litery
+    //  niby spoko, dziala z resource bundle Lang
+    //  ALE NIE DZIALA Z TYMI AUTHORS
+    //  nie wiadomo czemu, nie wiadomo gdzie.
+    //  musialem dać authors en_en a nie en_EN żeby dzialalo, nie jestem fanem
     public static List<Locale> getSupportedLocales() {
         return new ArrayList<>(Arrays.asList(new Locale("en_EN"), new Locale("pl_PL")));
     }
