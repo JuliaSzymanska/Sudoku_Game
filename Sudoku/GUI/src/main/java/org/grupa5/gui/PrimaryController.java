@@ -15,20 +15,6 @@ import java.util.ListResourceBundle;
 
 // TODO: zrobic te lsity bo wywalaja blad przy runie
 
-class authors_pl_PL extends ListResourceBundle {
-
-    private static final Object[][] contents = {
-            {"Authors: ", "Autorzy: "},
-            {"Julia Szymanska", "Julia Szymańska"},
-            {"Przemyslaw Zdrzalik", "Przemysław Zdrzalik"}
-    };
-
-    @Override
-    protected Object[][] getContents() {
-        return contents;
-    }
-}
-
 class authors extends ListResourceBundle {
 
     private static final Object[][] contents = {
@@ -57,9 +43,9 @@ public class PrimaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        authors.setText(this.resourceAuthors.getString("authors"));
-//        ResourceBundle resourceAuthors
-//                = ResourceBundle.getBundle("authors", new Locale("pl_PL"));
-//        System.out.println(resourceAuthors.getString("Authors: "));
+        ResourceBundle resourceAuthors
+                = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", new Locale("pl"));
+        System.out.println(resourceAuthors.getString("Authors: "));
     }
 
     @FXML
