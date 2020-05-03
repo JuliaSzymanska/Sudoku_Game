@@ -197,7 +197,8 @@ public class SecondaryController implements Initializable {
     //TODO: naprawic zeby jezyk sie zmienial tez na pierwszym ekranie
 
     public void changeLanguage() {
-        if (resourceBundle.getString("language").equals("PL")) {
+        // TODO: tutaj też Dżulia popraw tego ifa na coś co ma sens ._. mój mózg dzisiaj to przerasta
+        if (VariablesCollection.getLocale().toString().equals("en_en")) {
             VariablesCollection.setLocale(new Locale("pl_PL"));
             resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));

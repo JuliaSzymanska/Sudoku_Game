@@ -50,11 +50,10 @@ public class PrimaryController implements Initializable {
         // TODO: Julka popraw to proszę, boli mnie ten IF ale narazie dziala to zostawilem
         if (VariablesCollection.getLocale().toString().equals("en_en")) {
             VariablesCollection.setLocale(new Locale("pl_PL"));
-            resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
         } else {
             VariablesCollection.setLocale(new Locale("en_EN"));
-            resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
         }
+        resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
         updateLanguage();
     }
 
