@@ -50,6 +50,7 @@ public class SecondaryController implements Initializable {
         }
     }
 
+    // TODO: to jest konwerter do bindingu, nie wiem jeszcze czy bedzie potrzebny
     StringConverter<Integer> converter = new IntegerStringConverter();
 
     @FXML
