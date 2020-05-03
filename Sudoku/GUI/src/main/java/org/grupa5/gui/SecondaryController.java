@@ -158,7 +158,6 @@ public class SecondaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(VariablesCollection.getLocale());
         this.resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
         if (resourceBundle.getString("language").equals("PL")) {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
