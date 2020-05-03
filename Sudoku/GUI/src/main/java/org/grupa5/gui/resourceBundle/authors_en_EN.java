@@ -2,12 +2,12 @@ package org.grupa5.gui.resourceBundle;
 
 import java.util.ListResourceBundle;
 
-public class authors_pl extends ListResourceBundle {
+public class authors_en_EN extends ListResourceBundle {
 
     private static final Object[][] contents = {
-            {"Authors: ", "Autorzy: "},
+            {"Authors: ", "Authors: "},
             {"Julia Szymanska", "Julia Szymańska"},
-            {"Przemyslaw Zdrzalik", "Przemysław Zdrzalik"}
+            {"Przemyslaw Zdrzalik", "Przemyslaw Zdrzalik"}
     };
 
     @Override

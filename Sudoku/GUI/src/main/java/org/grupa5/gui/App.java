@@ -48,7 +48,7 @@ public class App extends Application {
     // TODO: zapis i wczytywanie prawie dokonczone, wiecej tam gdzie jest implementacja
 
     private static Parent loadFXML(String fxml) throws IOException {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", new Locale("en_EN"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
         // TODO: dlaczego default loaduje jako PL? bo jesteśmy w pl?
         //  Z jakiegos powodu jedyny resource jaki mi dziala w resource bundlu to jest 'start' reszta NIE DZIAA
         // ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());

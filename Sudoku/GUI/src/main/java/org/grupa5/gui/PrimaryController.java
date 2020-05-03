@@ -22,10 +22,10 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        authors.setText(this.resourceAuthors.getString("authors"));
+        resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
         ResourceBundle resourceAuthors
-                = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", new Locale("pl"));
-        System.out.println(resourceAuthors.getString("Authors: "));
+                = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", VariablesCollection.getLocale());
+        System.out.println(resourceAuthors);
         authors.setText(resourceAuthors.getString("Authors: "));
         author_1.setText(resourceAuthors.getString("Julia Szymanska"));
         author_2.setText(resourceAuthors.getString("Przemyslaw Zdrzalik"));
