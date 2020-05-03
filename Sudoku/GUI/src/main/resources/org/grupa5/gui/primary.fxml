@@ -7,7 +7,7 @@
 
 <VBox alignment="CENTER" maxHeight="750.0" maxWidth="500.0" minHeight="750.0" minWidth="500.0" prefHeight="750.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
    <children>
-      <Button fx:id="language" alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#changeLanguage" prefHeight="17.0" prefWidth="75.0" text="%language" translateX="190" translateY="-200.0" StackPane.alignment="CENTER_LEFT" />
+      <Button fx:id="language" alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#changeLanguage" text="%language" translateX="190" translateY="-200.0" StackPane.alignment="CENTER_LEFT" />
       <Label text="SUDOKU">
          <font>
             <Font name="System Bold" size="27.0" />
