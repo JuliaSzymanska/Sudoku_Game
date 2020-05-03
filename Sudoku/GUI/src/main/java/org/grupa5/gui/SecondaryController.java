@@ -3,6 +3,7 @@ package org.grupa5.gui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -24,20 +25,19 @@ public class SecondaryController implements Initializable {
     private int numberOfFields;
     private SudokuBoard sudokuBoard = new SudokuBoard();
     private boolean flag = true;
-//    private ResourceBundle resourceBundle;
-
+    private ResourceBundle resourceBundle;
 
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
 
-    public enum Level{
+    public enum Level {
         Easy(42),
         Medium(54),
         Hard(60);
 
         private final int number;
 
-        public int getNumber(){
+        public int getNumber() {
             return number;
         }
 
@@ -63,12 +63,12 @@ public class SecondaryController implements Initializable {
         App.setRoot("primary");
     }
 
-    public void setNumberOfFields(int number){
+    public void setNumberOfFields(int number) {
         this.numberOfFields = number;
     }
 
     public void startGame() {
-        if(!flag){
+        if (!flag) {
             try {
                 this.switchToPrimary();
             } catch (IOException e) {
@@ -80,7 +80,7 @@ public class SecondaryController implements Initializable {
         flag = false;
         // TODO: mam z tym problem
 //         secondaryButton.setText(resourceBundle.getString("end"));
-        secondaryButton.setText("fixME");
+        secondaryButton.setText("%start");
         this.numberOfFields = boxLevel.getSelectionModel().getSelectedItem().getNumber();
         sudokuBoard.solveGame();
         sudokuBoard.removeFields(this.numberOfFields);
@@ -90,7 +90,7 @@ public class SecondaryController implements Initializable {
         // Wypełnienie gridpane polami tekstowymi
         // TODO: zrobić sliczne wyswietlanie jak na zdj które wysłąlem na mesku że na górze jest
         //  kolumna i numer a po lewej jest rząd i numer
-        for(int i = 0; i < numRows; i++) {
+        for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
                 if (i == 0 && j == 0) {
                     grid1.add(new Label("X"), 0, 0);
@@ -110,14 +110,14 @@ public class SecondaryController implements Initializable {
             }
         }
         // CENTROWANIE
-        for( Object i : grid1.getChildren()) {
-            if(i instanceof TextField) {
+        for (Object i : grid1.getChildren()) {
+            if (i instanceof TextField) {
                 ((TextField) i).setAlignment(Pos.CENTER);
                 ((TextField) i).setMaxWidth(45);
                 ((TextField) i).setMaxHeight(45);
 
             }
-            if(i instanceof Label) {
+            if (i instanceof Label) {
                 ((Label) i).setMaxWidth(Double.MAX_VALUE);
                 ((Label) i).setAlignment(Pos.CENTER);
             }
@@ -126,23 +126,17 @@ public class SecondaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        boxLevel.setItems( FXCollections.observableArrayList(Level.values()));
+        boxLevel.setItems(FXCollections.observableArrayList(Level.values()));
 //        boxLevel.getItems().addAll(Level.values());
         boxLevel.setValue(Level.Easy);
-//        this.resourceBundle = rb;
+        this.resourceBundle = rb;
     }
 
     // TODO: generalnie zapisywanie dziaa, ale no trzeba by chyba zrobic jakies wykrywanie że sie nie udało czy cos?
     //  na przyklad że jak sie DAO wywali bo coś to wystakuje powiadomienie no nie zapisalismy
 
-    // TODO: przycisk do save nie chce żeby był tam gdzie jest, ale narazie jest
     public void saveSudokuToFile() {
         FileChooser fileChooser = new FileChooser();
-
-
-        // TODO: usun komentarze
-        // Set extension filter for text files
-        // DAO używa .txt
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
 
@@ -152,9 +146,6 @@ public class SecondaryController implements Initializable {
             SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
         }
     }
-
-    // TODO: to samo co przy save
-    //  ale generalnie "dziaa"
 
     public void readSudokuFromFile() {
         FileChooser fileChooser = new FileChooser();
@@ -170,6 +161,10 @@ public class SecondaryController implements Initializable {
             this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
         }
         System.out.println(this.sudokuBoard);
+    }
+
+    public void changeLanguage(){
+        resourceBundle = ResourceBundle.getBundle("Lang", new Locale("pl_PL"));
     }
 
 }

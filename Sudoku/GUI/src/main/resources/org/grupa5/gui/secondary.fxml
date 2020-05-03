@@ -5,21 +5,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="800.0" maxWidth="500.0" minHeight="800.0" minWidth="500.0" prefHeight="800.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
+<VBox alignment="CENTER" maxHeight="750.0" maxWidth="500.0" minHeight="750.0" minWidth="500.0" prefHeight="750.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
     <children>
-      <Label text="Wybierz poziom trudności">
-         <font>
+      <Button alignment="TOP_LEFT" mnemonicParsing="false" text="%language"  textAlignment="CENTER" translateY="30" translateX="190" onAction="#changeLanguage" StackPane.alignment="CENTER_LEFT"/>
+      <Label text="%level" translateY="20">
+          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <ComboBox fx:id="boxLevel" prefWidth="150.0" />
-        <Button fx:id="secondaryButton" onAction="#startGame"  text="Start"> <!--text="%start"> -->
+      <ComboBox fx:id="boxLevel" translateY="20" prefWidth="150.0" />
+        <Button fx:id="secondaryButton" translateY="20" onAction="#startGame" text="%start">
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveSudokuToFile" text="FIXME SAVE" />
-      <Button fx:id="loadButton" mnemonicParsing="false" onAction="#readSudokuFromFile" text="FIXME LOAD" />
-      <GridPane fx:id="grid1" gridLinesVisible="true">
+      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveSudokuToFile" textAlignment="CENTER" translateX="120" translateY="25" StackPane.alignment="CENTER_LEFT" text="%saveGame" />
+      <Button fx:id="loadButton" mnemonicParsing="false" onAction="#readSudokuFromFile" textAlignment="CENTER" translateY="-20" translateX="-120"  StackPane.alignment="CENTER_LEFT" text="%loadGame" />
+      <GridPane fx:id="grid1" gridLinesVisible="true" translateY="-20">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />
