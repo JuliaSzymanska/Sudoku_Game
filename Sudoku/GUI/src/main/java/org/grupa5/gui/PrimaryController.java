@@ -9,26 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-import static java.util.ResourceBundle.getBundle;
-
-import java.util.ListResourceBundle;
-
-// TODO: zrobic te lsity bo wywalaja blad przy runie
-
-class authors extends ListResourceBundle {
-
-    private static final Object[][] contents = {
-            {"Authors: ", "Authors: "},
-            {"Julia Szymanska", "Julia Szymanska"},
-            {"Przemyslaw Zdrzalik", "Przemyslaw Zdrzalik"}
-    };
-
-    @Override
-    protected Object[][] getContents() {
-        return contents;
-    }
-}
-
 public class PrimaryController implements Initializable {
 
     @FXML
@@ -46,6 +26,9 @@ public class PrimaryController implements Initializable {
         ResourceBundle resourceAuthors
                 = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", new Locale("pl"));
         System.out.println(resourceAuthors.getString("Authors: "));
+        authors.setText(resourceAuthors.getString("Authors: "));
+        author_1.setText(resourceAuthors.getString("Julia Szymanska"));
+        author_2.setText(resourceAuthors.getString("Przemyslaw Zdrzalik"));
     }
 
     @FXML

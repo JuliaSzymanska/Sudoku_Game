@@ -32,12 +32,13 @@ public class SecondaryController implements Initializable {
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
 
-
-     //TODO: wymyslec cos z tym enum
     public enum Level {
-        level_1(42),
-        level_2(54),
-        level_3(60);
+        Easy(42),
+        Medium(54),
+        Hard(60),
+        Prosty(42),
+        Sredni(54),
+        Trudny(60);
 
         private final int number;
 
@@ -49,6 +50,22 @@ public class SecondaryController implements Initializable {
             this.number = number;
         }
     }
+
+//    public enum LevelPolish {
+//        Prosty(42),
+//        Sredni(54),
+//        Trudny(60);
+//
+//        private final int number;
+//
+//        public int getNumber() {
+//            return number;
+//        }
+//
+//        LevelPolish(int number) {
+//            this.number = number;
+//        }
+//    }
 
     // TODO: to jest konwerter do bindingu, nie wiem jeszcze czy bedzie potrzebny
     StringConverter<Integer> converter = new IntegerStringConverter();
@@ -133,9 +150,14 @@ public class SecondaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        boxLevel.setItems(FXCollections.observableArrayList(Level.values()));
-        boxLevel.setValue(Level.level_1);
         this.resourceBundle = rb;
+        if (resourceBundle.getString("language").equals("PL")) {
+            boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
+            boxLevel.setValue(Level.values()[0]);
+        } else {
+            boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));
+            boxLevel.setValue(Level.values()[3]);
+        }
     }
 
     // TODO: generalnie zapisywanie dziaa, ale no trzeba by chyba zrobic jakies wykrywanie że sie nie udało czy cos?
@@ -171,11 +193,15 @@ public class SecondaryController implements Initializable {
 
     //TODO: naprawic zeby jezyk sie zmienial tez na pierwszym ekranie
 
-    public void changeLanguage(){
-        if(resourceBundle.getString("language").equals("PL")){
+    public void changeLanguage() {
+        if (resourceBundle.getString("language").equals("PL")) {
             resourceBundle = ResourceBundle.getBundle("Lang", new Locale("pl_PL"));
+            boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));
+            boxLevel.setValue(Level.values()[3]);
         } else {
             resourceBundle = ResourceBundle.getBundle("Lang", new Locale("en_EN"));
+            boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
+            boxLevel.setValue(Level.values()[0]);
         }
         secondaryButton.setText(resourceBundle.getString("start"));
         language.setText(resourceBundle.getString("language"));
