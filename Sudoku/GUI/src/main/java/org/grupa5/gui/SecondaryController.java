@@ -6,10 +6,9 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,6 +25,7 @@ import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import org.grupa5.dao.SudokuBoardDaoFactory;
 import org.grupa5.sudoku.SudokuBoard;
+import org.grupa5.sudoku.SudokuField;
 
 public class SecondaryController implements Initializable {
 
@@ -108,6 +108,16 @@ public class SecondaryController implements Initializable {
                 textField.setMaxWidth(45);
                 textField.setMaxHeight(45);
                 if (i != 0 && j != 0) {
+                    ObjectProperty<SudokuField> sudokuFieldObjectProperty = new SimpleObjectProperty<SudokuField>(sudokuBoard.getField(i - 1, j - 1));
+                    Binding<SudokuField> sudokuFieldBinding = Bindings.createObjectBinding(() ->
+                            sudokuFieldObjectProperty.get() == null ? null : sudokuFieldObjectProperty.get(), sudokuFieldObjectProperty);
+                    System.out.println("ostre JD");
+                    System.out.println(sudokuBoard.getField(i-1, j-1));
+                    System.out.println(sudokuFieldBinding.getValue().getValue());
+                    sudokuBoard.getField(i-1,j-1).setValue(9);
+                    System.out.println(sudokuBoard.getField(i-1, j-1));
+                    System.out.println(sudokuFieldBinding.getValue().getValue());
+
                     int intToAdd = sudokuBoard.get(j - 1, i - 1);
                     if (intToAdd != 0) {
                         textField.setDisable(true);

@@ -52,6 +52,10 @@ public class SudokuBoard implements Externalizable, Cloneable {
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]));
     }
 
+    public SudokuField getField(int x, int y) {
+        return this.board.get(x).get(y);
+    }
+
     /**
      * Calls sudokuSolver.solve() on this object, solving the board.
      */
