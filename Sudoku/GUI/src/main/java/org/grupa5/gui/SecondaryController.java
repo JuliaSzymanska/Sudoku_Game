@@ -97,11 +97,6 @@ public class SecondaryController implements Initializable {
         App.setRoot("primary");
     }
 
-    private void createListOfObservableValuesFromSudokuBoard() {
-        ObservableList<Integer> observableList = FXCollections.observableArrayList();
-
-    }
-
     // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
     private void fillGrid() {
         int numRows = grid1.getRowCount();

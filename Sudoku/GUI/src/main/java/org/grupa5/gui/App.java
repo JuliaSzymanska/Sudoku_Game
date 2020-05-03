@@ -36,12 +36,7 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
-    // TODO: ustawic wszystkie stringi na takie brane z resource bundle
-    //  oraz dokonczyc sam resource bundle
-
-    // TODO: dodać  zasób bazujący na ListResourceBundle
-
-    // TODO: dodać kontrolkę przełączającą resourceBundle
+    // TODO: mozna kombinowac coś z tym ENUM
 
     // TODO: dodać dwustronne wiązanie sudoku board i naszej planszy w gui
 
