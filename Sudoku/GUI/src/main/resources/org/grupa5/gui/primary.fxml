@@ -15,6 +15,21 @@
          <font>
             <Font size="28.0" />
          </font></Button>
+      <Label fx:id="authors" text="Label">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="author_1" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="author_2" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

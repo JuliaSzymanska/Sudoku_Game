@@ -30,10 +30,12 @@ public class SecondaryController implements Initializable {
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
 
+
+     //TODO: wymyslec cos z tym enum
     public enum Level {
-        Easy(42),
-        Medium(54),
-        Hard(60);
+        level_1(42),
+        level_2(54),
+        level_3(60);
 
         private final int number;
 
@@ -53,7 +55,13 @@ public class SecondaryController implements Initializable {
     private Button secondaryButton;
 
     @FXML
+    private Button language;
+
+    @FXML
     private Button saveButton;
+
+    @FXML
+    private Label level;
 
     @FXML
     private Button loadButton;
@@ -61,10 +69,6 @@ public class SecondaryController implements Initializable {
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
-    }
-
-    public void setNumberOfFields(int number) {
-        this.numberOfFields = number;
     }
 
     public void startGame() {
@@ -78,9 +82,7 @@ public class SecondaryController implements Initializable {
             return;
         }
         flag = false;
-        // TODO: mam z tym problem
-//         secondaryButton.setText(resourceBundle.getString("end"));
-        secondaryButton.setText("%start");
+        secondaryButton.setText(resourceBundle.getString("end"));
         this.numberOfFields = boxLevel.getSelectionModel().getSelectedItem().getNumber();
         sudokuBoard.solveGame();
         sudokuBoard.removeFields(this.numberOfFields);
@@ -127,8 +129,7 @@ public class SecondaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         boxLevel.setItems(FXCollections.observableArrayList(Level.values()));
-//        boxLevel.getItems().addAll(Level.values());
-        boxLevel.setValue(Level.Easy);
+        boxLevel.setValue(Level.level_1);
         this.resourceBundle = rb;
     }
 
@@ -163,8 +164,19 @@ public class SecondaryController implements Initializable {
         System.out.println(this.sudokuBoard);
     }
 
+    //TODO: naprawic zeby jezyk sie zmienial tez na pierwszym ekranie
+
     public void changeLanguage(){
-        resourceBundle = ResourceBundle.getBundle("Lang", new Locale("pl_PL"));
+        if(resourceBundle.getString("language").equals("PL")){
+            resourceBundle = ResourceBundle.getBundle("Lang", new Locale("pl_PL"));
+        } else {
+            resourceBundle = ResourceBundle.getBundle("Lang", new Locale("en_EN"));
+        }
+        secondaryButton.setText(resourceBundle.getString("start"));
+        language.setText(resourceBundle.getString("language"));
+        level.setText(resourceBundle.getString("level"));
+        saveButton.setText(resourceBundle.getString("saveGame"));
+        loadButton.setText(resourceBundle.getString("loadGame"));
     }
 
 }
