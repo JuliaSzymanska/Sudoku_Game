@@ -8,8 +8,9 @@ import java.io.ObjectOutputStream;
 
 import org.grupa5.sudoku.SudokuBoard;
 
-// TODO: ma implementowac AutoCloseable
-public class FileSudokuBoardDao implements Dao<SudokuBoard> {
+// TODO: Czy to autocloseable ma sens?
+//  Kwapi chciał by to mimplementowąło ale nie wiem czy to jest OK
+public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     private String fileName;
 
@@ -17,10 +18,6 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         this.fileName = fileName;
     }
 
-
-    // TODO: aktualnie w catch blockach jednynie wyprintowywujemy że doszło do wyjątku
-    //  prawdopodobnie znajdzie się tutaj nasz customowy wyjątek który będziemy potem
-    //  używać w grze do wykrywania czy nie udało się zapisać / odczytać gry aby poinformować gracza
     @Override
     public void write(SudokuBoard sudokuBoard) throws WriteException {
         try (
@@ -47,4 +44,8 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         return sudokuBoard;
     }
 
+    @Override
+    public void close() throws Exception {
+
+    }
 }

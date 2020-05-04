@@ -40,8 +40,6 @@ public class App extends Application {
 
     // TODO: dodać dwustronne wiązanie sudoku board i naszej planszy w gui
 
-    // TODO: zapis i wczytywanie prawie dokonczone, wiecej tam gdzie jest implementacja
-
     private static Parent loadFXML(String fxml) throws IOException {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
         // TODO: dlaczego default loaduje jako PL? bo jesteśmy w pl?

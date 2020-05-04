@@ -189,9 +189,5 @@ public class SudokuBoardTest {
         assertEquals(sudoku1.getBox(1, 5).hashCode(),sudoku2.getBox(1, 5).hashCode());
         assertNotSame(sudoku1.getBox(1, 5), sudoku2.getBox(1, 5));
     }
-
-    //TODO: w całej strukturze plików tak myślę, że zmieniłbym żeby
-    // było org.grupa5.sudoku.model nie a potem w gui byśmy mieli
-    // org.grupa5.sudoku.gui czy coś
-
+    
 }
