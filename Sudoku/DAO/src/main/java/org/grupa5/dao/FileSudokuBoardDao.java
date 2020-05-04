@@ -45,7 +45,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
 
     }
 }
