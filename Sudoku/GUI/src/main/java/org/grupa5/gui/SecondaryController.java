@@ -36,7 +36,8 @@ public class SecondaryController implements Initializable {
     private SudokuBoard sudokuBoard = new SudokuBoard();
     private boolean flag = true;
     private ResourceBundle resourceBundle;
-    private List<SudokuField> sudokuFields = new ArrayList<>();
+    // TODO: 04.05.2020 chyba będzie trzeba zrobić żeby były w liście te property żeby ich garbage collector nie usunal?
+    private List<IntegerProperty> integerPropertyArrayListForSudokuFieldBinding = new ArrayList<>();
 
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
