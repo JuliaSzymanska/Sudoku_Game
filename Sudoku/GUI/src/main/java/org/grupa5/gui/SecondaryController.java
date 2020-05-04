@@ -114,30 +114,20 @@ public class SecondaryController implements Initializable {
                 textField.setMaxWidth(45);
                 textField.setMaxHeight(45);
                 if (i != 0 && j != 0) {
-                    // TODO: już się wszystko ustawiam
-                    //  nie wiem ten binding to raczej nie jest to co on chce
-                    //  ale bliżej niż dalej
-                    // TODO: mam plan
-                    //  trzeba zbindować sudokuFiledy
-                    //  i mieć w dupie zwracane value od nich
-                    //  kurna sudokuField ma toString
-                    //  ale to nic nie da coś tak czuję
-                    //  nie wiem co z tym zrobić no na prawdę
-                    //  mam ochotę oddać bez tego w środę i zobaczyć czy coś może powie
-                    //  albo oddać bez bindingów tylko zrobione tak jak mówiłem update po ruchu
-                    //  ręcznie
-                    //  bo te bindingi mnie zabiją
-
                     SudokuField sudokuField = this.sudokuBoard.getField(j-1, i-1);
                     IntegerProperty integerProperty = new JavaBeanIntegerPropertyBuilder().bean(sudokuField).name("value").build();
-                    System.out.println(integerProperty);
-                    System.out.println(sudokuField.getValue());
-                    sudokuField.setValue(9);
-                    System.out.println(integerProperty);
-                    System.out.println(sudokuField.getValue());
-                    integerProperty.setValue(2);
-                    System.out.println(integerProperty);
-                    System.out.println(sudokuField.getValue());
+                    // TODO: 04.05.2020 wydaje mi się że tutaj trzeba to dodać do listy żeby to nam nie 'uciekło'
+                    //  żeby nie było z gabage collectowane
+                    this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
+
+//                    System.out.println(integerProperty);
+//                    System.out.println(sudokuField.getValue());
+//                    sudokuField.setValue(9);
+//                    System.out.println(integerProperty);
+//                    System.out.println(sudokuField.getValue());
+//                    integerProperty.setValue(2);
+//                    System.out.println(integerProperty);
+//                    System.out.println(sudokuField.getValue());
 
 
                     int intToAdd = sudokuBoard.get(j - 1, i - 1);
