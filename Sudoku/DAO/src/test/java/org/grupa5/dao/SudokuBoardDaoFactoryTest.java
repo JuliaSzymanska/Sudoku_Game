@@ -12,9 +12,9 @@ public class SudokuBoardDaoFactoryTest {
     }
 
 
-    // TODO: znowu się pluje o te testy
-//    @Test
-//    void defaultConstructorTest(){
-//        new SudokuBoardDaoFactory();
-//    }
+    // TODO: bez tego jacoco się pluje : )
+    @Test
+    void defaultConstructorTest(){
+        new SudokuBoardDaoFactory();
+    }
 }

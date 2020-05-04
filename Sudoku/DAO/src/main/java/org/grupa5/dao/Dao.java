@@ -1,7 +1,9 @@
 package org.grupa5.dao;
 
-public interface Dao<T> {
-    T read();
+import java.io.IOException;
 
-    void write(T t);
+public interface Dao<T> {
+    T read() throws ReadException;
+
+    void write(T t) throws WriteException;
 }

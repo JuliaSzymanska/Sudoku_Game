@@ -8,6 +8,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +28,7 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteNotSolvedTest() {
+    void sudokuBoardWriteNotSolvedTest() throws WriteException, ReadException {
         dao.write(board);
         board2 = dao.read();
         Assertions.assertEquals(board, board2);
@@ -35,7 +36,7 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteSolvedTest() {
+    void sudokuBoardWriteSolvedTest() throws WriteException, ReadException {
         board.solveGame();
         dao.write(board);
         board2 = dao.read();
@@ -44,20 +45,16 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteExceptionTest() {
-        final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(myOut));
-        failureDao.write(board);
-        final String standardOutput = myOut.toString();
-        Assertions.assertEquals("Wyjatek IO", standardOutput);
+    void sudokuBoardWriteExceptionTest()  {
+        assertThrows(WriteException.class, () -> {
+            failureDao.write(board);
+        });
     }
 
     @Test
     void sudokuBoardReadExceptionTest() {
-        final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(myOut));
-        failureDao.read();
-        final String standardOutput = myOut.toString();
-        Assertions.assertEquals("Wyjatek IO", standardOutput);
+        assertThrows(ReadException.class, () -> {
+            failureDao.read();
+        });
     }
 }

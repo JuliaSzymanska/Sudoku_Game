@@ -18,16 +18,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import org.grupa5.dao.ReadException;
 import org.grupa5.dao.SudokuBoardDaoFactory;
+import org.grupa5.dao.WriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
 
@@ -186,9 +185,6 @@ public class SecondaryController implements Initializable {
         }
     }
 
-    // TODO: generalnie zapisywanie dziala, ale no trzeba by chyba zrobic jakies wykrywanie że sie nie udało czy cos?
-    //  na przyklad że jak sie DAO wywali bo coś to wystakuje powiadomienie no nie zapisalismy
-
     public void saveSudokuToFile() {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
@@ -197,7 +193,17 @@ public class SecondaryController implements Initializable {
         File file = fileChooser.showSaveDialog(new Stage());
 
         if (file != null) {
-            SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
+            try {
+                SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
+            } catch (WriteException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Save Error");
+                alert.setHeaderText("Error Saving Game");
+                alert.setContentText("There was an error saving your game.\n" +
+                        "Please try to save again!");
+
+                alert.showAndWait();
+            }
         }
     }
 
@@ -211,8 +217,21 @@ public class SecondaryController implements Initializable {
 
         System.out.println(this.sudokuBoard);
         if (file != null) {
-            // TODO: jesli wczytamy nie wlasciwy plik to board ustawi sie na NULL, no chyba zle, znowu te wyjatki
-            this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
+            try {
+                this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
+                if (!flag) {
+                    flag = true;
+                }
+                this.fillGrid();
+            } catch (ReadException | NoSuchMethodException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Load Error");
+                alert.setHeaderText("Error Loading Game");
+                alert.setContentText("There was an error loading your game.\n" +
+                        "Please try to load again!");
+
+                alert.showAndWait();
+            }
         }
         System.out.println(this.sudokuBoard);
     }
