@@ -3,12 +3,16 @@ package org.grupa5.gui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.*;
+import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,6 +36,7 @@ public class SecondaryController implements Initializable {
     private SudokuBoard sudokuBoard = new SudokuBoard();
     private boolean flag = true;
     private ResourceBundle resourceBundle;
+    private List<SudokuField> sudokuFields = new ArrayList<>();
 
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
@@ -98,7 +103,7 @@ public class SecondaryController implements Initializable {
     }
 
     // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
-    private void fillGrid() {
+    private void fillGrid() throws NoSuchMethodException {
         int numRows = grid1.getRowCount();
         int numCols = grid1.getColumnCount();
         for (int i = 0; i < numRows; i++) {
@@ -108,33 +113,40 @@ public class SecondaryController implements Initializable {
                 textField.setMaxWidth(45);
                 textField.setMaxHeight(45);
                 if (i != 0 && j != 0) {
-                    ObjectProperty<SudokuBoard> sudokuBoardObjectProperty = new SimpleObjectProperty<SudokuBoard>(this.sudokuBoard);
-                    Binding<SudokuBoard> sudokuFieldBinding = Bindings.createObjectBinding(() ->
-                            sudokuBoardObjectProperty.get(), sudokuBoardObjectProperty);
                     // TODO: już się wszystko ustawiam
                     //  nie wiem ten binding to raczej nie jest to co on chce
                     //  ale bliżej niż dalej
-                    System.out.println(this.sudokuBoard.get(j - 1, i - 1));
-                    System.out.println(sudokuFieldBinding.getValue().get(j - 1, i - 1));
-                    this.sudokuBoard.setDoUsuniecia(j - 1, i - 1, 9);
-                    System.out.println(this.sudokuBoard.get(j - 1, i - 1));
-                    System.out.println(sudokuFieldBinding.getValue().get(j - 1, i - 1));
-                    sudokuFieldBinding.getValue().setDoUsuniecia(j - 1, i - 1, 1);
-                    System.out.println(this.sudokuBoard.get(j - 1,  i- 1));
-                    System.out.println(sudokuFieldBinding.getValue().get(j - 1, i - 1));
-                    System.out.println(this.sudokuBoard.getField(j-1,i-1).toString() + " TO STRING");
                     // TODO: mam plan
                     //  trzeba zbindować sudokuFiledy
                     //  i mieć w dupie zwracane value od nich
                     //  kurna sudokuField ma toString
+                    //  ale to nic nie da coś tak czuję
+                    //  nie wiem co z tym zrobić no na prawdę
+                    //  mam ochotę oddać bez tego w środę i zobaczyć czy coś może powie
+                    //  albo oddać bez bindingów tylko zrobione tak jak mówiłem update po ruchu
+                    //  ręcznie
+                    //  bo te bindingi mnie zabiją
+
+                    SudokuField sudokuField = this.sudokuBoard.getField(j-1, i-1);
+                    IntegerProperty integerProperty = new JavaBeanIntegerPropertyBuilder().bean(sudokuField).name("value").build();
+                    System.out.println(integerProperty);
+                    System.out.println(sudokuField.getValue());
+                    sudokuField.setValue(9);
+                    System.out.println(integerProperty);
+                    System.out.println(sudokuField.getValue());
+                    integerProperty.setValue(2);
+                    System.out.println(integerProperty);
+                    System.out.println(sudokuField.getValue());
+
 
                     int intToAdd = sudokuBoard.get(j - 1, i - 1);
                     if (intToAdd != 0) {
                         textField.setDisable(true);
                     }
-                    SimpleStringProperty stringProperty = new SimpleStringProperty();
-                    stringProperty.set(Integer.toString(intToAdd));
-                    textField.textProperty().bindBidirectional(stringProperty);
+//                    Bindings.bindBidirectional(new SimpleStringProperty(sudokuBoard.getField(j - 1, i - 1).toString()), textField.textProperty());
+//                    SimpleStringProperty stringProperty = new SimpleStringProperty();
+//                    stringProperty.set(Integer.toString(intToAdd));
+//                    textField.textProperty().bindBidirectional(new SimpleStringProperty(sudokuBoard.getField(j - 1, i - 1).toString()));
                 }
                 else if (i == 0 && j == 0) {
                     textField.setDisable(true);
@@ -153,7 +165,7 @@ public class SecondaryController implements Initializable {
         }
     }
 
-    public void startGame() {
+    public void startGame() throws NoSuchMethodException {
         if (!flag) {
             try {
                 this.switchToPrimary();
