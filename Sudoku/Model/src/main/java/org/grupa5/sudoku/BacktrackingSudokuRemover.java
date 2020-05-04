@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class BacktrackingSudokuRemover implements SudokuRemover {
 
-    private List<Integer> allFields = new ArrayList<Integer>();
+    private List<Integer> allFields = new ArrayList<>();
     private SudokuBoard sudokuBoard;
     private int numOfFieldsToRemove;
     private SudokuBoard copyBoard;

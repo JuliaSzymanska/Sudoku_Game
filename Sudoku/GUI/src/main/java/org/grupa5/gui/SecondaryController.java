@@ -133,10 +133,10 @@ public class SecondaryController implements Initializable {
                     if (intToAdd != 0) {
                         textField.setDisable(true);
                     }
-//                    Bindings.bindBidirectional(new SimpleStringProperty(sudokuBoard.getField(j - 1, i - 1).toString()), textField.textProperty());
-//                    SimpleStringProperty stringProperty = new SimpleStringProperty();
-//                    stringProperty.set(Integer.toString(intToAdd));
-//                    textField.textProperty().bindBidirectional(new SimpleStringProperty(sudokuBoard.getField(j - 1, i - 1).toString()));
+                    Bindings.bindBidirectional(new SimpleStringProperty(sudokuBoard.getField(j - 1, i - 1).toString()), textField.textProperty());
+                    SimpleStringProperty stringProperty = new SimpleStringProperty();
+                    stringProperty.set(Integer.toString(intToAdd));
+                    textField.textProperty().bindBidirectional(new SimpleStringProperty(sudokuBoard.getField(j - 1, i - 1).toString()));
                 }
                 else if (i == 0 && j == 0) {
                     textField.setDisable(true);
@@ -215,7 +215,6 @@ public class SecondaryController implements Initializable {
 
         File file = fileChooser.showOpenDialog(new Stage());
 
-        System.out.println(this.sudokuBoard);
         if (file != null) {
             try {
                 this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
