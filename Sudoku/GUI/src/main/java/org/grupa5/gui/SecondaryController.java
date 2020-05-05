@@ -120,24 +120,46 @@ public class SecondaryController implements Initializable {
                 textField.setMaxWidth(45);
                 textField.setMaxHeight(45);
                 if (i != 0 && j != 0) {
-                    SudokuField sudokuField = this.sudokuBoard.getField(j-1, i-1);
-                    IntegerProperty integerProperty = new JavaBeanIntegerPropertyBuilder().bean(sudokuField).name("value").build();
+                    // TODO: 05.05.2020 żeby wrocic do wersji z bindingami to:
+                    //  trzeba odkomentować to co wykomentowane (4 linijki)
+                    //  wykomentować w listenerze
+                    //  this.sudokuBoard.set(finalJ - 1, finalI - 1, Integer.parseInt(textField.getText()));
+                    //  zamiast
+    //                    if (this.sudokuBoard.get(finalJ - 1, finalI - 1) == 0) {
+    //                        textField.setText("0");
+    //                    }
+                    //   dac
+                //      if (!this.sudokuBoard.isWholeBoardValid()) {
+                //                            textField.setText("0");
+                //                        }
+                    //  wykomentować textField.setText(Integer.toString(this.sudokuBoard.get(j - 1, i - 1)));
+//                    SudokuField sudokuField = this.sudokuBoard.getField(j-1, i-1);
+//                    IntegerProperty integerProperty = new JavaBeanIntegerPropertyBuilder().bean(sudokuField).name("value").build();
 
                     // TODO: 04.05.2020 wydaje mi się że tutaj trzeba to dodać do listy żeby to nam nie 'uciekło'
                     //  żeby nie było z gabage collectowane
-                    this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
+//                    this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
 
-                    textField.textProperty().bindBidirectional(integerProperty, converter);
+//                    textField.textProperty().bindBidirectional(integerProperty, converter);
+                    textField.setText(Integer.toString(this.sudokuBoard.get(j - 1, i - 1)));
 
+                    // TODO: 05.05.2020 ja nie wiem czy tak ma wygladać ten validation, ale działa chyba
+                    //  problem mam z tym taki że to jakby najpierw próbuje zmienić, coś innego wywala error a to to poprawia
+                    //  i tak w zasadzie bez bindingu by to mogło działać w ten sposób jak teraz zrobiłem i wtedy nie ma problemu
+                    int finalJ = j;
+                    int finalI = i;
                     textField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+
                         if (!t1) {
                             if(!textField.getText().matches("[0-9]")) {
                                 textField.setText("0");
                             }
                         }
-                        if (!this.sudokuBoard.isWholeBoardValid()) {
+                        this.sudokuBoard.set(finalJ - 1, finalI - 1, Integer.parseInt(textField.getText()));
+                        if (this.sudokuBoard.get(finalJ - 1, finalI - 1) == 0) {
                             textField.setText("0");
                         }
+                        System.out.println(this.sudokuBoard);
                     });
 
 
