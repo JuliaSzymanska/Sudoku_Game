@@ -1,16 +1,15 @@
 package org.grupa5.sudoku;
 
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
+import java.io.*;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class SudokuField implements Externalizable, Cloneable, Comparable {
+public class SudokuField implements Serializable, Cloneable, Comparable {
+
+
 
     private int value;
 

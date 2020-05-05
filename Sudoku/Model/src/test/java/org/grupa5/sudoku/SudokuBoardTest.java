@@ -118,14 +118,14 @@ public class SudokuBoardTest {
         });
     }
 
-    // TODO: wykomentowany test odkomentowac jak juz to zrobimy zeby sie dalo testowac
-//    @Test
-//    public void cloneExceptionTest() {
-//        SudokuBoard sudoku = new SudokuBoard();
-//        assertThrows(CloneNotSupportedException.class, () -> {
-//            sudoku.clone();
-//        });
-//    }
+    @Test
+    void getFieldTet(){
+        SudokuBoard board = new SudokuBoard();
+        board.solveGame();
+        assertEquals(board.get(0,0), board.getField(0, 0).getValue());
+    }
+
+
 
     @Test
     void equalsTest() {
