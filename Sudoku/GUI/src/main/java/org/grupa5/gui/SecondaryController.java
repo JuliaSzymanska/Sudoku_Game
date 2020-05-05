@@ -8,13 +8,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.*;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -24,6 +29,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.NumberStringConverter;
 import org.grupa5.dao.ReadException;
 import org.grupa5.dao.SudokuBoardDaoFactory;
 import org.grupa5.dao.WriteException;
@@ -77,7 +83,7 @@ public class SecondaryController implements Initializable {
 //    }
 
     // TODO: to jest konwerter do bindingu, nie wiem jeszcze czy bedzie potrzebny
-    StringConverter<Integer> converter = new IntegerStringConverter();
+    StringConverter<Number> converter = new NumberStringConverter();
 
     @FXML
     private GridPane grid1;
@@ -115,28 +121,28 @@ public class SecondaryController implements Initializable {
                 if (i != 0 && j != 0) {
                     SudokuField sudokuField = this.sudokuBoard.getField(j-1, i-1);
                     IntegerProperty integerProperty = new JavaBeanIntegerPropertyBuilder().bean(sudokuField).name("value").build();
+
                     // TODO: 04.05.2020 wydaje mi się że tutaj trzeba to dodać do listy żeby to nam nie 'uciekło'
                     //  żeby nie było z gabage collectowane
                     this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
 
-//                    System.out.println(integerProperty);
-//                    System.out.println(sudokuField.getValue());
-//                    sudokuField.setValue(9);
-//                    System.out.println(integerProperty);
-//                    System.out.println(sudokuField.getValue());
-//                    integerProperty.setValue(2);
-//                    System.out.println(integerProperty);
-//                    System.out.println(sudokuField.getValue());
+                    textField.textProperty().bindBidirectional(integerProperty, converter);
 
 
+//
+//                    int finalJ = j;
+//                    int finalI = i;
+//
+//                    textField.textProperty().addListener((observableValue, s, t1) -> {
+//                        System.out.println("textfield changed");
+//                    });
+//
+//
+//
                     int intToAdd = sudokuBoard.get(j - 1, i - 1);
                     if (intToAdd != 0) {
                         textField.setDisable(true);
                     }
-                    Bindings.bindBidirectional(new SimpleStringProperty(sudokuBoard.getField(j - 1, i - 1).toString()), textField.textProperty());
-                    SimpleStringProperty stringProperty = new SimpleStringProperty();
-                    stringProperty.set(Integer.toString(intToAdd));
-                    textField.textProperty().bindBidirectional(new SimpleStringProperty(sudokuBoard.getField(j - 1, i - 1).toString()));
                 }
                 else if (i == 0 && j == 0) {
                     textField.setDisable(true);
