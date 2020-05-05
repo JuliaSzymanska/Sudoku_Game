@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class SudokuField implements Serializable, Cloneable, Comparable {
 
-
+    private static final long serialVersionUID = 756545346;
 
     private int value;
 
@@ -84,16 +84,6 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(value).toHashCode();
-    }
-
-    @Override
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeInt(value);
-    }
-
-    @Override
-    public void readExternal(ObjectInput in) throws IOException {
-        value = in.readInt();
     }
 
     /**
