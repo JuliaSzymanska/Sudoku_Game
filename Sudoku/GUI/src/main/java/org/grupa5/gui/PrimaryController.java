@@ -34,7 +34,6 @@ public class PrimaryController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ResourceBundle resourceAuthors
                 = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", VariablesCollection.getLocale());
-        System.out.println(resourceAuthors);
         authors.setText(resourceAuthors.getString("Authors: "));
         author_1.setText(resourceAuthors.getString("Julia Szymanska"));
         author_2.setText(resourceAuthors.getString("Przemyslaw Zdrzalik"));
