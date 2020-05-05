@@ -1,13 +1,9 @@
 package org.grupa5.sudoku;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,7 +48,6 @@ public class SudokuBoard implements Externalizable, Cloneable {
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]));
     }
 
-    // TODO: 05.05.2020 no nie wydaje mi się żeby ten getField powinien istnieć, ale jak inaczej to zrobić?
     public SudokuField getField(int x, int y) {
         return this.board.get(x).get(y);
     }
@@ -187,11 +182,6 @@ public class SudokuBoard implements Externalizable, Cloneable {
         }
     }
 
-    // TODO: 03.05.2020 USUN
-    public void setDoUsuniecia(int x, int y, int value) {
-        this.board.get(x).get(y).setValue(value);
-    }
-
     /**
      * Reset board, fill with 0.
      */
@@ -252,7 +242,8 @@ public class SudokuBoard implements Externalizable, Cloneable {
 
     /**
      * Tests validity of the board.
-     * @return
+     *
+     * @return True if board is valid
      */
     public boolean isWholeBoardValid() {
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {

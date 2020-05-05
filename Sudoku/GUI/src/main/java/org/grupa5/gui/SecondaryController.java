@@ -8,28 +8,19 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.*;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
-import javafx.beans.property.adapter.JavaBeanObjectPropertyBuilder;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.css.PseudoClass;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.NumberStringConverter;
 import org.grupa5.dao.ReadException;
 import org.grupa5.dao.SudokuBoardDaoFactory;
@@ -42,7 +33,6 @@ public class SecondaryController implements Initializable {
     private SudokuBoard sudokuBoard = new SudokuBoard();
     private boolean flag = true;
     private ResourceBundle resourceBundle;
-    // TODO: 04.05.2020 chyba będzie trzeba zrobić żeby były w liście te property żeby ich garbage collector nie usunal?
     private List<IntegerProperty> integerPropertyArrayListForSudokuFieldBinding = new ArrayList<>();
 
     @FXML
@@ -67,23 +57,6 @@ public class SecondaryController implements Initializable {
         }
     }
 
-//    public enum LevelPolish {
-//        Prosty(42),
-//        Sredni(54),
-//        Trudny(60);
-//
-//        private final int number;
-//
-//        public int getNumber() {
-//            return number;
-//        }
-//
-//        LevelPolish(int number) {
-//            this.number = number;
-//        }
-//    }
-
-    // TODO: to jest konwerter do bindingu, nie wiem jeszcze czy bedzie potrzebny
     StringConverter<Number> converter = new NumberStringConverter();
 
     @FXML
@@ -109,6 +82,17 @@ public class SecondaryController implements Initializable {
         App.setRoot("primary");
     }
 
+    private boolean checkNumeric(String value) {
+        String number = value.replaceAll("\\s+", "");
+        for (int j = 0; j < number.length(); j++) {
+            if (!(((int) number.charAt(j) > 47 && (int) number.charAt(j) <= 57))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
     private void fillGrid() throws NoSuchMethodException {
         int numRows = grid1.getRowCount();
@@ -119,78 +103,59 @@ public class SecondaryController implements Initializable {
                 textField.setAlignment(Pos.CENTER);
                 textField.setMaxWidth(45);
                 textField.setMaxHeight(45);
+
                 if (i != 0 && j != 0) {
-                    // TODO: 05.05.2020 żeby wrocic do wersji z bindingami to:
-                    //  trzeba odkomentować to co wykomentowane (4 linijki)
-                    //  wykomentować w listenerze
-                    //  this.sudokuBoard.set(finalJ - 1, finalI - 1, Integer.parseInt(textField.getText()));
-                    //  zamiast
-    //                    if (this.sudokuBoard.get(finalJ - 1, finalI - 1) == 0) {
-    //                        textField.setText("0");
-    //                    }
-                    //   dac
-                //      if (!this.sudokuBoard.isWholeBoardValid()) {
-                //                            textField.setText("0");
-                //                        }
-                    //  wykomentować textField.setText(Integer.toString(this.sudokuBoard.get(j - 1, i - 1)));
-//                    SudokuField sudokuField = this.sudokuBoard.getField(j-1, i-1);
-//                    IntegerProperty integerProperty = new JavaBeanIntegerPropertyBuilder().bean(sudokuField).name("value").build();
 
-                    // TODO: 04.05.2020 wydaje mi się że tutaj trzeba to dodać do listy żeby to nam nie 'uciekło'
-                    //  żeby nie było z gabage collectowane
-//                    this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
+                    textField.setTextFormatter(new TextFormatter<>(c -> {
+                        if (c.isContentChange()) {
+                            if (c.getText().matches("[0-9] | ^$ ")) {
+                                return c;
+                            }
+                        }
+                        return c;
+                    }));
 
-//                    textField.textProperty().bindBidirectional(integerProperty, converter);
-                    textField.setText(Integer.toString(this.sudokuBoard.get(j - 1, i - 1)));
+                    SudokuField sudokuField = this.sudokuBoard.getField(j - 1, i - 1);
+                    IntegerProperty integerProperty = new JavaBeanIntegerPropertyBuilder().bean(sudokuField).name("value").build();
 
-                    // TODO: 05.05.2020 ja nie wiem czy tak ma wygladać ten validation, ale działa chyba
-                    //  problem mam z tym taki że to jakby najpierw próbuje zmienić, coś innego wywala error a to to poprawia
-                    //  i tak w zasadzie bez bindingu by to mogło działać w ten sposób jak teraz zrobiłem i wtedy nie ma problemu
-                    int finalJ = j;
-                    int finalI = i;
-                    textField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+                    this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
+                    textField.textProperty().bindBidirectional(integerProperty, converter);
 
-                        if (!t1) {
-                            if(!textField.getText().matches("[0-9]")) {
+                    textField.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+                        @Override
+                        public void handle(KeyEvent event) {
+                            textField.clear();
+                            String character = event.getCharacter();
+                            if (!checkNumeric(character)) {
+                                textField.setText("0");
+                                event.consume();
+                            }
+                        }
+                    });
+                    textField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                        @Override
+                        public void handle(KeyEvent event) {
+                            if (!sudokuBoard.isWholeBoardValid()) {
                                 textField.setText("0");
                             }
                         }
-                        this.sudokuBoard.set(finalJ - 1, finalI - 1, Integer.parseInt(textField.getText()));
-                        if (this.sudokuBoard.get(finalJ - 1, finalI - 1) == 0) {
-                            textField.setText("0");
-                        }
-                        System.out.println(this.sudokuBoard);
                     });
 
-
-//
-//                    int finalJ = j;
-//                    int finalI = i;
-//
-//                    textField.textProperty().addListener((observableValue, s, t1) -> {
-//                        System.out.println("textfield changed");
-//                    });
-//
-//
-//
                     int intToAdd = sudokuBoard.get(j - 1, i - 1);
                     if (intToAdd != 0) {
                         textField.setDisable(true);
                     }
-                }
-                else if (i == 0 && j == 0) {
+                } else if (i == 0 && j == 0) {
                     textField.setDisable(true);
                     textField.setText("X");
-                }
-                else if (i == 0) {
+                } else if (i == 0) {
                     textField.setDisable(true);
                     textField.setText((Character.toString((char) (64 + j))));
-                }
-                else {
+                } else {
                     textField.setDisable(true);
                     textField.setText(("0" + i));
                 }
-                    grid1.add(textField, i, j);
+                grid1.add(textField, i, j);
             }
         }
     }
@@ -216,7 +181,7 @@ public class SecondaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
-        if (resourceBundle.getString("language").equals("PL")) {
+        if (VariablesCollection.getLocale().toString().equals("en_en")) {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
             boxLevel.setValue(Level.values()[0]);
         } else {
@@ -249,12 +214,9 @@ public class SecondaryController implements Initializable {
 
     public void readSudokuFromFile() {
         FileChooser fileChooser = new FileChooser();
-
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
-
         File file = fileChooser.showOpenDialog(new Stage());
-
         if (file != null) {
             try {
                 this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
@@ -268,11 +230,9 @@ public class SecondaryController implements Initializable {
                 alert.setHeaderText("Error Loading Game");
                 alert.setContentText("There was an error loading your game.\n" +
                         "Please try to load again!");
-
                 alert.showAndWait();
             }
         }
-        System.out.println(this.sudokuBoard);
     }
 
     public void changeLanguage() {

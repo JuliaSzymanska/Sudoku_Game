@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -47,7 +46,6 @@ public class PrimaryController implements Initializable {
     }
 
     public void changeLanguage() {
-        // TODO: Julka popraw to proszę, boli mnie ten IF ale narazie dziala to zostawilem
         if (VariablesCollection.getLocale().toString().equals("en_en")) {
             VariablesCollection.setLocale(new Locale("pl_PL"));
         } else {
