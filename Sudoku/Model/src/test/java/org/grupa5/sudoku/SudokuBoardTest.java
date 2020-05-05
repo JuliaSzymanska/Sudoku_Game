@@ -134,7 +134,6 @@ public class SudokuBoardTest {
 
         assertNotEquals(sudoku1, null);
         assertEquals(sudoku1, sudoku1);
-        // assert not solved are equal
         assertEquals(sudoku1, sudoku2);
         assertNotEquals(sudoku1, Object.class);
 
@@ -148,6 +147,13 @@ public class SudokuBoardTest {
         assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
         sudoku2.set(3, 3, 0);
         assertNotEquals(sudoku1, sudoku2);
+    }
+
+    @Test
+    void validBoardTest(){
+        SudokuBoard board = new SudokuBoard();
+        board.solveGame();
+        assertTrue(board.isWholeBoardValid());
     }
 
     @Test
@@ -177,11 +183,7 @@ public class SudokuBoardTest {
         SudokuBoard sudoku2 = null;
 
         sudoku1.solveGame();
-        try {
-            sudoku2 = sudoku1.clone();
-        } catch (CloneNotSupportedException e) {
-            fail("exception thrown");
-        }
+        sudoku2 = sudoku1.clone();
         assertEquals(sudoku1, sudoku2);
         assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
         assertNotSame(sudoku1, sudoku2);

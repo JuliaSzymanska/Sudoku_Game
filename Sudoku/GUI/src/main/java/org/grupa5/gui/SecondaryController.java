@@ -92,6 +92,20 @@ public class SecondaryController implements Initializable {
         return true;
     }
 
+    private void switchStartAndEndButtons(){
+        if (!flag) {
+            try {
+                this.switchToPrimary();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            flag = true;
+            return;
+        }
+        flag = false;
+        secondaryButton.setText(resourceBundle.getString("end"));
+    }
+
 
     // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
     private void fillGrid() throws NoSuchMethodException {
@@ -161,17 +175,7 @@ public class SecondaryController implements Initializable {
     }
 
     public void startGame() throws NoSuchMethodException {
-        if (!flag) {
-            try {
-                this.switchToPrimary();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            flag = true;
-            return;
-        }
-        flag = false;
-        secondaryButton.setText(resourceBundle.getString("end"));
+        switchStartAndEndButtons();
         int numberOfFields = boxLevel.getSelectionModel().getSelectedItem().getNumber();
         sudokuBoard.solveGame();
         sudokuBoard.removeFields(numberOfFields);
@@ -213,6 +217,7 @@ public class SecondaryController implements Initializable {
     }
 
     public void readSudokuFromFile() {
+        // TODO: 05.05.2020 popraw wczytywanie rozpoczetej gry
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -220,9 +225,7 @@ public class SecondaryController implements Initializable {
         if (file != null) {
             try {
                 this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
-                if (!flag) {
-                    flag = true;
-                }
+                switchStartAndEndButtons();
                 this.fillGrid();
             } catch (ReadException | NoSuchMethodException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -236,7 +239,6 @@ public class SecondaryController implements Initializable {
     }
 
     public void changeLanguage() {
-        // TODO: tutaj też Dżulia popraw tego ifa na coś co ma sens ._. mój mózg dzisiaj to przerasta
         if (VariablesCollection.getLocale().toString().equals("en_en")) {
             VariablesCollection.setLocale(new Locale("pl_PL"));
             resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
