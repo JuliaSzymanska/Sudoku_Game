@@ -71,12 +71,8 @@ public class SudokuBoard implements Cloneable, Serializable {
      */
 
     public List<List<SudokuField>> getBoard() {
-        try {
-            SudokuBoard copyBoard = this.clone();
-            return copyBoard.board;
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("was unable to copy Board");
-        }
+        SudokuBoard copyBoard = this.clone();
+        return copyBoard.board;
     }
 
     /**
@@ -248,14 +244,9 @@ public class SudokuBoard implements Cloneable, Serializable {
      * Clone objects.
      *
      * @return Cloned SudokuBoard.
-     * @throws CloneNotSupportedException when the Board in invalid or when either
-     *                                    IOException or  ClassNotFoundException are caught.
      */
-    public SudokuBoard clone() throws CloneNotSupportedException {
-        if (!isWholeBoardValid()) {
-            throw new CloneNotSupportedException(
-                    "SudokuBoard doesn't allow cloning non valid boards");
-        }
+    @Override
+    public SudokuBoard clone() {
         SudokuBoard cloneBoard = new SudokuBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

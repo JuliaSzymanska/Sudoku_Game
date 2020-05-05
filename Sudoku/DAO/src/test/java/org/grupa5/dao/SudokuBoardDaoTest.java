@@ -22,7 +22,7 @@ public class SudokuBoardDaoTest {
     private SudokuBoard board2 = null;
 
     @Test
-    void failureFileTest(){
+    void failureFileTest() {
         File f = new File(FAILURE_FILE_PATH);
         Assertions.assertFalse((f.exists() && !f.isDirectory()));
     }
@@ -36,6 +36,15 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
+    void tryWithResourceTest() {
+        try (
+                Dao<SudokuBoard> dao2 = SudokuBoardDaoFactory.getFileDao(FILE_PATH);) {
+            dao2.read();
+        } catch (Exception ignore) {
+        }
+    }
+
+    @Test
     void sudokuBoardWriteSolvedTest() throws WriteException, ReadException {
         board.solveGame();
         dao.write(board);
@@ -45,7 +54,7 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteExceptionTest()  {
+    void sudokuBoardWriteExceptionTest() {
         assertThrows(WriteException.class, () -> {
             failureDao.write(board);
         });

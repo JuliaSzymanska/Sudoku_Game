@@ -8,8 +8,6 @@ import java.io.ObjectOutputStream;
 
 import org.grupa5.sudoku.SudokuBoard;
 
-// TODO: Czy to autocloseable ma sens?
-//  Kwapi chciał by to mimplementowąło ale nie wiem czy to jest OK
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     private String fileName;
@@ -32,16 +30,15 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     @Override
     public SudokuBoard read() throws ReadException {
-        SudokuBoard sudokuBoard = null;
         try (
                 FileInputStream fileIn = new FileInputStream(this.fileName);
                 ObjectInputStream objectIn = new ObjectInputStream(fileIn)
         ) {
-            sudokuBoard = (SudokuBoard) objectIn.readObject();
+            return (SudokuBoard) objectIn.readObject();
         } catch (ClassNotFoundException | IOException e) {
             throw new ReadException("SudokuBoard Dao Read encountered an Issue");
         }
-        return sudokuBoard;
+
     }
 
     @Override
