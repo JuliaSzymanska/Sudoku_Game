@@ -15,6 +15,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.*;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
+import javafx.beans.property.adapter.JavaBeanObjectPropertyBuilder;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -127,6 +128,17 @@ public class SecondaryController implements Initializable {
                     this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
 
                     textField.textProperty().bindBidirectional(integerProperty, converter);
+
+                    textField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+                        if (!t1) {
+                            if(!textField.getText().matches("[0-9]")) {
+                                textField.setText("0");
+                            }
+                        }
+                        if (!this.sudokuBoard.isWholeBoardValid()) {
+                            textField.setText("0");
+                        }
+                    });
 
 
 //

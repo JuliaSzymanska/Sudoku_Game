@@ -52,6 +52,7 @@ public class SudokuBoard implements Externalizable, Cloneable {
                 Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]));
     }
 
+    // TODO: 05.05.2020 no nie wydaje mi się żeby ten getField powinien istnieć, ale jak inaczej to zrobić?
     public SudokuField getField(int x, int y) {
         return this.board.get(x).get(y);
     }
@@ -249,7 +250,11 @@ public class SudokuBoard implements Externalizable, Cloneable {
         board = (List<List<SudokuField>>) in.readObject();
     }
 
-    private boolean isWholeBoardValid() {
+    /**
+     * Tests validity of the board.
+     * @return
+     */
+    public boolean isWholeBoardValid() {
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             for (int j = 0; j < SUDOKU_DIMENSIONS; j++) {
                 if (this.checkBoard(i, j)) {
