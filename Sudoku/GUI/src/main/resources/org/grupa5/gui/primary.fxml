@@ -5,16 +5,32 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="700.0" maxWidth="500.0" minHeight="700.0" minWidth="500.0" prefHeight="700.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
+<VBox alignment="CENTER" maxHeight="750.0" maxWidth="500.0" minHeight="750.0" minWidth="500.0" prefHeight="750.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
    <children>
+      <Button fx:id="language" alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#changeLanguage" text="%language" translateX="190" translateY="-200.0" StackPane.alignment="CENTER_LEFT" />
       <Label text="SUDOKU">
          <font>
             <Font name="System Bold" size="27.0" />
          </font></Label>
-      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="START GAME">
+      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="%start">
          <font>
             <Font size="28.0" />
          </font></Button>
+      <Label fx:id="authors" text="Label">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="author_1" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="author_2" text="Label">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

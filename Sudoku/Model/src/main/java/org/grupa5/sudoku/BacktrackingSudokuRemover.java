@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class BacktrackingSudokuRemover implements SudokuRemover {
 
-    private List<Integer> allFields = new ArrayList<Integer>();
+    private List<Integer> allFields = new ArrayList<>();
     private SudokuBoard sudokuBoard;
     private int numOfFieldsToRemove;
     private SudokuBoard copyBoard;
@@ -22,16 +22,12 @@ public class BacktrackingSudokuRemover implements SudokuRemover {
      */
 
     public BacktrackingSudokuRemover(SudokuBoard board, int numOfFieldsToRemove) {
-        try {
-            this.sudokuBoard = board;
-            this.numOfFieldsToRemove = numOfFieldsToRemove;
-            this.copyBoard = this.sudokuBoard.clone();
-            allFields = IntStream.range(0, 80).boxed().collect(Collectors.toList());
-            Collections.shuffle(allFields);
-            remove();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        this.sudokuBoard = board;
+        this.numOfFieldsToRemove = numOfFieldsToRemove;
+        this.copyBoard = this.sudokuBoard.clone();
+        allFields = IntStream.range(0, 80).boxed().collect(Collectors.toList());
+        Collections.shuffle(allFields);
+        remove();
 
     }
 

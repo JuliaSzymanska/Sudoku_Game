@@ -1,4 +1,4 @@
-package org.grupa5.sudoku.dao;
+package org.grupa5.dao;
 
 import org.grupa5.sudoku.SudokuBoard;
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +8,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,13 +22,13 @@ public class SudokuBoardDaoTest {
     private SudokuBoard board2 = null;
 
     @Test
-    void failureFileTest(){
+    void failureFileTest() {
         File f = new File(FAILURE_FILE_PATH);
         Assertions.assertFalse((f.exists() && !f.isDirectory()));
     }
 
     @Test
-    void sudokuBoardWriteNotSolvedTest() {
+    void sudokuBoardWriteNotSolvedTest() throws WriteException, ReadException {
         dao.write(board);
         board2 = dao.read();
         Assertions.assertEquals(board, board2);
@@ -35,7 +36,16 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteSolvedTest() {
+    void tryWithResourceTest() {
+        try (
+                Dao<SudokuBoard> dao2 = SudokuBoardDaoFactory.getFileDao(FILE_PATH);) {
+            dao2.read();
+        } catch (Exception ignore) {
+        }
+    }
+
+    @Test
+    void sudokuBoardWriteSolvedTest() throws WriteException, ReadException {
         board.solveGame();
         dao.write(board);
         board2 = dao.read();
@@ -45,19 +55,15 @@ public class SudokuBoardDaoTest {
 
     @Test
     void sudokuBoardWriteExceptionTest() {
-        final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(myOut));
-        failureDao.write(board);
-        final String standardOutput = myOut.toString();
-        assertEquals("Wyjatek IO", standardOutput);
+        assertThrows(WriteException.class, () -> {
+            failureDao.write(board);
+        });
     }
 
     @Test
     void sudokuBoardReadExceptionTest() {
-        final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(myOut));
-        failureDao.read();
-        final String standardOutput = myOut.toString();
-        assertEquals("Wyjatek IO", standardOutput);
+        assertThrows(ReadException.class, () -> {
+            failureDao.read();
+        });
     }
 }

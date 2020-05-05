@@ -6,15 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-
 
     private static Scene scene;
 
@@ -30,9 +28,9 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
-
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"), resourceBundle);
         return fxmlLoader.load();
     }
 

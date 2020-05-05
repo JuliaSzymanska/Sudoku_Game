@@ -11,8 +11,11 @@
     <modules>
         <module>Model</module>
         <module>GUI</module>
+        <module>DAO</module>
     </modules>
 
+<!--    TODO: zrobić żeby łapał nam site
+            site z podprojektów-->
     <build>
         <pluginManagement>
             <plugins>

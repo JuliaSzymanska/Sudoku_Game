@@ -118,14 +118,14 @@ public class SudokuBoardTest {
         });
     }
 
-    // TODO: wykomentowany test odkomentowac jak juz to zrobimy zeby sie dalo testowac
-//    @Test
-//    public void cloneExceptionTest() {
-//        SudokuBoard sudoku = new SudokuBoard();
-//        assertThrows(CloneNotSupportedException.class, () -> {
-//            sudoku.clone();
-//        });
-//    }
+    @Test
+    void getFieldTet(){
+        SudokuBoard board = new SudokuBoard();
+        board.solveGame();
+        assertEquals(board.get(0,0), board.getField(0, 0).getValue());
+    }
+
+
 
     @Test
     void equalsTest() {
@@ -134,7 +134,6 @@ public class SudokuBoardTest {
 
         assertNotEquals(sudoku1, null);
         assertEquals(sudoku1, sudoku1);
-        // assert not solved are equal
         assertEquals(sudoku1, sudoku2);
         assertNotEquals(sudoku1, Object.class);
 
@@ -148,6 +147,13 @@ public class SudokuBoardTest {
         assertTrue(sudoku1.equals(sudoku2) && sudoku2.equals(sudoku1));
         sudoku2.set(3, 3, 0);
         assertNotEquals(sudoku1, sudoku2);
+    }
+
+    @Test
+    void validBoardTest(){
+        SudokuBoard board = new SudokuBoard();
+        board.solveGame();
+        assertTrue(board.isWholeBoardValid());
     }
 
     @Test
@@ -177,11 +183,7 @@ public class SudokuBoardTest {
         SudokuBoard sudoku2 = null;
 
         sudoku1.solveGame();
-        try {
-            sudoku2 = sudoku1.clone();
-        } catch (CloneNotSupportedException e) {
-            fail("exception thrown");
-        }
+        sudoku2 = sudoku1.clone();
         assertEquals(sudoku1, sudoku2);
         assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
         assertNotSame(sudoku1, sudoku2);
@@ -189,9 +191,5 @@ public class SudokuBoardTest {
         assertEquals(sudoku1.getBox(1, 5).hashCode(),sudoku2.getBox(1, 5).hashCode());
         assertNotSame(sudoku1.getBox(1, 5), sudoku2.getBox(1, 5));
     }
-
-    //TODO: w całej strukturze plików tak myślę, że zmieniłbym żeby
-    // było org.grupa5.sudoku.model nie a potem w gui byśmy mieli
-    // org.grupa5.sudoku.gui czy coś
-
+    
 }

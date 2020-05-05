@@ -24,6 +24,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class SudokuObject implements Serializable, Cloneable {
 
+    private static final long serialVersionUID = 547874675;
+
     private List<SudokuField> object;
 
     /**
