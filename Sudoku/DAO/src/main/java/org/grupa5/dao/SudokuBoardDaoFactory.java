@@ -7,5 +7,7 @@ public class SudokuBoardDaoFactory {
         return new FileSudokuBoardDao(fileName);
     }
 
+    // TODO: 06.05.2020 prywatny konstruktor 
+
     //static
 }

@@ -28,7 +28,6 @@ public class BacktrackingSudokuRemover implements SudokuRemover {
         allFields = IntStream.range(0, 80).boxed().collect(Collectors.toList());
         Collections.shuffle(allFields);
         remove();
-
     }
 
     @Override

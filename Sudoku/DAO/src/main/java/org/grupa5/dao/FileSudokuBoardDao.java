@@ -36,6 +36,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         ) {
             return (SudokuBoard) objectIn.readObject();
         } catch (ClassNotFoundException | IOException e) {
+            // TODO: 06.05.2020 dać żeby pokazywalo jaki wyjatek rzuca 
             throw new ReadException("SudokuBoard Dao Read encountered an Issue");
         }
 
