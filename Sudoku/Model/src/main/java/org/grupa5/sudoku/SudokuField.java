@@ -104,6 +104,7 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
                 throw new ClassCastException();
         }
         SudokuField that = (SudokuField) o;
+        // TODO: 06.05.2020 uporścić
         if (this.equals(that)) {
             return 0;
         } else if (this.value < that.value) {

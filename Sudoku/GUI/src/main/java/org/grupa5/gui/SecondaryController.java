@@ -57,6 +57,7 @@ public class SecondaryController implements Initializable {
         }
     }
 
+    // TODO: 06.05.2020 mozna zrobic wlasna
     StringConverter<Number> converter = new NumberStringConverter();
 
     @FXML
