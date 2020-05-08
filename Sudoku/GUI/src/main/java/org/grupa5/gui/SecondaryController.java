@@ -27,8 +27,12 @@ import org.grupa5.dao.SudokuBoardDaoFactory;
 import org.grupa5.dao.WriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SecondaryController implements Initializable {
+
+    private final Logger logger = LoggerFactory.getLogger(PrimaryController.class);
 
     private SudokuBoard sudokuBoard = new SudokuBoard();
     private boolean flag = true;
@@ -173,9 +177,15 @@ public class SecondaryController implements Initializable {
                 grid1.add(textField, i, j);
             }
         }
+        if (logger.isDebugEnabled()) {
+            logger.debug("Grid Filled");
+        }
     }
 
     public void startGame() throws NoSuchMethodException {
+        if (logger.isInfoEnabled()) {
+            logger.debug("Sudoku Game Started");
+        }
         switchStartAndEndButtons();
         int numberOfFields = boxLevel.getSelectionModel().getSelectedItem().getNumber();
         sudokuBoard.solveGame();
@@ -185,6 +195,9 @@ public class SecondaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("SecondaryController init");
+        }
         this.resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
         if (VariablesCollection.getLocale().toString().equals("en_en")) {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
@@ -213,6 +226,10 @@ public class SecondaryController implements Initializable {
                         "Please try to save again!");
 
                 alert.showAndWait();
+
+                if (logger.isErrorEnabled()) {
+                    logger.debug("Sudoku Game Saving Failed");
+                }
             }
         }
     }
@@ -235,6 +252,10 @@ public class SecondaryController implements Initializable {
                 alert.setContentText("There was an error loading your game.\n" +
                         "Please try to load again!");
                 alert.showAndWait();
+
+                if (logger.isErrorEnabled()) {
+                    logger.debug("Sudoku Game Loading Failed");
+                }
             }
         }
     }

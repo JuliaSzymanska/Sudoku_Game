@@ -3,6 +3,7 @@ module hellofx {
     requires javafx.fxml;
     requires ModelProject;
     requires Dao;
+    requires slf4j.api;
 
     opens org.grupa5.gui to javafx.fxml;
     exports org.grupa5.gui;

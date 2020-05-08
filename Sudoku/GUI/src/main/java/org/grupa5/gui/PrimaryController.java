@@ -10,7 +10,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class PrimaryController implements Initializable {
+
+    private final Logger logger = LoggerFactory.getLogger(PrimaryController.class);
 
     @FXML
     private Label authors;
@@ -32,6 +38,9 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("PrimaryController init");
+        }
         ResourceBundle resourceAuthors
                 = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", VariablesCollection.getLocale());
         authors.setText(resourceAuthors.getString("Authors: "));
