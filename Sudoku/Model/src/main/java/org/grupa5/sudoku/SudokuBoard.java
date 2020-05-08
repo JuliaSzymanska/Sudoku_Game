@@ -8,8 +8,12 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SudokuBoard implements Cloneable, Serializable {
+
+    private final Logger logger = LoggerFactory.getLogger(SudokuBoard.class);
 
     private static final long serialVersionUID = 1735345345;
 
@@ -148,9 +152,16 @@ public class SudokuBoard implements Cloneable, Serializable {
 
     public int get(int x, int y) {
         if (x < 0 || x > SUDOKU_DIMENSIONS - 1) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Invalid Index Provided to get");
+            }
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
+
         }
         if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Invalid Index Provided to get");
+            }
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
         return this.board.get(x).get(y).getValue();
@@ -162,12 +173,21 @@ public class SudokuBoard implements Cloneable, Serializable {
 
     public void set(int x, int y, int value) {
         if (x < 0 || x > SUDOKU_DIMENSIONS - 1) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Invalid Index Provided to set");
+            }
             throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
         }
         if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Invalid Index Provided to set");
+            }
             throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
         }
         if (value < 0 || value > 9) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Invalid Value Provided to set");
+            }
             throw new IllegalArgumentException("Number has to be in range 0 - 9");
         }
         int temp = this.board.get(x).get(y).getValue();

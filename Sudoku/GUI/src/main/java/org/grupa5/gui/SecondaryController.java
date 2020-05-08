@@ -32,12 +32,12 @@ import org.slf4j.LoggerFactory;
 
 public class SecondaryController implements Initializable {
 
-    private final Logger logger = LoggerFactory.getLogger(PrimaryController.class);
+    private final Logger logger = LoggerFactory.getLogger(SecondaryController.class);
 
     private SudokuBoard sudokuBoard = new SudokuBoard();
     private boolean flag = true;
     private ResourceBundle resourceBundle;
-    private List<IntegerProperty> integerPropertyArrayListForSudokuFieldBinding = new ArrayList<>();
+    private final List<IntegerProperty> integerPropertyArrayListForSudokuFieldBinding = new ArrayList<>();
 
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
@@ -184,7 +184,7 @@ public class SecondaryController implements Initializable {
 
     public void startGame() throws NoSuchMethodException {
         if (logger.isInfoEnabled()) {
-            logger.debug("Sudoku Game Started");
+            logger.info("Sudoku Game Started");
         }
         switchStartAndEndButtons();
         int numberOfFields = boxLevel.getSelectionModel().getSelectedItem().getNumber();
@@ -228,7 +228,7 @@ public class SecondaryController implements Initializable {
                 alert.showAndWait();
 
                 if (logger.isErrorEnabled()) {
-                    logger.debug("Sudoku Game Saving Failed");
+                    logger.error("Sudoku Game Saving Failed");
                 }
             }
         }
@@ -254,7 +254,7 @@ public class SecondaryController implements Initializable {
                 alert.showAndWait();
 
                 if (logger.isErrorEnabled()) {
-                    logger.debug("Sudoku Game Loading Failed");
+                    logger.error("Sudoku Game Loading Failed");
                 }
             }
         }
