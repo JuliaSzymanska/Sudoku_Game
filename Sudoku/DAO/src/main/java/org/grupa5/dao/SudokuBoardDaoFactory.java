@@ -6,5 +6,8 @@ public class SudokuBoardDaoFactory {
     public static Dao<SudokuBoard> getFileDao(String fileName) {
         return new FileSudokuBoardDao(fileName);
     }
-    // TODO: 06.05.2020 prywatny konstruktor
+
+    private SudokuBoardDaoFactory() {
+
+    }
 }

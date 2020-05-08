@@ -12,7 +12,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     private String fileName;
 
-    public FileSudokuBoardDao(String fileName) {
+    FileSudokuBoardDao(String fileName) {
         this.fileName = fileName;
     }
 
@@ -24,7 +24,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         ) {
             objectOut.writeObject(sudokuBoard);
         } catch (IOException e) {
-            throw new WriteException("SudokuBoard Dao write encountered an Issue");
+            throw new WriteException("SudokuBoard Dao write encountered an Issue", e);
         }
     }
 
@@ -36,8 +36,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         ) {
             return (SudokuBoard) objectIn.readObject();
         } catch (ClassNotFoundException | IOException e) {
-            // TODO: 06.05.2020 dać żeby pokazywalo jaki wyjatek rzuca 
-            throw new ReadException("SudokuBoard Dao Read encountered an Issue");
+            throw new ReadException("SudokuBoard Dao Read encountered an Issue", e);
         }
 
     }
