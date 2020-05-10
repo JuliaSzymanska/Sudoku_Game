@@ -13,6 +13,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -35,6 +37,10 @@ public class SudokuObject implements Serializable, Cloneable {
 
     public SudokuObject(List<SudokuField> table) {
         if (table.size() != SUDOKU_DIMENSIONS) {
+            Logger logger = LoggerFactory.getLogger(SudokuObject.class);
+            if (logger.isDebugEnabled()) {
+                logger.debug("Invalid size of list in constructor");
+            }
             throw new IllegalArgumentException("List size has to be equal to "
                     + Integer.toString(SUDOKU_DIMENSIONS));
         }

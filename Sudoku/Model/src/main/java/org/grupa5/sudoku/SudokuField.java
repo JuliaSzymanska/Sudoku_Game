@@ -6,8 +6,12 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class SudokuField implements Serializable, Cloneable, Comparable {
+public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
+
+    private final Logger logger = LoggerFactory.getLogger(SudokuField.class);
 
     private static final long serialVersionUID = 756545346;
 
@@ -56,6 +60,9 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
 
     public void setValue(int value) {
         if (value < 0 || value > 9) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Invalid Index Provided to set");
+            }
             throw new IllegalArgumentException("Value has to be in range 0 - 9");
         }
         this.value = value;
@@ -96,18 +103,16 @@ public class SudokuField implements Serializable, Cloneable, Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(SudokuField o) {
         if (o == null) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Comparing to null");
+            }
             throw new NullPointerException("comparing to null");
         }
-        if (!(o instanceof SudokuField)) {
-                throw new ClassCastException();
-        }
-        SudokuField that = (SudokuField) o;
-        // TODO: 06.05.2020 uporścić
-        if (this.equals(that)) {
+        if (this.equals(o)) {
             return 0;
-        } else if (this.value < that.value) {
+        } else if (this.value < o.value) {
             return -1;
         } else {
             return 1;
