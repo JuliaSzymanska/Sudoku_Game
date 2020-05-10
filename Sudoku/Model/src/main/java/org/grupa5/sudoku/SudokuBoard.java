@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
+// TODO: 10.05.2020 https://stackoverflow.com/questions/21881846/where-does-the-slf4j-log-file-get-saved
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class SudokuBoard implements Cloneable, Serializable {
 
-    private final Logger logger = LoggerFactory.getLogger(SudokuBoard.class);
+    private static final Logger logger = LoggerFactory.getLogger(SudokuBoard.class);
 
     private static final long serialVersionUID = 1735345345;
 
