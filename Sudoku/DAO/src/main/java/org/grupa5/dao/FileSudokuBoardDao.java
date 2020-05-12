@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.grupa5.dao.exception.ReadException;
+import org.grupa5.dao.exception.WriteException;
 import org.grupa5.sudoku.SudokuBoard;
 
 class FileSudokuBoardDao implements Dao<SudokuBoard> {
