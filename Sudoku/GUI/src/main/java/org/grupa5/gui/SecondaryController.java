@@ -27,6 +27,7 @@ import org.grupa5.dao.SudokuBoardDaoFactory;
 import org.grupa5.dao.exception.WriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
+import org.grupa5.sudoku.exceptions.GetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -160,7 +161,12 @@ public class SecondaryController implements Initializable {
                         }
                     });
 
-                    int intToAdd = sudokuBoard.get(j - 1, i - 1);
+                    int intToAdd = 0;
+                    try {
+                        intToAdd = sudokuBoard.get(j - 1, i - 1);
+                    } catch (GetException e) {
+                        // TODO: 12.05.2020 cos madrego tutaj 
+                    }
                     if (intToAdd != 0) {
                         textField.setDisable(true);
                     }
