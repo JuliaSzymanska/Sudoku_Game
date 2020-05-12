@@ -226,6 +226,7 @@ public class SudokuBoard implements Cloneable, Serializable {
                 || !getColumn(column).verify()
                 || !getBox(row, column).verify();
         } catch (SetException e) {
+            // TODO: 12.05.2020 zajac sie tym wyjatkiem
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Value Provided to get", e);
             }
