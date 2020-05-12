@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import org.grupa5.sudoku.exceptions.GetException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -78,23 +79,22 @@ public class SudokuBoardTest {
     @Test
     void getterTest() {
         SudokuBoard sudoku = new SudokuBoard();
-        assertEquals(sudoku.get(2, 2), 0);
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(GetException.class, () -> {
             sudoku.get(9, 7);
         });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(GetException.class, () -> {
             sudoku.get(7, 9);
         });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(GetException.class, () -> {
             sudoku.get(-1, 7);
         });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(GetException.class, () -> {
             sudoku.get(7, -1);
         });
     }
 
     @Test
-    void setterTest() {
+    void setterTest() throws GetException {
         SudokuBoard sudoku = new SudokuBoard();
         sudoku.set(2, 2, 2);
         assertEquals(sudoku.get(2, 2), 2);
@@ -119,7 +119,7 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void getFieldTet(){
+    void getFieldTet() throws GetException {
         SudokuBoard board = new SudokuBoard();
         board.solveGame();
         assertEquals(board.get(0,0), board.getField(0, 0).getValue());
@@ -128,7 +128,7 @@ public class SudokuBoardTest {
 
 
     @Test
-    void equalsTest() {
+    void equalsTest() throws GetException {
         SudokuBoard sudoku1 = new SudokuBoard();
         SudokuBoard sudoku2 = new SudokuBoard();
 

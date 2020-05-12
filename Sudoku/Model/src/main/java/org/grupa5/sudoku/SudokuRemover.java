@@ -3,7 +3,7 @@ package org.grupa5.sudoku;
 public interface SudokuRemover {
 
     /**
-     * It is a method in interface, which solve sudoku.
+     * Interface responsible for removing sudoku Fields from finished board.
      *
      */
     void remove();

@@ -1,5 +1,7 @@
 package org.grupa5.sudoku;
 
+import org.grupa5.sudoku.exceptions.GetException;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,21 +30,27 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
     private boolean solveSudoku(SudokuBoard board) {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (board.get(row, col) == 0) {
-                    List<Integer> range = 
-                    IntStream.range(1, 10).boxed().collect(Collectors.toList());
-                    Collections.shuffle(range);
-                    for (int number : range) {
-                        board.set(row, col, number);
-                        if (board.get(row, col) == number) {
-                            if (this.solveSudoku(board)) {
-                                return true;
-                            } else {
-                                board.set(row, col, 0);
+                try {
+                    if (board.get(row, col) == 0) {
+                        List<Integer> range =
+                        IntStream.range(1, 10).boxed().collect(Collectors.toList());
+                        Collections.shuffle(range);
+                        for (int number : range) {
+                            board.set(row, col, number);
+                            if (board.get(row, col) == number) {
+                                if (this.solveSudoku(board)) {
+                                    return true;
+                                } else {
+                                    board.set(row, col, 0);
+                                }
                             }
                         }
+                        return false;
                     }
-                    return false;
+                    // TODO: tjaaa chyba nie bardzo XD
+
+                } catch (GetException ignore) {
+
                 }
             }
         }

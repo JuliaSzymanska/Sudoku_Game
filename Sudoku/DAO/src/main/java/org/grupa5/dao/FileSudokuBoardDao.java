@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 
 import org.grupa5.sudoku.SudokuBoard;
 
-// TODO: 10.05.2020 USUWAM autclosable bo jest w DAO to tu nie musi byc z tego co pamietam
 class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
     private String fileName;

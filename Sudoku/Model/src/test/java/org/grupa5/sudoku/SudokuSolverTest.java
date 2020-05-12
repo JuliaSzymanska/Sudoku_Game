@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import org.grupa5.sudoku.exceptions.GetException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +30,7 @@ public class SudokuSolverTest {
     }
 
     @Test
-    void solveSudokuTest() {
+    void solveSudokuTest() throws GetException {
         SudokuBoard Plansza = new SudokuBoard();
         Plansza.solveGame();
         for (int i = 0; i < 9; i++) {

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.grupa5.sudoku.exceptions.GetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -152,19 +153,18 @@ public class SudokuBoard implements Cloneable, Serializable {
      * Return int from board at [x][y] position.
      */
 
-    public int get(int x, int y) {
+    public int get(int x, int y) throws GetException {
         if (x < 0 || x > SUDOKU_DIMENSIONS - 1) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to get");
             }
-            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
-
+            throw new GetException("Row has to be in range 0 - 8");
         }
         if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to get");
             }
-            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
+            throw new GetException("Column has to be in range 0 - 8");
         }
         return this.board.get(x).get(y).getValue();
     }
@@ -272,7 +272,14 @@ public class SudokuBoard implements Cloneable, Serializable {
         SudokuBoard cloneBoard = new SudokuBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                cloneBoard.set(i, j, this.get(i, j));
+                try {
+                    cloneBoard.set(i, j, this.get(i, j));
+                } catch (GetException e) {
+                    if (logger.isErrorEnabled()) {
+                        // TODO: czy to powinno tak być że tutaj łapiemy i tylko logujemy?
+                        logger.error("Get Exception thrown by clone", e);
+                    }
+                }
             }
         }
         return cloneBoard;
