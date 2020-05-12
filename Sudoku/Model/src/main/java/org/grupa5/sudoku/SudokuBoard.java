@@ -39,7 +39,7 @@ public class SudokuBoard implements Cloneable, Serializable {
         this.resetBoard(this.board);
     }
 
-    public void resetField(int row, int column) {
+    public void resetField(int row, int column) throws SetException {
         this.board.get(row).get(column).setValue(0);
     }
 
@@ -91,7 +91,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      * @return column
      */
 
-    public SudokuObject getColumn(int column) {
+    public SudokuObject getColumn(int column) throws SetException {
         SudokuField[] copyArray = new SudokuField[9];
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             copyArray[i] = board.get(i).get(column);
@@ -106,7 +106,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      * @return Row.
      */
 
-    public SudokuObject getRow(int row) {
+    public SudokuObject getRow(int row) throws SetException {
         SudokuField[] copyArray = new SudokuField[SUDOKU_DIMENSIONS];
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             copyArray[i] = board.get(row).get(i);
@@ -122,7 +122,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      * @return Sector.
      */
 
-    public SudokuObject getBox(int row, int column) {
+    public SudokuObject getBox(int row, int column) throws SetException {
         int sectorNr = this.getSectorNumber(row, column);
         int begX = (sectorNr / 3) * 3;
         int begY = (sectorNr % 3) * 3;
@@ -217,7 +217,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      * Check if number can be set at position [row][column].
      */
 
-    private boolean checkBoard(int row, int column) {
+    private boolean checkBoard(int row, int column) throws SetException {
         return !getRow(row).verify()
                 || !getColumn(column).verify()
                 || !getBox(row, column).verify();
@@ -253,7 +253,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      *
      * @return True if board is valid
      */
-    public boolean isWholeBoardValid() {
+    public boolean isWholeBoardValid() throws SetException {
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             for (int j = 0; j < SUDOKU_DIMENSIONS; j++) {
                 if (this.checkBoard(i, j)) {

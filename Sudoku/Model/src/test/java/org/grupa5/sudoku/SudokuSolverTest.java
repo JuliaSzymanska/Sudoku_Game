@@ -1,6 +1,7 @@
 package org.grupa5.sudoku;
 
 import org.grupa5.sudoku.exceptions.GetException;
+import org.grupa5.sudoku.exceptions.SetException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class SudokuSolverTest {
 
-    private boolean checkBoard(int row, int column, SudokuBoard board) {
+    private boolean checkBoard(int row, int column, SudokuBoard board) throws SetException {
         if (board == null) {
             throw new NullPointerException("SudokuBoard can't be null");
         }
@@ -30,7 +31,7 @@ public class SudokuSolverTest {
     }
 
     @Test
-    void solveSudokuTest() throws GetException {
+    void solveSudokuTest() throws GetException, SetException {
         SudokuBoard Plansza = new SudokuBoard();
         Plansza.solveGame();
         for (int i = 0; i < 9; i++) {

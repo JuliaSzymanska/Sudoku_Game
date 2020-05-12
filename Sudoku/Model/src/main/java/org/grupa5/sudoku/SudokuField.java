@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.grupa5.sudoku.exceptions.SetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,12 +59,12 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
      * @param value - Set the field 'value' to this param
      */
 
-    public void setValue(int value) {
+    public void setValue(int value) throws SetException {
         if (value < 0 || value > 9) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to set");
             }
-            throw new IllegalArgumentException("Value has to be in range 0 - 9");
+            throw new SetException("Value has to be in range 0 - 9");
         }
         this.value = value;
     }

@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-
-import com.jparams.verifier.tostring.ToStringVerifier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +31,7 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void getRowTest() {
+    void getRowTest() throws SetException {
         List<List<SudokuField>> board;
         SudokuBoard sudoku = new SudokuBoard();
         sudoku.solveGame();
@@ -45,7 +42,7 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void getColumnTest() {
+    void getColumnTest() throws SetException {
         List<List<SudokuField>> board;
         SudokuBoard sudoku = new SudokuBoard();
         sudoku.solveGame();
@@ -60,7 +57,7 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void getBoxTest() {
+    void getBoxTest() throws SetException {
         List<List<SudokuField>> board;
         SudokuBoard sudoku = new SudokuBoard();
         sudoku.solveGame();
@@ -157,7 +154,7 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void validBoardTest(){
+    void validBoardTest() throws SetException {
         SudokuBoard board = new SudokuBoard();
         board.solveGame();
         assertTrue(board.isWholeBoardValid());
@@ -185,7 +182,7 @@ public class SudokuBoardTest {
 
 
     @Test
-    public void cloneTest() {
+    public void cloneTest() throws SetException {
         SudokuBoard sudoku1 = new SudokuBoard();
         SudokuBoard sudoku2 = null;
 

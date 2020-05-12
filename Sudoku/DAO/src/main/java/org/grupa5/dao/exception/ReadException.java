@@ -16,5 +16,17 @@ public class ReadException extends Exception {
     public String getLocalizedMessage() {
         // to jest inaczej ale tak zostawiam narazie
         return super.getLocalizedMessage();
+
+//        ResourceBundle labels = ResourceBundle.getBundle("loc.exc.test.message");
+//
+//        private static final long serialVersionUID = 1L;
+//        public MyLocalizedThrowable(String messageKey) {
+//            super(messageKey);
+//        }
+//
+//        public String getLocalizedMessage() {
+//            return labels.getString(getMessage());
+//        }
+
     }
 }

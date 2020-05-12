@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import org.grupa5.sudoku.exceptions.SetException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,10 +11,10 @@ public class SudokuFieldTest {
     @Test
     void setTest() {
         SudokuField field = new SudokuField();
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(SetException.class, () -> {
             field.setValue(-1);
         });
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(SetException.class, () -> {
             field.setValue(10);
         });
         SudokuField field1 = new SudokuField(field);
@@ -21,7 +22,7 @@ public class SudokuFieldTest {
     }
 
     @Test
-    void equalsCodeTest() {
+    void equalsCodeTest() throws SetException {
         SudokuField sudoku1 = new SudokuField(3);
         SudokuField sudoku2 = new SudokuField(4);
 
@@ -64,7 +65,7 @@ public class SudokuFieldTest {
     }
 
     @Test
-    public void compareToTest(){
+    public void compareToTest() throws SetException {
         SudokuField field1 = new SudokuField(1);
         assertThrows(NullPointerException.class, () -> {
             field1.compareTo(null);

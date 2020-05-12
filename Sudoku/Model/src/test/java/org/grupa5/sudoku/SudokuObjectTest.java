@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import org.grupa5.sudoku.exceptions.SetException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SudokuObjectTest {
 
     @Test
-    void equalsCodeTest() {
+    void equalsCodeTest() throws SetException {
         List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
         List<SudokuField> list2 = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
@@ -46,7 +47,7 @@ class SudokuObjectTest {
     }
 
     @Test
-    void verifyTest() {
+    void verifyTest() throws SetException {
         List<SudokuField> list1 = Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]);
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             list1.set(i, new SudokuField(i + 1));
@@ -64,7 +65,7 @@ class SudokuObjectTest {
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             list.set(i, new SudokuField(i));
         }
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(SetException.class, () -> {
             new SudokuObject(list);
         });
     }
@@ -75,7 +76,7 @@ class SudokuObjectTest {
     }
 
     @Test
-    public void cloneTest() {
+    public void cloneTest() throws SetException {
         List<SudokuField> list1 = Arrays.asList(new SudokuField[9]);
         List<SudokuField> list2 = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
