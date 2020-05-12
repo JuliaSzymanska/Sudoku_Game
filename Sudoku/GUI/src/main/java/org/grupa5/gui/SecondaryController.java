@@ -99,7 +99,7 @@ public class SecondaryController implements Initializable {
         return true;
     }
 
-    private void switchStartAndEndButtons(){
+    private void switchStartAndEndButtons() {
         if (!flag) {
             try {
                 this.switchToPrimary();
@@ -156,12 +156,8 @@ public class SecondaryController implements Initializable {
                     textField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
                         @Override
                         public void handle(KeyEvent event) {
-                            try {
-                                if (!sudokuBoard.isWholeBoardValid()) {
-                                    textField.setText("0");
-                                }
-                            } catch (SetException e) {
-                                System.out.println(e.getLocalizedMessage());
+                            if (!sudokuBoard.isWholeBoardValid()) {
+                                textField.setText("0");
                             }
                         }
                     });
@@ -170,7 +166,7 @@ public class SecondaryController implements Initializable {
                     try {
                         intToAdd = sudokuBoard.get(j - 1, i - 1);
                     } catch (GetException e) {
-                        // TODO: 12.05.2020 cos madrego tutaj 
+                        System.out.println(e.getLocalizedMessage());
                     }
                     if (intToAdd != 0) {
                         textField.setDisable(true);
