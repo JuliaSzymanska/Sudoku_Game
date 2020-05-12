@@ -96,6 +96,7 @@ public class SudokuBoard implements Cloneable, Serializable {
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             copyArray[i] = board.get(i).get(column);
         }
+
         return new SudokuObject(Arrays.asList(copyArray));
     }
 
@@ -111,6 +112,7 @@ public class SudokuBoard implements Cloneable, Serializable {
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             copyArray[i] = board.get(row).get(i);
         }
+
         return new SudokuObject(Arrays.asList(copyArray));
     }
 
@@ -134,6 +136,7 @@ public class SudokuBoard implements Cloneable, Serializable {
                 k++;
             }
         }
+
         return new SudokuObject(Arrays.asList(copyArray));
     }
 
@@ -217,10 +220,17 @@ public class SudokuBoard implements Cloneable, Serializable {
      * Check if number can be set at position [row][column].
      */
 
-    private boolean checkBoard(int row, int column) throws SetException {
+    private boolean checkBoard(int row, int column) {
+        try {
         return !getRow(row).verify()
                 || !getColumn(column).verify()
                 || !getBox(row, column).verify();
+        } catch (SetException e) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Invalid Value Provided to get");
+            }
+        }
+        return false;
     }
 
     @Override
@@ -253,7 +263,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      *
      * @return True if board is valid
      */
-    public boolean isWholeBoardValid() throws SetException {
+    public boolean isWholeBoardValid() {
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             for (int j = 0; j < SUDOKU_DIMENSIONS; j++) {
                 if (this.checkBoard(i, j)) {
