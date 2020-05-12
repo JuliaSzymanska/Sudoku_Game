@@ -26,7 +26,7 @@ class FileSudokuBoardDao implements Dao<SudokuBoard> {
         ) {
             objectOut.writeObject(sudokuBoard);
         } catch (IOException e) {
-            throw new WriteException("SudokuBoard Dao write encountered an Issue", e);
+            throw new WriteException("write", e);
         }
     }
 
@@ -38,7 +38,7 @@ class FileSudokuBoardDao implements Dao<SudokuBoard> {
         ) {
             return (SudokuBoard) objectIn.readObject();
         } catch (ClassNotFoundException | IOException e) {
-            throw new ReadException("SudokuBoard Dao Read encountered an Issue", e);
+            throw new ReadException("read", e);
         }
 
     }

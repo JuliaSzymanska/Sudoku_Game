@@ -28,6 +28,7 @@ import org.grupa5.dao.exception.WriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
 import org.grupa5.sudoku.exceptions.GetException;
+import org.grupa5.sudoku.exceptions.SetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -155,8 +156,12 @@ public class SecondaryController implements Initializable {
                     textField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
                         @Override
                         public void handle(KeyEvent event) {
-                            if (!sudokuBoard.isWholeBoardValid()) {
-                                textField.setText("0");
+                            try {
+                                if (!sudokuBoard.isWholeBoardValid()) {
+                                    textField.setText("0");
+                                }
+                            } catch (SetException e) {
+                                System.out.println(e.getLocalizedMessage());
                             }
                         }
                     });
