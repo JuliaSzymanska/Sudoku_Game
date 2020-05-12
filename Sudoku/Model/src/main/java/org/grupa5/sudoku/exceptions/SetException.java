@@ -1,8 +1,16 @@
 package org.grupa5.sudoku.exceptions;
 
-public class SetException extends Exception {
+import java.io.Serializable;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-    // TODO: 12.05.2020 niestety jeszcze internacjonalizacja ehhh
+public class SetException extends Exception implements Serializable {
+
+    ResourceBundle boundle = ResourceBundle.getBundle("BoardException", new Locale("en", "EN"));
+
+    private static final long serialVersionUID = 645235;
+
+    // TODO: 12.05.2020 przekazywanie parametru jezyka
 
     public SetException(String s) {
         super(s);
@@ -12,12 +20,8 @@ public class SetException extends Exception {
         super(s, e);
     }
 
-
-    // TODO: 12.05.2020 zrobic to dla wszysktkich klas z wyjatkami
-    //  https://stackoverflow.com/a/24989341
     @Override
     public String getLocalizedMessage() {
-        // to jest inaczej ale tak zostawiam narazie
-        return super.getLocalizedMessage();
+        return boundle.getString(getMessage());
     }
 }

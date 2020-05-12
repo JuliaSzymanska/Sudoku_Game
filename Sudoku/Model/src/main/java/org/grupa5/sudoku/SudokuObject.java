@@ -42,8 +42,7 @@ public class SudokuObject implements Serializable, Cloneable {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid size of list in constructor");
             }
-            throw new SetException("List size has to be equal to "
-                    + Integer.toString(SUDOKU_DIMENSIONS));
+            throw new SetException("listSize");
         }
         this.object = Arrays.asList(new SudokuField[SUDOKU_DIMENSIONS]);
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {

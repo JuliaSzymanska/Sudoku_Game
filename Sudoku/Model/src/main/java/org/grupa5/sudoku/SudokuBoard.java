@@ -160,13 +160,13 @@ public class SudokuBoard implements Cloneable, Serializable {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to get");
             }
-            throw new GetException("Row has to be in range 0 - 8");
+            throw new GetException("from0to8");
         }
         if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to get");
             }
-            throw new GetException("Column has to be in range 0 - 8");
+            throw new GetException("from0to8");
         }
         return this.board.get(x).get(y).getValue();
     }
@@ -180,19 +180,19 @@ public class SudokuBoard implements Cloneable, Serializable {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to set");
             }
-            throw new SetException("Row has to be in range 0 - 8");
+            throw new SetException("from0to8");
         }
         if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to set");
             }
-            throw new SetException("Column has to be in range 0 - 8");
+            throw new SetException("from0to8");
         }
         if (value < 0 || value > 9) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Value Provided to set");
             }
-            throw new SetException("Number has to be in range 0 - 9");
+            throw new SetException("from0to8");
         }
         int temp = this.board.get(x).get(y).getValue();
         this.board.get(x).get(y).setValue(value);

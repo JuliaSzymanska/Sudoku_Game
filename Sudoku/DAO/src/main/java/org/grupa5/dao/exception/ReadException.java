@@ -4,13 +4,11 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-// TODO: 12.05.2020 niestety jeszcze internacjonalizacja ehhh
 public class ReadException extends Exception implements Serializable {
 
     ResourceBundle boundle = ResourceBundle.getBundle("DAOException", new Locale("en", "EN"));
 
-    // TODO: 12.05.2020 zrobic serializacje
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 654323;
 
     public ReadException(String errorMessage, Exception exception) {
         super(errorMessage, exception);
