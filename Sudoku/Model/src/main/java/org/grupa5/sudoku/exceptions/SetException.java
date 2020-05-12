@@ -2,6 +2,8 @@ package org.grupa5.sudoku.exceptions;
 
 public class SetException extends Exception {
 
+    // TODO: 12.05.2020 niestety jeszcze internacjonalizacja ehhh
+
     public SetException(String s) {
         super(s);
     }

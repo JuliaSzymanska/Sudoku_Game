@@ -1,15 +1,15 @@
 package org.grupa5.sudoku;
 
-import org.grupa5.sudoku.exceptions.GetException;
-import org.grupa5.sudoku.exceptions.SetException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import org.grupa5.sudoku.exceptions.GetException;
+import org.grupa5.sudoku.exceptions.SetException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BacktrackingSudokuRemover implements SudokuRemover {
 
@@ -60,15 +60,15 @@ public class BacktrackingSudokuRemover implements SudokuRemover {
                 }
             }
             this.setOriginalBoardToCopy();
-        }
-        catch (GetException e) {
+        } catch (GetException | SetException e) {
+            // TODO: 12.05.2020 Z nudów obejrzyj też i ten exception i log
             if (logger.isErrorEnabled()) {
                 logger.error("Exception thrown in remove, ", e);
             }
         }
     }
 
-    private boolean checkNumbOfCombinations(SudokuBoard board) throws GetException {
+    private boolean checkNumbOfCombinations(SudokuBoard board) throws GetException, SetException {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (board.get(row, col) == 0) {

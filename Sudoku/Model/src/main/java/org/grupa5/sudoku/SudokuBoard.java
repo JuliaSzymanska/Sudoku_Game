@@ -3,6 +3,7 @@ package org.grupa5.sudoku;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 // TODO: 10.05.2020 https://stackoverflow.com/questions/21881846/where-does-the-slf4j-log-file-get-saved
 
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.grupa5.sudoku.exceptions.GetException;
+import org.grupa5.sudoku.exceptions.SetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -173,24 +175,24 @@ public class SudokuBoard implements Cloneable, Serializable {
      * Set value at [x][y] position in board.
      */
 
-    public void set(int x, int y, int value) {
+    public void set(int x, int y, int value) throws SetException {
         if (x < 0 || x > SUDOKU_DIMENSIONS - 1) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to set");
             }
-            throw new IndexOutOfBoundsException("Row has to be in range 0 - 8");
+            throw new SetException("Row has to be in range 0 - 8");
         }
         if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to set");
             }
-            throw new IndexOutOfBoundsException("Column has to be in range 0 - 8");
+            throw new SetException("Column has to be in range 0 - 8");
         }
         if (value < 0 || value > 9) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Value Provided to set");
             }
-            throw new IllegalArgumentException("Number has to be in range 0 - 9");
+            throw new SetException("Number has to be in range 0 - 9");
         }
         int temp = this.board.get(x).get(y).getValue();
         this.board.get(x).get(y).setValue(value);
@@ -274,10 +276,10 @@ public class SudokuBoard implements Cloneable, Serializable {
             for (int j = 0; j < 9; j++) {
                 try {
                     cloneBoard.set(i, j, this.get(i, j));
-                } catch (GetException e) {
+                } catch (GetException | SetException e) {
                     if (logger.isErrorEnabled()) {
                         // TODO: czy to powinno tak być że tutaj łapiemy i tylko logujemy?
-                        logger.error("Get Exception thrown by clone", e);
+                        logger.error("Exception thrown by clone", e);
                     }
                 }
             }

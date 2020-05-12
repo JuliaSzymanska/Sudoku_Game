@@ -1,13 +1,18 @@
 package org.grupa5.sudoku;
 
-import org.grupa5.sudoku.exceptions.GetException;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.grupa5.sudoku.exceptions.GetException;
+import org.grupa5.sudoku.exceptions.SetException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class BacktrackingSudokuSolver implements SudokuSolver {
+
+    private static final Logger logger = LoggerFactory.getLogger(BacktrackingSudokuSolver.class);
 
     /**
      * Fills the board in a random way with every usage. Starts by filling every.
@@ -18,7 +23,14 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
 
     @Override
     public void solve(SudokuBoard board) {
-        this.solveSudoku(board);
+        try {
+            this.solveSudoku(board);
+        } catch (SetException | GetException e) {
+            if (logger.isErrorEnabled()) {
+                // TODO: 12.05.2020 Kolejne do obejrzenia w wolnym czasie
+                logger.error("Exception thrown by solve, ", e);
+            }
+        }
     }
 
     /**
@@ -27,10 +39,9 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
      * @param board is an object of SudokuBoard class
      */
 
-    private boolean solveSudoku(SudokuBoard board) {
+    private boolean solveSudoku(SudokuBoard board) throws SetException, GetException {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                try {
                     if (board.get(row, col) == 0) {
                         List<Integer> range =
                         IntStream.range(1, 10).boxed().collect(Collectors.toList());
@@ -47,11 +58,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                         }
                         return false;
                     }
-                    // TODO: tjaaa chyba nie bardzo XD
-
-                } catch (GetException ignore) {
-
-                }
             }
         }
         return true;

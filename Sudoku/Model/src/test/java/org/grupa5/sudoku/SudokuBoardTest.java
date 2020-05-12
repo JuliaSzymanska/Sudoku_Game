@@ -1,10 +1,12 @@
 package org.grupa5.sudoku;
 
 import org.grupa5.sudoku.exceptions.GetException;
+import org.grupa5.sudoku.exceptions.SetException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import com.jparams.verifier.tostring.ToStringVerifier;
 
@@ -77,7 +79,14 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void getterTest() {
+    void getterAndSetterTest() throws SetException, GetException {
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.set(2, 2, 2);
+        assertEquals(sudoku.get(2, 2), 2);
+    }
+
+    @Test
+    void getterTestException() {
         SudokuBoard sudoku = new SudokuBoard();
         assertThrows(GetException.class, () -> {
             sudoku.get(9, 7);
@@ -94,26 +103,24 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void setterTest() throws GetException {
+    void setterTestException() {
         SudokuBoard sudoku = new SudokuBoard();
-        sudoku.set(2, 2, 2);
-        assertEquals(sudoku.get(2, 2), 2);
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(SetException.class, () -> {
             sudoku.set(10, 7, 3);
         });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(SetException.class, () -> {
             sudoku.set(7, 10, 3);
         });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(SetException.class, () -> {
             sudoku.set(-1, 7, 3);
         });
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(SetException.class, () -> {
             sudoku.set(7, -1, 3);
         });
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(SetException.class, () -> {
             sudoku.set(7, 7, -1);
         });
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(SetException.class, () -> {
             sudoku.set(7, 7, 10);
         });
     }
@@ -128,7 +135,7 @@ public class SudokuBoardTest {
 
 
     @Test
-    void equalsTest() throws GetException {
+    void equalsTest() throws GetException, SetException {
         SudokuBoard sudoku1 = new SudokuBoard();
         SudokuBoard sudoku2 = new SudokuBoard();
 
