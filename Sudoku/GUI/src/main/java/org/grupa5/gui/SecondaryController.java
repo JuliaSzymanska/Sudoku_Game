@@ -44,6 +44,7 @@ public class SecondaryController implements Initializable {
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
 
+    // TODO: 13.05.2020 nadpisac metode, zapisac nazwy jako klucze  
     public enum Level {
         Easy(42),
         Medium(54),
