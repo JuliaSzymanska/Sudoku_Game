@@ -121,11 +121,6 @@ public class SecondaryController implements Initializable {
 
     // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
     private void fillGrid() throws NoSuchMethodException {
-        // TODO: sprawdzam tym czy dziala internationalized wyjatek XD
-//          to jest tak: ten locale w erorach DZIALA ale jakos dziwnie XD
-//          na poczatku error jest po polsku(bo taki jest default)
-//          po zmianie jezyka jest po angielsku
-//          kolejne zmiany jezyka nie maja wplywu xD
         try {
             sudokuBoard.set(0, 0, 12);
         } catch (SetException e) {
@@ -283,7 +278,6 @@ public class SecondaryController implements Initializable {
     }
 
     public void changeLanguage() {
-        // FIXME: 16.05.2020 Z JAKIEGOS POWODU NIE ZMIENIA TERAZ COMBO BOXA :(
         if (Locale.getDefault().equals(new Locale("en", "en"))) {
             Locale.setDefault(new Locale("pl", "pl"));
             resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
