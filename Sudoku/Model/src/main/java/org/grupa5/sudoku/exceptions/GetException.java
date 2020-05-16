@@ -1,12 +1,11 @@
 package org.grupa5.sudoku.exceptions;
 
 import java.io.Serializable;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class GetException extends Exception implements Serializable {
 
-    ResourceBundle boundle = ResourceBundle.getBundle("BoardException");
+    ResourceBundle bundle = ResourceBundle.getBundle("BoardException");
 
     private static final long serialVersionUID = 97834245;
 
@@ -22,6 +21,6 @@ public class GetException extends Exception implements Serializable {
 
     @Override
     public String getLocalizedMessage() {
-        return boundle.getString(getMessage());
+        return bundle.getString(getMessage());
     }
 }
