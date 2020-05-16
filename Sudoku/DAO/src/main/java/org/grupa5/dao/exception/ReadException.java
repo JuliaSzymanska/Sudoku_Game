@@ -3,6 +3,7 @@ package org.grupa5.dao.exception;
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.ResourceBundle;
+// TODO: 16.05.2020 PRZETESTOWAC WYJATKI W KAZDEJ KLASIE CZY SIE INTERNACJONALIZUJA 
 
 public class ReadException extends Exception implements Serializable {
 
@@ -17,9 +18,7 @@ public class ReadException extends Exception implements Serializable {
     public ReadException(String errorMessage) {
         super(errorMessage);
     }
-
-    // TODO: 12.05.2020 zrobic to dla wszysktkich klas z wyjatkami
-    //  https://stackoverflow.com/a/24989341
+    
     @Override
     public String getLocalizedMessage() {
         return boundle.getString(getMessage());
