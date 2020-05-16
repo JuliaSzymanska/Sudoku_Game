@@ -121,10 +121,11 @@ public class SecondaryController implements Initializable {
 
     // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
     private void fillGrid() throws NoSuchMethodException {
+        // TODO: sprawdzam tym czy dziala internationalized wyjatek XD
         try {
             sudokuBoard.set(0, 0, 12);
         } catch (SetException e) {
-            System.out.println(e);
+            System.out.println(e.getLocalizedMessage());
         }
         int numRows = grid1.getRowCount();
         int numCols = grid1.getColumnCount();

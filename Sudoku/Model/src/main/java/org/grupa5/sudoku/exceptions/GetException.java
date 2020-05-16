@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 public class GetException extends Exception implements Serializable {
 
-    ResourceBundle boundle = ResourceBundle.getBundle("BoardException", new Locale("en", "EN"));
+    ResourceBundle boundle = ResourceBundle.getBundle("BoardException");
 
     private static final long serialVersionUID = 97834245;
 

@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 public class ReadException extends Exception implements Serializable {
 
-    ResourceBundle boundle = ResourceBundle.getBundle("DAOException", new Locale("en", "EN"));
+    ResourceBundle boundle = ResourceBundle.getBundle("DAOException");
 
     private static final long serialVersionUID = 654323;
 
