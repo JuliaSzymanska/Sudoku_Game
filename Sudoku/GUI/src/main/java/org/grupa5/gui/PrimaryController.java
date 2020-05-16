@@ -71,6 +71,8 @@ public class PrimaryController implements Initializable {
 
     private void updateLanguage() throws IOException {
         App reload = new App();
+        Locale.setDefault(VariablesCollection.getLocale());
+        System.out.println(VariablesCollection.getLocale());
         reload.reload("primary");
     }
 }

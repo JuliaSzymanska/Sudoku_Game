@@ -3,6 +3,7 @@ package org.grupa5.sudoku;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 // TODO: 10.05.2020 https://stackoverflow.com/questions/21881846/where-does-the-slf4j-log-file-get-saved
@@ -294,10 +295,22 @@ public class SudokuBoard implements Cloneable, Serializable {
         }
         return cloneBoard;
     }
-
-    public static void main(String[] args) {
-        SudokuBoard board = new SudokuBoard();
-        System.out.println(board.toString());
-    }
+    // TODO: 16.05.2020 tutaj locale dziala ehh 
+//    public static void main(String[] args) {
+//        SudokuBoard board = new SudokuBoard();
+//        System.out.println(board.toString());
+//        Locale.setDefault(new Locale("en_en"));
+//        try {
+//            board.set(0, 0, 12);
+//        } catch (SetException e) {
+//            System.out.println(e);
+//        }
+//        Locale.setDefault(new Locale("pl_pl"));
+//        try {
+//            board.set(0, 0, 12);
+//        } catch (SetException e) {
+//            System.out.println(e);
+//        }
+//    }
 
 }

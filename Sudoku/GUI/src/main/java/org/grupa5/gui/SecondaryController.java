@@ -122,6 +122,10 @@ public class SecondaryController implements Initializable {
     // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
     private void fillGrid() throws NoSuchMethodException {
         // TODO: sprawdzam tym czy dziala internationalized wyjatek XD
+//          to jest tak: ten locale w erorach DZIALA ale jakos dziwnie XD
+//          na poczatku error jest po polsku(bo taki jest default)
+//          po zmianie jezyka jest po angielsku
+//          kolejne zmiany jezyka nie maja wplywu xD
         try {
             sudokuBoard.set(0, 0, 12);
         } catch (SetException e) {
@@ -301,6 +305,8 @@ public class SecondaryController implements Initializable {
 
     private void updateLanguage() throws IOException {
         App reload = new App();
+        Locale.setDefault(VariablesCollection.getLocale());
+        System.out.println(VariablesCollection.getLocale());
         reload.reload("secondary");
     }
 
