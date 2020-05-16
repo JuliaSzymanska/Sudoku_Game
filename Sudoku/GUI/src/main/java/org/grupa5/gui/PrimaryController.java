@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -42,7 +43,7 @@ public class PrimaryController implements Initializable {
             logger.debug("PrimaryController init");
         }
         ResourceBundle resourceAuthors
-                = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", VariablesCollection.getLocale());
+                = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", Locale.getDefault());
         authors.setText(resourceAuthors.getString("Authors: "));
         author_1.setText(resourceAuthors.getString("Julia Szymanska"));
         author_2.setText(resourceAuthors.getString("Przemyslaw Zdrzalik"));
@@ -54,12 +55,12 @@ public class PrimaryController implements Initializable {
     }
 
     public void changeLanguage() {
-        if (VariablesCollection.getLocale().toString().equals("en_en")) {
-            VariablesCollection.setLocale(new Locale("pl_PL"));
+        if (Locale.getDefault().equals(new Locale("en", "en"))) {
+            Locale.setDefault(new Locale("pl", "pl"));
         } else {
-            VariablesCollection.setLocale(new Locale("en_EN"));
+            Locale.setDefault(new Locale("en", "en"));
         }
-        resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
+        resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
         try {
             updateLanguage();
         } catch (IOException e) {
@@ -71,8 +72,7 @@ public class PrimaryController implements Initializable {
 
     private void updateLanguage() throws IOException {
         App reload = new App();
-        Locale.setDefault(VariablesCollection.getLocale());
-        System.out.println(VariablesCollection.getLocale());
+        System.out.println(Locale.getDefault());
         reload.reload("primary");
     }
 }

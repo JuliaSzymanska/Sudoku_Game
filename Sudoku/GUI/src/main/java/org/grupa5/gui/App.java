@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -24,6 +25,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
         scene = new Scene(loadFXML("primary"));
+//        VariablesCollection.setLocale(Locale.getDefault());
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
@@ -39,7 +41,7 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"), resourceBundle);
         return fxmlLoader.load();
     }

@@ -220,8 +220,8 @@ public class SecondaryController implements Initializable {
         if (logger.isDebugEnabled()) {
             logger.debug("SecondaryController init");
         }
-        this.resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
-        if (VariablesCollection.getLocale().toString().equals("en_en")) {
+        this.resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
+        if (Locale.getDefault().equals(new Locale("en", "en"))) {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
             boxLevel.setValue(Level.values()[0]);
         } else {
@@ -283,14 +283,15 @@ public class SecondaryController implements Initializable {
     }
 
     public void changeLanguage() {
-        if (VariablesCollection.getLocale().toString().equals("en_en")) {
-            VariablesCollection.setLocale(new Locale("pl_PL"));
-            resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
+        // FIXME: 16.05.2020 Z JAKIEGOS POWODU NIE ZMIENIA TERAZ COMBO BOXA :(
+        if (Locale.getDefault().equals(new Locale("en", "en"))) {
+            Locale.setDefault(new Locale("pl", "pl"));
+            resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));
             boxLevel.setValue(Level.values()[3]);
         } else {
-            VariablesCollection.setLocale(new Locale("en_EN"));
-            resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
+            Locale.setDefault(new Locale("en", "en"));
+            resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
             boxLevel.setValue(Level.values()[0]);
         }
@@ -305,8 +306,6 @@ public class SecondaryController implements Initializable {
 
     private void updateLanguage() throws IOException {
         App reload = new App();
-        Locale.setDefault(VariablesCollection.getLocale());
-        System.out.println(VariablesCollection.getLocale());
         reload.reload("secondary");
     }
 

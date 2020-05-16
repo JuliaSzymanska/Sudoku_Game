@@ -2,7 +2,7 @@ package org.grupa5.gui.resourceBundle;
 
 import java.util.ListResourceBundle;
 
-public class authors_pl_pl extends ListResourceBundle {
+public class authors_pl_PL extends ListResourceBundle {
 
     private static final Object[][] contents = {
             {"Authors: ", "Autorzy: "},
