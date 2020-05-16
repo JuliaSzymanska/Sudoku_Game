@@ -60,18 +60,17 @@ public class PrimaryController implements Initializable {
             VariablesCollection.setLocale(new Locale("en_EN"));
         }
         resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
-        updateLanguage();
+        try {
+            updateLanguage();
+        } catch (IOException e) {
+            if (logger.isErrorEnabled()) {
+                logger.error("changeLanguage threw ", e);
+            }
+        }
     }
 
-    private void updateLanguage() {
-        Locale.setDefault(VariablesCollection.getLocale());
-
-        ResourceBundle resourceAuthors
-                = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", VariablesCollection.getLocale());
-        authors.setText(resourceAuthors.getString("Authors: "));
-        author_1.setText(resourceAuthors.getString("Julia Szymanska"));
-        author_2.setText(resourceAuthors.getString("Przemyslaw Zdrzalik"));
-        primaryButton.setText(resourceBundle.getString("start"));
-        language.setText(resourceBundle.getString("language"));
+    private void updateLanguage() throws IOException {
+        App reload = new App();
+        reload.reload("primary");
     }
 }

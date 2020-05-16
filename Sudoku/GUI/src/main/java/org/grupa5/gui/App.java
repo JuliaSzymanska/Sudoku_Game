@@ -15,12 +15,14 @@ import java.util.ResourceBundle;
 public class App extends Application {
 
     private static Scene scene;
+    public static Stage stage;
 
     // TODO: 16.05.2020 OMG TERAZ SIE DOWIADUJE ZE TAK MOZNA :(
     //  https://stackoverflow.com/questions/29097864/when-reload-scene-in-javafx-maximized-did-not-work
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
+        stage = primaryStage;
         scene = new Scene(loadFXML("primary"));
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setScene(scene);
@@ -31,9 +33,13 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
+    // Tym reloadujemy po zmianie jezyka
+    public void reload(String fxmlFileName) throws IOException {
+        stage.getScene().setRoot(loadFXML(fxmlFileName));
+    }
+
     private static Parent loadFXML(String fxml) throws IOException {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
-        // TODO: 06.05.2020 uzyc do zmiany jezyka
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"), resourceBundle);
         return fxmlLoader.load();
     }

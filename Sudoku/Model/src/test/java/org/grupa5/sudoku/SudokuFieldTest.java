@@ -42,13 +42,12 @@ public class SudokuFieldTest {
             assertNotEquals(sudoku1, sudoku2);
     }
 
-// TODO: 10.05.2020 zrobic ta metode bo nie dziala przez loggery
-//    @Test
-//    public void testToString() {
-//        String expectedOut = "1234567890";
-//        SudokuField field = new SudokuField(1234567890);
-//        assertEquals(expectedOut, field.toString());
-//    }
+    @Test
+    public void testToString() {
+        String expectedOut = "1234567890";
+        SudokuField field = new SudokuField(1234567890);
+        assertEquals(expectedOut, field.toString());
+    }
 
     @Test
     public void cloneTest(){

@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -34,6 +35,9 @@ import org.slf4j.LoggerFactory;
 
 public class SecondaryController implements Initializable {
 
+    @FXML
+    private AnchorPane root;
+
     private final Logger logger = LoggerFactory.getLogger(SecondaryController.class);
 
     private SudokuBoard sudokuBoard = new SudokuBoard();
@@ -44,6 +48,7 @@ public class SecondaryController implements Initializable {
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
 
+    // TODO: 16.05.2020 kwapi mówił że da sie internalizowac tego enuma jakos
     public enum Level {
         Easy(42),
         Medium(54),
@@ -284,15 +289,18 @@ public class SecondaryController implements Initializable {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
             boxLevel.setValue(Level.values()[0]);
         }
-        updateLanguage();
+        try {
+            updateLanguage();
+        } catch (IOException e) {
+            if (logger.isErrorEnabled()) {
+                logger.error("changeLanguage threw ", e);
+            }
+        }
     }
 
-    private void updateLanguage() {
-        secondaryButton.setText(resourceBundle.getString("start"));
-        language.setText(resourceBundle.getString("language"));
-        level.setText(resourceBundle.getString("level"));
-        saveButton.setText(resourceBundle.getString("saveGame"));
-        loadButton.setText(resourceBundle.getString("loadGame"));
+    private void updateLanguage() throws IOException {
+        App reload = new App();
+        reload.reload("secondary");
     }
 
 }
