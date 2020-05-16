@@ -1,5 +1,6 @@
 package org.grupa5.sudoku;
 
+import com.jparams.verifier.tostring.ToStringVerifier;
 import org.grupa5.sudoku.exceptions.GetException;
 import org.grupa5.sudoku.exceptions.SetException;
 import org.junit.jupiter.api.Test;
@@ -174,10 +175,10 @@ public class SudokuBoardTest {
         assertNotEquals(sudoku1, sudoku2);
     }
 
-//    @Test
-//    public void testToString() {
-//        ToStringVerifier.forClass(SudokuBoard.class).verify();
-//    }
+    @Test
+    public void testToString() {
+        ToStringVerifier.forClass(SudokuBoard.class).verify();
+    }
 
 
 

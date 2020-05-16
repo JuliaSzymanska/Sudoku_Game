@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -34,6 +35,9 @@ import org.slf4j.LoggerFactory;
 
 public class SecondaryController implements Initializable {
 
+    @FXML
+    private AnchorPane root;
+
     private final Logger logger = LoggerFactory.getLogger(SecondaryController.class);
 
     private SudokuBoard sudokuBoard = new SudokuBoard();
@@ -44,7 +48,11 @@ public class SecondaryController implements Initializable {
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
 
+<<<<<<< HEAD
     // TODO: 13.05.2020 nadpisac metode, zapisac nazwy jako klucze  
+=======
+    // TODO: 16.05.2020 kwapi mówił że da sie internalizowac tego enuma jakos
+>>>>>>> de1e28f43ac8a4f852daab5536a020c82d8a0128
     public enum Level {
         Easy(42),
         Medium(54),
@@ -117,6 +125,12 @@ public class SecondaryController implements Initializable {
 
     // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
     private void fillGrid() throws NoSuchMethodException {
+        // TODO: 16.05.2020 Testuje tym czy sie internacjonalizuja wyjatki xd
+        try {
+            sudokuBoard.set(0, 0, 12);
+        } catch (SetException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
         int numRows = grid1.getRowCount();
         int numCols = grid1.getColumnCount();
         for (int i = 0; i < numRows; i++) {
@@ -206,8 +220,8 @@ public class SecondaryController implements Initializable {
         if (logger.isDebugEnabled()) {
             logger.debug("SecondaryController init");
         }
-        this.resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
-        if (VariablesCollection.getLocale().toString().equals("en_en")) {
+        this.resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
+        if (Locale.getDefault().equals(new Locale("en", "en"))) {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
             boxLevel.setValue(Level.values()[0]);
         } else {
@@ -269,26 +283,31 @@ public class SecondaryController implements Initializable {
     }
 
     public void changeLanguage() {
-        if (VariablesCollection.getLocale().toString().equals("en_en")) {
-            VariablesCollection.setLocale(new Locale("pl_PL"));
-            resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
+        if (Locale.getDefault().equals(new Locale("en", "en"))) {
+            Locale.setDefault(new Locale("pl", "pl"));
+            resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));
             boxLevel.setValue(Level.values()[3]);
         } else {
-            VariablesCollection.setLocale(new Locale("en_EN"));
-            resourceBundle = ResourceBundle.getBundle("Lang", VariablesCollection.getLocale());
+            Locale.setDefault(new Locale("en", "en"));
+            resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
             boxLevel.setValue(Level.values()[0]);
         }
-        updateLanguage();
+        try {
+            updateLanguage();
+        } catch (IOException e) {
+            if (logger.isErrorEnabled()) {
+                logger.error("changeLanguage threw ", e);
+            }
+        }
     }
 
-    private void updateLanguage() {
-        secondaryButton.setText(resourceBundle.getString("start"));
-        language.setText(resourceBundle.getString("language"));
-        level.setText(resourceBundle.getString("level"));
-        saveButton.setText(resourceBundle.getString("saveGame"));
-        loadButton.setText(resourceBundle.getString("loadGame"));
+    // TODO: 16.05.2020 Aktualnie po przeresetowaniu sceny tzn po zmianie jezyka
+    //  resetuje nam sie plansza, postep gry, jak to tam chcesz nazwac >.> do fixu
+    private void updateLanguage() throws IOException {
+        App reload = new App();
+        reload.reload("secondary");
     }
 
 }

@@ -6,11 +6,9 @@ import java.util.ResourceBundle;
 
 public class SetException extends Exception implements Serializable {
 
-    ResourceBundle boundle = ResourceBundle.getBundle("BoardException", new Locale("en", "EN"));
+    ResourceBundle boundle = ResourceBundle.getBundle("BoardException");
 
     private static final long serialVersionUID = 645235;
-
-    // TODO: 12.05.2020 przekazywanie parametru jezyka
 
     public SetException(String s) {
         super(s);

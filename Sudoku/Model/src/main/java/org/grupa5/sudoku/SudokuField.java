@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
 
-    private final Logger logger = LoggerFactory.getLogger(SudokuField.class);
+    private static final Logger logger = LoggerFactory.getLogger(SudokuField.class);
 
     private static final long serialVersionUID = 756545346;
 
