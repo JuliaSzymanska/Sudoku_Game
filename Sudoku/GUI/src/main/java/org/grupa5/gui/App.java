@@ -16,6 +16,9 @@ public class App extends Application {
 
     private static Scene scene;
 
+    // TODO: 16.05.2020 OMG TERAZ SIE DOWIADUJE ZE TAK MOZNA :(
+    //  https://stackoverflow.com/questions/29097864/when-reload-scene-in-javafx-maximized-did-not-work
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"));

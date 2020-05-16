@@ -64,6 +64,8 @@ public class PrimaryController implements Initializable {
     }
 
     private void updateLanguage() {
+        Locale.setDefault(VariablesCollection.getLocale());
+
         ResourceBundle resourceAuthors
                 = ResourceBundle.getBundle("org.grupa5.gui.resourceBundle.authors", VariablesCollection.getLocale());
         authors.setText(resourceAuthors.getString("Authors: "));
