@@ -10,8 +10,6 @@ public class SetException extends Exception implements Serializable {
 
     private static final long serialVersionUID = 645235;
 
-    // TODO: 12.05.2020 przekazywanie parametru jezyka
-
     public SetException(String s) {
         super(s);
     }

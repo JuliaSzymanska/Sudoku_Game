@@ -9,7 +9,7 @@ public class GetException extends Exception implements Serializable {
 
     private static final long serialVersionUID = 97834245;
 
-    // TODO: 12.05.2020 przekazywanie parametru jezyka
+    // TODO: 16.05.2020 przetestowac czy ta klasa tez sie poprawnie internacjonalizuje
 
     public GetException(String s) {
         super(s);

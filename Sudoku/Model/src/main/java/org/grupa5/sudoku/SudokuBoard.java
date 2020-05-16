@@ -295,22 +295,5 @@ public class SudokuBoard implements Cloneable, Serializable {
         }
         return cloneBoard;
     }
-    // TODO: 16.05.2020 tutaj locale dziala ehh 
-//    public static void main(String[] args) {
-//        SudokuBoard board = new SudokuBoard();
-//        System.out.println(board.toString());
-//        Locale.setDefault(new Locale("en_en"));
-//        try {
-//            board.set(0, 0, 12);
-//        } catch (SetException e) {
-//            System.out.println(e);
-//        }
-//        Locale.setDefault(new Locale("pl_pl"));
-//        try {
-//            board.set(0, 0, 12);
-//        } catch (SetException e) {
-//            System.out.println(e);
-//        }
-//    }
 
 }

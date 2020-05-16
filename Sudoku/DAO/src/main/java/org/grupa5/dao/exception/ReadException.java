@@ -3,7 +3,7 @@ package org.grupa5.dao.exception;
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.ResourceBundle;
-// TODO: 16.05.2020 PRZETESTOWAC WYJATKI W KAZDEJ KLASIE CZY SIE INTERNACJONALIZUJA 
+// TODO: 16.05.2020 przetestowac czy ta klasa tez sie poprawnie internacjonalizuje
 
 public class ReadException extends Exception implements Serializable {
 
