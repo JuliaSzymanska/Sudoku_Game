@@ -1,15 +1,11 @@
 package org.grupa5.dao.exception;
 
-import java.io.Serializable;
-import java.util.Locale;
 import java.util.ResourceBundle;
-// TODO: 16.05.2020 przetestowac czy ta klasa tez sie poprawnie internacjonalizuje
 
-public class ReadException extends Exception implements Serializable {
 
-    ResourceBundle boundle = ResourceBundle.getBundle("DAOException");
+public class ReadException extends Exception {
 
-    private static final long serialVersionUID = 654323;
+    ResourceBundle bundle = ResourceBundle.getBundle("DAOException");
 
     public ReadException(String errorMessage, Exception exception) {
         super(errorMessage, exception);
@@ -21,6 +17,6 @@ public class ReadException extends Exception implements Serializable {
     
     @Override
     public String getLocalizedMessage() {
-        return boundle.getString(getMessage());
+        return bundle.getString(getMessage());
     }
 }
