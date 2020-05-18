@@ -105,6 +105,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     private boolean isTableExist(boolean type) throws SQLException {
+        // TODO: 18.05.2020 zrobic porpawnie zwracanie zeby mialo sens
         // dla type = false znaczy ze odczyt, jak true zapis
         if (connection != null) {
             DatabaseMetaData dbmd = connection.getMetaData();
