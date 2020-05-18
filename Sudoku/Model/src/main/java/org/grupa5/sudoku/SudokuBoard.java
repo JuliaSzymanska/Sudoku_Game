@@ -14,7 +14,6 @@ import org.grupa5.sudoku.exceptions.SetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class SudokuBoard implements Cloneable, Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(SudokuBoard.class);
