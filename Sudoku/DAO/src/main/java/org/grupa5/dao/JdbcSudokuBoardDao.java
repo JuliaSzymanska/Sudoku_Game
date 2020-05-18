@@ -21,6 +21,9 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private Statement statement;
     ResultSet resultSet = null;
     private String tableName = "boards";
+    private String boardId = "board_id";
+    private String boardFields = "fields";
+
 
     JdbcSudokuBoardDao(String fileName) {
         this.fileName = fileName;
@@ -28,7 +31,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
     @Override
     public SudokuBoard read() throws ReadException {
-        String query = "SELECT * FROM" + tableName + "WHERE board_id = " + fileName;
+        String query = "SELECT * FROM " + tableName + " WHERE " + boardId + " = " + fileName;
         try {
             Class.forName(DBDRIVER).newInstance();
             connection = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
@@ -36,8 +39,12 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             SudokuBoard sudokuBoard = new SudokuBoard();
             if (isTableExist(false)) {
                 resultSet = statement.executeQuery(query);
-                String id = resultSet.getString("board_id");
-                String fields = resultSet.getString("fields");
+                String id = "";
+                String fields = "";
+                while (resultSet.next()) {
+                    id = resultSet.getString(boardId);
+                    fields = resultSet.getString(boardFields);
+                }
                 int counterX = 0;
                 int counterY = 0;
                 for (char c : fields.toCharArray()) {
@@ -49,10 +56,10 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                         counterY += 1;
                     }
                 }
-                return sudokuBoard;
             }
             statement.close();
             connection.close();
+            return sudokuBoard;
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
                 | SQLException | SetException e) {
             // TODO wyjatki
@@ -64,7 +71,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
     @Override
     public void write(SudokuBoard sudokuBoard) throws WriteException {
-        String sudoku = "";
+        String sudoku = "'";
         try {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -74,7 +81,9 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
         } catch (GetException e) {
             e.printStackTrace();
         }
-        String query = "INSERT INTO " + tableName + " VALUES (" + fileName + ", " + sudoku + ")";
+        sudoku += "'";
+        String query = "INSERT INTO " + tableName + "(" + boardId + ", " + boardFields + ")"
+                + " VALUES (" + fileName + ", " + sudoku + ")";
         try {
             Class.forName(DBDRIVER).newInstance();
             connection = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
@@ -91,16 +100,21 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
         }
     }
 
+    private void getAll() {
+
+    }
+
     private boolean isTableExist(boolean type) throws SQLException {
         // dla type = false znaczy ze odczyt, jak true zapis
         if (connection != null) {
             DatabaseMetaData dbmd = connection.getMetaData();
             ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null);
-            if (!rs.next() && type) {
+            boolean rsbool = rs.next();
+            if (!rsbool && type) {
                 statement.executeUpdate("CREATE TABLE " + tableName
-                        + "( " + "board_id VARCHAR(20) PRIMARY KEY, "
-                        + "fields VARCHAR(81))");
-            } else if (!rs.next() && !type) {
+                        + "( " + boardId + " VARCHAR(20) PRIMARY KEY, "
+                        + boardFields + " CHAR(81))");
+            } else if (!rsbool && !type) {
                 return false;
             }
             return true;

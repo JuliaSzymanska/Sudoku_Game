@@ -237,7 +237,7 @@ public class SecondaryController implements Initializable {
             try {
 //                SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
                 // TODO: 18.05.2020 zrobic parametr
-                SudokuBoardDaoFactory.getJdbcDao("Nazwa").write(this.sudokuBoard);
+                SudokuBoardDaoFactory.getJdbcDao("'Nazwa3'").write(this.sudokuBoard);
             } catch (WriteException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Save Error");
@@ -264,7 +264,8 @@ public class SecondaryController implements Initializable {
             try {
 //                this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
                 // TODO: 18.05.2020 poprawic parametr
-                this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao("Nazwa").read();
+                this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao("'Nazwa3'").read();
+                System.out.println(this.sudokuBoard);
                 switchStartAndEndButtons();
                 this.fillGrid();
             } catch (ReadException | NoSuchMethodException e) {
