@@ -13,7 +13,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private static final String DBURL = "jdbc:derby://localhost:1527/dbname;create=true";
     //jdbc:derby://localhost/c:/temp/db";
     private static final String DBUSER = "user";
-    private static final String DBPASS = "";
+    private static final String DBPASS = "1";
     private static final String DBDRIVER = "org.apache.derby.jdbc.ClientDriver";
     //obiekt tworzący połączenie z bazą danych.
     private Connection connection;
@@ -21,7 +21,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private Statement statement;
     ResultSet resultSet = null;
     private String tableName = "boards";
-    private boolean tableExist = false;
 
     JdbcSudokuBoardDao(String fileName) {
         this.fileName = fileName;
@@ -29,7 +28,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
     @Override
     public SudokuBoard read() throws ReadException {
-        String query = "SELECT * from" + tableName + "WHERE board_id = " + fileName;
+        String query = "SELECT * FROM" + tableName + "WHERE board_id = " + fileName;
         try {
             Class.forName(DBDRIVER).newInstance();
             connection = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
@@ -65,16 +64,17 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
     @Override
     public void write(SudokuBoard sudokuBoard) throws WriteException {
-        String query = "INSERT INTO " + tableName + "VALUE(" + fileName;
+        String sudoku = "";
         try {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
-                    query += sudokuBoard.get(i, j);
+                    sudoku += Integer.toString(sudokuBoard.get(i, j));
                 }
             }
         } catch (GetException e) {
             e.printStackTrace();
         }
+        String query = "INSERT INTO " + tableName + " VALUES (" + fileName + ", " + sudoku + ")";
         try {
             Class.forName(DBDRIVER).newInstance();
             connection = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
@@ -98,8 +98,8 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null);
             if (!rs.next() && type) {
                 statement.executeUpdate("CREATE TABLE " + tableName
-                        + "board_id varchar(20) PRIMARY KEY, "
-                        + "fields varchar(81))");
+                        + "( " + "board_id VARCHAR(20) PRIMARY KEY, "
+                        + "fields VARCHAR(81))");
             } else if (!rs.next() && !type) {
                 return false;
             }

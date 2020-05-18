@@ -18,6 +18,35 @@
             <artifactId>ModelProject</artifactId>
 <!--            <scope>compile</scope>-->
         </dependency>
+
+<!--         https://mvnrepository.com/artifact/org.apache.derby/derby-->
+                <dependency>
+                    <groupId>org.apache.derby</groupId>
+                    <artifactId>derby</artifactId>
+                    <version>10.15.2.0</version>
+                </dependency>
+<!--                 https://mvnrepository.com/artifact/org.apache.derby/derbyclient-->
+                <dependency>
+                    <groupId>org.apache.derby</groupId>
+                    <artifactId>derbyclient</artifactId>
+                    <version>10.15.2.0</version>
+                </dependency>
+
+<!--                 https://mvnrepository.com/artifact/org.apache.derby/derbynet-->
+                <dependency>
+                    <groupId>org.apache.derby</groupId>
+                    <artifactId>derbynet</artifactId>
+                    <version>10.15.2.0</version>
+                </dependency>
+
+                <!-- https://mvnrepository.com/artifact/org.apache.derby/derbytools -->
+                <dependency>
+                    <groupId>org.apache.derby</groupId>
+                    <artifactId>derbytools</artifactId>
+                    <version>10.15.2.0</version>
+                </dependency>
+
+
     </dependencies>
 
     <reporting>
