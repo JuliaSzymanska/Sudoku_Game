@@ -3,6 +3,12 @@
 <!--    TODO: ja myslę że konfiguracja logerów powinna być w jednym pliku, widziałem coś dla log4j
             https://stackoverflow.com/questions/4162992/log4j-configuration-file-in-a-multi-module-maven-project
             ale dla naszego coś cinko mi idzie szukac xd -->
+<!--    TODO: link do modulu z logbackiem: http://logback.10977.n7.nabble.com/Logback-with-multi-module-Maven-project-td2139.html
+        TODO: https://github.com/zxbe/aspectj-multi-module-logging-example/blob/master/pom.xml
+        TODO: https://mkyong.com/maven/maven-exclude-logback-xml-in-jar-file/
+        TODO: https://stackoverflow.com/questions/33799773/how-to-include-specific-jars-in-war-web-inf-lib-directory-with-maven
+
+-->
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <charset>UTF-8</charset>
