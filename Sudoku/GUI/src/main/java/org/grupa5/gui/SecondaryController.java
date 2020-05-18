@@ -81,13 +81,19 @@ public class SecondaryController implements Initializable {
     private Button language;
 
     @FXML
-    private Button saveButton;
+    private Button saveButtonFile;
+
+    @FXML
+    private Button loadButtonFile;
+
+    @FXML
+    private Button loadButtonDb;
+
+    @FXML
+    private Button saveButtonDb;
 
     @FXML
     private Label level;
-
-    @FXML
-    private Button loadButton;
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -235,7 +241,33 @@ public class SecondaryController implements Initializable {
 
         if (file != null) {
             try {
-//                SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
+                SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
+            } catch (WriteException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Save Error");
+                alert.setHeaderText("Error Saving Game");
+                alert.setContentText("There was an error saving your game.\n" +
+                        "Please try to save again!");
+
+                alert.showAndWait();
+
+                if (logger.isErrorEnabled()) {
+                    logger.error("Sudoku Game Saving Failed");
+                }
+            }
+        }
+    }
+
+    public void saveSudokuToDb() {
+        // TODO: 18.05.2020 wyjatki popraw to wszystko
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if (file != null) {
+            try {
                 // TODO: 18.05.2020 zrobic parametr
                 SudokuBoardDaoFactory.getJdbcDao("'Nazwa3'").write(this.sudokuBoard);
             } catch (WriteException e) {
@@ -262,7 +294,33 @@ public class SecondaryController implements Initializable {
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
             try {
-//                this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
+                this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
+                System.out.println(this.sudokuBoard);
+                switchStartAndEndButtons();
+                this.fillGrid();
+            } catch (ReadException | NoSuchMethodException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Load Error");
+                alert.setHeaderText("Error Loading Game");
+                alert.setContentText("There was an error loading your game.\n" +
+                        "Please try to load again!");
+                alert.showAndWait();
+
+                if (logger.isErrorEnabled()) {
+                    logger.error("Sudoku Game Loading Failed");
+                }
+            }
+        }
+    }
+
+    public void readSudokuFromDb() {
+        // TODO: 18.05.2020 wyjatki popraw to wszystko
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File file = fileChooser.showOpenDialog(new Stage());
+        if (file != null) {
+            try {
                 // TODO: 18.05.2020 poprawic parametr
                 this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao("'Nazwa3'").read();
                 System.out.println(this.sudokuBoard);
