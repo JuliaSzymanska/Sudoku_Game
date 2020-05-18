@@ -1,34 +1,26 @@
 package org.grupa5.dao;
 
-import org.grupa5.dao.Dao;
+import java.sql.*;
+
 import org.grupa5.dao.exception.ReadException;
 import org.grupa5.dao.exception.WriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.exceptions.GetException;
 import org.grupa5.sudoku.exceptions.SetException;
 
-import java.sql.*;
-
-import static java.lang.Character.getNumericValue;
-
 class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
-
     private String fileName;
-
-    private final static String DBURL = "jdbc:derby://localhost/c:/temp/db";
-    private final static String DBUSER = "user";
-    private final static String DBPASS = "";
-    private final static String DBDRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
-
+    private static final String DBURL = "jdbc:derby://localhost:1527/dbname;create=true";
+    //jdbc:derby://localhost/c:/temp/db";
+    private static final String DBUSER = "user";
+    private static final String DBPASS = "";
+    private static final String DBDRIVER = "org.apache.derby.jdbc.ClientDriver";
     //obiekt tworzący połączenie z bazą danych.
     private Connection connection;
     //obiekt pozwalający tworzyć nowe wyrażenia SQL
     private Statement statement;
-
     ResultSet resultSet = null;
-
     private String tableName = "boards";
-
     private boolean tableExist = false;
 
     JdbcSudokuBoardDao(String fileName) {
@@ -47,10 +39,11 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 resultSet = statement.executeQuery(query);
                 String id = resultSet.getString("board_id");
                 String fields = resultSet.getString("fields");
-                int counterX = 0, counterY = 0;
-                for(char c : fields.toCharArray()){
-                    sudokuBoard.set(counterX, counterY, getNumericValue(c));
-                    if(counterY == 8){
+                int counterX = 0;
+                int counterY = 0;
+                for (char c : fields.toCharArray()) {
+                    sudokuBoard.set(counterX, counterY, Integer.parseInt(String.valueOf(c)));
+                    if (counterY == 8) {
                         counterX += 1;
                         counterY = 0;
                     } else {
@@ -61,7 +54,8 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             }
             statement.close();
             connection.close();
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | SetException e) {
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
+                | SQLException | SetException e) {
             // TODO wyjatki
             e.printStackTrace();
         }
@@ -103,9 +97,9 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             DatabaseMetaData dbmd = connection.getMetaData();
             ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null);
             if (!rs.next() && type) {
-                statement.executeUpdate("CREATE TABLE " + tableName +
-                        "board_id varchar(20) PRIMARY KEY, " +
-                        "fields varchar(81))");
+                statement.executeUpdate("CREATE TABLE " + tableName
+                        + "board_id varchar(20) PRIMARY KEY, "
+                        + "fields varchar(81))");
             } else if (!rs.next() && !type) {
                 return false;
             }
