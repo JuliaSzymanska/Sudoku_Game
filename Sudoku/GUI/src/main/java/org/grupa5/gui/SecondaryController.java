@@ -107,8 +107,8 @@ public class SecondaryController implements Initializable {
     }
 
     private void switchStartAndEndButtons() {
-        VariablesCollection.setIsGameInProgress(!VariablesCollection.isIsGameInProgress());
-        if (!VariablesCollection.isIsGameInProgress()) {
+        VariablesCollection.setIsGameInProgress(!VariablesCollection.getIsGameInProgress());
+        if (!VariablesCollection.getIsGameInProgress()) {
             try {
                 this.switchToPrimary();
             } catch (IOException e) {
@@ -223,7 +223,7 @@ public class SecondaryController implements Initializable {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));
             boxLevel.setValue(Level.values()[3]);
         }
-        if (VariablesCollection.isIsGameInProgress()) {
+        if (VariablesCollection.getIsGameInProgress()) {
             try {
                 this.fillGrid();
             } catch (NoSuchMethodException e) {

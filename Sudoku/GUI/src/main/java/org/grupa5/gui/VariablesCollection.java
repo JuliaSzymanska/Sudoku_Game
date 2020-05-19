@@ -47,7 +47,7 @@ public class VariablesCollection {
         VariablesCollection.isGameInProgress = isGameInProgress;
     }
 
-    public static boolean isIsGameInProgress() {
+    public static boolean getIsGameInProgress() {
         return isGameInProgress;
     }
 
