@@ -114,7 +114,7 @@ public class SudokuBoardDaoTest {
 
     @Test
     void localizedMessagesTestReadDBDao() {
-        Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STRINGGGGGGGGGGGGGGGGGGGGGGGG");
+        Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STR'ING");
 
         Locale.setDefault(new Locale("en", "en"));
         JDBCDaoReadException exceptionEN = assertThrows(
