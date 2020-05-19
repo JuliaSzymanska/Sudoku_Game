@@ -314,6 +314,7 @@ public class SecondaryController implements Initializable {
     }
 
     public void readSudokuFromDb() {
+        // TODO: 20.05.2020 internalizacjia tego
         TextInputDialog td = new TextInputDialog("Enter Saved Board's Name (20 characters)");
         td.setTitle("Load Game");
         // TODO: 19.05.2020 lepszy header
