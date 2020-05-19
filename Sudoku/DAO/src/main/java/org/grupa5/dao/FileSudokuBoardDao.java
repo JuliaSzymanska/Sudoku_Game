@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.grupa5.exceptions.ReadException;
-import org.grupa5.exceptions.WriteException;
+import org.grupa5.exceptions.FileDaoReadException;
+import org.grupa5.exceptions.FileDaoWriteException;
 import org.grupa5.sudoku.SudokuBoard;
 
 class FileSudokuBoardDao implements Dao<SudokuBoard> {
@@ -19,26 +19,26 @@ class FileSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public void write(SudokuBoard sudokuBoard) throws WriteException {
+    public void write(SudokuBoard sudokuBoard) throws FileDaoWriteException {
         try (
                 FileOutputStream fileOut = new FileOutputStream(this.fileName);
                 ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)
         ) {
             objectOut.writeObject(sudokuBoard);
         } catch (IOException e) {
-            throw new WriteException("write", e);
+            throw new FileDaoWriteException("write", e);
         }
     }
 
     @Override
-    public SudokuBoard read() throws ReadException {
+    public SudokuBoard read() throws FileDaoReadException {
         try (
                 FileInputStream fileIn = new FileInputStream(this.fileName);
                 ObjectInputStream objectIn = new ObjectInputStream(fileIn)
         ) {
             return (SudokuBoard) objectIn.readObject();
         } catch (ClassNotFoundException | IOException e) {
-            throw new ReadException("read", e);
+            throw new FileDaoReadException("read", e);
         }
 
     }

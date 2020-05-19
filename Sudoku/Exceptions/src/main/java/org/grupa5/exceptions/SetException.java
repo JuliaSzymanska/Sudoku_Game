@@ -3,11 +3,7 @@ package org.grupa5.exceptions;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 
-public class SetException extends Exception implements Serializable {
-
-    ResourceBundle boundle = ResourceBundle.getBundle("BoardException");
-
-    private static final long serialVersionUID = 645235;
+public class SetException extends SudokuException {
 
     public SetException(String s) {
         super(s);
@@ -15,10 +11,5 @@ public class SetException extends Exception implements Serializable {
 
     public SetException(String s, Exception e) {
         super(s, e);
-    }
-
-    @Override
-    public String getLocalizedMessage() {
-        return boundle.getString(getMessage());
     }
 }

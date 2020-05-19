@@ -1,7 +1,7 @@
 package org.grupa5.dao;
 
-import org.grupa5.exceptions.ReadException;
-import org.grupa5.exceptions.WriteException;
+import org.grupa5.exceptions.FileDaoReadException;
+import org.grupa5.exceptions.FileDaoWriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteNotSolvedTest() throws WriteException, ReadException {
+    void sudokuBoardWriteNotSolvedTest() throws FileDaoWriteException, FileDaoReadException {
         dao.write(board);
         board2 = dao.read();
         Assertions.assertEquals(board, board2);
@@ -44,7 +44,7 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteSolvedTest() throws WriteException, ReadException {
+    void sudokuBoardWriteSolvedTest() throws FileDaoWriteException, FileDaoReadException {
         board.solveGame();
         dao.write(board);
         board2 = dao.read();
@@ -54,14 +54,14 @@ public class SudokuBoardDaoTest {
 
     @Test
     void sudokuBoardWriteExceptionTest() {
-        assertThrows(WriteException.class, () -> {
+        assertThrows(FileDaoWriteException.class, () -> {
             failureDao.write(board);
         });
     }
 
     @Test
     void sudokuBoardReadExceptionTest() {
-        assertThrows(ReadException.class, () -> {
+        assertThrows(FileDaoReadException.class, () -> {
             failureDao.read();
         });
     }

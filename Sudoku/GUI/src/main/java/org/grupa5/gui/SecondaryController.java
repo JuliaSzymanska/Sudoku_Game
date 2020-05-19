@@ -23,9 +23,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
-import org.grupa5.exceptions.ReadException;
+import org.grupa5.exceptions.FileDaoReadException;
 import org.grupa5.dao.SudokuBoardDaoFactory;
-import org.grupa5.exceptions.WriteException;
+import org.grupa5.exceptions.FileDaoWriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
 import org.grupa5.exceptions.SetException;
@@ -40,8 +40,7 @@ public class SecondaryController implements Initializable {
 
     private final Logger logger = LoggerFactory.getLogger(SecondaryController.class);
 
-    private SudokuBoard sudokuBoard = new SudokuBoard();
-    private boolean isGameInProgress = false;
+    private SudokuBoard sudokuBoard;
     private ResourceBundle resourceBundle;
     private final List<IntegerProperty> integerPropertyArrayListForSudokuFieldBinding = new ArrayList<>();
 
@@ -111,8 +110,8 @@ public class SecondaryController implements Initializable {
     }
 
     private void switchStartAndEndButtons() {
-        isGameInProgress = !isGameInProgress;
-        if (!isGameInProgress) {
+        VariablesCollection.setIsGameInProgress(!VariablesCollection.isIsGameInProgress());
+        if (!VariablesCollection.isIsGameInProgress()) {
             try {
                 this.switchToPrimary();
             } catch (IOException e) {
@@ -211,8 +210,9 @@ public class SecondaryController implements Initializable {
         }
         switchStartAndEndButtons();
         int numberOfFields = boxLevel.getSelectionModel().getSelectedItem().getNumber();
-        sudokuBoard.solveGame();
-        sudokuBoard.removeFields(numberOfFields);
+        this.sudokuBoard.solveGame();
+        this.sudokuBoard.removeFields(numberOfFields);
+        VariablesCollection.setSudokuBoard(this.sudokuBoard);
         this.fillGrid();
     }
 
@@ -221,6 +221,7 @@ public class SecondaryController implements Initializable {
         if (logger.isDebugEnabled()) {
             logger.debug("SecondaryController init");
         }
+        this.sudokuBoard = VariablesCollection.getSudokuBoard();
         this.resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
         if (Locale.getDefault().equals(new Locale("en", "en"))) {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
@@ -229,6 +230,16 @@ public class SecondaryController implements Initializable {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));
             boxLevel.setValue(Level.values()[3]);
         }
+        if (VariablesCollection.isIsGameInProgress()) {
+            try {
+                this.fillGrid();
+            } catch (NoSuchMethodException e) {
+                if (logger.isTraceEnabled()) {
+                    logger.trace("", e);
+                }
+            }
+        }
+
     }
 
     public void saveSudokuToFile() {
@@ -241,7 +252,7 @@ public class SecondaryController implements Initializable {
         if (file != null) {
             try {
                 SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
-            } catch (WriteException e) {
+            } catch (FileDaoWriteException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Save Error");
                 alert.setHeaderText("Error Saving Game");
@@ -269,7 +280,7 @@ public class SecondaryController implements Initializable {
             try {
                 // TODO: 18.05.2020 zrobic parametr
                 SudokuBoardDaoFactory.getJdbcDao("'Nazwa3'").write(this.sudokuBoard);
-            } catch (WriteException e) {
+            } catch (FileDaoWriteException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Save Error");
                 alert.setHeaderText("Error Saving Game");
@@ -297,7 +308,7 @@ public class SecondaryController implements Initializable {
                 System.out.println(this.sudokuBoard);
                 switchStartAndEndButtons();
                 this.fillGrid();
-            } catch (ReadException | NoSuchMethodException e) {
+            } catch (FileDaoReadException | NoSuchMethodException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Load Error");
                 alert.setHeaderText("Error Loading Game");
@@ -325,7 +336,7 @@ public class SecondaryController implements Initializable {
                 System.out.println(this.sudokuBoard);
                 switchStartAndEndButtons();
                 this.fillGrid();
-            } catch (ReadException | NoSuchMethodException e) {
+            } catch (FileDaoReadException | NoSuchMethodException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Load Error");
                 alert.setHeaderText("Error Loading Game");

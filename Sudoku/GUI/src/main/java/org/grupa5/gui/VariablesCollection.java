@@ -1,6 +1,7 @@
 package org.grupa5.gui;
 
 import javafx.beans.property.ObjectProperty;
+import org.grupa5.sudoku.SudokuBoard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +12,10 @@ import java.util.Locale;
 public class VariablesCollection {
 
     private static final VariablesCollection INSTANCE = new VariablesCollection();
+
+    private static boolean isGameInProgress = false;
+
+    private static SudokuBoard sudokuBoard = new SudokuBoard();
 
     private VariablesCollection() {
     }
@@ -36,5 +41,21 @@ public class VariablesCollection {
     public static Locale getDefaultLocale() {
         Locale sysDefault = Locale.getDefault();
         return getSupportedLocales().contains(sysDefault) ? sysDefault : new Locale("en_EN");
+    }
+
+    public static void setIsGameInProgress(boolean isGameInProgress) {
+        VariablesCollection.isGameInProgress = isGameInProgress;
+    }
+
+    public static boolean isIsGameInProgress() {
+        return isGameInProgress;
+    }
+
+    public static SudokuBoard getSudokuBoard() {
+        return sudokuBoard;
+    }
+
+    public static void setSudokuBoard(SudokuBoard sudokuBoard) {
+        VariablesCollection.sudokuBoard = sudokuBoard;
     }
 }

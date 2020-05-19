@@ -3,9 +3,9 @@ package org.grupa5.dao;
 import java.sql.*;
 
 import org.grupa5.exceptions.GetException;
-import org.grupa5.exceptions.ReadException;
+import org.grupa5.exceptions.FileDaoReadException;
 import org.grupa5.exceptions.SetException;
-import org.grupa5.exceptions.WriteException;
+import org.grupa5.exceptions.FileDaoWriteException;
 
 import org.grupa5.sudoku.SudokuBoard;
 
@@ -36,7 +36,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public SudokuBoard read() throws ReadException {
+    public SudokuBoard read() throws FileDaoReadException {
         String query = "SELECT * FROM " + tableName + " WHERE " + boardId + " = " + fileName;
         try {
             Class.forName(DB_DRIVER).newInstance();
@@ -76,7 +76,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public void write(SudokuBoard sudokuBoard) throws WriteException {
+    public void write(SudokuBoard sudokuBoard) throws FileDaoWriteException {
         String sudoku = "'";
         try {
             for (int i = 0; i < 9; i++) {
