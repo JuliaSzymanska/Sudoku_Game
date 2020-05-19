@@ -319,7 +319,6 @@ public class SecondaryController implements Initializable {
 //        }));
         td.showAndWait();
         String inputString = td.getEditor().getText();
-        System.out.println(inputString);
         try {
             // TODO: 18.05.2020 poprawic parametr
             this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao(inputString).read();
