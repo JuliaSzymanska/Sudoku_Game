@@ -23,13 +23,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
-import org.grupa5.exceptions.FileDaoReadException;
+import org.grupa5.exceptions.*;
 import org.grupa5.dao.SudokuBoardDaoFactory;
-import org.grupa5.exceptions.FileDaoWriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
-import org.grupa5.exceptions.SetException;
-import org.grupa5.exceptions.GetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -252,7 +249,7 @@ public class SecondaryController implements Initializable {
         if (file != null) {
             try {
                 SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
-            } catch (FileDaoWriteException e) {
+            } catch (SudokuException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Save Error");
                 alert.setHeaderText("Error Saving Game");
@@ -280,7 +277,7 @@ public class SecondaryController implements Initializable {
             try {
                 // TODO: 18.05.2020 zrobic parametr
                 SudokuBoardDaoFactory.getJdbcDao("'Nazwa3'").write(this.sudokuBoard);
-            } catch (FileDaoWriteException e) {
+            } catch (SudokuException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Save Error");
                 alert.setHeaderText("Error Saving Game");
@@ -308,7 +305,7 @@ public class SecondaryController implements Initializable {
                 System.out.println(this.sudokuBoard);
                 switchStartAndEndButtons();
                 this.fillGrid();
-            } catch (FileDaoReadException | NoSuchMethodException e) {
+            } catch (SudokuException| NoSuchMethodException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Load Error");
                 alert.setHeaderText("Error Loading Game");
@@ -336,7 +333,7 @@ public class SecondaryController implements Initializable {
                 System.out.println(this.sudokuBoard);
                 switchStartAndEndButtons();
                 this.fillGrid();
-            } catch (FileDaoReadException | NoSuchMethodException e) {
+            } catch (SudokuException | NoSuchMethodException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Load Error");
                 alert.setHeaderText("Error Loading Game");

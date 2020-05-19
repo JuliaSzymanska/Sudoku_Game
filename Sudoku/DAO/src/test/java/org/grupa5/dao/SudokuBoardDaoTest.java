@@ -2,12 +2,15 @@ package org.grupa5.dao;
 
 import org.grupa5.exceptions.FileDaoReadException;
 import org.grupa5.exceptions.FileDaoWriteException;
+import org.grupa5.exceptions.JDBCDaoReadException;
+import org.grupa5.exceptions.JDBCDaoWriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +30,7 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteNotSolvedTest() throws FileDaoWriteException, FileDaoReadException {
+    void sudokuBoardWriteNotSolvedTest() throws FileDaoWriteException, FileDaoReadException, JDBCDaoWriteException, JDBCDaoReadException {
         dao.write(board);
         board2 = dao.read();
         Assertions.assertEquals(board, board2);
@@ -44,7 +47,7 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteSolvedTest() throws FileDaoWriteException, FileDaoReadException {
+    void sudokuBoardWriteSolvedTest() throws FileDaoWriteException, FileDaoReadException, JDBCDaoWriteException, JDBCDaoReadException {
         board.solveGame();
         dao.write(board);
         board2 = dao.read();
@@ -64,5 +67,71 @@ public class SudokuBoardDaoTest {
         assertThrows(FileDaoReadException.class, () -> {
             failureDao.read();
         });
+    }
+
+    @Test
+    void localizedMessagesTestReadFileDao() {
+        Locale.setDefault(new Locale("en", "en"));
+        try {
+            failureDao.read();
+        } catch (FileDaoReadException | JDBCDaoReadException e) {
+            assertEquals(e.getLocalizedMessage(), "SudokuBoard FileDao read encountered an Issue");
+        }
+        Locale.setDefault(new Locale("pl", "pl"));
+        try {
+            failureDao.read();
+        } catch (FileDaoReadException | JDBCDaoReadException e) {
+            assertEquals(e.getLocalizedMessage(), "SudokuBoard Dao odczyt z pliku napotkal problem");
+        }
+    }
+
+    @Test
+    void localizedMessagesTestWriteFileDao() {
+        Locale.setDefault(new Locale("en", "en"));
+        try {
+            failureDao.write(this.board);
+        } catch (JDBCDaoWriteException | FileDaoWriteException e) {
+            assertEquals(e.getLocalizedMessage(), "SudokuBoard FileDao write encountered an Issue");
+        }
+        Locale.setDefault(new Locale("pl", "pl"));
+        try {
+            failureDao.write(this.board);
+        } catch (JDBCDaoWriteException | FileDaoWriteException e) {
+            assertEquals(e.getLocalizedMessage(), "SudokuBoard Dao zapis do pliku napotkal problem");
+        }
+    }
+
+    @Test
+    void localizedMessagesTestReadDBDao() {
+        Locale.setDefault(new Locale("en", "en"));
+        Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STRING");
+        try {
+            failureDaoDB.read();
+        } catch (FileDaoReadException | JDBCDaoReadException e) {
+            assertEquals(e.getLocalizedMessage(),"SudokuBoard DBDao read encountered an Issue");
+        }
+        Locale.setDefault(new Locale("pl", "pl"));
+        try {
+            failureDaoDB.read();
+        } catch (FileDaoReadException | JDBCDaoReadException e) {
+            assertEquals(e.getLocalizedMessage(), "SudokuBoard Dao odczyt z bazy danych napotkal problem");
+        }
+    }
+
+    @Test
+    void localizedMessagesTestWriteDBDao() {
+        Locale.setDefault(new Locale("en", "en"));
+        Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STRING");
+        try {
+            failureDaoDB.write(this.board);
+        } catch (JDBCDaoWriteException | FileDaoWriteException e) {
+            assertEquals(e.getLocalizedMessage(), "SudokuBoard DBDao write encountered an Issue");
+        }
+        Locale.setDefault(new Locale("pl", "pl"));
+        try {
+            failureDaoDB.write(this.board);
+        } catch (JDBCDaoWriteException | FileDaoWriteException e) {
+            assertEquals(e.getLocalizedMessage(), "Blad przy zapisie do Planszy do bazy danych (DBDao)");
+        }
     }
 }

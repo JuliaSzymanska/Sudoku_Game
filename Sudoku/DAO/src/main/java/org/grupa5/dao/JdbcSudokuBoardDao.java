@@ -2,10 +2,7 @@ package org.grupa5.dao;
 
 import java.sql.*;
 
-import org.grupa5.exceptions.FileDaoReadException;
-import org.grupa5.exceptions.FileDaoWriteException;
-import org.grupa5.exceptions.GetException;
-import org.grupa5.exceptions.SetException;
+import org.grupa5.exceptions.*;
 
 import org.grupa5.sudoku.SudokuBoard;
 
@@ -36,7 +33,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public SudokuBoard read() throws FileDaoReadException {
+    public SudokuBoard read() throws JDBCDaoReadException {
         String query = "SELECT * FROM " + tableName + " WHERE " + boardId + " = " + fileName;
         try {
             Class.forName(DB_DRIVER).newInstance();
@@ -68,15 +65,13 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             return sudokuBoard;
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
                 | SQLException | SetException e) {
-            // TODO wyjatki
-            e.printStackTrace();
+            throw new JDBCDaoReadException("DBRead", e);
         }
         // TODO: 18.05.2020 naprawic to zeby nie bylo null
-        return null;
     }
 
     @Override
-    public void write(SudokuBoard sudokuBoard) throws FileDaoWriteException {
+    public void write(SudokuBoard sudokuBoard) throws JDBCDaoWriteException {
         String sudoku = "'";
         try {
             for (int i = 0; i < 9; i++) {
@@ -101,8 +96,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             connection.close();
         } catch (InstantiationException | IllegalAccessException
                 | ClassNotFoundException | SQLException e) {
-            // TODO wyjatki
-            e.printStackTrace();
+            throw new JDBCDaoWriteException("DBWrite", e);
         }
     }
 
