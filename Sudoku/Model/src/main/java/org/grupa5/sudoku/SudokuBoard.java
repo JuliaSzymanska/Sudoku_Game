@@ -191,7 +191,7 @@ public class SudokuBoard implements Cloneable, Serializable {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Value Provided to set");
             }
-            throw new SetException("from0to8");
+            throw new SetException("val0to9");
         }
         int temp = this.board.get(x).get(y).getValue();
         this.board.get(x).get(y).setValue(value);

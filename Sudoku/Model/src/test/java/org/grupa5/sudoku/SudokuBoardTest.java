@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * Unit test for simple App. Testing methods: resetBoard and getters.
  */
 public class SudokuBoardTest {
-
 
 
     @Test
@@ -127,9 +127,8 @@ public class SudokuBoardTest {
     void getFieldTet() throws GetException {
         SudokuBoard board = new SudokuBoard();
         board.solveGame();
-        assertEquals(board.get(0,0), board.getField(0, 0).getValue());
+        assertEquals(board.get(0, 0), board.getField(0, 0).getValue());
     }
-
 
 
     @Test
@@ -176,14 +175,12 @@ public class SudokuBoardTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         ToStringVerifier.forClass(SudokuBoard.class).verify();
     }
 
-
-
     @Test
-    public void cloneTest() throws SetException {
+    void cloneTest() throws SetException {
         SudokuBoard sudoku1 = new SudokuBoard();
         SudokuBoard sudoku2 = null;
 
@@ -193,8 +190,59 @@ public class SudokuBoardTest {
         assertEquals(sudoku1.hashCode(), sudoku2.hashCode());
         assertNotSame(sudoku1, sudoku2);
         assertEquals(sudoku1.getBox(1, 5), sudoku2.getBox(1, 5));
-        assertEquals(sudoku1.getBox(1, 5).hashCode(),sudoku2.getBox(1, 5).hashCode());
+        assertEquals(sudoku1.getBox(1, 5).hashCode(), sudoku2.getBox(1, 5).hashCode());
         assertNotSame(sudoku1.getBox(1, 5), sudoku2.getBox(1, 5));
     }
-    
+
+    @Test
+    void internationalizedtSetExceptionTest() {
+        Locale.setDefault(new Locale("en", "en"));
+        SudokuBoard sudoku1 = new SudokuBoard();
+
+        try {
+            sudoku1.set(0, 0, -1);
+        } catch (SetException e) {
+            assertEquals(e.getLocalizedMessage(), "Sudoku Field Value Provided has to be in range <0, 9>");
+        }
+        try {
+            sudoku1.set(-1, -1, 1);
+        } catch (SetException e) {
+            assertEquals(e.getLocalizedMessage(), "Value has to be in range 0 - 8");
+        }
+
+        Locale.setDefault(new Locale("pl", "pl"));
+
+        try {
+            sudoku1.set(0, 0, -1);
+        } catch (SetException e) {
+            assertEquals(e.getLocalizedMessage(), "Wartosc Dla Sudoku Field Musi byc od 0 do 9");
+        }
+        try {
+            sudoku1.set(-1, -1, 1);
+        } catch (SetException e) {
+            assertEquals(e.getLocalizedMessage(), "Wartosc musi byc w zasiegu od 0 do 8");
+        }
+    }
+
+    @Test
+    void internationalizedtGetExceptionTest() {
+        Locale.setDefault(new Locale("en", "en"));
+        SudokuBoard sudoku1 = new SudokuBoard();
+
+        // TODO: 19.05.2020 Czy mozna jakos lepiej te stringi sprawdzic
+        try {
+            sudoku1.get(0, 0);
+        } catch (GetException e) {
+            assertEquals(e.getLocalizedMessage(), "Value has to be in range 0 - 8");
+        }
+
+        Locale.setDefault(new Locale("pl", "pl"));
+
+        try {
+            sudoku1.get(-1, -1);
+        } catch (GetException e) {
+            assertEquals(e.getLocalizedMessage(), "Wartosc musi byc w zasiegu od 0 do 8");
+        }
+
+    }
 }
