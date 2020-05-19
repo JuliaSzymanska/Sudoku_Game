@@ -1,7 +1,7 @@
 package org.grupa5.dao;
 
-import org.grupa5.dao.exception.ReadException;
-import org.grupa5.dao.exception.WriteException;
+import org.grupa5.exceptions.ReadException;
+import org.grupa5.exceptions.WriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

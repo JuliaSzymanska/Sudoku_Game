@@ -12,7 +12,15 @@
         <module>Model</module>
         <module>GUI</module>
         <module>DAO</module>
+        <module>Exceptions</module>
     </modules>
+
+<!--    <distributionManagement>-->
+<!--        <site>-->
+<!--            <id>www.yourcompany.com</id>-->
+<!--            <url>scp://www.yourcompany.com/www/docs/project/</url>-->
+<!--        </site>-->
+<!--    </distributionManagement>-->
 
 <!--    TODO: zrobić żeby łapał nam site
             site z podprojektów-->
@@ -111,12 +119,12 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.10</version>
             </dependency>
-
-            <dependency>
-                <groupId>javax.annotation</groupId>
-                <artifactId>javax.annotation-api</artifactId>
-                <version>1.3.2</version>
-            </dependency>
+            <!--            todo: sprawdz potrzebnosc-->
+<!--            <dependency>-->
+<!--                <groupId>javax.annotation</groupId>-->
+<!--                <artifactId>javax.annotation-api</artifactId>-->
+<!--                <version>1.3.2</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -157,11 +165,12 @@
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>1.2.3</version>
-            </dependency>
+<!--            todo: sprawdz potrzebnosc-->
+<!--            <dependency>-->
+<!--                <groupId>ch.qos.logback</groupId>-->
+<!--                <artifactId>logback-core</artifactId>-->
+<!--                <version>1.2.3</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>org.openjfx</groupId>

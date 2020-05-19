@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.grupa5.sudoku.exceptions.GetException;
-import org.grupa5.sudoku.exceptions.SetException;
+import org.grupa5.exceptions.GetException;
+import org.grupa5.exceptions.SetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

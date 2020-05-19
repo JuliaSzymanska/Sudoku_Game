@@ -1,8 +1,8 @@
 package org.grupa5.sudoku;
 
 import com.jparams.verifier.tostring.ToStringVerifier;
-import org.grupa5.sudoku.exceptions.GetException;
-import org.grupa5.sudoku.exceptions.SetException;
+import org.grupa5.exceptions.SetException;
+import org.grupa5.exceptions.GetException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

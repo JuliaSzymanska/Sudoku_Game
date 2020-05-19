@@ -23,13 +23,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
-import org.grupa5.dao.exception.ReadException;
+import org.grupa5.exceptions.ReadException;
 import org.grupa5.dao.SudokuBoardDaoFactory;
-import org.grupa5.dao.exception.WriteException;
+import org.grupa5.exceptions.WriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
-import org.grupa5.sudoku.exceptions.GetException;
-import org.grupa5.sudoku.exceptions.SetException;
+import org.grupa5.exceptions.SetException;
+import org.grupa5.exceptions.GetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +41,7 @@ public class SecondaryController implements Initializable {
     private final Logger logger = LoggerFactory.getLogger(SecondaryController.class);
 
     private SudokuBoard sudokuBoard = new SudokuBoard();
-    private boolean flag = true;
+    private boolean isGameInProgress = false;
     private ResourceBundle resourceBundle;
     private final List<IntegerProperty> integerPropertyArrayListForSudokuFieldBinding = new ArrayList<>();
 
@@ -111,16 +111,15 @@ public class SecondaryController implements Initializable {
     }
 
     private void switchStartAndEndButtons() {
-        if (!flag) {
+        isGameInProgress = !isGameInProgress;
+        if (!isGameInProgress) {
             try {
                 this.switchToPrimary();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            flag = true;
             return;
         }
-        flag = false;
         secondaryButton.setText(resourceBundle.getString("end"));
     }
 
@@ -131,7 +130,7 @@ public class SecondaryController implements Initializable {
         try {
             sudokuBoard.set(0, 0, 12);
         } catch (SetException e) {
-            System.out.println(e.getLocalizedMessage());
+            System.out.println(e);
         }
         int numRows = grid1.getRowCount();
         int numCols = grid1.getColumnCount();

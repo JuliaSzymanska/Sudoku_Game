@@ -1,6 +1,7 @@
 package org.grupa5.sudoku;
 
-import org.grupa5.sudoku.exceptions.SetException;
+import org.grupa5.exceptions.SetException;
+import org.grupa5.exceptions.GetException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

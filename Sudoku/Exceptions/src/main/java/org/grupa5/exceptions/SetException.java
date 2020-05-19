@@ -1,7 +1,6 @@
-package org.grupa5.sudoku.exceptions;
+package org.grupa5.exceptions;
 
 import java.io.Serializable;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class SetException extends Exception implements Serializable {

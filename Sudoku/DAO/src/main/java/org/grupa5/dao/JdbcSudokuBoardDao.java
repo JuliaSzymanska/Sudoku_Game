@@ -2,27 +2,33 @@ package org.grupa5.dao;
 
 import java.sql.*;
 
-import org.grupa5.dao.exception.ReadException;
-import org.grupa5.dao.exception.WriteException;
+import org.grupa5.exceptions.GetException;
+import org.grupa5.exceptions.ReadException;
+import org.grupa5.exceptions.SetException;
+import org.grupa5.exceptions.WriteException;
+
 import org.grupa5.sudoku.SudokuBoard;
-import org.grupa5.sudoku.exceptions.GetException;
-import org.grupa5.sudoku.exceptions.SetException;
 
 class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
-    private String fileName;
-    private static final String DBURL = "jdbc:derby://localhost:1527/dbname;create=true";
-    //jdbc:derby://localhost/c:/temp/db";
-    private static final String DBUSER = "user";
-    private static final String DBPASS = "1";
-    private static final String DBDRIVER = "org.apache.derby.jdbc.ClientDriver";
+
+
+
     //obiekt tworzący połączenie z bazą danych.
     private Connection connection;
     //obiekt pozwalający tworzyć nowe wyrażenia SQL
     private Statement statement;
-    ResultSet resultSet = null;
-    private String tableName = "boards";
-    private String boardId = "board_id";
-    private String boardFields = "fields";
+    private ResultSet resultSet = null;
+
+    private static final String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
+    //jdbc:derby://localhost/c:/temp/db";
+    private static final String DB_USER = "user";
+    private static final String DB_PASS = "1";
+    private static final String DB_DRIVER = "org.apache.derby.jdbc.ClientDriver";
+
+    private final String fileName;
+    private final String tableName = "boards";
+    private final String boardId = "board_id";
+    private final String boardFields = "fields";
 
 
     JdbcSudokuBoardDao(String fileName) {
@@ -33,8 +39,8 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     public SudokuBoard read() throws ReadException {
         String query = "SELECT * FROM " + tableName + " WHERE " + boardId + " = " + fileName;
         try {
-            Class.forName(DBDRIVER).newInstance();
-            connection = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
+            Class.forName(DB_DRIVER).newInstance();
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             statement = connection.createStatement();
             SudokuBoard sudokuBoard = new SudokuBoard();
             if (isTableExist(false)) {
@@ -85,8 +91,8 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
         String query = "INSERT INTO " + tableName + "(" + boardId + ", " + boardFields + ")"
                 + " VALUES (" + fileName + ", " + sudoku + ")";
         try {
-            Class.forName(DBDRIVER).newInstance();
-            connection = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
+            Class.forName(DB_DRIVER).newInstance();
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             statement = connection.createStatement();
             if (isTableExist(true)) {
                 statement.executeUpdate(query);

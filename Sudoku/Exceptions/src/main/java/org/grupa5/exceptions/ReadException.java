@@ -1,4 +1,4 @@
-package org.grupa5.dao.exception;
+package org.grupa5.exceptions;
 
 import java.util.ResourceBundle;
 
