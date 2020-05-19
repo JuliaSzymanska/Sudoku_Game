@@ -2,10 +2,10 @@ package org.grupa5.dao;
 
 import java.sql.*;
 
-import org.grupa5.exceptions.GetException;
 import org.grupa5.exceptions.FileDaoReadException;
-import org.grupa5.exceptions.SetException;
 import org.grupa5.exceptions.FileDaoWriteException;
+import org.grupa5.exceptions.GetException;
+import org.grupa5.exceptions.SetException;
 
 import org.grupa5.sudoku.SudokuBoard;
 
