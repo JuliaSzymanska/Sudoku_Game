@@ -196,53 +196,64 @@ public class SudokuBoardTest {
 
     @Test
     void internationalizedtSetExceptionTest() {
-        Locale.setDefault(new Locale("en", "en"));
         SudokuBoard sudoku1 = new SudokuBoard();
 
-        try {
-            sudoku1.set(0, 0, -1);
-        } catch (SetException e) {
-            assertEquals(e.getLocalizedMessage(), "Sudoku Field Value Provided has to be in range <0, 9>");
-        }
-        try {
-            sudoku1.set(-1, -1, 1);
-        } catch (SetException e) {
-            assertEquals(e.getLocalizedMessage(), "Value has to be in range 0 - 8");
-        }
+        Locale.setDefault(new Locale("en", "en"));
+        SetException exception1 = assertThrows(
+                SetException.class,
+                () -> {
+                    sudoku1.set(0, 0, -1);
+                }
+        );
+        assertEquals("Sudoku Field Value Provided has to be in range <0, 9>", exception1.getLocalizedMessage());
+
+        SetException exception2 = assertThrows(
+                SetException.class,
+                () -> {
+                    sudoku1.set(-1, -1, 1);
+                }
+        );
+        assertEquals("Value has to be in range 0 - 8", exception2.getLocalizedMessage());
 
         Locale.setDefault(new Locale("pl", "pl"));
+        SetException exception3 = assertThrows(
+                SetException.class,
+                () -> {
+                    sudoku1.set(0, 0, -1);
+                }
+        );
+        assertEquals("Wartosc Dla Sudoku Field Musi byc od 0 do 9", exception3.getLocalizedMessage());
 
-        try {
-            sudoku1.set(0, 0, -1);
-        } catch (SetException e) {
-            assertEquals(e.getLocalizedMessage(), "Wartosc Dla Sudoku Field Musi byc od 0 do 9");
-        }
-        try {
-            sudoku1.set(-1, -1, 1);
-        } catch (SetException e) {
-            assertEquals(e.getLocalizedMessage(), "Wartosc musi byc w zasiegu od 0 do 8");
-        }
+        SetException exception4 = assertThrows(
+                SetException.class,
+                () -> {
+                    sudoku1.set(-1, -1, 1);
+                }
+        );
+        assertEquals("Wartosc musi byc w zasiegu od 0 do 8", exception4.getLocalizedMessage());
     }
+
 
     @Test
     void internationalizedtGetExceptionTest() {
-        Locale.setDefault(new Locale("en", "en"));
         SudokuBoard sudoku1 = new SudokuBoard();
 
-        // TODO: 19.05.2020 Czy mozna jakos lepiej te stringi sprawdzic
-        try {
-            sudoku1.get(0, 0);
-        } catch (GetException e) {
-            assertEquals(e.getLocalizedMessage(), "Value has to be in range 0 - 8");
-        }
+        Locale.setDefault(new Locale("en", "en"));
+        GetException exceptionEN = assertThrows(
+                GetException.class,
+                () -> {
+                    sudoku1.get(-1, -1);
+                }
+        );
+        assertEquals("Value has to be in range 0 - 8", exceptionEN.getLocalizedMessage());
 
         Locale.setDefault(new Locale("pl", "pl"));
-
-        try {
-            sudoku1.get(-1, -1);
-        } catch (GetException e) {
-            assertEquals(e.getLocalizedMessage(), "Wartosc musi byc w zasiegu od 0 do 8");
-        }
-
+        GetException exceptionPL = assertThrows(
+                GetException.class,
+                () -> {
+                    sudoku1.get(-1, -1);
+                }
+        );
+        assertEquals("Wartosc musi byc w zasiegu od 0 do 8", exceptionPL.getLocalizedMessage());
     }
 }

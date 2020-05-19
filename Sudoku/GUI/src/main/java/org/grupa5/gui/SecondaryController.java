@@ -272,6 +272,7 @@ public class SecondaryController implements Initializable {
                 }
             }
         });
+        // TODO: 19.05.2020 nie dokonca jestem zadowolona z tego rozwiazania
         if(!isTextPropert.get()){
             return;
         }
@@ -326,6 +327,7 @@ public class SecondaryController implements Initializable {
                 }
             }
         });
+        // TODO: 19.05.2020 nie dokonca jestem zadowolona z tego rozwiazania
         if(!isTextPropert.get()){
             return;
         }
@@ -345,13 +347,11 @@ public class SecondaryController implements Initializable {
 
     private void checkTextInutDB(String text) throws JDBCDaoWriteException {
         if (text.length() > 20) {
-            throw new JDBCDaoWriteException("Get DB name");
+            throw new JDBCDaoWriteException("DBWrite");
         }
         for (int i = 0; i < text.length(); i++) {
-//            if(text.charAt(i) < 48 || (text.charAt(i) > 57 && text.charAt(i) < 65)
-//                    || (text.charAt(i) > 90 )){
             if (!Character.isLetterOrDigit(text.charAt(i))) {
-                throw new JDBCDaoWriteException("Get DB name");
+                throw new JDBCDaoWriteException("DBWrite");
             }
         }
 
