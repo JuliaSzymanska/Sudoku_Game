@@ -258,10 +258,10 @@ public class SecondaryController implements Initializable {
     }
 
     public void saveSudokuToDb() {
-        TextInputDialog td = new TextInputDialog("Enter Board Name (20 characters)");
-        td.setTitle("Save Game");
+        TextInputDialog td = new TextInputDialog("nameSaveDB");
+        td.setTitle("saveGame");
         // TODO: 19.05.2020 lepszy header
-        td.setHeaderText("Save Game");
+        td.setHeaderText("saveGame");
         AtomicBoolean isTextPropert = new AtomicBoolean(true);
         td.showAndWait().ifPresent((text) -> {
             try {
@@ -315,7 +315,7 @@ public class SecondaryController implements Initializable {
 
     public void readSudokuFromDb() {
         // TODO: 20.05.2020 internalizacjia tego
-        TextInputDialog td = new TextInputDialog("Enter Saved Board's Name (20 characters)");
+        TextInputDialog td = new TextInputDialog("nameReadDB");
         td.setTitle("Load Game");
         // TODO: 19.05.2020 lepszy header
         td.setHeaderText("Load Game");
