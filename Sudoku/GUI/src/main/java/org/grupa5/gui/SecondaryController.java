@@ -122,12 +122,6 @@ public class SecondaryController implements Initializable {
 
     // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
     private void fillGrid() throws NoSuchMethodException {
-        // TODO: 16.05.2020 Testuje tym czy sie internacjonalizuja wyjatki xd
-        try {
-            sudokuBoard.set(0, 0, 12);
-        } catch (SetException e) {
-            System.out.println(e);
-        }
         int numRows = grid1.getRowCount();
         int numCols = grid1.getColumnCount();
         for (int i = 0; i < numRows; i++) {
@@ -178,7 +172,9 @@ public class SecondaryController implements Initializable {
                     try {
                         intToAdd = sudokuBoard.get(j - 1, i - 1);
                     } catch (GetException e) {
-                        System.out.println(e.getLocalizedMessage());
+                        if (this.logger.isErrorEnabled()) {
+                            logger.error("", e);
+                        }
                     }
                     if (intToAdd != 0) {
                         textField.setDisable(true);
@@ -251,6 +247,9 @@ public class SecondaryController implements Initializable {
                 SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
             } catch (SudokuException e) {
                 this.alertNotAbleToSaveGame();
+                if (this.logger.isInfoEnabled()) {
+                    this.logger.info("", e);
+                }
             }
         }
     }
@@ -271,13 +270,15 @@ public class SecondaryController implements Initializable {
 //        }));
         td.showAndWait();
         String inputString = td.getEditor().getText();
-        System.out.println(inputString);
         if (!inputString.equals("")) {
             try {
                 // TODO: 18.05.2020 zrobic parametr
                 SudokuBoardDaoFactory.getJdbcDao(inputString).write(this.sudokuBoard);
             } catch (SudokuException e) {
                 this.alertNotAbleToSaveGame();
+                if (this.logger.isInfoEnabled()) {
+                    this.logger.info("", e);
+                }
             }
         }
     }
@@ -291,11 +292,13 @@ public class SecondaryController implements Initializable {
         if (file != null) {
             try {
                 this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
-                System.out.println(this.sudokuBoard);
                 switchStartAndEndButtons();
                 this.fillGrid();
             } catch (SudokuException | NoSuchMethodException e) {
                 this.alertNotAbleToReadGame();
+                if (this.logger.isInfoEnabled()) {
+                    this.logger.info("", e);
+                }
             }
         }
     }
@@ -324,7 +327,6 @@ public class SecondaryController implements Initializable {
             this.fillGrid();
         } catch (NoSuchMethodException | FileDaoReadException | JDBCDaoReadException e) {
             this.alertNotAbleToReadGame();
-            e.printStackTrace();
             if (this.logger.isInfoEnabled()) {
                 this.logger.info("", e);
             }

@@ -8,8 +8,6 @@ import org.grupa5.sudoku.SudokuBoard;
 
 class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
-
-
     //obiekt tworzący połączenie z bazą danych.
     private Connection connection;
     //obiekt pozwalający tworzyć nowe wyrażenia SQL
@@ -31,8 +29,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     JdbcSudokuBoardDao(String fileName) {
         this.fileName = "'" + fileName + "'";
     }
-
-
 
     @Override
     public SudokuBoard read() throws JDBCDaoReadException {
