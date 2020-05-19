@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.beans.property.*;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
@@ -259,16 +260,21 @@ public class SecondaryController implements Initializable {
         td.setTitle("Save Game");
         // TODO: 19.05.2020 lepszy header
         td.setHeaderText("Save Game");
-        // TODO: 19.05.2020 Nie dziala mi formatter na tym, tak ot jest ok
-//        td.getEditor().setTextFormatter(new TextFormatter<>(c -> {
-//            if (c.isContentChange()) {
-//                if (c.getText().matches("[0-9] | ^$ ")) {
-//                    return c;
-//                }
-//            }
-//            return c;
-//        }));
-        td.showAndWait();
+        AtomicBoolean isTextPropert = new AtomicBoolean(true);
+        td.showAndWait().ifPresent((text) -> {
+            try {
+                checkTextInutDB(text);
+            } catch (NumberFormatException | JDBCDaoWriteException e) {
+                this.alertNotAbleToSaveGame();
+                isTextPropert.set(false);
+                if (this.logger.isInfoEnabled()) {
+                    this.logger.info("", e);
+                }
+            }
+        });
+        if(!isTextPropert.get()){
+            return;
+        }
         String inputString = td.getEditor().getText();
         if (!inputString.equals("")) {
             try {
@@ -304,20 +310,25 @@ public class SecondaryController implements Initializable {
     }
 
     public void readSudokuFromDb() {
-        TextInputDialog td = new TextInputDialog("Enter Save Name (20 characters)");
+        TextInputDialog td = new TextInputDialog("Enter Load Name (20 characters)");
         td.setTitle("Load Game");
         // TODO: 19.05.2020 lepszy header
         td.setHeaderText("Load Game");
-        // TODO: 19.05.2020 Nie dziala mi formatter na tym, tak ot jest ok
-//        td.getEditor().setTextFormatter(new TextFormatter<>(c -> {
-//            if (c.isContentChange()) {
-//                if (c.getText().matches("[0-9] | ^$ ")) {
-//                    return c;
-//                }
-//            }
-//            return c;
-//        }));
-        td.showAndWait();
+        AtomicBoolean isTextPropert = new AtomicBoolean(true);
+        td.showAndWait().ifPresent((text) -> {
+            try {
+                checkTextInutDB(text);
+            } catch (NumberFormatException | JDBCDaoWriteException e) {
+                this.alertNotAbleToSaveGame();
+                isTextPropert.set(false);
+                if (this.logger.isInfoEnabled()) {
+                    this.logger.info("", e);
+                }
+            }
+        });
+        if(!isTextPropert.get()){
+            return;
+        }
         String inputString = td.getEditor().getText();
         try {
             // TODO: 18.05.2020 poprawic parametr
@@ -330,6 +341,20 @@ public class SecondaryController implements Initializable {
                 this.logger.info("", e);
             }
         }
+    }
+
+    private void checkTextInutDB(String text) throws JDBCDaoWriteException {
+        if (text.length() > 20) {
+            throw new JDBCDaoWriteException("Get DB name");
+        }
+        for (int i = 0; i < text.length(); i++) {
+//            if(text.charAt(i) < 48 || (text.charAt(i) > 57 && text.charAt(i) < 65)
+//                    || (text.charAt(i) > 90 )){
+            if (!Character.isLetterOrDigit(text.charAt(i))) {
+                throw new JDBCDaoWriteException("Get DB name");
+            }
+        }
+
     }
 
     private void alertNotAbleToReadGame() {
