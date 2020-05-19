@@ -360,28 +360,28 @@ public class SecondaryController implements Initializable {
 
     private void alertNotAbleToReadGame() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Load Error");
-        alert.setHeaderText("Error Loading Game");
-        alert.setContentText("There was an error loading your game.\n" +
-                "Please try to load again!");
+        alert.setTitle(resourceBundle.getString("loadError"));
+        alert.setHeaderText(resourceBundle.getString("loadError"));
+        alert.setContentText(resourceBundle.getString("loadingFailed") + "\n" +
+                resourceBundle.getString("tryAgain"));
         alert.showAndWait();
 
         if (logger.isErrorEnabled()) {
-            logger.error("Sudoku Game Loading Failed");
+            logger.error(resourceBundle.getString("loadingFailed"));
         }
     }
 
     private void alertNotAbleToSaveGame() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Save Error");
-        alert.setHeaderText("Error Saving Game");
-        alert.setContentText("There was an error saving your game.\n" +
-                "Please try to save again!");
+        alert.setTitle(resourceBundle.getString("saveError"));
+        alert.setHeaderText(resourceBundle.getString("saveError"));
+        alert.setContentText(resourceBundle.getString("savingFailed") + "\n" +
+                resourceBundle.getString("tryAgain"));
 
         alert.showAndWait();
 
         if (logger.isErrorEnabled()) {
-            logger.error("Sudoku Game Saving Failed");
+            logger.error(resourceBundle.getString("savingFailed"));
         }
     }
 
