@@ -258,7 +258,7 @@ public class SecondaryController implements Initializable {
     }
 
     public void saveSudokuToDb() {
-        TextInputDialog td = new TextInputDialog("Enter Save Name (20 characters)");
+        TextInputDialog td = new TextInputDialog("Enter Board Name (20 characters)");
         td.setTitle("Save Game");
         // TODO: 19.05.2020 lepszy header
         td.setHeaderText("Save Game");
@@ -275,7 +275,7 @@ public class SecondaryController implements Initializable {
             }
         });
         // TODO: 19.05.2020 nie dokonca jestem zadowolona z tego rozwiazania
-        if(!isTextPropert.get()){
+        if (!isTextPropert.get()) {
             return;
         }
         String inputString = td.getEditor().getText();
@@ -314,7 +314,7 @@ public class SecondaryController implements Initializable {
     }
 
     public void readSudokuFromDb() {
-        TextInputDialog td = new TextInputDialog("Enter Load Name (20 characters)");
+        TextInputDialog td = new TextInputDialog("Enter Saved Board's Name (20 characters)");
         td.setTitle("Load Game");
         // TODO: 19.05.2020 lepszy header
         td.setHeaderText("Load Game");
@@ -331,7 +331,7 @@ public class SecondaryController implements Initializable {
             }
         });
         // TODO: 19.05.2020 nie dokonca jestem zadowolona z tego rozwiazania
-        if(!isTextPropert.get()){
+        if (!isTextPropert.get()) {
             return;
         }
         String inputString = td.getEditor().getText();
