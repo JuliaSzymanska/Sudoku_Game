@@ -113,7 +113,9 @@ public class SecondaryController implements Initializable {
             try {
                 this.switchToPrimary();
             } catch (IOException e) {
-                e.printStackTrace();
+                if (this.logger.isErrorEnabled()) {
+                    logger.error("", e);
+                }
             }
             return;
         }
@@ -291,7 +293,8 @@ public class SecondaryController implements Initializable {
     }
 
     public void readSudokuFromFile() {
-        // TODO: 05.05.2020 popraw wczytywanie rozpoczetej gry
+        // TODO: 05.05.2020 popraw wczytywanie rozpoczetej gry, zeby pola ktore wczensije
+        //  sie wpisalo przed zapisem a nie sa zerami dalo sie zmienic po wczytaniu
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -339,6 +342,7 @@ public class SecondaryController implements Initializable {
             this.fillGrid();
         } catch (NoSuchMethodException | FileDaoReadException | JDBCDaoReadException e) {
             this.alertNotAbleToReadGame();
+            // TODO: 19.05.2020 loggery sprawdzic
             if (this.logger.isInfoEnabled()) {
                 this.logger.info("", e);
             }

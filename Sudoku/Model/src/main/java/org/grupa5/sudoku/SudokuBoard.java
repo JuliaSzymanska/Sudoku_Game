@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
-// TODO: 10.05.2020 https://stackoverflow.com/questions/21881846/where-does-the-slf4j-log-file-get-saved
-
 import org.apache.commons.lang3.builder.*;
 import org.grupa5.exceptions.GetException;
 import org.grupa5.exceptions.SetException;
@@ -285,7 +283,6 @@ public class SudokuBoard implements Cloneable, Serializable {
                     cloneBoard.set(i, j, this.get(i, j));
                 } catch (GetException | SetException e) {
                     if (logger.isErrorEnabled()) {
-                        // TODO: czy to powinno tak być że tutaj łapiemy i tylko logujemy?
                         logger.error("Exception thrown by clone", e);
                     }
                 }

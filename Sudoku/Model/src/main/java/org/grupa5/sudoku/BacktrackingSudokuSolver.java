@@ -27,7 +27,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             this.solveSudoku(board);
         } catch (SetException | GetException e) {
             if (logger.isErrorEnabled()) {
-                // TODO: 12.05.2020 Kolejne do obejrzenia w wolnym czasie
                 logger.error("Exception thrown by solve, ", e);
             }
         }

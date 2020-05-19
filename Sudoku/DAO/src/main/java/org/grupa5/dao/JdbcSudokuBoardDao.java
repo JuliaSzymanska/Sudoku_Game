@@ -67,7 +67,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 | SQLException | SetException e) {
             throw new JDBCDaoReadException("DBRead", e);
         }
-        // TODO: 18.05.2020 naprawic to zeby nie bylo null
     }
 
     @Override
@@ -79,13 +78,11 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                     sudoku += Integer.toString(sudokuBoard.get(i, j));
                 }
             }
-        } catch (GetException e) {
-            e.printStackTrace();
-        }
-        sudoku += "'";
-        String query = "INSERT INTO " + tableName + "(" + boardId + ", " + boardFields + ")"
-                + " VALUES (" + fileName + ", " + sudoku + ")";
-        try {
+
+            sudoku += "'";
+            String query = "INSERT INTO " + tableName + "(" + boardId + ", " + boardFields + ")"
+                    + " VALUES (" + fileName + ", " + sudoku + ")";
+
             Class.forName(DB_DRIVER).newInstance();
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             statement = connection.createStatement();
@@ -94,14 +91,14 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             }
             statement.close();
             connection.close();
-        } catch (InstantiationException | IllegalAccessException
+
+        } catch (GetException | InstantiationException | IllegalAccessException
                 | ClassNotFoundException | SQLException e) {
             throw new JDBCDaoWriteException("DBWrite", e);
         }
     }
 
     private boolean isTableExist(boolean type) throws SQLException {
-        // TODO: 18.05.2020 zrobic porpawnie zwracanie zeby mialo sens
         // dla type = false znaczy ze odczyt, jak true zapis
         if (connection != null) {
             DatabaseMetaData dbmd = connection.getMetaData();

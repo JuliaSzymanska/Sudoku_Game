@@ -61,7 +61,6 @@ public class BacktrackingSudokuRemover implements SudokuRemover {
             }
             this.setOriginalBoardToCopy();
         } catch (GetException | SetException e) {
-            // TODO: 12.05.2020 Z nudów obejrzyj też i ten exception i log
             if (logger.isErrorEnabled()) {
                 logger.error("Exception thrown in remove, ", e);
             }
