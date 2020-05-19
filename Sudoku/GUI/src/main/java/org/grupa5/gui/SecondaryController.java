@@ -322,7 +322,7 @@ public class SecondaryController implements Initializable {
             try {
                 checkTextInutDB(text);
             } catch (NumberFormatException | JDBCDaoWriteException e) {
-                this.alertNotAbleToSaveGame();
+                this.alertNotAbleToReadGame();
                 isTextPropert.set(false);
                 if (this.logger.isInfoEnabled()) {
                     this.logger.info("", e);
