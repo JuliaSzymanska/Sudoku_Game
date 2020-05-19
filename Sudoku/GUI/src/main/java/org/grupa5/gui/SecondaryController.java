@@ -250,33 +250,32 @@ public class SecondaryController implements Initializable {
             try {
                 SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
             } catch (SudokuException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Save Error");
-                alert.setHeaderText("Error Saving Game");
-                alert.setContentText("There was an error saving your game.\n" +
-                        "Please try to save again!");
-
-                alert.showAndWait();
-
-                if (logger.isErrorEnabled()) {
-                    logger.error("Sudoku Game Saving Failed");
-                }
+                this.alertNotAbleToSaveGame();
             }
         }
     }
 
     public void saveSudokuToDb() {
-        // TODO: 18.05.2020 wyjatki popraw to wszystko
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        File file = fileChooser.showSaveDialog(new Stage());
-
-        if (file != null) {
+        TextInputDialog td = new TextInputDialog("Enter Save Name (20 characters)");
+        td.setTitle("Save Game");
+        // TODO: 19.05.2020 lepszy header
+        td.setHeaderText("Save Game");
+        // TODO: 19.05.2020 Nie dziala mi formatter na tym, tak ot jest ok
+//        td.getEditor().setTextFormatter(new TextFormatter<>(c -> {
+//            if (c.isContentChange()) {
+//                if (c.getText().matches("[0-9] | ^$ ")) {
+//                    return c;
+//                }
+//            }
+//            return c;
+//        }));
+        td.showAndWait();
+        String inputString = td.getEditor().getText();
+        System.out.println(inputString);
+        if (!inputString.equals("")) {
             try {
                 // TODO: 18.05.2020 zrobic parametr
-                SudokuBoardDaoFactory.getJdbcDao("'Nazwa3'").write(this.sudokuBoard);
+                SudokuBoardDaoFactory.getJdbcDao(inputString).write(this.sudokuBoard);
             } catch (SudokuException e) {
                 this.alertNotAbleToSaveGame();
             }

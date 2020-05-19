@@ -61,8 +61,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                         counterY += 1;
                     }
                 }
-            }
-            else {
+            } else {
                 throw new JDBCDaoReadException("DBRead");
             }
             connection.close();
