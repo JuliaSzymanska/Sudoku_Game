@@ -342,7 +342,6 @@ public class SecondaryController implements Initializable {
             this.fillGrid();
         } catch (NoSuchMethodException | FileDaoReadException | JDBCDaoReadException e) {
             this.alertNotAbleToReadGame();
-            // TODO: 19.05.2020 loggery sprawdzic
             if (this.logger.isInfoEnabled()) {
                 this.logger.info("", e);
             }

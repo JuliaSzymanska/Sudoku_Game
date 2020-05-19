@@ -43,7 +43,7 @@ class SudokuObjectTest {
             list1.set(i, new SudokuField(i + 1));
             list2.set(i, new SudokuField(i + 3));
         }
-        if(list1.hashCode() != list2.hashCode())
+        if (list1.hashCode() != list2.hashCode())
             assertNotEquals(list1, list2);
     }
 
@@ -88,8 +88,7 @@ class SudokuObjectTest {
         SudokuObject sudoku2 = new SudokuObject(list2);
         try {
             sudoku2 = sudoku1.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+        } catch (CloneNotSupportedException ignored) {
         }
         assertEquals(sudoku1, sudoku2);
         assertEquals(sudoku1.hashCode(), sudoku2.hashCode());

@@ -39,7 +39,7 @@ public class SudokuFieldTest {
     void HashCodeTest() {
         SudokuField sudoku1 = new SudokuField(3);
         SudokuField sudoku2 = new SudokuField(4);
-        if(sudoku1.hashCode() != sudoku2.hashCode())
+        if (sudoku1.hashCode() != sudoku2.hashCode())
             assertNotEquals(sudoku1, sudoku2);
     }
 
@@ -51,13 +51,12 @@ public class SudokuFieldTest {
     }
 
     @Test
-    public void cloneTest(){
+    public void cloneTest() {
         SudokuField field1 = new SudokuField(1);
         SudokuField field2 = new SudokuField();
         try {
             field2 = field1.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+        } catch (CloneNotSupportedException ignored) {
         }
         assertEquals(field1, field2);
         assertEquals(field1.hashCode(), field2.hashCode());
