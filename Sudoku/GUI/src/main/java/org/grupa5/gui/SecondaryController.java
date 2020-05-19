@@ -258,10 +258,10 @@ public class SecondaryController implements Initializable {
     }
 
     public void saveSudokuToDb() {
-        TextInputDialog td = new TextInputDialog("nameSaveDB");
-        td.setTitle("saveGame");
+        TextInputDialog td = new TextInputDialog(resourceBundle.getString("nameSaveDB"));
+        td.setTitle(resourceBundle.getString("saveGame"));
         // TODO: 19.05.2020 lepszy header
-        td.setHeaderText("saveGame");
+        td.setHeaderText(resourceBundle.getString("saveGame"));
         AtomicBoolean isTextPropert = new AtomicBoolean(true);
         td.showAndWait().ifPresent((text) -> {
             try {
@@ -274,7 +274,6 @@ public class SecondaryController implements Initializable {
                 }
             }
         });
-        // TODO: 19.05.2020 nie dokonca jestem zadowolona z tego rozwiazania
         if (!isTextPropert.get()) {
             return;
         }
@@ -314,11 +313,10 @@ public class SecondaryController implements Initializable {
     }
 
     public void readSudokuFromDb() {
-        // TODO: 20.05.2020 internalizacjia tego
-        TextInputDialog td = new TextInputDialog("nameReadDB");
-        td.setTitle("Load Game");
+        TextInputDialog td = new TextInputDialog(resourceBundle.getString("nameReadDB"));
+        td.setTitle(resourceBundle.getString("loadGame"));
         // TODO: 19.05.2020 lepszy header
-        td.setHeaderText("Load Game");
+        td.setHeaderText(resourceBundle.getString("loadGame"));
         AtomicBoolean isTextPropert = new AtomicBoolean(true);
         td.showAndWait().ifPresent((text) -> {
             try {
@@ -331,7 +329,6 @@ public class SecondaryController implements Initializable {
                 }
             }
         });
-        // TODO: 19.05.2020 nie dokonca jestem zadowolona z tego rozwiazania
         if (!isTextPropert.get()) {
             return;
         }
