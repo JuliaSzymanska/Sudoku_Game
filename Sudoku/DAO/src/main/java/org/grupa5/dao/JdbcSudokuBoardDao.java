@@ -29,8 +29,10 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
 
     JdbcSudokuBoardDao(String fileName) {
-        this.fileName = fileName;
+        this.fileName = "'" + fileName + "'";
     }
+
+
 
     @Override
     public SudokuBoard read() throws JDBCDaoReadException {
@@ -60,8 +62,11 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                     }
                 }
             }
-            statement.close();
+            else {
+                throw new JDBCDaoReadException("DBRead");
+            }
             connection.close();
+            statement.close();
             return sudokuBoard;
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
                 | SQLException | SetException e) {
@@ -98,10 +103,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 | ClassNotFoundException | SQLException e) {
             throw new JDBCDaoWriteException("DBWrite", e);
         }
-    }
-
-    private void getAll() {
-
     }
 
     private boolean isTableExist(boolean type) throws SQLException {

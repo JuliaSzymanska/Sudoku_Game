@@ -278,17 +278,7 @@ public class SecondaryController implements Initializable {
                 // TODO: 18.05.2020 zrobic parametr
                 SudokuBoardDaoFactory.getJdbcDao("'Nazwa3'").write(this.sudokuBoard);
             } catch (SudokuException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Save Error");
-                alert.setHeaderText("Error Saving Game");
-                alert.setContentText("There was an error saving your game.\n" +
-                        "Please try to save again!");
-
-                alert.showAndWait();
-
-                if (logger.isErrorEnabled()) {
-                    logger.error("Sudoku Game Saving Failed");
-                }
+                this.alertNotAbleToSaveGame();
             }
         }
     }
@@ -305,46 +295,67 @@ public class SecondaryController implements Initializable {
                 System.out.println(this.sudokuBoard);
                 switchStartAndEndButtons();
                 this.fillGrid();
-            } catch (SudokuException| NoSuchMethodException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Load Error");
-                alert.setHeaderText("Error Loading Game");
-                alert.setContentText("There was an error loading your game.\n" +
-                        "Please try to load again!");
-                alert.showAndWait();
-
-                if (logger.isErrorEnabled()) {
-                    logger.error("Sudoku Game Loading Failed");
-                }
+            } catch (SudokuException | NoSuchMethodException e) {
+                this.alertNotAbleToReadGame();
             }
         }
     }
 
     public void readSudokuFromDb() {
-        // TODO: 18.05.2020 wyjatki popraw to wszystko
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(extFilter);
-        File file = fileChooser.showOpenDialog(new Stage());
-        if (file != null) {
-            try {
-                // TODO: 18.05.2020 poprawic parametr
-                this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao("'Nazwa3'").read();
-                System.out.println(this.sudokuBoard);
-                switchStartAndEndButtons();
-                this.fillGrid();
-            } catch (SudokuException | NoSuchMethodException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Load Error");
-                alert.setHeaderText("Error Loading Game");
-                alert.setContentText("There was an error loading your game.\n" +
-                        "Please try to load again!");
-                alert.showAndWait();
-
-                if (logger.isErrorEnabled()) {
-                    logger.error("Sudoku Game Loading Failed");
-                }
+        TextInputDialog td = new TextInputDialog("Enter Save Name (20 characters)");
+        td.setTitle("Load Game");
+        // TODO: 19.05.2020 lepszy header
+        td.setHeaderText("Load Game");
+        // TODO: 19.05.2020 Nie dziala mi formatter na tym, tak ot jest ok
+//        td.getEditor().setTextFormatter(new TextFormatter<>(c -> {
+//            if (c.isContentChange()) {
+//                if (c.getText().matches("[0-9] | ^$ ")) {
+//                    return c;
+//                }
+//            }
+//            return c;
+//        }));
+        td.showAndWait();
+        String inputString = td.getEditor().getText();
+        System.out.println(inputString);
+        try {
+            // TODO: 18.05.2020 poprawic parametr
+            this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao(inputString).read();
+            switchStartAndEndButtons();
+            this.fillGrid();
+        } catch (NoSuchMethodException | FileDaoReadException | JDBCDaoReadException e) {
+            this.alertNotAbleToReadGame();
+            e.printStackTrace();
+            if (this.logger.isInfoEnabled()) {
+                this.logger.info("", e);
             }
+        }
+    }
+
+    private void alertNotAbleToReadGame() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Load Error");
+        alert.setHeaderText("Error Loading Game");
+        alert.setContentText("There was an error loading your game.\n" +
+                "Please try to load again!");
+        alert.showAndWait();
+
+        if (logger.isErrorEnabled()) {
+            logger.error("Sudoku Game Loading Failed");
+        }
+    }
+
+    private void alertNotAbleToSaveGame() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Save Error");
+        alert.setHeaderText("Error Saving Game");
+        alert.setContentText("There was an error saving your game.\n" +
+                "Please try to save again!");
+
+        alert.showAndWait();
+
+        if (logger.isErrorEnabled()) {
+            logger.error("Sudoku Game Saving Failed");
         }
     }
 
