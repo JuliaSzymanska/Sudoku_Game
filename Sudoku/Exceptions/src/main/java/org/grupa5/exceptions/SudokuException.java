@@ -2,6 +2,7 @@ package org.grupa5.exceptions;
 
 import java.util.ResourceBundle;
 
+// TODO: 20.05.2020 chciales tu dac runtime exception
 public class SudokuException extends Exception {
     ResourceBundle bundle = ResourceBundle.getBundle("SudokuExceptions");
 

@@ -6,6 +6,7 @@ import org.grupa5.exceptions.*;
 
 import org.grupa5.sudoku.SudokuBoard;
 
+// TODO: 20.05.2020 dac jeden typ wyjaktu dla dao albo zrobic osobny modul
 class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
     //obiekt tworzący połączenie z bazą danych.
@@ -36,9 +37,11 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
         try {
             Class.forName(DB_DRIVER).newInstance();
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            // TODO: 20.05.2020 statment w try with resources, albo w finally
             statement = connection.createStatement();
             SudokuBoard sudokuBoard = new SudokuBoard();
             if (isTableExist(false)) {
+                // TODO: 20.05.2020 zamknac w finally,
                 resultSet = statement.executeQuery(query);
                 String id = "";
                 String fields = "";
@@ -60,6 +63,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             } else {
                 throw new JDBCDaoReadException("DBRead");
             }
+            // TODO: 20.05.2020 finally tutaj koniecznie
             connection.close();
             statement.close();
             return sudokuBoard;
@@ -80,6 +84,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             }
 
             sudoku += "'";
+            // TODO: 20.05.2020 scommitowac transakcje
             String query = "INSERT INTO " + tableName + "(" + boardId + ", " + boardFields + ")"
                     + " VALUES (" + fileName + ", " + sudoku + ")";
 
@@ -89,6 +94,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             if (isTableExist(true)) {
                 statement.executeUpdate(query);
             }
+            // TODO: 20.05.2020 finally tutaj koniecznie
             statement.close();
             connection.close();
 

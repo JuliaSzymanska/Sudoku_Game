@@ -135,6 +135,7 @@ public class SudokuBoardDaoTest {
         assertEquals(exceptionPL.getLocalizedMessage(), "SudokuBoard Dao odczyt z bazy danych napotkal problem");
     }
 
+    // TODO: 20.05.2020 wytworzyc nowa baze danych, w pamieci memroy zeby plik sie nie tworzyl, to wtedy po zakonczeniu testow ona sie usunie
     @Test
     void localizedMessagesTestWriteDBDao() {
         Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STRING");
