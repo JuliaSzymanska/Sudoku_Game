@@ -6,7 +6,6 @@ import org.grupa5.exceptions.*;
 
 import org.grupa5.sudoku.SudokuBoard;
 
-// TODO: 20.05.2020 dac jeden typ wyjaktu dla dao albo zrobic osobny modul
 class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
     //obiekt tworzący połączenie z bazą danych.
@@ -16,7 +15,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private ResultSet resultSet = null;
 
     private static final String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
-    //jdbc:derby://localhost/c:/temp/db";
     private static final String DB_USER = "user";
     private static final String DB_PASS = "1";
     private static final String DB_DRIVER = "org.apache.derby.jdbc.ClientDriver";
@@ -37,11 +35,9 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
         try {
             Class.forName(DB_DRIVER).newInstance();
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            // TODO: 20.05.2020 statment w try with resources, albo w finally
             statement = connection.createStatement();
             SudokuBoard sudokuBoard = new SudokuBoard();
             if (isTableExist(false)) {
-                // TODO: 20.05.2020 zamknac w finally,
                 resultSet = statement.executeQuery(query);
                 String id = "";
                 String fields = "";
@@ -63,13 +59,18 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             } else {
                 throw new DaoReadException("DBRead");
             }
-            // TODO: 20.05.2020 finally tutaj koniecznie
-            connection.close();
-            statement.close();
             return sudokuBoard;
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
                 | SQLException | SetException e) {
             throw new DaoReadException("DBRead", e);
+        } finally {
+            try {
+                resultSet.close();
+                connection.close();
+                statement.close();
+            } catch (SQLException e) {
+                throw new DaoReadException("DBRead", e);
+            }
         }
     }
 
@@ -82,7 +83,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                     sudoku += Integer.toString(sudokuBoard.get(i, j));
                 }
             }
-
             sudoku += "'";
             // TODO: 20.05.2020 scommitowac transakcje
             String query = "INSERT INTO " + tableName + "(" + boardId + ", " + boardFields + ")"
@@ -94,18 +94,20 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             if (isTableExist(true)) {
                 statement.executeUpdate(query);
             }
-            // TODO: 20.05.2020 finally tutaj koniecznie
-            statement.close();
-            connection.close();
-
         } catch (GetException | InstantiationException | IllegalAccessException
                 | ClassNotFoundException | SQLException e) {
             throw new DaoWriteException("DBWrite", e);
+        } finally {
+            try {
+                connection.close();
+                statement.close();
+            } catch (SQLException e) {
+                throw new DaoWriteException("DBWrite", e);
+            }
         }
     }
 
     private boolean isTableExist(boolean type) throws SQLException {
-        // dla type = false znaczy ze odczyt, jak true zapis
         if (connection != null) {
             DatabaseMetaData dbmd = connection.getMetaData();
             ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null);
