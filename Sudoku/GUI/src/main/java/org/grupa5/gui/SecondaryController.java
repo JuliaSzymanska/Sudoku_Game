@@ -132,8 +132,6 @@ public class SecondaryController implements Initializable {
         secondaryButton.setText(resourceBundle.getString(end));
     }
 
-
-    // TODO: zrobić żeby grid się centrował po zmianie rozmiaru okna
     private void fillGrid() throws NoSuchMethodException {
         int numRows = grid1.getRowCount();
         int numCols = grid1.getColumnCount();
@@ -143,6 +141,8 @@ public class SecondaryController implements Initializable {
                 textField.setAlignment(Pos.CENTER);
                 textField.setMaxWidth(45);
                 textField.setMaxHeight(45);
+                textField.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);" +
+                        "-fx-text-fill: white");
 
                 if (i != 0 && j != 0) {
 
@@ -192,12 +192,12 @@ public class SecondaryController implements Initializable {
                     if (intToAdd != 0) {
                         textField.setDisable(true);
                     }
-                } else if (i == 0 && j == 0) {
-                    textField.setDisable(true);
-                    textField.setText("X");
-                } else if (i == 0) {
-                    textField.setDisable(true);
-                    textField.setText((Character.toString((char) (64 + j))));
+//                } else if (i == 0 && j == 0) {
+//                    textField.setDisable(true);
+//                    textField.setText("X");
+//                } else if (i == 0) {
+//                    textField.setDisable(true);
+//                    textField.setText((Character.toString((char) (64 + j))));
                 } else {
                     textField.setDisable(true);
                     textField.setText(("0" + i));
