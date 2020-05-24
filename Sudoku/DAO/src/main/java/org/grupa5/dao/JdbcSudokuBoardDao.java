@@ -75,6 +75,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     @Override
     public void write(SudokuBoard sudokuBoard) throws DaoWriteException {
         String sudoku = "'";
+        System.out.println(sudokuBoard.toString());
         try (Statement statement = connection.createStatement()) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -82,7 +83,9 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 }
             }
             sudoku += "'";
-            // TODO: 20.05.2020 scommitowac transakcje
+            // TODO: 20.05.2020 mozna commitowac transakcje ale \
+            //  wlasciwie to jak mamy jedno insert to nie trzeba
+
             String query = "INSERT INTO " + tableName + "(" + boardId + ", " + boardFields + ")"
                     + " VALUES (" + fileName + ", " + sudoku + ")";
             //ladowanie klasy sterownika do pamieci
