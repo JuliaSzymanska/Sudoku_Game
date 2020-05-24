@@ -1,8 +1,5 @@
 package org.grupa5.exceptions;
 
-import java.io.Serializable;
-import java.util.ResourceBundle;
-
 public class SetException extends SudokuException {
 
     public SetException(String s) {

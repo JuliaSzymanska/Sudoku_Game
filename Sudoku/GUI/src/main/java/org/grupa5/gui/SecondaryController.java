@@ -248,7 +248,7 @@ public class SecondaryController implements Initializable {
         if (file != null) {
             try {
                 SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
-            } catch (SudokuException e) {
+            } catch (DaoException e) {
                 this.alertNotAbleToSaveGame();
                 if (this.logger.isInfoEnabled()) {
                     this.logger.info("", e);
@@ -282,7 +282,7 @@ public class SecondaryController implements Initializable {
             try {
                 // TODO: 18.05.2020 zrobic parametr
                 SudokuBoardDaoFactory.getJdbcDao(inputString).write(this.sudokuBoard);
-            } catch (SudokuException e) {
+            } catch (DaoException e) {
                 this.alertNotAbleToSaveGame();
                 if (this.logger.isInfoEnabled()) {
                     this.logger.info("", e);
@@ -303,7 +303,7 @@ public class SecondaryController implements Initializable {
                 this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
                 switchStartAndEndButtons();
                 this.fillGrid();
-            } catch (SudokuException | NoSuchMethodException e) {
+            } catch (DaoException | NoSuchMethodException e) {
                 this.alertNotAbleToReadGame();
                 if (this.logger.isInfoEnabled()) {
                     this.logger.info("", e);

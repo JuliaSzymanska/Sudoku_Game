@@ -1,6 +1,7 @@
 package org.grupa5.exceptions;
 
-public class DaoReadException extends SudokuException {
+public class DaoReadException extends DaoException {
+
     public DaoReadException(String s) {
         super(s);
     }

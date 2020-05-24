@@ -117,7 +117,7 @@ public class SudokuBoardDaoTest {
         DaoReadException exceptionEN = assertThrows(
                 DaoReadException.class,
                 () -> {
-                    failureDaoDB.read();
+                        failureDaoDB.read();
                 }
         );
         assertEquals(exceptionEN.getLocalizedMessage(), "SudokuBoard DBDao read encountered an Issue");

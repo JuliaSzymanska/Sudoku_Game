@@ -1,8 +1,5 @@
 package org.grupa5.exceptions;
 
-import java.io.Serializable;
-import java.util.ResourceBundle;
-
 public class GetException extends SudokuException {
 
     public GetException(String s) {
