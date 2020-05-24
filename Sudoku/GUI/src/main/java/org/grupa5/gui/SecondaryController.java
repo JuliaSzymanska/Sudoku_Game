@@ -143,64 +143,51 @@ public class SecondaryController implements Initializable {
                 textField.setMaxHeight(45);
                 textField.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);" +
                         "-fx-text-fill: white");
-
-                if (i != 0 && j != 0) {
-
-                    textField.setTextFormatter(new TextFormatter<>(c -> {
-                        if (c.isContentChange()) {
-                            if (c.getText().matches("[0-9] | ^$ ")) {
-                                return c;
-                            }
-                        }
-                        return c;
-                    }));
-
-                    SudokuField sudokuField = this.sudokuBoard.getField(j - 1, i - 1);
-                    IntegerProperty integerProperty = new JavaBeanIntegerPropertyBuilder().bean(sudokuField).name("value").build();
-
-                    this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
-                    textField.textProperty().bindBidirectional(integerProperty, converter);
-
-                    textField.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
-                        @Override
-                        public void handle(KeyEvent event) {
-                            textField.clear();
-                            String character = event.getCharacter();
-                            if (!checkNumeric(character)) {
-                                textField.setText("0");
-                                event.consume();
-                            }
-                        }
-                    });
-                    textField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
-                        @Override
-                        public void handle(KeyEvent event) {
-                            if (!sudokuBoard.isWholeBoardValid()) {
-                                textField.setText("0");
-                            }
-                        }
-                    });
-
-                    int intToAdd = 0;
-                    try {
-                        intToAdd = sudokuBoard.get(j - 1, i - 1);
-                    } catch (GetException e) {
-                        if (this.logger.isErrorEnabled()) {
-                            logger.error("", e);
+                textField.setTextFormatter(new TextFormatter<>(c -> {
+                    if (c.isContentChange()) {
+                        if (c.getText().matches("[0-9] | ^$ ")) {
+                            return c;
                         }
                     }
-                    if (intToAdd != 0) {
-                        textField.setDisable(true);
+                    return c;
+                }));
+
+                SudokuField sudokuField = this.sudokuBoard.getField(j, i);
+                IntegerProperty integerProperty = new JavaBeanIntegerPropertyBuilder().bean(sudokuField).name("value").build();
+
+                this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
+                textField.textProperty().bindBidirectional(integerProperty, converter);
+
+                textField.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        textField.clear();
+                        String character = event.getCharacter();
+                        if (!checkNumeric(character)) {
+                            textField.setText("0");
+                            event.consume();
+                        }
                     }
-//                } else if (i == 0 && j == 0) {
-//                    textField.setDisable(true);
-//                    textField.setText("X");
-//                } else if (i == 0) {
-//                    textField.setDisable(true);
-//                    textField.setText((Character.toString((char) (64 + j))));
-                } else {
+                });
+                textField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent event) {
+                        if (!sudokuBoard.isWholeBoardValid()) {
+                            textField.setText("0");
+                        }
+                    }
+                });
+
+                int intToAdd = 0;
+                try {
+                    intToAdd = sudokuBoard.get(j, i);
+                } catch (GetException e) {
+                    if (this.logger.isErrorEnabled()) {
+                        logger.error("", e);
+                    }
+                }
+                if (intToAdd != 0) {
                     textField.setDisable(true);
-                    textField.setText(("0" + i));
                 }
                 grid1.add(textField, i, j);
             }
@@ -208,6 +195,7 @@ public class SecondaryController implements Initializable {
         if (logger.isDebugEnabled()) {
             logger.debug("Grid Filled");
         }
+
     }
 
     public void startGame() throws NoSuchMethodException {

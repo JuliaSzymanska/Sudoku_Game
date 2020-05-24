@@ -27,23 +27,21 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
     JdbcSudokuBoardDao(String fileName) throws DaoException {
         this.fileName = "'" + fileName + "'";
-        try {
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-        } catch (SQLException e) {
-            throw new DaoException(e.getLocalizedMessage());
-        }
-
+        this.createConnection();
     }
 
     JdbcSudokuBoardDao(String fileName, String url) throws DaoException {
-        this.fileName = "'" + fileName + "'";
         DB_URL = url;
+        this.fileName = "'" + fileName + "'";
+        this.createConnection();
+    }
+
+    private void createConnection() throws DaoException {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
         } catch (SQLException e) {
             throw new DaoException(e.getLocalizedMessage());
         }
-
     }
 
     @Override
@@ -94,11 +92,11 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             sudoku += "'";
             // TODO: 20.05.2020 mozna commitowac transakcje ale \
             //  wlasciwie to jak mamy jedno insert to nie trzeba
-
             String query = "INSERT INTO " + tableName + "(" + boardId + ", " + boardFields + ")"
                     + " VALUES (" + fileName + ", " + sudoku + ")";
             //ladowanie klasy sterownika do pamieci
             Class.forName(DB_DRIVER);
+            // TODO: 24.05.2020 jesli istnieje juz w tablicy to trzeba zorbic update
             if (isTableExist(true)) {
                 statement.executeUpdate(query);
             }
@@ -120,6 +118,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                     return false;
                 }
                 return true;
+                // TODO: 24.05.2020 null pointer exception
             } catch (Exception e) {
                 throw new DaoException(e.getLocalizedMessage());
             }
