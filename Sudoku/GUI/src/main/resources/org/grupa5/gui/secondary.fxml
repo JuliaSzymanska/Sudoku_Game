@@ -5,35 +5,35 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="700.0" maxWidth="500.0" minHeight="700.0" minWidth="500.0" prefHeight="700.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
+<VBox alignment="CENTER" maxHeight="612.0" maxWidth="1164.0" minHeight="612.0" minWidth="1164.0" prefHeight="612.0" prefWidth="1164.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
     <children>
-      <Button fx:id="language" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeLanguage" text="%language" textAlignment="CENTER" translateX="190" translateY="100.0" StackPane.alignment="CENTER_LEFT" />
-      <Label fx:id="level" text="%level" translateY="70.0">
+      <Button fx:id="language" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeLanguage" text="%language" textAlignment="CENTER" translateX="510.0" translateY="150.0" StackPane.alignment="CENTER_LEFT" />
+      <Label fx:id="level" text="%level" textFill="#cdbfbf" translateX="430.0" translateY="230.0">
           <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <ComboBox fx:id="boxLevel" prefWidth="150.0" translateY="70.0" />
-        <Button fx:id="secondaryButton" onAction="#startGame" text="%start" translateY="70.0">
+      <ComboBox fx:id="boxLevel" prefWidth="150.0" translateX="430.0" translateY="230.0" />
+        <Button fx:id="secondaryButton" onAction="#startGame" text="%start" translateX="430.0" translateY="230.0">
          <font>
             <Font size="28.0" />
          </font></Button>
-        <Button fx:id="saveButtonDb" mnemonicParsing="false" onAction="#saveSudokuToDb" text="%saveGameDb" textAlignment="CENTER" translateX="-180.0" translateY="35.0" StackPane.alignment="CENTER_LEFT" />
-        <Button fx:id="loadButtonDb" mnemonicParsing="false" onAction="#readSudokuFromDb" text="%loadGameDb" textAlignment="CENTER" translateX="-180.0" translateY="-60.0" StackPane.alignment="CENTER_LEFT" />
-      <Button fx:id="saveButtonFile" mnemonicParsing="false" onAction="#saveSudokuToFile" text="%saveGame" textAlignment="CENTER" translateX="180.0" translateY="-55.0" StackPane.alignment="CENTER_LEFT" />
-      <Button fx:id="loadButtonFile" mnemonicParsing="false" onAction="#readSudokuFromFile" text="%loadGame" textAlignment="CENTER" translateX="180.0" translateY="-150.0" StackPane.alignment="CENTER_LEFT" />
-      <GridPane fx:id="grid1" gridLinesVisible="true" translateY="-90.0">
+        <Button fx:id="saveButtonDb" mnemonicParsing="false" onAction="#saveSudokuToDb" text="%saveGameDb" textAlignment="CENTER" translateX="380.0" translateY="285.0" StackPane.alignment="CENTER_LEFT" />
+        <Button fx:id="loadButtonDb" mnemonicParsing="false" onAction="#readSudokuFromDb" text="%loadGameDb" textAlignment="CENTER" translateX="380.0" translateY="195.0" StackPane.alignment="CENTER_LEFT" />
+      <Button fx:id="saveButtonFile" mnemonicParsing="false" onAction="#saveSudokuToFile" text="%saveGame" textAlignment="CENTER" translateX="500.0" translateY="150.0" StackPane.alignment="CENTER_LEFT" />
+      <Button fx:id="loadButtonFile" mnemonicParsing="false" onAction="#readSudokuFromFile" text="%loadGame" textAlignment="CENTER" translateX="500.0" translateY="150.0" StackPane.alignment="CENTER_LEFT" />
+      <GridPane fx:id="grid1" gridLinesVisible="true" prefHeight="200.0" prefWidth="200.0" translateX="100.0" translateY="-170.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="10.0" prefWidth="45.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="10.0" prefWidth="45.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="10.0" prefWidth="45.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="10.0" prefWidth="45.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="10.0" prefWidth="45.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="30.0" prefWidth="35.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="30.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="30.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="30.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="30.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="10.0" prefWidth="35.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="10.0" prefWidth="35.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />

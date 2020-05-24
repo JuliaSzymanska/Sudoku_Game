@@ -5,28 +5,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="700.0" maxWidth="500.0" minHeight="700.0" minWidth="500.0" prefHeight="700.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
+<VBox alignment="CENTER" maxHeight="612.0" maxWidth="1164.0" minHeight="612.0" minWidth="1164.0" prefHeight="612.0" prefWidth="1164.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
    <children>
-      <Button fx:id="language" alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#changeLanguage" text="%language" translateX="190" translateY="-150.0" StackPane.alignment="CENTER_LEFT" />
-      <Label text="SUDOKU">
+      <Button fx:id="language" alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#changeLanguage" text="%language" translateX="510.0" translateY="-100.0" StackPane.alignment="CENTER_LEFT" />
+      <Label text="SUDOKU" textFill="#cdbfbf" translateX="430.0" translateY="-50.0">
          <font>
             <Font name="System Bold" size="27.0" />
          </font></Label>
-      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="%start">
+      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="%start" translateX="430.0" translateY="-50.0">
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Label fx:id="authors" text="Label">
+      <Label fx:id="authors" text="Label" textFill="#cdbfbf" translateX="430.0" translateY="-50.0">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="author_1" text="Label">
+      <Label fx:id="author_1" text="Label" textFill="#cdbfbf" translateX="430.0" translateY="-50.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="author_2" text="Label">
+      <Label fx:id="author_2" text="Label" textFill="#cdbfbf" translateX="430.0" translateY="-50.0">
          <font>
             <Font size="20.0" />
          </font>
