@@ -1,6 +1,5 @@
 package org.grupa5.gui;
 
-import javafx.beans.property.ObjectProperty;
 import org.grupa5.sudoku.SudokuBoard;
 
 import java.util.ArrayList;

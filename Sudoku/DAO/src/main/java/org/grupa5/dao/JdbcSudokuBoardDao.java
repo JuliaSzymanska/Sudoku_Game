@@ -32,7 +32,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public SudokuBoard read() throws JDBCDaoReadException {
+    public SudokuBoard read() throws DaoReadException {
         String query = "SELECT * FROM " + tableName + " WHERE " + boardId + " = " + fileName;
         try {
             Class.forName(DB_DRIVER).newInstance();
@@ -61,7 +61,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                     }
                 }
             } else {
-                throw new JDBCDaoReadException("DBRead");
+                throw new DaoReadException("DBRead");
             }
             // TODO: 20.05.2020 finally tutaj koniecznie
             connection.close();
@@ -69,12 +69,12 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             return sudokuBoard;
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException
                 | SQLException | SetException e) {
-            throw new JDBCDaoReadException("DBRead", e);
+            throw new DaoReadException("DBRead", e);
         }
     }
 
     @Override
-    public void write(SudokuBoard sudokuBoard) throws JDBCDaoWriteException {
+    public void write(SudokuBoard sudokuBoard) throws DaoWriteException {
         String sudoku = "'";
         try {
             for (int i = 0; i < 9; i++) {
@@ -100,7 +100,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
         } catch (GetException | InstantiationException | IllegalAccessException
                 | ClassNotFoundException | SQLException e) {
-            throw new JDBCDaoWriteException("DBWrite", e);
+            throw new DaoWriteException("DBWrite", e);
         }
     }
 

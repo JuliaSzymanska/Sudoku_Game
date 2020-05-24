@@ -1,10 +1,7 @@
 package org.grupa5.dao;
 
-import org.grupa5.exceptions.FileDaoReadException;
-import org.grupa5.exceptions.FileDaoWriteException;
-import org.grupa5.exceptions.GetException;
-import org.grupa5.exceptions.JDBCDaoReadException;
-import org.grupa5.exceptions.JDBCDaoWriteException;
+import org.grupa5.exceptions.DaoReadException;
+import org.grupa5.exceptions.DaoWriteException;
 import org.grupa5.sudoku.SudokuBoard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,7 +28,7 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteNotSolvedTest() throws FileDaoWriteException, FileDaoReadException, JDBCDaoWriteException, JDBCDaoReadException {
+    void sudokuBoardWriteNotSolvedTest() throws DaoWriteException, DaoReadException {
         dao.write(board);
         board2 = dao.read();
         Assertions.assertEquals(board, board2);
@@ -48,7 +45,7 @@ public class SudokuBoardDaoTest {
     }
 
     @Test
-    void sudokuBoardWriteSolvedTest() throws FileDaoWriteException, FileDaoReadException, JDBCDaoWriteException, JDBCDaoReadException {
+    void sudokuBoardWriteSolvedTest() throws DaoWriteException, DaoReadException {
         board.solveGame();
         dao.write(board);
         board2 = dao.read();
@@ -58,14 +55,14 @@ public class SudokuBoardDaoTest {
 
     @Test
     void sudokuBoardWriteExceptionTest() {
-        assertThrows(FileDaoWriteException.class, () -> {
+        assertThrows(DaoWriteException.class, () -> {
             failureDao.write(board);
         });
     }
 
     @Test
     void sudokuBoardReadExceptionTest() {
-        assertThrows(FileDaoReadException.class, () -> {
+        assertThrows(DaoReadException.class, () -> {
             failureDao.read();
         });
     }
@@ -73,8 +70,8 @@ public class SudokuBoardDaoTest {
     @Test
     void localizedMessagesTestReadFileDao() {
         Locale.setDefault(new Locale("en", "en"));
-        FileDaoReadException exceptionEN = assertThrows(
-                FileDaoReadException.class,
+        DaoReadException exceptionEN = assertThrows(
+                DaoReadException.class,
                 () -> {
                     failureDao.read();
                 }
@@ -82,8 +79,8 @@ public class SudokuBoardDaoTest {
         assertEquals(exceptionEN.getLocalizedMessage(), "SudokuBoard FileDao read encountered an Issue");
 
         Locale.setDefault(new Locale("pl", "pl"));
-        FileDaoReadException exceptionPL = assertThrows(
-                FileDaoReadException.class,
+        DaoReadException exceptionPL = assertThrows(
+                DaoReadException.class,
                 () -> {
                     failureDao.read();
                 }
@@ -94,8 +91,8 @@ public class SudokuBoardDaoTest {
     @Test
     void localizedMessagesTestWriteFileDao() {
         Locale.setDefault(new Locale("en", "en"));
-        FileDaoWriteException exceptionEN = assertThrows(
-                FileDaoWriteException.class,
+        DaoWriteException exceptionEN = assertThrows(
+                DaoWriteException.class,
                 () -> {
                     failureDao.write(this.board);
                 }
@@ -103,8 +100,8 @@ public class SudokuBoardDaoTest {
         assertEquals(exceptionEN.getLocalizedMessage(), "SudokuBoard FileDao write encountered an Issue");
 
         Locale.setDefault(new Locale("pl", "pl"));
-        FileDaoWriteException exceptionPL = assertThrows(
-                FileDaoWriteException.class,
+        DaoWriteException exceptionPL = assertThrows(
+                DaoWriteException.class,
                 () -> {
                     failureDao.write(this.board);
                 }
@@ -117,8 +114,8 @@ public class SudokuBoardDaoTest {
         Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STR'ING");
 
         Locale.setDefault(new Locale("en", "en"));
-        JDBCDaoReadException exceptionEN = assertThrows(
-                JDBCDaoReadException.class,
+        DaoReadException exceptionEN = assertThrows(
+                DaoReadException.class,
                 () -> {
                     failureDaoDB.read();
                 }
@@ -126,8 +123,8 @@ public class SudokuBoardDaoTest {
         assertEquals(exceptionEN.getLocalizedMessage(), "SudokuBoard DBDao read encountered an Issue");
 
         Locale.setDefault(new Locale("pl", "pl"));
-        JDBCDaoReadException exceptionPL = assertThrows(
-                JDBCDaoReadException.class,
+        DaoReadException exceptionPL = assertThrows(
+                DaoReadException.class,
                 () -> {
                     failureDaoDB.read();
                 }
@@ -140,8 +137,8 @@ public class SudokuBoardDaoTest {
     void localizedMessagesTestWriteDBDao() {
         Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STRING");
         Locale.setDefault(new Locale("en", "en"));
-        JDBCDaoWriteException exceptionEN = assertThrows(
-                JDBCDaoWriteException.class,
+        DaoWriteException exceptionEN = assertThrows(
+                DaoWriteException.class,
                 () -> {
                     failureDaoDB.write(this.board);
                 }
@@ -149,8 +146,8 @@ public class SudokuBoardDaoTest {
         assertEquals(exceptionEN.getLocalizedMessage(), "SudokuBoard DBDao write encountered an Issue");
 
         Locale.setDefault(new Locale("pl", "pl"));
-        JDBCDaoWriteException exceptionPL = assertThrows(
-                JDBCDaoWriteException.class,
+        DaoWriteException exceptionPL = assertThrows(
+                DaoWriteException.class,
                 () -> {
                     failureDaoDB.write(this.board);
                 }

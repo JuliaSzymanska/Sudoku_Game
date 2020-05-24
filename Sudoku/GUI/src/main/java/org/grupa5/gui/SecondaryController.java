@@ -266,7 +266,7 @@ public class SecondaryController implements Initializable {
         td.showAndWait().ifPresent((text) -> {
             try {
                 checkTextInutDB(text);
-            } catch (NumberFormatException | JDBCDaoWriteException e) {
+            } catch (NumberFormatException | DaoWriteException e) {
                 this.alertNotAbleToSaveGame();
                 isTextPropert.set(false);
                 if (this.logger.isInfoEnabled()) {
@@ -321,7 +321,7 @@ public class SecondaryController implements Initializable {
         td.showAndWait().ifPresent((text) -> {
             try {
                 checkTextInutDB(text);
-            } catch (NumberFormatException | JDBCDaoWriteException e) {
+            } catch (NumberFormatException | DaoWriteException e) {
                 this.alertNotAbleToReadGame();
                 isTextPropert.set(false);
                 if (this.logger.isInfoEnabled()) {
@@ -338,7 +338,7 @@ public class SecondaryController implements Initializable {
             this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao(inputString).read();
             switchStartAndEndButtons();
             this.fillGrid();
-        } catch (NoSuchMethodException | FileDaoReadException | JDBCDaoReadException e) {
+        } catch (NoSuchMethodException | DaoReadException e) {
             this.alertNotAbleToReadGame();
             if (this.logger.isInfoEnabled()) {
                 this.logger.info("", e);
@@ -346,13 +346,13 @@ public class SecondaryController implements Initializable {
         }
     }
 
-    private void checkTextInutDB(String text) throws JDBCDaoWriteException {
+    private void checkTextInutDB(String text) throws DaoWriteException {
         if (text.length() > 20) {
-            throw new JDBCDaoWriteException("DBWrite");
+            throw new DaoWriteException("DBWrite");
         }
         for (int i = 0; i < text.length(); i++) {
             if (!Character.isLetterOrDigit(text.charAt(i))) {
-                throw new JDBCDaoWriteException("DBWrite");
+                throw new DaoWriteException("DBWrite");
             }
         }
 

@@ -25,7 +25,6 @@ public class App extends Application {
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
         scene = new Scene(loadFXML("primary"));
-//        VariablesCollection.setLocale(Locale.getDefault());
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
@@ -35,7 +34,6 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
-    // Tym reloadujemy po zmianie jezyka
     public void reload(String fxmlFileName) throws IOException {
         stage.getScene().setRoot(loadFXML(fxmlFileName));
     }
