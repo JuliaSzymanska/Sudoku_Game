@@ -10,9 +10,12 @@ import org.grupa5.exceptions.DaoReadException;
 import org.grupa5.exceptions.DaoWriteException;
 import org.grupa5.sudoku.SudokuBoard;
 
+
 class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
     private String fileName;
+    private static final String fileWrite = "fileWrite";
+    private static final String fileRead = "fileRead";
 
     FileSudokuBoardDao(String fileName) {
         this.fileName = fileName;
@@ -26,7 +29,7 @@ class FileSudokuBoardDao implements Dao<SudokuBoard> {
         ) {
             objectOut.writeObject(sudokuBoard);
         } catch (IOException e) {
-            throw new DaoWriteException("fileWrite", e);
+            throw new DaoWriteException(fileWrite, e);
         }
     }
 
@@ -38,7 +41,7 @@ class FileSudokuBoardDao implements Dao<SudokuBoard> {
         ) {
             return (SudokuBoard) objectIn.readObject();
         } catch (ClassNotFoundException | IOException e) {
-            throw new DaoReadException("fileRead", e);
+            throw new DaoReadException(fileRead, e);
         }
 
     }

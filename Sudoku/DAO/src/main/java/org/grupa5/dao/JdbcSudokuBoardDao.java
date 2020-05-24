@@ -18,6 +18,8 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private static final String DB_USER = "user";
     private static final String DB_PASS = "1";
     private static final String DB_DRIVER = "org.apache.derby.jdbc.ClientDriver";
+    private static final String DBRead = "DBRead";
+    private static final String DBWrite = "DBWrite";
 
     private final String fileName;
     private final String tableName = "boards";
@@ -57,12 +59,12 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                     }
                 }
             } else {
-                throw new DaoReadException("DBRead");
+                throw new DaoReadException(DBRead);
             }
             return sudokuBoard;
         } catch (InstantiationException | IllegalAccessException
                 | ClassNotFoundException | SQLException e) {
-            throw new DaoReadException("DBRead", e);
+            throw new DaoReadException(DBRead, e);
         }
     }
 
@@ -87,7 +89,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             }
         } catch (GetException | InstantiationException | IllegalAccessException
                 | ClassNotFoundException | SQLException e) {
-            throw new DaoWriteException("DBWrite", e);
+            throw new DaoWriteException(DBWrite, e);
         }
     }
 

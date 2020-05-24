@@ -37,6 +37,16 @@ public class SecondaryController implements Initializable {
     private AnchorPane root;
 
     private final Logger logger = LoggerFactory.getLogger(SecondaryController.class);
+    private static final String loadGame = "loadGame";
+    private static final String saveGame = "saveGame";
+    private static final String end = "end";
+    private static final String loadError = "loadError";
+    private static final String saveError = "saveError";
+    private static final String nameSaveDB = "nameSaveDB";
+    private static final String loadingFailed = "loadingFailed";
+    private static final String savingFailed = "savingFailed";
+    private static final String tryAgain = "tryAgain";
+
 
     private SudokuBoard sudokuBoard;
     private ResourceBundle resourceBundle;
@@ -119,7 +129,7 @@ public class SecondaryController implements Initializable {
             }
             return;
         }
-        secondaryButton.setText(resourceBundle.getString("end"));
+        secondaryButton.setText(resourceBundle.getString(end));
     }
 
 
@@ -258,10 +268,10 @@ public class SecondaryController implements Initializable {
     }
 
     public void saveSudokuToDb() {
-        TextInputDialog td = new TextInputDialog(resourceBundle.getString("nameSaveDB"));
-        td.setTitle(resourceBundle.getString("saveGame"));
+        TextInputDialog td = new TextInputDialog(resourceBundle.getString(nameSaveDB));
+        td.setTitle(resourceBundle.getString(saveGame));
         // TODO: 19.05.2020 lepszy header
-        td.setHeaderText(resourceBundle.getString("saveGame"));
+        td.setHeaderText(resourceBundle.getString(saveGame));
         AtomicBoolean isTextPropert = new AtomicBoolean(true);
         td.showAndWait().ifPresent((text) -> {
             try {
@@ -314,9 +324,9 @@ public class SecondaryController implements Initializable {
 
     public void readSudokuFromDb() {
         TextInputDialog td = new TextInputDialog(resourceBundle.getString("nameReadDB"));
-        td.setTitle(resourceBundle.getString("loadGame"));
+        td.setTitle(resourceBundle.getString(loadGame));
         // TODO: 19.05.2020 lepszy header
-        td.setHeaderText(resourceBundle.getString("loadGame"));
+        td.setHeaderText(resourceBundle.getString(loadGame));
         AtomicBoolean isTextPropert = new AtomicBoolean(true);
         td.showAndWait().ifPresent((text) -> {
             try {
@@ -360,28 +370,28 @@ public class SecondaryController implements Initializable {
 
     private void alertNotAbleToReadGame() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(resourceBundle.getString("loadError"));
-        alert.setHeaderText(resourceBundle.getString("loadError"));
-        alert.setContentText(resourceBundle.getString("loadingFailed") + "\n" +
-                resourceBundle.getString("tryAgain"));
+        alert.setTitle(resourceBundle.getString(loadError));
+        alert.setHeaderText(resourceBundle.getString(loadError));
+        alert.setContentText(resourceBundle.getString(loadingFailed) + "\n" +
+                resourceBundle.getString(tryAgain));
         alert.showAndWait();
 
         if (logger.isErrorEnabled()) {
-            logger.error(resourceBundle.getString("loadingFailed"));
+            logger.error(resourceBundle.getString(loadingFailed));
         }
     }
 
     private void alertNotAbleToSaveGame() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(resourceBundle.getString("saveError"));
-        alert.setHeaderText(resourceBundle.getString("saveError"));
-        alert.setContentText(resourceBundle.getString("savingFailed") + "\n" +
-                resourceBundle.getString("tryAgain"));
+        alert.setTitle(resourceBundle.getString(saveError));
+        alert.setHeaderText(resourceBundle.getString(saveError));
+        alert.setContentText(resourceBundle.getString(savingFailed) + "\n" +
+                resourceBundle.getString(tryAgain));
 
         alert.showAndWait();
 
         if (logger.isErrorEnabled()) {
-            logger.error(resourceBundle.getString("savingFailed"));
+            logger.error(resourceBundle.getString(savingFailed));
         }
     }
 
