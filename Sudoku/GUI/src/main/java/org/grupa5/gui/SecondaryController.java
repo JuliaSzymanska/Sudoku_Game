@@ -348,7 +348,7 @@ public class SecondaryController implements Initializable {
             this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao(inputString).read();
             switchStartAndEndButtons();
             this.fillGrid();
-        } catch (NoSuchMethodException | DaoReadException e) {
+        } catch (NoSuchMethodException | DaoException e) {
             this.alertNotAbleToReadGame();
             if (this.logger.isInfoEnabled()) {
                 this.logger.info("", e);

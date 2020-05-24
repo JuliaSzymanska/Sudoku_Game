@@ -7,13 +7,13 @@ import org.grupa5.exceptions.*;
 import org.grupa5.sudoku.SudokuBoard;
 
 class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
-    // TODO: 24.05.2020 nie wiem czy obydwa tu sa potrzebne
+    // TODO: 24.05.2020 nie wiem czy statment jest potrzebne
     //obiekt tworzący połączenie z bazą danych.
     private Connection connection;
     //obiekt pozwalający tworzyć nowe wyrażenia SQL
     private Statement statement;
 
-    private static final String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
+    private static String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
     private static final String DB_USER = "user";
     private static final String DB_PASS = "1";
     private static final String DB_DRIVER = "org.apache.derby.jdbc.ClientDriver";
@@ -25,11 +25,21 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private final String boardId = "board_id";
     private final String boardFields = "fields";
 
-
     JdbcSudokuBoardDao(String fileName) throws DaoException {
         this.fileName = "'" + fileName + "'";
         try {
-            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+        } catch (SQLException e) {
+            throw new DaoException(e.getLocalizedMessage());
+        }
+
+    }
+
+    JdbcSudokuBoardDao(String fileName, String url) throws DaoException {
+        this.fileName = "'" + fileName + "'";
+        DB_URL = url;
+        try {
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
         } catch (SQLException e) {
             throw new DaoException(e.getLocalizedMessage());
         }
@@ -67,7 +77,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 throw new DaoReadException(DBRead);
             }
             return sudokuBoard;
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException | DaoException e) {
             throw new DaoReadException(DBRead, e);
         }
     }
@@ -75,7 +85,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     @Override
     public void write(SudokuBoard sudokuBoard) throws DaoWriteException {
         String sudoku = "'";
-        System.out.println(sudokuBoard.toString());
         try (Statement statement = connection.createStatement()) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -93,12 +102,12 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             if (isTableExist(true)) {
                 statement.executeUpdate(query);
             }
-        } catch (GetException | ClassNotFoundException | SQLException e) {
+        } catch (GetException | ClassNotFoundException | SQLException | DaoException e) {
             throw new DaoWriteException(DBWrite, e);
         }
     }
 
-    private boolean isTableExist(boolean type) throws SQLException {
+    private boolean isTableExist(boolean type) throws SQLException, DaoException {
         if (connection != null) {
             DatabaseMetaData dbmd = connection.getMetaData();
             try (ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null)) {
@@ -111,6 +120,8 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                     return false;
                 }
                 return true;
+            } catch (Exception e) {
+                throw new DaoException(e.getLocalizedMessage());
             }
         }
         return false;
