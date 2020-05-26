@@ -23,7 +23,6 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import javafx.util.converter.NumberStringConverter;
 import org.grupa5.exceptions.*;
 import org.grupa5.dao.SudokuBoardDaoFactory;
 import org.grupa5.sudoku.SudokuBoard;
