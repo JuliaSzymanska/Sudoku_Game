@@ -75,7 +75,6 @@ public class SecondaryController implements Initializable {
         }
     }
 
-    // TODO: 06.05.2020 mozna zrobic wlasny, zeby konwertowal 0 na puste, puste na 0 czy cos
     StringConverter<Number> converter = new SudokuNumberStringConverter();
 
     @FXML
