@@ -205,7 +205,6 @@ public class SecondaryController implements Initializable {
 
     }
 
-    // TODO: 26.05.2020 spraw żeby enum znikal w trakcie gry
     public void startGame() throws NoSuchMethodException {
         if (logger.isInfoEnabled()) {
             logger.info("Sudoku Game Started");
@@ -271,7 +270,6 @@ public class SecondaryController implements Initializable {
                 }
             }
         }
-
     }
 
     public void saveSudokuToFile() {

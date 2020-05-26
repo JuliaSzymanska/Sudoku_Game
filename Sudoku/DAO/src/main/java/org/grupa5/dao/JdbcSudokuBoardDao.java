@@ -99,6 +99,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             //ladowanie klasy sterownika do pamieci
             Class.forName(DB_DRIVER);
             // TODO: 24.05.2020 jesli istnieje juz w tablicy to trzeba zorbic update
+            //  ale czy chce nam sie to robic? chyba nie xd
             if (isTableExist(true)) {
                 statement.executeUpdate(query);
             }
