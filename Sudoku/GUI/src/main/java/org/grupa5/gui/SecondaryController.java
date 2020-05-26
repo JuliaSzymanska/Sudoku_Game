@@ -146,7 +146,7 @@ public class SecondaryController implements Initializable {
                         "-fx-text-fill: white");
                 textField.setTextFormatter(new TextFormatter<>(c -> {
                     if (c.isContentChange()) {
-                        if (c.getText().matches("[0-9] | ^$ ")) {
+                        if (c.getText().matches("[1-9] | ^$ ")) {
                             return c;
                         }
                     }

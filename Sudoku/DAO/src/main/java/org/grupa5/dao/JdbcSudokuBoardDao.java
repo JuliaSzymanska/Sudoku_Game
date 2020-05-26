@@ -13,7 +13,9 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     //obiekt pozwalający tworzyć nowe wyrażenia SQL
     private Statement statement;
 
-    private static String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
+    // TODO: 26.05.2020 Moze tworzmy w memory?
+    // private static String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
+    private static String DB_URL = "jdbc:derby:memory:myDb;create=true";
     private static final String DB_USER = "user";
     private static final String DB_PASS = "1";
     private static final String DB_DRIVER = "org.apache.derby.jdbc.ClientDriver";

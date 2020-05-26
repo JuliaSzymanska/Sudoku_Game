@@ -37,13 +37,13 @@
         <rowConstraints>
           <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="41.0" minHeight="41.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="41.0" minHeight="41.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="41.0" minHeight="41.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
     </children>
