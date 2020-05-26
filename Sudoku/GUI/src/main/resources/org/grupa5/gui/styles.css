@@ -1,12 +1,14 @@
 .text-field {
-    -fx-border-color: black;
-    -fx-border-width: 3px ;
 }
 
 .button {
     -fx-stroke: black;
     -fx-stroke-width: 3px;
     -fx-text-fill: white;
+}
+
+.button:pressed, .toggle-button:selected {
+    -fx-text-fill: black;
 }
 
 .root{
