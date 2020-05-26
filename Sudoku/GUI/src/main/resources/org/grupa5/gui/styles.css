@@ -2,13 +2,11 @@
 }
 
 .button {
-    -fx-stroke: black;
-    -fx-stroke-width: 3px;
     -fx-text-fill: #dfd2d2;
 }
 
 .button:pressed, .toggle-button:selected {
-    -fx-text-fill: black;
+    -fx-text-fill: #202d2d;
 }
 
 .root{
@@ -16,3 +14,11 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 }
+
+.outline.label .text {
+    -fx-fill: white;
+    -fx-stroke: black;
+    -fx-stroke-width: 2px;
+}
+
+
