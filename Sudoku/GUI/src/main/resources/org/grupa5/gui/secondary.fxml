@@ -35,15 +35,15 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="42" minWidth="42" prefWidth="45.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41.0" minHeight="41.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41.0" minHeight="41.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41" minHeight="41" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41.0" minHeight="41.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="42.0" minHeight="42.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="42.0" minHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="42.0" minHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="42.0" minHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="42.0" minHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="42.0" minHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="42.0" minHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="42.0" minHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="42.0" minHeight="42.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
     </children>
