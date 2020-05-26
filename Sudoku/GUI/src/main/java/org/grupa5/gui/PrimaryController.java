@@ -45,10 +45,6 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.authors.getStyleClass().add("outline");
-        this.author_1.getStyleClass().add("outline");
-        this.author_2.getStyleClass().add("outline");
-        this.mainLabel.getStyleClass().add("outline");
         BackgroundImage backgroundImage = new BackgroundImage(new Image(getClass().
                 getResource("Button_Wide_Wood_Border.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);

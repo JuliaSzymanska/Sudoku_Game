@@ -227,7 +227,6 @@ public class SecondaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.level.getStyleClass().add("outline");
         BackgroundImage backgroundImage = new BackgroundImage(new Image(getClass().
                 getResource("Button_Wide_Wood_Border.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
