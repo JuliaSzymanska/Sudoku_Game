@@ -54,15 +54,10 @@ public class SecondaryController implements Initializable {
     @FXML
     private ComboBox<Level> boxLevel = new ComboBox<>();
 
-    // TODO: 13.05.2020 zapisac nazwy jako klucze  internalizowac tego enuma jakos
-    //   https://softwareengineering.stackexchange.com/questions/256806/best-approach-for-multilingual-java-enum
     public enum Level {
         Easy(42),
         Medium(54),
-        Hard(60),
-        Prosty(42),
-        Sredni(54),
-        Trudny(60);
+        Hard(60);
 
         private final int number;
 
@@ -70,29 +65,21 @@ public class SecondaryController implements Initializable {
             return number;
         }
 
+        public String getLocaleText() {
+            ResourceBundle  bundle = ResourceBundle.getBundle("Lang");
+            return bundle.getString(this.name());
+        }
+
         Level(int number) {
             this.number = number;
         }
-    }
 
-    // TODO: 26.05.2020 Przerasta mnie enum 
-    private static final class I18n {
-        private I18n() {
-        }
-
-        private static ResourceBundle bundle;
-
-        public static String getMessage(String key) {
-            if (bundle == null) {
-                bundle = ResourceBundle.getBundle("Lang");
-            }
-            return bundle.getString(key);
-        }
-
-        public static String getMessage(Enum<Level> enumVal) {
-            return getMessage(enumVal.toString());
+        @Override
+        public String toString() {
+            return this.getLocaleText();
         }
     }
+
 
     StringConverter<Number> converter = new SudokuNumberStringConverter();
 
@@ -120,6 +107,7 @@ public class SecondaryController implements Initializable {
 
     @FXML
     private Label level;
+
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -224,12 +212,16 @@ public class SecondaryController implements Initializable {
         }
         switchStartAndEndButtons();
         if (!VariablesCollection.getIsGameInProgress()) {
+            this.level.setVisible(true);
+            this.boxLevel.setVisible(true);
             return;
         }
         int numberOfFields = boxLevel.getSelectionModel().getSelectedItem().getNumber();
         this.sudokuBoard.solveGame();
         this.sudokuBoard.removeFields(numberOfFields);
         VariablesCollection.setSudokuBoard(this.sudokuBoard);
+        this.level.setVisible(false);
+        this.boxLevel.setVisible(false);
         this.fillGrid();
     }
 
@@ -250,26 +242,26 @@ public class SecondaryController implements Initializable {
         Background background = new Background(backgroundImage);
         Background background2 = new Background(backgroundImage2);
         Background background3 = new Background(backgroundImage3);
+
         this.secondaryButton.setBackground(background);
+
         this.loadButtonDb.setBackground(background2);
         this.saveButtonDb.setBackground(background2);
         this.saveButtonFile.setBackground(background2);
         this.loadButtonFile.setBackground(background2);
+
         this.language.setBackground(background3);
+
         if (logger.isDebugEnabled()) {
             logger.debug("SecondaryController init");
         }
+
         this.sudokuBoard = VariablesCollection.getSudokuBoard();
         this.resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
-        
-        if (Locale.getDefault().equals(new Locale("en", "en"))) {
-            boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
-            boxLevel.setValue(Level.values()[0]);
-        }
-        else {
-            boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));
-            boxLevel.setValue(Level.values()[3]);
-        }
+
+        boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
+        boxLevel.setValue(Level.values()[0]);
+
         if (VariablesCollection.getIsGameInProgress()) {
             try {
                 this.fillGrid();
@@ -283,6 +275,10 @@ public class SecondaryController implements Initializable {
     }
 
     public void saveSudokuToFile() {
+        if (!VariablesCollection.getIsGameInProgress()) {
+            this.alertNotAbleToSaveGame();
+            return;
+        }
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -302,6 +298,10 @@ public class SecondaryController implements Initializable {
     }
 
     public void saveSudokuToDb() {
+        if (!VariablesCollection.getIsGameInProgress()) {
+            this.alertNotAbleToSaveGame();
+            return;
+        }
         TextInputDialog td = new TextInputDialog(resourceBundle.getString(nameSaveDB));
         td.setTitle(resourceBundle.getString(saveGame));
         td.setHeaderText(resourceBundle.getString(saveGame));
@@ -323,7 +323,6 @@ public class SecondaryController implements Initializable {
         String inputString = td.getEditor().getText();
         if (!inputString.equals("")) {
             try {
-                // TODO: 18.05.2020 zrobic parametr
                 SudokuBoardDaoFactory.getJdbcDao(inputString).write(this.sudokuBoard);
             } catch (DaoException e) {
                 this.alertNotAbleToSaveGame();
@@ -376,7 +375,6 @@ public class SecondaryController implements Initializable {
         }
         String inputString = td.getEditor().getText();
         try {
-            // TODO: 18.05.2020 poprawic parametr
             this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao(inputString).read();
             switchStartAndEndButtons();
             this.fillGrid();
@@ -430,15 +428,10 @@ public class SecondaryController implements Initializable {
     public void changeLanguage() {
         if (Locale.getDefault().equals(new Locale("en", "en"))) {
             Locale.setDefault(new Locale("pl", "pl"));
-            resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
-            boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));
-            boxLevel.setValue(Level.values()[3]);
         } else {
             Locale.setDefault(new Locale("en", "en"));
-            resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
-            boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
-            boxLevel.setValue(Level.values()[0]);
         }
+        resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
         try {
             updateLanguage();
         } catch (IOException e) {

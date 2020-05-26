@@ -8,7 +8,7 @@
 <VBox alignment="CENTER" maxHeight="612.0" maxWidth="1164.0" minHeight="612.0" minWidth="1164.0" prefHeight="612.0" prefWidth="1164.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
     <children>
       <Button fx:id="language" alignment="CENTER" contentDisplay="CENTER" minHeight="52.0" minWidth="60.0" mnemonicParsing="false" onAction="#changeLanguage" text="%language" textAlignment="JUSTIFY" translateX="510.0" translateY="210.0" StackPane.alignment="CENTER_LEFT" />
-      <Label fx:id="level" text="%level" textFill="#cdbfbf" translateX="430.0" translateY="200.0">
+      <Label id="chooseLevelText" fx:id="level" text="%level" textFill="#cdbfbf" translateX="430.0" translateY="200.0">
           <font>
             <Font name="System Bold" size="17.0" />
          </font>
