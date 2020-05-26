@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,15 +43,9 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // TODO: 26.05.2020 NIE DZIALA 
-//        try {
-//            FileInputStream input = new FileInputStream("Button.png");
-//            Image image = new Image(input);
-//            ImageView imageView = new ImageView(image);
-//            primaryButton.setGraphic(imageView);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("Button.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background background = new Background(backgroundImage);
+        this.primaryButton.setBackground(background);
         if (logger.isDebugEnabled()) {
             logger.debug("PrimaryController init");
         }

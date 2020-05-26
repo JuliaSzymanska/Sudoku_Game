@@ -13,13 +13,10 @@
          <font>
             <Font name="System Bold" size="27.0" />
          </font></Label>
-      <Button fx:id="primaryButton" minWidth="230.0" onAction="#switchToSecondary" style="-fx-graphic: url('Button.png')" text="%start" translateX="430.0" translateY="-50.0">
+      <Button fx:id="primaryButton" minWidth="230.0" onAction="#switchToSecondary" text="%start" translateX="430.0" translateY="-50.0">
          <font>
             <Font size="28.0" />
          </font>
-         <graphic>
-            <ImageView />
-         </graphic>
       </Button>
       <Label fx:id="authors" text="Label" textFill="#cdbfbf" translateX="430.0" translateY="-50.0">
          <font>

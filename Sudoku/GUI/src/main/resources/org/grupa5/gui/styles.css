@@ -1,9 +1,7 @@
 .button {
-    -fx-text-fill: blue;
+    -fx-text-fill: #0000ff;
 }
-.buttonWithImage{
-    -fx-background-image: url("Button.png");
-}
+
 .root{
     -fx-background-image: url("background.jpg");
     -fx-background-repeat: no-repeat;
