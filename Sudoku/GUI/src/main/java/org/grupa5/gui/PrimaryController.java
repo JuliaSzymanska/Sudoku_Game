@@ -1,5 +1,7 @@
 package org.grupa5.gui;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
@@ -10,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +42,15 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // TODO: 26.05.2020 NIE DZIALA 
+//        try {
+//            FileInputStream input = new FileInputStream("Button.png");
+//            Image image = new Image(input);
+//            ImageView imageView = new ImageView(image);
+//            primaryButton.setGraphic(imageView);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
         if (logger.isDebugEnabled()) {
             logger.debug("PrimaryController init");
         }
