@@ -198,6 +198,7 @@ public class SecondaryController implements Initializable {
 
     }
 
+    // TODO: 26.05.2020 spraw żeby enum znikal w trakcie gry
     public void startGame() throws NoSuchMethodException {
         if (logger.isInfoEnabled()) {
             logger.info("Sudoku Game Started");
@@ -215,8 +216,18 @@ public class SecondaryController implements Initializable {
         BackgroundImage backgroundImage = new BackgroundImage(new Image(getClass().
                 getResource("Button_Wide_Wood_Border.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+        BackgroundImage backgroundImage2 = new BackgroundImage(new Image(getClass().
+                getResource("Button_Small_Wood_Border.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
         Background background = new Background(backgroundImage);
+        Background background2 = new Background(backgroundImage2);
         this.secondaryButton.setBackground(background);
+        this.loadButtonDb.setBackground(background2);
+        this.saveButtonDb.setBackground(background2);
+        this.saveButtonFile.setBackground(background2);
+        this.loadButtonFile.setBackground(background2);
         if (logger.isDebugEnabled()) {
             logger.debug("SecondaryController init");
         }
