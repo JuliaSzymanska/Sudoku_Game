@@ -4,6 +4,8 @@ import java.util.ResourceBundle;
 
 public class DaoException extends Exception {
 
+    static final String defaultMsgKey = "daoException";
+
     ResourceBundle bundle = ResourceBundle.getBundle("SudokuExceptions");
 
     // TODO: 16.05.2020 przetestowac czy ta klasa tez sie poprawnie internacjonalizuje
