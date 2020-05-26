@@ -13,8 +13,6 @@ import org.slf4j.LoggerFactory;
 
 public class BacktrackingSudokuRemover implements SudokuRemover {
 
-    private static final Logger logger = LoggerFactory.getLogger(BacktrackingSudokuRemover.class);
-
     private List<Integer> allFields = new ArrayList<>();
     private SudokuBoard sudokuBoard;
     private int numOfFieldsToRemove;
@@ -39,35 +37,29 @@ public class BacktrackingSudokuRemover implements SudokuRemover {
 
     @Override
     public void remove() {
-        try {
-            int counter = 0;
-            for (Integer i : allFields) {
-                if (counter >= numOfFieldsToRemove) {
-                    this.setOriginalBoardToCopy();
-                    return;
-                }
-                int row = i / 9;
-                int col = i % 9;
-                curreentNumOfPossibleBoards = 0;
-                int temp = 0;
-                temp = copyBoard.get(row, col);
-                copyBoard.resetField(row, col);
-                checkNumbOfCombinations(this.copyBoard);
-                if (curreentNumOfPossibleBoards > 1) {
-                    copyBoard.set(row, col, temp);
-                } else {
-                    counter++;
-                }
+        int counter = 0;
+        for (Integer i : allFields) {
+            if (counter >= numOfFieldsToRemove) {
+                this.setOriginalBoardToCopy();
+                return;
             }
-            this.setOriginalBoardToCopy();
-        } catch (GetException | SetException e) {
-            if (logger.isErrorEnabled()) {
-                logger.error("Exception thrown in remove, ", e);
+            int row = i / 9;
+            int col = i % 9;
+            curreentNumOfPossibleBoards = 0;
+            int temp = 0;
+            temp = copyBoard.get(row, col);
+            copyBoard.resetField(row, col);
+            checkNumbOfCombinations(this.copyBoard);
+            if (curreentNumOfPossibleBoards > 1) {
+                copyBoard.set(row, col, temp);
+            } else {
+                counter++;
             }
         }
+        this.setOriginalBoardToCopy();
     }
 
-    private boolean checkNumbOfCombinations(SudokuBoard board) throws GetException, SetException {
+    private boolean checkNumbOfCombinations(SudokuBoard board) {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (board.get(row, col) == 0) {
@@ -92,7 +84,7 @@ public class BacktrackingSudokuRemover implements SudokuRemover {
         return false;
     }
 
-    private void setOriginalBoardToCopy() throws GetException, SetException {
+    private void setOriginalBoardToCopy() {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (this.copyBoard.get(row, col) == 0) {

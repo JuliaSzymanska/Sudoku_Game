@@ -39,7 +39,7 @@ public class SudokuObject implements Serializable, Cloneable {
     public SudokuObject(List<SudokuField> table) {
         if (table.size() != SUDOKU_DIMENSIONS) {
             Logger logger = LoggerFactory.getLogger(SudokuObject.class);
-            // TODO: 26.05.2020 pamietac 
+            // TODO: 26.05.2020 pamietac
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid size of list in constructor");
             }

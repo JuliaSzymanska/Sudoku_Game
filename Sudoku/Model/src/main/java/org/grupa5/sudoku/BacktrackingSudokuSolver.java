@@ -12,8 +12,6 @@ import org.slf4j.LoggerFactory;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
-    private static final Logger logger = LoggerFactory.getLogger(BacktrackingSudokuSolver.class);
-
     /**
      * Fills the board in a random way with every usage. Starts by filling every.
      * sector in the board in a random space with a random number. The board is.
@@ -23,13 +21,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
 
     @Override
     public void solve(SudokuBoard board) {
-        try {
             this.solveSudoku(board);
-        } catch (SetException | GetException e) {
-            if (logger.isErrorEnabled()) {
-                logger.error("Exception thrown by solve, ", e);
-            }
-        }
     }
 
     /**
