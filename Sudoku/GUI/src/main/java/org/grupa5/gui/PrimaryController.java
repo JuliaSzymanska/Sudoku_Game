@@ -46,8 +46,18 @@ public class PrimaryController implements Initializable {
         BackgroundImage backgroundImage = new BackgroundImage(new Image(getClass().
                 getResource("Button_Wide_Wood_Border.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+
+        BackgroundImage backgroundImage2 = new BackgroundImage(new Image(getClass().
+                getResource("Button_Small_Wood_Border_Smaller.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
         Background background = new Background(backgroundImage);
+        Background background2 = new Background(backgroundImage2);
+
         this.primaryButton.setBackground(background);
+        this.language.setBackground(background2);
+
         if (logger.isDebugEnabled()) {
             logger.debug("PrimaryController init");
         }
