@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -26,6 +27,9 @@ public class App extends Application {
         stage = primaryStage;
         scene = new Scene(loadFXML("primary"));
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        stage.setResizable(false);
+        // TODO: 26.05.2020 Pani artystko, ustaw jak ci sie lepiej wydaje
+        // stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
     }

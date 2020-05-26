@@ -59,8 +59,9 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
      * @param value - Set the field 'value' to this param
      */
 
-    public void setValue(int value) throws SetException {
+    public void setValue(int value) {
         if (value < 0 || value > 9) {
+            // TODO: 26.05.2020 pamietac 
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to set");
             }
