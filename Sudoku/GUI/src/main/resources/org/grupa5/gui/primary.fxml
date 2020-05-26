@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.image.ImageView?>
 <VBox alignment="CENTER" maxHeight="612.0" maxWidth="1164.0" minHeight="612.0" minWidth="1164.0" prefHeight="612.0" prefWidth="1164.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
    <children>
       <Button fx:id="language" alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#changeLanguage" text="%language" translateX="510.0" translateY="-100.0" StackPane.alignment="CENTER_LEFT" />
@@ -12,10 +13,14 @@
          <font>
             <Font name="System Bold" size="27.0" />
          </font></Label>
-      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="%start" translateX="430.0" translateY="-50.0">
+      <Button fx:id="primaryButton" minWidth="230.0" onAction="#switchToSecondary" text="%start" translateX="430.0" translateY="-50.0">
          <font>
             <Font size="28.0" />
-         </font></Button>
+         </font>
+         <graphic>
+            <ImageView />
+         </graphic>
+      </Button>
       <Label fx:id="authors" text="Label" textFill="#cdbfbf" translateX="430.0" translateY="-50.0">
          <font>
             <Font size="25.0" />
