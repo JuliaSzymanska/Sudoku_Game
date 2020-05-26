@@ -75,6 +75,25 @@ public class SecondaryController implements Initializable {
         }
     }
 
+    // TODO: 26.05.2020 Przerasta mnie enum 
+    private static final class I18n {
+        private I18n() {
+        }
+
+        private static ResourceBundle bundle;
+
+        public static String getMessage(String key) {
+            if (bundle == null) {
+                bundle = ResourceBundle.getBundle("Lang");
+            }
+            return bundle.getString(key);
+        }
+
+        public static String getMessage(Enum<Level> enumVal) {
+            return getMessage(enumVal.toString());
+        }
+    }
+
     StringConverter<Number> converter = new SudokuNumberStringConverter();
 
     @FXML
@@ -242,10 +261,12 @@ public class SecondaryController implements Initializable {
         }
         this.sudokuBoard = VariablesCollection.getSudokuBoard();
         this.resourceBundle = ResourceBundle.getBundle("Lang", Locale.getDefault());
+        
         if (Locale.getDefault().equals(new Locale("en", "en"))) {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
             boxLevel.setValue(Level.values()[0]);
-        } else {
+        }
+        else {
             boxLevel.setItems(FXCollections.observableArrayList(Level.values()[3], Level.values()[4], Level.values()[5]));
             boxLevel.setValue(Level.values()[3]);
         }

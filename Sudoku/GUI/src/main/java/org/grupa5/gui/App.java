@@ -29,7 +29,11 @@ public class App extends Application {
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setResizable(false);
         // TODO: 26.05.2020 Pani artystko, ustaw jak ci sie lepiej wydaje
-        // stage.initStyle(StageStyle.UNDECORATED);
+//        stage.initStyle(StageStyle.UNDECORATED);
+        // TODO: to jest ikonka ta windowsowa, takie co sie pokazuja na pasku na dole i na pasku aplikacji po lewej
+        //  pobrałem z neta, jeśli ci się chce możesz zrobić własną
+        stage.getIcons().add(new Image(App.class.getResourceAsStream( "IconZNeta.png" )));
+
         stage.setScene(scene);
         stage.show();
     }
