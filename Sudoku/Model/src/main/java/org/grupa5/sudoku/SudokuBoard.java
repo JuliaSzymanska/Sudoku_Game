@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.*;
+import org.apache.commons.lang3.exception.CloneFailedException;
 import org.grupa5.exceptions.GetException;
 import org.grupa5.exceptions.SetException;
 import org.slf4j.Logger;
@@ -215,17 +216,9 @@ public class SudokuBoard implements Cloneable, Serializable {
      */
 
     private boolean checkBoard(int row, int column) {
-        try {
         return !getRow(row).verify()
                 || !getColumn(column).verify()
                 || !getBox(row, column).verify();
-        } catch (SetException e) {
-            // TODO: 12.05.2020 zajac sie tym wyjatkiem
-            if (logger.isDebugEnabled()) {
-                logger.debug("Invalid Value Provided to get", e);
-            }
-        }
-        return false;
     }
 
     @Override
@@ -279,13 +272,7 @@ public class SudokuBoard implements Cloneable, Serializable {
         SudokuBoard cloneBoard = new SudokuBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                try {
                     cloneBoard.set(i, j, this.get(i, j));
-                } catch (GetException | SetException e) {
-                    if (logger.isErrorEnabled()) {
-                        logger.error("Exception thrown by clone", e);
-                    }
-                }
             }
         }
         return cloneBoard;
