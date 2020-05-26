@@ -258,7 +258,6 @@ public class SecondaryController implements Initializable {
     public void saveSudokuToDb() {
         TextInputDialog td = new TextInputDialog(resourceBundle.getString(nameSaveDB));
         td.setTitle(resourceBundle.getString(saveGame));
-        // TODO: 19.05.2020 lepszy header
         td.setHeaderText(resourceBundle.getString(saveGame));
         AtomicBoolean isTextPropert = new AtomicBoolean(true);
         td.showAndWait().ifPresent((text) -> {
@@ -313,7 +312,6 @@ public class SecondaryController implements Initializable {
     public void readSudokuFromDb() {
         TextInputDialog td = new TextInputDialog(resourceBundle.getString("nameReadDB"));
         td.setTitle(resourceBundle.getString(loadGame));
-        // TODO: 19.05.2020 lepszy header
         td.setHeaderText(resourceBundle.getString(loadGame));
         AtomicBoolean isTextPropert = new AtomicBoolean(true);
         td.showAndWait().ifPresent((text) -> {
@@ -404,8 +402,6 @@ public class SecondaryController implements Initializable {
         }
     }
 
-    // TODO: 16.05.2020 Aktualnie po przeresetowaniu sceny tzn po zmianie jezyka
-    //  resetuje nam sie plansza, postep gry, jak to tam chcesz nazwac >.> do fixu
     private void updateLanguage() throws IOException {
         App reload = new App();
         reload.reload("secondary");

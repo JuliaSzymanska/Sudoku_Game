@@ -33,7 +33,7 @@ public class SudokuBoard implements Cloneable, Serializable {
         this.resetBoard(this.board);
     }
 
-    public void resetField(int row, int column) throws SetException {
+    public void resetField(int row, int column) {
         this.board.get(row).get(column).setValue(0);
     }
 
@@ -85,7 +85,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      * @return column
      */
 
-    public SudokuObject getColumn(int column) throws SetException {
+    public SudokuObject getColumn(int column) {
         SudokuField[] copyArray = new SudokuField[9];
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             copyArray[i] = board.get(i).get(column);
@@ -101,7 +101,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      * @return Row.
      */
 
-    public SudokuObject getRow(int row) throws SetException {
+    public SudokuObject getRow(int row) {
         SudokuField[] copyArray = new SudokuField[SUDOKU_DIMENSIONS];
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             copyArray[i] = board.get(row).get(i);
@@ -118,7 +118,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      * @return Sector.
      */
 
-    public SudokuObject getBox(int row, int column) throws SetException {
+    public SudokuObject getBox(int row, int column) {
         int sectorNr = this.getSectorNumber(row, column);
         int begX = (sectorNr / 3) * 3;
         int begY = (sectorNr % 3) * 3;
@@ -152,7 +152,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      * Return int from board at [x][y] position.
      */
 
-    public int get(int x, int y) throws GetException {
+    public int get(int x, int y) {
         if (x < 0 || x > SUDOKU_DIMENSIONS - 1) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to get");
@@ -172,7 +172,7 @@ public class SudokuBoard implements Cloneable, Serializable {
      * Set value at [x][y] position in board.
      */
 
-    public void set(int x, int y, int value) throws SetException {
+    public void set(int x, int y, int value)  {
         if (x < 0 || x > SUDOKU_DIMENSIONS - 1) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to set");

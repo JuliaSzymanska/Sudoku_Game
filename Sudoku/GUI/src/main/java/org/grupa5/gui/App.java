@@ -20,8 +20,6 @@ public class App extends Application {
     private static Scene scene;
     public static Stage stage;
 
-    // TODO: 16.05.2020 OMG TERAZ SIE DOWIADUJE ZE TAK MOZNA :(
-    //  https://stackoverflow.com/questions/29097864/when-reload-scene-in-javafx-maximized-did-not-work
 
     @Override
     public void start(Stage primaryStage) throws IOException {
