@@ -4,7 +4,7 @@
 .button {
     -fx-stroke: black;
     -fx-stroke-width: 3px;
-    -fx-text-fill: white;
+    -fx-text-fill: #dfd2d2;
 }
 
 .button:pressed, .toggle-button:selected {
