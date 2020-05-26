@@ -80,6 +80,7 @@ public class SecondaryController implements Initializable {
     @FXML
     private GridPane grid1;
 
+    // TODO: 26.05.2020 Zrobić żeby przyciski po nacisnięciu się zmieniały
     @FXML
     private Button secondaryButton;
 
