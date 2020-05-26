@@ -1,5 +1,12 @@
+.text-field {
+    -fx-border-color: black;
+    -fx-border-width: 3px ;
+}
+
 .button {
-    -fx-text-fill: #0000ff;
+    -fx-stroke: black;
+    -fx-stroke-width: 3px;
+    -fx-text-fill: white;
 }
 
 .root{
