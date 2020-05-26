@@ -89,13 +89,18 @@ public class PrimaryController implements Initializable {
         }
     }
 
-    private void updateLanguage() throws IOException {
+    public void languageButtonPressed(){
         BackgroundImage backgroundImage2 = new BackgroundImage(new Image(getClass().
                 getResource("Button_Small_Wood_Border_Smaller_Wcisniety.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
         Background background2 = new Background(backgroundImage2);
         this.language.setBackground(background2);
+    }
+
+
+
+    private void updateLanguage() throws IOException {
         App reload = new App();
         reload.reload("primary");
     }

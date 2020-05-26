@@ -67,7 +67,7 @@ public class SecondaryController implements Initializable {
         }
 
         public String getLocaleText() {
-            ResourceBundle  bundle = ResourceBundle.getBundle("Lang");
+            ResourceBundle bundle = ResourceBundle.getBundle("Lang");
             return bundle.getString(this.name());
         }
 
@@ -443,6 +443,50 @@ public class SecondaryController implements Initializable {
     private void updateLanguage() throws IOException {
         App reload = new App();
         reload.reload("secondary");
+    }
+
+    public void languageButtonPressed() {
+        this.language.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Smaller_Wcisniety.png"));
+    }
+
+    public void saveDBButtonPressed() {
+        this.saveButtonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
+    }
+
+    public void saveDBButtonRelease() {
+        this.saveButtonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
+    }
+
+    public void loadDBButtonPressed() {
+        this.loadButtonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
+    }
+
+    public void loadDBButtonRelease() {
+        this.loadButtonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
+    }
+
+    public void saveFileButtonPressed() {
+        this.saveButtonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
+    }
+
+    public void saveFileButtonRelease() {
+        this.saveButtonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
+    }
+
+    public void loadFileButtonPressed() {
+        this.loadButtonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
+    }
+
+    public void loadFileButtonRelease() {
+        this.loadButtonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
+    }
+
+    private Background getBackgroundForImage(String image) {
+        BackgroundImage backgroundImage2 = new BackgroundImage(new Image(getClass().
+                getResource(image).toExternalForm()), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+        return new Background(backgroundImage2);
     }
 
 }
