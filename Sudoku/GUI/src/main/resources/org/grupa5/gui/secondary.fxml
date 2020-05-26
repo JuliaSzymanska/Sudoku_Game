@@ -14,7 +14,7 @@
          </font>
       </Label>
       <ComboBox fx:id="boxLevel" prefWidth="150.0" translateX="430.0" translateY="200.0" />
-        <Button fx:id="secondaryButton" minHeight="60.0" minWidth="230.0" onAction="#startGame" text="%start" translateX="430.0" translateY="200.0">
+        <Button fx:id="secondaryButton" minHeight="60.0" minWidth="230.0" onAction="#startGame" onMousePressed="#startButtonPressed" onMouseReleased="#startButtonReleased" text="%start" translateX="430.0" translateY="200.0">
          <font>
             <Font size="28.0" />
          </font></Button>

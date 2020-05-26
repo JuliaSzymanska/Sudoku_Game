@@ -96,15 +96,24 @@ public class PrimaryController implements Initializable {
     }
 
     public void languageButtonPressed(){
-        BackgroundImage backgroundImage2 = new BackgroundImage(new Image(getClass().
-                getResource("Button_Small_Wood_Border_Smaller_Wcisniety.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-        Background background2 = new Background(backgroundImage2);
-        this.language.setBackground(background2);
+        this.language.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Smaller_Wcisniety.png"));
     }
 
+    public void startButtonPressed(){
+        this.primaryButton.setBackground(getBackgroundForImage("Button_Wide_Wood_Border_wcisniety.png"));
+    }
 
+    public void startButtonReleased(){
+        this.primaryButton.setBackground(getBackgroundForImage("Button_Wide_Wood_Border.png"));
+    }
+
+    private Background getBackgroundForImage(String image) {
+        BackgroundImage backgroundImage2 = new BackgroundImage(new Image(getClass().
+                getResource(image).toExternalForm()), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+        return new Background(backgroundImage2);
+    }
 
     private void updateLanguage() throws IOException {
         App reload = new App();

@@ -482,6 +482,14 @@ public class SecondaryController implements Initializable {
         this.loadButtonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
     }
 
+    public void startButtonPressed(){
+        this.secondaryButton.setBackground(getBackgroundForImage("Button_Wide_Wood_Border_wcisniety.png"));
+    }
+
+    public void startButtonReleased(){
+        this.secondaryButton.setBackground(getBackgroundForImage("Button_Wide_Wood_Border.png"));
+    }
+
     private Background getBackgroundForImage(String image) {
         BackgroundImage backgroundImage2 = new BackgroundImage(new Image(getClass().
                 getResource(image).toExternalForm()), BackgroundRepeat.NO_REPEAT,
