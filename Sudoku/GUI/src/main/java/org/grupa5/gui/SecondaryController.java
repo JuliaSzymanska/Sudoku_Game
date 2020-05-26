@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SecondaryController implements Initializable {
+    // TODO: 26.05.2020 Podłożyć muzyczkę! 
 
     @FXML
     private AnchorPane root;
