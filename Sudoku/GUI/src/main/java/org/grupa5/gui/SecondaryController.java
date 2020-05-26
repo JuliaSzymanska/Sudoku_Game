@@ -76,7 +76,7 @@ public class SecondaryController implements Initializable {
     }
 
     // TODO: 06.05.2020 mozna zrobic wlasny, zeby konwertowal 0 na puste, puste na 0 czy cos
-    StringConverter<Number> converter = new NumberStringConverter();
+    StringConverter<Number> converter = new SudokuNumberStringConverter();
 
     @FXML
     private GridPane grid1;
@@ -164,7 +164,7 @@ public class SecondaryController implements Initializable {
                         textField.clear();
                         String character = event.getCharacter();
                         if (!checkNumeric(character)) {
-                            textField.setText("0");
+                            textField.setText("");
                             event.consume();
                         }
                     }
@@ -173,7 +173,7 @@ public class SecondaryController implements Initializable {
                     @Override
                     public void handle(KeyEvent event) {
                         if (!sudokuBoard.isWholeBoardValid()) {
-                            textField.setText("0");
+                            textField.setText("");
                         }
                     }
                 });

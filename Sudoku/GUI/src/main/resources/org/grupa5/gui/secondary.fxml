@@ -22,7 +22,7 @@
         <Button fx:id="loadButtonDb" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#readSudokuFromDb" text="%loadGameDb" textAlignment="CENTER" translateX="370.0" translateY="225.0" StackPane.alignment="CENTER_LEFT" />
       <Button fx:id="saveButtonFile" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#saveSudokuToFile" text="%saveGame" textAlignment="CENTER" translateX="490.0" translateY="30.0" StackPane.alignment="CENTER_LEFT" />
       <Button fx:id="loadButtonFile" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#readSudokuFromFile" text="%loadGame" textAlignment="CENTER" translateX="490.0" translateY="45.0" StackPane.alignment="CENTER_LEFT" />
-      <GridPane fx:id="grid1" maxHeight="366" maxWidth="368" prefHeight="366.0" prefWidth="368.0" translateX="-163.0" translateY="-185.0">
+      <GridPane fx:id="grid1" maxHeight="366" maxWidth="368" prefHeight="366.0" prefWidth="368.0" translateX="-163.0" translateY="-291.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="42" minWidth="42" prefWidth="45.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="42" minWidth="42" prefWidth="45.0" />
