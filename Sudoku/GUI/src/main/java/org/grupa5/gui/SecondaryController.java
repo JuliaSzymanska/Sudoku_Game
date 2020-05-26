@@ -205,6 +205,9 @@ public class SecondaryController implements Initializable {
             logger.info("Sudoku Game Started");
         }
         switchStartAndEndButtons();
+        if (!VariablesCollection.getIsGameInProgress()) {
+            return;
+        }
         int numberOfFields = boxLevel.getSelectionModel().getSelectedItem().getNumber();
         this.sudokuBoard.solveGame();
         this.sudokuBoard.removeFields(numberOfFields);
