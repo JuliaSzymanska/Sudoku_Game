@@ -81,13 +81,11 @@ public class SecondaryController implements Initializable {
         }
     }
 
-
     StringConverter<Number> converter = new SudokuNumberStringConverter();
 
     @FXML
     private GridPane grid1;
 
-    // TODO: 26.05.2020 Zrobić żeby przyciski po nacisnięciu się zmieniały
     @FXML
     private Button secondaryButton;
 

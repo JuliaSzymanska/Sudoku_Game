@@ -2,8 +2,6 @@ package org.grupa5.gui;
 
 import javafx.util.converter.NumberStringConverter;
 
-
-// TODO: KONWERTER Z NETA, Z jakiegoś powodu przesuwa nam layout xD
 public class SudokuNumberStringConverter extends NumberStringConverter {
 
     @Override

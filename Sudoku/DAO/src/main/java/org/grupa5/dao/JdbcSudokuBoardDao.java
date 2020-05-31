@@ -7,13 +7,12 @@ import org.grupa5.exceptions.*;
 import org.grupa5.sudoku.SudokuBoard;
 
 class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
-    // TODO: 24.05.2020 nie wiem czy statment jest potrzebne
     //obiekt tworzący połączenie z bazą danych.
     private Connection connection;
     //obiekt pozwalający tworzyć nowe wyrażenia SQL
+    // TODO: 01.06.2020 usunac to trzeba
     private Statement statement;
 
-    // TODO: 26.05.2020 Moze tworzmy w memory?
     private static String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
     //    private static String DB_URL = "jdbc:derby:memory:myDb;create=true";
     private static final String DB_USER = "user";
@@ -114,6 +113,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             try (ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null)) {
                 boolean rsbool = rs.next();
                 if (!rsbool && type) {
+                    // TODO: 01.06.2020 dodac Statment statement = connection.CreateStatement();
                     statement.executeUpdate("CREATE TABLE " + tableName
                             + "( " + boardId + " VARCHAR(20) PRIMARY KEY, "
                             + boardFields + " CHAR(81))");
@@ -121,7 +121,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                     return false;
                 }
                 return true;
-                // TODO: 24.05.2020 null pointer exception
             } catch (Exception e) {
                 throw new DaoException(e.getLocalizedMessage());
             }

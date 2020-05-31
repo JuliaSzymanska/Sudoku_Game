@@ -28,12 +28,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("primary"));
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setResizable(false);
-        // TODO: 26.05.2020 Pani artystko, ustaw jak ci sie lepiej wydaje
-        //  stage.initStyle(StageStyle.UNDECORATED);
-        // TODO: to jest ikonka ta windowsowa, takie co sie pokazuja na pasku na dole i na pasku aplikacji po lewej
-        //  pobrałem z neta, jeśli ci się chce możesz zrobić własną
-        //  Google Sudoku Icon dla inspiracji
-        stage.getIcons().add(new Image(App.class.getResourceAsStream( "IconZNeta.png" )));
+        stage.getIcons().add(new Image(App.class.getResourceAsStream( "sudokuTaskbarIcon.png" )));
 
         stage.setScene(scene);
         stage.show();

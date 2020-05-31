@@ -8,8 +8,6 @@ public class SudokuException extends RuntimeException {
 
     ResourceBundle bundle = ResourceBundle.getBundle("SudokuExceptions");
 
-    // TODO: 16.05.2020 przetestowac czy ta klasa tez sie poprawnie internacjonalizuje
-
     public SudokuException(String s) {
         super(s);
     }
