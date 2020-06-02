@@ -1,11 +1,12 @@
 package org.grupa5.gui;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -20,6 +21,8 @@ public class App extends Application {
 
     private static Scene scene;
     public static Stage stage;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
 
     @Override
@@ -30,9 +33,25 @@ public class App extends Application {
         stage.setResizable(false);
         stage.getIcons().add(new Image(App.class.getResourceAsStream( "sudokuTaskbarIcon.png" )));
         stage.initStyle(StageStyle.UNDECORATED);
-//        stage.getIcons().add(new Image(App.class.getResourceAsStream( "sudokuTaskbarIcon.png" )));
         stage.setScene(scene);
         stage.show();
+
+        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
+
     }
 
     static void setRoot(String fxml) throws IOException {

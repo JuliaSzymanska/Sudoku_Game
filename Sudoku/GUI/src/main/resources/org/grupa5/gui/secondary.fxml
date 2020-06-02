@@ -7,21 +7,38 @@
 
 <VBox alignment="CENTER" maxHeight="612.0" maxWidth="1164.0" minHeight="612.0" minWidth="1164.0" prefHeight="612.0" prefWidth="1164.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.SecondaryController">
     <children>
-      <Button fx:id="language" alignment="CENTER" contentDisplay="CENTER" minHeight="52.0" minWidth="60.0" mnemonicParsing="false" onAction="#changeLanguage" onMousePressed="#languageButtonPressed" text="%language" textAlignment="JUSTIFY" translateX="510.0" translateY="210.0" StackPane.alignment="CENTER_LEFT" />
-      <Label id="chooseLevelText" fx:id="level" text="%level" textFill="#cdbfbf" translateX="430.0" translateY="200.0">
+      <Button fx:id="exit" mnemonicParsing="false" onAction="#exitWindow" text="X" translateX="567.0" translateY="218.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="language" alignment="CENTER" contentDisplay="CENTER" minHeight="52.0" minWidth="60.0" mnemonicParsing="false" onAction="#changeLanguage" onMousePressed="#languageButtonPressed" text="%language" textAlignment="JUSTIFY" textFill="#dac071" translateX="502.0" translateY="197.0" StackPane.alignment="CENTER_LEFT" />
+      <Label id="chooseLevelText" fx:id="level" text="%level" textFill="#f0dc72" translateX="430.0" translateY="225.0">
           <font>
-            <Font name="System Bold" size="25.0" />
+            <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <ComboBox fx:id="boxLevel" prefWidth="150.0" translateX="430.0" translateY="200.0" />
-        <Button fx:id="secondaryButton" minHeight="60.0" minWidth="230.0" onAction="#startGame" onMousePressed="#startButtonPressed" onMouseReleased="#startButtonReleased" text="%start" translateX="430.0" translateY="200.0">
+      <ComboBox fx:id="boxLevel" prefWidth="150.0" translateX="430.0" translateY="213.0" />
+        <Button fx:id="secondaryButton" minHeight="60.0" minWidth="230.0" onAction="#startGame" onMousePressed="#startButtonPressed" onMouseReleased="#startButtonReleased" text="%start" translateX="430.0" translateY="210.0">
          <font>
             <Font size="28.0" />
          </font></Button>
-        <Button fx:id="saveButtonDb" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#saveSudokuToDb" onMousePressed="#saveDBButtonPressed" onMouseReleased="#saveDBButtonRelease" text="%saveGameDb" textAlignment="CENTER" translateX="370.0" translateY="210.0" StackPane.alignment="CENTER_LEFT" />
-        <Button fx:id="loadButtonDb" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#readSudokuFromDb" onMousePressed="#loadDBButtonPressed" onMouseReleased="#loadDBButtonRelease" text="%loadGameDb" textAlignment="CENTER" translateX="370.0" translateY="225.0" StackPane.alignment="CENTER_LEFT" />
-      <Button fx:id="saveButtonFile" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#saveSudokuToFile" onMousePressed="#saveFileButtonPressed" onMouseReleased="#saveFileButtonRelease" text="%saveGame" textAlignment="CENTER" translateX="490.0" translateY="30.0" StackPane.alignment="CENTER_LEFT" />
-      <Button fx:id="loadButtonFile" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#readSudokuFromFile" onMousePressed="#loadFileButtonPressed" onMouseReleased="#loadFileButtonRelease" text="%loadGame" textAlignment="CENTER" translateX="490.0" translateY="45.0" StackPane.alignment="CENTER_LEFT" />
+        <Button fx:id="saveButtonDb" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#saveSudokuToDb" onMousePressed="#saveDBButtonPressed" onMouseReleased="#saveDBButtonRelease" text="%saveGameDb" textAlignment="CENTER" translateX="370.0" translateY="210.0" StackPane.alignment="CENTER_LEFT">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+        <Button fx:id="loadButtonDb" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#readSudokuFromDb" onMousePressed="#loadDBButtonPressed" onMouseReleased="#loadDBButtonRelease" text="%loadGameDb" textAlignment="CENTER" translateX="370.0" translateY="225.0" StackPane.alignment="CENTER_LEFT">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="saveButtonFile" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#saveSudokuToFile" onMousePressed="#saveFileButtonPressed" onMouseReleased="#saveFileButtonRelease" text="%saveGame" textAlignment="CENTER" translateX="490.0" translateY="29.0" StackPane.alignment="CENTER_LEFT">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="loadButtonFile" minHeight="70.0" minWidth="100.0" mnemonicParsing="false" onAction="#readSudokuFromFile" onMousePressed="#loadFileButtonPressed" onMouseReleased="#loadFileButtonRelease" text="%loadGame" textAlignment="CENTER" translateX="490.0" translateY="44.0" StackPane.alignment="CENTER_LEFT">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
       <GridPane fx:id="grid1" maxHeight="366" maxWidth="368" prefHeight="366.0" prefWidth="368.0" translateX="-163.0" translateY="-291.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="42" minWidth="42" prefWidth="45.0" />

@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
 import javafx.collections.FXCollections;
@@ -79,6 +80,9 @@ public class SecondaryController implements Initializable {
     }
 
     StringConverter<Number> converter = new SudokuNumberStringConverter();
+
+    @FXML
+    private Button exit;
 
     @FXML
     private GridPane grid1;
@@ -225,9 +229,14 @@ public class SecondaryController implements Initializable {
                 getResource("Button_Small_Wood_Border_Smaller.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
+        BackgroundImage backgroundImage4 = new BackgroundImage(new Image(getClass().
+                getResource("exit.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
         Background background = new Background(backgroundImage);
         Background background2 = new Background(backgroundImage2);
         Background background3 = new Background(backgroundImage3);
+        Background background4 = new Background(backgroundImage4);
 
         this.secondaryButton.setBackground(background);
 
@@ -235,6 +244,7 @@ public class SecondaryController implements Initializable {
         this.saveButtonDb.setBackground(background2);
         this.saveButtonFile.setBackground(background2);
         this.loadButtonFile.setBackground(background2);
+        this.exit.setBackground(background4);
 
         this.language.setBackground(background3);
 
@@ -472,6 +482,11 @@ public class SecondaryController implements Initializable {
 
     public void startButtonReleased(){
         this.secondaryButton.setBackground(getBackgroundForImage("Button_Wide_Wood_Border.png"));
+    }
+
+    @FXML
+    private void exitWindow(){
+        Platform.exit();
     }
 
     private Background getBackgroundForImage(String image) {

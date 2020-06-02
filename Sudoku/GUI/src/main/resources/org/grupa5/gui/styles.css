@@ -2,11 +2,11 @@
 }
 
 .button {
-    -fx-text-fill: #dfd2d2;
+    -fx-text-fill: #F0DC72;
 }
 
 .button:pressed, .toggle-button:selected {
-    -fx-text-fill: #202d2d;
+    -fx-text-fill: #bdab51;
 }
 
 .root{

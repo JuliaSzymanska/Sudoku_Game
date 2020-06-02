@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +23,9 @@ import org.slf4j.LoggerFactory;
 public class PrimaryController implements Initializable {
 
     private final Logger logger = LoggerFactory.getLogger(PrimaryController.class);
+
+    @FXML
+    private Button exit;
 
     @FXML
     private Label authors;
@@ -54,11 +58,17 @@ public class PrimaryController implements Initializable {
                 getResource("Button_Small_Wood_Border_Smaller.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
+        BackgroundImage backgroundImage3 = new BackgroundImage(new Image(getClass().
+                getResource("exit.png").toExternalForm()), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
         Background background = new Background(backgroundImage);
         Background background2 = new Background(backgroundImage2);
+        Background background3 = new Background(backgroundImage3);
 
         this.primaryButton.setBackground(background);
         this.language.setBackground(background2);
+        this.exit.setBackground(background3);
 
         if (logger.isDebugEnabled()) {
             logger.debug("PrimaryController init");
@@ -109,6 +119,11 @@ public class PrimaryController implements Initializable {
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
         return new Background(backgroundImage2);
+    }
+
+    @FXML
+    private void exitWindow(){
+        Platform.exit();
     }
 
     private void updateLanguage() throws IOException {
