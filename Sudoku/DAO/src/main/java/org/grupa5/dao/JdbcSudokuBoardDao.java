@@ -25,6 +25,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private final String tableName = "boards";
     private final String boardId = "board_id";
     private final String boardFields = "fields";
+    private final String boardFieldsAreEditable = "editable";
     // TODO: 02.06.2020 dodać do tabelki pozycje pokazujaca boola z sudokuField
     //   I zapisywać / odczytywac go
 
@@ -42,6 +43,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private void createConnection() throws DaoException {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            //            this.dropTable();
         } catch (SQLException e) {
             throw new DaoException(e.getLocalizedMessage());
         }
@@ -59,14 +61,34 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             if (isTableExist(false)) {
                 String id = "";
                 String fields = "";
+                String isEditable = "";
                 while (resultSet.next()) {
                     id = resultSet.getString(boardId);
                     fields = resultSet.getString(boardFields);
+                    isEditable = resultSet.getString(boardFieldsAreEditable);
                 }
                 int counterX = 0;
                 int counterY = 0;
                 for (char c : fields.toCharArray()) {
                     sudokuBoard.set(counterX, counterY, Integer.parseInt(String.valueOf(c)));
+                    if (counterY == 8) {
+                        counterX += 1;
+                        counterY = 0;
+                    } else {
+                        counterY += 1;
+                    }
+                }
+                counterX = 0;
+                counterY = 0;
+                for (char c : isEditable.toCharArray()) {
+                    int toBool = Integer.parseInt(String.valueOf(c));
+                    if (toBool == 0) {
+                        sudokuBoard.getField(counterX, counterY)
+                                .setEditable(false);
+                    } else {
+                        sudokuBoard.getField(counterX, counterY)
+                                .setEditable(true);
+                    }
                     if (counterY == 8) {
                         counterX += 1;
                         counterY = 0;
@@ -86,17 +108,22 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     @Override
     public void write(SudokuBoard sudokuBoard) throws DaoWriteException {
         String sudoku = "'";
+        String areEditable = "'";
         try (Statement statement = connection.createStatement()) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
                     sudoku += Integer.toString(sudokuBoard.get(i, j));
+                    areEditable +=
+                            Integer.toString(sudokuBoard.getField(i, j).isEditable() ? 1 : 0);
                 }
             }
             sudoku += "'";
+            areEditable += "'";
             // TODO: 20.05.2020 mozna commitowac transakcje ale \
             //  wlasciwie to jak mamy jedno insert to nie trzeba
-            String query = "INSERT INTO " + tableName + "(" + boardId + ", " + boardFields + ")"
-                    + " VALUES (" + fileName + ", " + sudoku + ")";
+            String query = "INSERT INTO " + tableName + "(" + boardId + ", "
+                    + boardFields + ", " + boardFieldsAreEditable + ")"
+                    + " VALUES (" + fileName + ", " + sudoku + ", " + areEditable + ")";
             //ladowanie klasy sterownika do pamieci
             Class.forName(DB_DRIVER);
             // TODO: 24.05.2020 jesli istnieje juz w tablicy to trzeba zorbic update
@@ -109,16 +136,23 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
         }
     }
 
+    private void dropTable() throws SQLException {
+        Statement stm = connection.createStatement();
+        stm.execute("DROP TABLE " + tableName);
+    }
+
     private boolean isTableExist(boolean type) throws SQLException, DaoException {
         if (connection != null) {
             DatabaseMetaData dbmd = connection.getMetaData();
             try (ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null)) {
                 boolean rsbool = rs.next();
                 if (!rsbool && type) {
+                    Statement statement = connection.createStatement();
                     // TODO: 01.06.2020 dodac Statment statement = connection.CreateStatement();
                     statement.executeUpdate("CREATE TABLE " + tableName
                             + "( " + boardId + " VARCHAR(20) PRIMARY KEY, "
-                            + boardFields + " CHAR(81))");
+                            + boardFields + " CHAR(81),"
+                            + boardFieldsAreEditable + " CHAR(81))");
                 } else if (!rsbool && !type) {
                     return false;
                 }
@@ -134,4 +168,5 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     public void close() throws Exception {
         connection.close();
     }
+
 }
