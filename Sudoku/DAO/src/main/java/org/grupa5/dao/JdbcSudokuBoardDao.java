@@ -40,6 +40,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             //            this.dropTable();
         } catch (SQLException e) {
+            // TODO: 02.06.2020 czemu tu nie ma localized msg?
             throw new DaoException(e.getLocalizedMessage());
         }
     }
@@ -152,6 +153,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 }
                 return true;
             } catch (Exception e) {
+                // TODO: 02.06.2020 czemu tu nie ma localized msg?
                 throw new DaoException(e.getLocalizedMessage());
             }
         }
