@@ -86,41 +86,21 @@ public class SudokuBoardTest {
     @Test
     void getterTestException() {
         SudokuBoard sudoku = new SudokuBoard();
-        assertThrows(GetException.class, () -> {
-            sudoku.get(9, 7);
-        });
-        assertThrows(GetException.class, () -> {
-            sudoku.get(7, 9);
-        });
-        assertThrows(GetException.class, () -> {
-            sudoku.get(-1, 7);
-        });
-        assertThrows(GetException.class, () -> {
-            sudoku.get(7, -1);
-        });
+        assertThrows(GetException.class, () -> sudoku.get(9, 7));
+        assertThrows(GetException.class, () -> sudoku.get(7, 9));
+        assertThrows(GetException.class, () -> sudoku.get(-1, 7));
+        assertThrows(GetException.class, () -> sudoku.get(7, -1));
     }
 
     @Test
     void setterTestException() {
         SudokuBoard sudoku = new SudokuBoard();
-        assertThrows(SetException.class, () -> {
-            sudoku.set(10, 7, 3);
-        });
-        assertThrows(SetException.class, () -> {
-            sudoku.set(7, 10, 3);
-        });
-        assertThrows(SetException.class, () -> {
-            sudoku.set(-1, 7, 3);
-        });
-        assertThrows(SetException.class, () -> {
-            sudoku.set(7, -1, 3);
-        });
-        assertThrows(SetException.class, () -> {
-            sudoku.set(7, 7, -1);
-        });
-        assertThrows(SetException.class, () -> {
-            sudoku.set(7, 7, 10);
-        });
+        assertThrows(SetException.class, () -> sudoku.set(10, 7, 3));
+        assertThrows(SetException.class, () -> sudoku.set(7, 10, 3));
+        assertThrows(SetException.class, () -> sudoku.set(-1, 7, 3));
+        assertThrows(SetException.class, () -> sudoku.set(7, -1, 3));
+        assertThrows(SetException.class, () -> sudoku.set(7, 7, -1));
+        assertThrows(SetException.class, () -> sudoku.set(7, 7, 10));
     }
 
     @Test
@@ -162,8 +142,8 @@ public class SudokuBoardTest {
 
     @Test
     void HashCodeTest() {
-        SudokuBoard sudoku1 = null;
-        SudokuBoard sudoku2 = null;
+        SudokuBoard sudoku1;
+        SudokuBoard sudoku2;
         do {
             sudoku1 = new SudokuBoard();
             sudoku2 = new SudokuBoard();
@@ -182,7 +162,7 @@ public class SudokuBoardTest {
     @Test
     void cloneTest() throws SetException {
         SudokuBoard sudoku1 = new SudokuBoard();
-        SudokuBoard sudoku2 = null;
+        SudokuBoard sudoku2;
 
         sudoku1.solveGame();
         sudoku2 = sudoku1.clone();
@@ -201,34 +181,26 @@ public class SudokuBoardTest {
         Locale.setDefault(new Locale("en", "en"));
         SetException exception1 = assertThrows(
                 SetException.class,
-                () -> {
-                    sudoku1.set(0, 0, -1);
-                }
+                () -> sudoku1.set(0, 0, -1)
         );
         assertEquals("Sudoku Field Value Provided has to be in range <0, 9>", exception1.getLocalizedMessage());
 
         SetException exception2 = assertThrows(
                 SetException.class,
-                () -> {
-                    sudoku1.set(-1, -1, 1);
-                }
+                () -> sudoku1.set(-1, -1, 1)
         );
         assertEquals("Value has to be in range 0 - 8", exception2.getLocalizedMessage());
 
         Locale.setDefault(new Locale("pl", "pl"));
         SetException exception3 = assertThrows(
                 SetException.class,
-                () -> {
-                    sudoku1.set(0, 0, -1);
-                }
+                () -> sudoku1.set(0, 0, -1)
         );
         assertEquals("Wartosc Dla Sudoku Field Musi byc od 0 do 9", exception3.getLocalizedMessage());
 
         SetException exception4 = assertThrows(
                 SetException.class,
-                () -> {
-                    sudoku1.set(-1, -1, 1);
-                }
+                () -> sudoku1.set(-1, -1, 1)
         );
         assertEquals("Wartosc musi byc w zasiegu od 0 do 8", exception4.getLocalizedMessage());
     }
@@ -241,18 +213,14 @@ public class SudokuBoardTest {
         Locale.setDefault(new Locale("en", "en"));
         GetException exceptionEN = assertThrows(
                 GetException.class,
-                () -> {
-                    sudoku1.get(-1, -1);
-                }
+                () -> sudoku1.get(-1, -1)
         );
         assertEquals("Value has to be in range 0 - 8", exceptionEN.getLocalizedMessage());
 
         Locale.setDefault(new Locale("pl", "pl"));
         GetException exceptionPL = assertThrows(
                 GetException.class,
-                () -> {
-                    sudoku1.get(-1, -1);
-                }
+                () -> sudoku1.get(-1, -1)
         );
         assertEquals("Wartosc musi byc w zasiegu od 0 do 8", exceptionPL.getLocalizedMessage());
     }

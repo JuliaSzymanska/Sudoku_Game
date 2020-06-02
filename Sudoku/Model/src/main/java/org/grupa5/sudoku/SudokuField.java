@@ -46,14 +46,6 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
     }
 
     /**
-     * Copy constructor.
-     */
-
-    public SudokuField(SudokuField sudokuField) {
-        this.value = sudokuField.value;
-    }
-
-    /**
      * A simple getter.
      *
      * @return Value of member variable 'value'
@@ -106,6 +98,7 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
 
     /**
      * Clone objects.
+     *
      * @return Cloned SudokuField
      * @throws CloneNotSupportedException when thrown by super implementation.
      */

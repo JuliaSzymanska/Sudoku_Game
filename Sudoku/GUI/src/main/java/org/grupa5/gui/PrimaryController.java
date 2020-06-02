@@ -1,7 +1,5 @@
 package org.grupa5.gui;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
@@ -14,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

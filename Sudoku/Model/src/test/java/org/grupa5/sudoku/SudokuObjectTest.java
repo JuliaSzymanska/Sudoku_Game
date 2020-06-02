@@ -65,9 +65,7 @@ class SudokuObjectTest {
         for (int i = 0; i < SUDOKU_DIMENSIONS; i++) {
             list.set(i, new SudokuField(i));
         }
-        assertThrows(SetException.class, () -> {
-            new SudokuObject(list);
-        });
+        assertThrows(SetException.class, () -> new SudokuObject(list));
     }
 
     @Test

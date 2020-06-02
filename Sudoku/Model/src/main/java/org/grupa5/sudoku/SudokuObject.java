@@ -57,7 +57,7 @@ public class SudokuObject implements Serializable, Cloneable {
      */
 
     public boolean verify() {
-        Set<Integer> setNumbers = new HashSet<Integer>();
+        Set<Integer> setNumbers = new HashSet<>();
         for (SudokuField x : object) {
             if (!setNumbers.add(x.getValue()) && x.getValue() != 0) {
                 return false;

@@ -11,13 +11,9 @@ public class SudokuFieldTest {
     @Test
     void setTest() {
         SudokuField field = new SudokuField();
-        assertThrows(SetException.class, () -> {
-            field.setValue(-1);
-        });
-        assertThrows(SetException.class, () -> {
-            field.setValue(10);
-        });
-        SudokuField field1 = new SudokuField(field);
+        assertThrows(SetException.class, () -> field.setValue(-1));
+        assertThrows(SetException.class, () -> field.setValue(10));
+        SudokuField field1 = new SudokuField(field.getValue());
         assertEquals(field.getValue(), field1.getValue());
     }
 
@@ -67,9 +63,7 @@ public class SudokuFieldTest {
     @Test
     public void compareToTest() throws SetException {
         SudokuField field1 = new SudokuField(1);
-        assertThrows(NullPointerException.class, () -> {
-            field1.compareTo(null);
-        });
+        assertThrows(NullPointerException.class, () -> field1.compareTo(null));
         SudokuField field2 = new SudokuField(1);
         assertEquals(field1, field2);
         assertEquals(field1.compareTo(field2), 0);

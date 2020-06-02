@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class BacktrackingSudokuRemover implements SudokuRemover {
 
-    private List<Integer> allFields = new ArrayList<>();
+    private List<Integer> allFields;
     private SudokuBoard sudokuBoard;
     private int numOfFieldsToRemove;
     private SudokuBoard copyBoard;
@@ -41,8 +41,7 @@ public class BacktrackingSudokuRemover implements SudokuRemover {
             int row = i / 9;
             int col = i % 9;
             curreentNumOfPossibleBoards = 0;
-            int temp = 0;
-            temp = copyBoard.get(row, col);
+            int temp = copyBoard.get(row, col);
             copyBoard.resetField(row, col);
             checkNumbOfCombinations(this.copyBoard);
             if (curreentNumOfPossibleBoards > 1) {

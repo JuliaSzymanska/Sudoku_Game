@@ -7,7 +7,6 @@ import org.grupa5.exceptions.*;
 import org.grupa5.sudoku.SudokuBoard;
 
 class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
-    //obiekt tworzący połączenie z bazą danych.
     private Connection connection;
 
     private static String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
@@ -37,7 +36,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private void createConnection() throws DaoException {
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-            //            this.dropTable();
+            //this.dropTable();
         } catch (SQLException e) {
             throw new DaoException(e.getLocalizedMessage());
         }
@@ -49,7 +48,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)
         ) {
-            //ladowanie klasy sterownika do pamieci
             Class.forName(DB_DRIVER);
             SudokuBoard sudokuBoard = new SudokuBoard();
             if (isTableExist(false)) {
@@ -116,7 +114,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             String query = "INSERT INTO " + tableName + "(" + boardId + ", "
                     + boardFields + ", " + boardFieldsAreEditable + ")"
                     + " VALUES (" + fileName + ", " + sudoku + ", " + areEditable + ")";
-            //ladowanie klasy sterownika do pamieci
             Class.forName(DB_DRIVER);
             if (isTableExist(true)) {
                 statement.executeUpdate(query);

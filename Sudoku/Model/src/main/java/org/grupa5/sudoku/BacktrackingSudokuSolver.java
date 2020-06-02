@@ -7,8 +7,6 @@ import java.util.stream.IntStream;
 
 import org.grupa5.exceptions.GetException;
 import org.grupa5.exceptions.SetException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 

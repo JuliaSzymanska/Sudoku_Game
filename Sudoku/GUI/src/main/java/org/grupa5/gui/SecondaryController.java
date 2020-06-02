@@ -46,7 +46,6 @@ public class SecondaryController implements Initializable {
     private static final String savingFailed = "savingFailed";
     private static final String tryAgain = "tryAgain";
     private static final String saveGameDb = "saveGameDb";
-    private static final String loadGameDb = "loadGameDb";
 
 
     private SudokuBoard sudokuBoard;
@@ -462,16 +461,16 @@ public class SecondaryController implements Initializable {
         this.buttonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
     }
 
-    public void startButtonPressed(){
+    public void startButtonPressed() {
         this.secondaryButton.setBackground(getBackgroundForImage("Button_Wide_Wood_Border_wcisniety.png"));
     }
 
-    public void startButtonReleased(){
+    public void startButtonReleased() {
         this.secondaryButton.setBackground(getBackgroundForImage("Button_Wide_Wood_Border.png"));
     }
 
     @FXML
-    private void exitWindow(){
+    private void exitWindow() {
         Platform.exit();
     }
 
