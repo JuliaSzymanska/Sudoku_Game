@@ -25,6 +25,8 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private final String tableName = "boards";
     private final String boardId = "board_id";
     private final String boardFields = "fields";
+    // TODO: 02.06.2020 dodać do tabelki pozycje pokazujaca boola z sudokuField
+    //   I zapisywać / odczytywac go
 
     JdbcSudokuBoardDao(String fileName) throws DaoException {
         this.fileName = "'" + fileName + "'";

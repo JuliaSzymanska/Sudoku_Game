@@ -495,5 +495,3 @@ public class SecondaryController implements Initializable {
     }
 
 }
-
-
