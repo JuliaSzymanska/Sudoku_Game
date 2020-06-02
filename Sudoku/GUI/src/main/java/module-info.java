@@ -5,6 +5,7 @@ module hellofx {
     requires Dao;
     requires slf4j.api;
     requires Exceptions;
+    requires javafx.media;
 
     opens org.grupa5.gui to javafx.fxml;
     exports org.grupa5.gui;

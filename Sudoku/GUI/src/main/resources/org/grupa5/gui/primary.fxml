@@ -7,16 +7,16 @@
 
 <VBox alignment="CENTER" maxHeight="612.0" maxWidth="1164.0" minHeight="612.0" minWidth="1164.0" prefHeight="612.0" prefWidth="1164.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.grupa5.gui.PrimaryController">
    <children>
-      <Button fx:id="exit" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#exitWindow" text="X" translateX="568.0" translateY="-107.0">
+      <Button fx:id="exit" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#exitWindow" text="X" translateX="567.0" translateY="-106.0">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="language" alignment="CENTER" contentDisplay="CENTER" minHeight="52.0" minWidth="60.0" mnemonicParsing="false" onAction="#changeLanguage" onMousePressed="#languageButtonPressed" text="%language" textAlignment="JUSTIFY" translateX="493.0" translateY="-123.0" StackPane.alignment="CENTER_LEFT" />
-      <Label fx:id="mainLabel" text="SUDOKU" textFill="#f0dc72" translateX="430.0" translateY="-82.0">
+      <Button fx:id="language" alignment="CENTER" contentDisplay="CENTER" minHeight="52.0" minWidth="60.0" mnemonicParsing="false" onAction="#changeLanguage" onMousePressed="#languageButtonPressed" text="%language" textAlignment="JUSTIFY" translateX="502.0" translateY="-123.0" StackPane.alignment="CENTER_LEFT" />
+      <Label fx:id="mainLabel" text="SUDOKU" textFill="#f0dc72" translateX="430.0" translateY="-72.0">
          <font>
             <Font name="System Bold" size="27.0" />
          </font></Label>
-      <Button fx:id="primaryButton" minHeight="60.0" minWidth="230.0" onAction="#switchToSecondary" onMousePressed="#startButtonPressed" onMouseReleased="#startButtonReleased" text="%start" translateX="430.0" translateY="-85.0">
+      <Button fx:id="primaryButton" minHeight="60.0" minWidth="230.0" onAction="#switchToSecondary" onMousePressed="#startButtonPressed" onMouseReleased="#startButtonReleased" text="%start" translateX="430.0" translateY="-76.0">
          <font>
             <Font size="28.0" />
          </font>

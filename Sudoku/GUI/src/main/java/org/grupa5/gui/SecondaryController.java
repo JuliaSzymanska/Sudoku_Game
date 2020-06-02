@@ -30,9 +30,10 @@ import org.grupa5.sudoku.SudokuBoard;
 import org.grupa5.sudoku.SudokuField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class SecondaryController implements Initializable {
-    // TODO: 26.05.2020 Podłożyć muzyczkę! 
 
     private final Logger logger = LoggerFactory.getLogger(SecondaryController.class);
     private static final String loadGame = "loadGame";
@@ -44,6 +45,8 @@ public class SecondaryController implements Initializable {
     private static final String loadingFailed = "loadingFailed";
     private static final String savingFailed = "savingFailed";
     private static final String tryAgain = "tryAgain";
+    private static final String saveGameDb = "saveGameDb";
+    private static final String loadGameDb = "loadGameDb";
 
 
     private SudokuBoard sudokuBoard;
@@ -94,16 +97,10 @@ public class SecondaryController implements Initializable {
     private Button language;
 
     @FXML
-    private Button saveButtonFile;
+    private Button buttonFile;
 
     @FXML
-    private Button loadButtonFile;
-
-    @FXML
-    private Button loadButtonDb;
-
-    @FXML
-    private Button saveButtonDb;
+    private Button buttonDb;
 
     @FXML
     private Label level;
@@ -117,7 +114,7 @@ public class SecondaryController implements Initializable {
     private boolean checkNumeric(String value) {
         String number = value.replaceAll("\\s+", "");
         for (int j = 0; j < number.length(); j++) {
-            if (!(((int) number.charAt(j) > 47 && (int) number.charAt(j) <= 57))) {
+            if (!(((int) number.charAt(j) > 48 && (int) number.charAt(j) <= 57))) {
                 return false;
             }
         }
@@ -128,6 +125,9 @@ public class SecondaryController implements Initializable {
         VariablesCollection.setIsGameInProgress(!VariablesCollection.getIsGameInProgress());
         if (!VariablesCollection.getIsGameInProgress()) {
             try {
+                Media media = new Media(new File(".\\src\\main\\resources\\org\\grupa5\\gui\\sound.wav").toURI().toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.setAutoPlay(true);
                 this.switchToPrimary();
             } catch (IOException e) {
                 if (this.logger.isErrorEnabled()) {
@@ -137,6 +137,10 @@ public class SecondaryController implements Initializable {
             return;
         }
         secondaryButton.setText(resourceBundle.getString(end));
+        buttonFile.setText(resourceBundle.getString(saveGame));
+        buttonFile.setOnAction(e -> saveSudokuToFile());
+        buttonDb.setText(resourceBundle.getString(saveGameDb));
+        buttonDb.setOnAction(e -> saveSudokuToDb());
     }
 
     private void fillGrid() throws NoSuchMethodException {
@@ -240,10 +244,8 @@ public class SecondaryController implements Initializable {
 
         this.secondaryButton.setBackground(background);
 
-        this.loadButtonDb.setBackground(background2);
-        this.saveButtonDb.setBackground(background2);
-        this.saveButtonFile.setBackground(background2);
-        this.loadButtonFile.setBackground(background2);
+        this.buttonDb.setBackground(background2);
+        this.buttonFile.setBackground(background2);
         this.exit.setBackground(background4);
 
         this.language.setBackground(background3);
@@ -444,36 +446,20 @@ public class SecondaryController implements Initializable {
         this.language.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Smaller_Wcisniety.png"));
     }
 
-    public void saveDBButtonPressed() {
-        this.saveButtonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
-    }
-
-    public void saveDBButtonRelease() {
-        this.saveButtonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
-    }
-
     public void loadDBButtonPressed() {
-        this.loadButtonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
+        this.buttonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
     }
 
     public void loadDBButtonRelease() {
-        this.loadButtonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
-    }
-
-    public void saveFileButtonPressed() {
-        this.saveButtonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
-    }
-
-    public void saveFileButtonRelease() {
-        this.saveButtonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
+        this.buttonDb.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
     }
 
     public void loadFileButtonPressed() {
-        this.loadButtonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
+        this.buttonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border_Wcisniety.png"));
     }
 
     public void loadFileButtonRelease() {
-        this.loadButtonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
+        this.buttonFile.setBackground(getBackgroundForImage("Button_Small_Wood_Border.png"));
     }
 
     public void startButtonPressed(){
