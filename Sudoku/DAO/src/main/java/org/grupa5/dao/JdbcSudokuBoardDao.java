@@ -9,9 +9,6 @@ import org.grupa5.sudoku.SudokuBoard;
 class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     //obiekt tworzący połączenie z bazą danych.
     private Connection connection;
-    //obiekt pozwalający tworzyć nowe wyrażenia SQL
-    // TODO: 01.06.2020 usunac to trzeba
-    private Statement statement;
 
     private static String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
     //    private static String DB_URL = "jdbc:derby:memory:myDb;create=true";
@@ -26,8 +23,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private final String boardId = "board_id";
     private final String boardFields = "fields";
     private final String boardFieldsAreEditable = "editable";
-    // TODO: 02.06.2020 dodać do tabelki pozycje pokazujaca boola z sudokuField
-    //   I zapisywać / odczytywac go
 
     JdbcSudokuBoardDao(String fileName) throws DaoException {
         this.fileName = "'" + fileName + "'";
@@ -148,7 +143,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 boolean rsbool = rs.next();
                 if (!rsbool && type) {
                     Statement statement = connection.createStatement();
-                    // TODO: 01.06.2020 dodac Statment statement = connection.CreateStatement();
                     statement.executeUpdate("CREATE TABLE " + tableName
                             + "( " + boardId + " VARCHAR(20) PRIMARY KEY, "
                             + boardFields + " CHAR(81),"

@@ -33,9 +33,6 @@ import org.slf4j.LoggerFactory;
 public class SecondaryController implements Initializable {
     // TODO: 26.05.2020 Podłożyć muzyczkę! 
 
-    @FXML
-    private AnchorPane root;
-
     private final Logger logger = LoggerFactory.getLogger(SecondaryController.class);
     private static final String loadGame = "loadGame";
     private static final String saveGame = "saveGame";
@@ -183,15 +180,6 @@ public class SecondaryController implements Initializable {
                         }
                     }
                 });
-
-                int intToAdd = 0;
-                try {
-                    intToAdd = sudokuBoard.get(j, i);
-                } catch (GetException e) {
-                    if (this.logger.isErrorEnabled()) {
-                        logger.error("", e);
-                    }
-                }
                 if (!sudokuField.isEditable()) {
                     textField.setDisable(true);
                 }
@@ -349,7 +337,6 @@ public class SecondaryController implements Initializable {
         }
     }
 
-    // TODO: 02.06.2020 Zapis z bazy danych i odczyt trzeba zmienic zeby zapisywał sie tez ten bool
     public void readSudokuFromDb() {
         TextInputDialog td = new TextInputDialog(resourceBundle.getString("nameReadDB"));
         td.setTitle(resourceBundle.getString(loadGame));
