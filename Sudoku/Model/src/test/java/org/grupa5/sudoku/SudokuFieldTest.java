@@ -18,6 +18,14 @@ public class SudokuFieldTest {
     }
 
     @Test
+    void isEditableSet(){
+        SudokuField field = new SudokuField();
+        assertFalse(field.isEditable());
+        field.setEditable(true);
+        assertTrue(field.isEditable());
+    }
+
+    @Test
     void equalsCodeTest() throws SetException {
         SudokuField sudoku1 = new SudokuField(3);
         SudokuField sudoku2 = new SudokuField(4);
