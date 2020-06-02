@@ -46,7 +46,9 @@ public class SudokuFieldTest {
     public void testToString() {
         String expectedOut = "1234567890";
         SudokuField field = new SudokuField(1234567890);
-        assertEquals(expectedOut, field.toString());
+        boolean editable = true;
+        field.setEditable(true);
+        assertEquals(editable + "," + expectedOut, field.toString());
     }
 
     @Test

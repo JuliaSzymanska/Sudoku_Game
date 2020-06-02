@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.*;
-import org.apache.commons.lang3.exception.CloneFailedException;
 import org.grupa5.exceptions.GetException;
 import org.grupa5.exceptions.SetException;
 import org.slf4j.Logger;
@@ -163,7 +162,6 @@ public class SudokuBoard implements Cloneable, Serializable {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to get");
             }
-            // TODO: 26.05.2020 pamietac 
             throw new GetException("from0to8");
         }
         if (y < 0 || y > SUDOKU_DIMENSIONS - 1) {
@@ -190,7 +188,6 @@ public class SudokuBoard implements Cloneable, Serializable {
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to set");
             }
-            // TODO: 26.05.2020 pamietac 
             throw new SetException("from0to8");
         }
         if (value < 0 || value > 9) {

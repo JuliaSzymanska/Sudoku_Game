@@ -29,7 +29,8 @@ public class App extends Application {
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setResizable(false);
         stage.getIcons().add(new Image(App.class.getResourceAsStream( "sudokuTaskbarIcon.png" )));
-
+        stage.initStyle(StageStyle.UNDECORATED);
+//        stage.getIcons().add(new Image(App.class.getResourceAsStream( "sudokuTaskbarIcon.png" )));
         stage.setScene(scene);
         stage.show();
     }

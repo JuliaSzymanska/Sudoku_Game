@@ -4,6 +4,8 @@ import java.io.*;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.grupa5.exceptions.SetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,7 +71,6 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
 
     public void setValue(int value) {
         if (value < 0 || value > 9) {
-            // TODO: 26.05.2020 pamietac
             if (logger.isDebugEnabled()) {
                 logger.debug("Invalid Index Provided to set");
             }
@@ -93,10 +94,9 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
         return new EqualsBuilder().append(that.getValue(), this.value).isEquals();
     }
 
-    // TODO: 02.06.2020 poprawic na tostringbuilder
     @Override
     public String toString() {
-        return Integer.toString(this.value);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
     @Override

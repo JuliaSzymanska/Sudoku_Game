@@ -11,7 +11,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private Connection connection;
 
     private static String DB_URL = "jdbc:derby://localhost:1527/dbname;create=true";
-    //    private static String DB_URL = "jdbc:derby:memory:myDb;create=true";
     private static final String DB_USER = "user";
     private static final String DB_PASS = "1";
     private static final String DB_DRIVER = "org.apache.derby.jdbc.ClientDriver";
@@ -40,7 +39,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             //            this.dropTable();
         } catch (SQLException e) {
-            // TODO: 02.06.2020 czemu tu nie ma localized msg?
             throw new DaoException(e.getLocalizedMessage());
         }
     }
@@ -115,15 +113,11 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             }
             sudoku += "'";
             areEditable += "'";
-            // TODO: 20.05.2020 mozna commitowac transakcje ale \
-            //  wlasciwie to jak mamy jedno insert to nie trzeba
             String query = "INSERT INTO " + tableName + "(" + boardId + ", "
                     + boardFields + ", " + boardFieldsAreEditable + ")"
                     + " VALUES (" + fileName + ", " + sudoku + ", " + areEditable + ")";
             //ladowanie klasy sterownika do pamieci
             Class.forName(DB_DRIVER);
-            // TODO: 24.05.2020 jesli istnieje juz w tablicy to trzeba zorbic update
-            //  ale czy chce nam sie to robic? chyba nie xd
             if (isTableExist(true)) {
                 statement.executeUpdate(query);
             }
@@ -140,10 +134,10 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private boolean isTableExist(boolean type) throws SQLException, DaoException {
         if (connection != null) {
             DatabaseMetaData dbmd = connection.getMetaData();
-            try (ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null)) {
+            try (ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null);
+                 Statement statement = connection.createStatement();) {
                 boolean rsbool = rs.next();
                 if (!rsbool && type) {
-                    Statement statement = connection.createStatement();
                     statement.executeUpdate("CREATE TABLE " + tableName
                             + "( " + boardId + " VARCHAR(20) PRIMARY KEY, "
                             + boardFields + " CHAR(81),"
@@ -153,7 +147,6 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 }
                 return true;
             } catch (Exception e) {
-                // TODO: 02.06.2020 czemu tu nie ma localized msg?
                 throw new DaoException(e.getLocalizedMessage());
             }
         }

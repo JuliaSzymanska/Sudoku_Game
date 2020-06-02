@@ -248,6 +248,7 @@ public class SecondaryController implements Initializable {
         boxLevel.setItems(FXCollections.observableArrayList(Level.values()[0], Level.values()[1], Level.values()[2]));
         boxLevel.setValue(Level.values()[0]);
 
+
         if (VariablesCollection.getIsGameInProgress()) {
             try {
                 this.fillGrid();
