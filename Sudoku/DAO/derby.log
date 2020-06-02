@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Mon Jun 01 00:25:58 CEST 2020D001 : [0] The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585), [1] a816c00e-0172-6cd7-70af-00000e428130, [2] memory:D:\Dokumenty\Dokumenty\Studia\4_semestr\Programowanie_Komponentowe\Laboratorium\Git\pk-2020-mkwa-sr-12-05\Sudoku\DAO\myDb, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@614c5515, [4] file:/C:/Users/julas/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
+Tue Jun 02 14:55:35 CEST 2020D001 : [0] The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585), [1] a816c00e-0172-7519-f4ef-00001e318f50, [2] memory:D:\Studia\kompo\pk-2020-mkwa-sr-12-05\Sudoku\DAO\myDb, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@60addb54, [4] file:/C:/Users/Przemek/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=11.0.6+8-LTS
-user.dir=D:\Dokumenty\Dokumenty\Studia\4_semestr\Programowanie_Komponentowe\Laboratorium\Git\pk-2020-mkwa-sr-12-05\Sudoku\DAO
+java.runtime.version=11.0.7+8-LTS
+user.dir=D:\Studia\kompo\pk-2020-mkwa-sr-12-05\Sudoku\DAO
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

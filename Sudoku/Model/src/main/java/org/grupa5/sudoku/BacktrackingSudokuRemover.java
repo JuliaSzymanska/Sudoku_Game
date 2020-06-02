@@ -84,6 +84,7 @@ public class BacktrackingSudokuRemover implements SudokuRemover {
             for (int col = 0; col < 9; col++) {
                 if (this.copyBoard.get(row, col) == 0) {
                     this.sudokuBoard.resetField(row, col);
+                    this.sudokuBoard.getField(row, col).setEditable(true);
                 }
             }
         }

@@ -192,7 +192,7 @@ public class SecondaryController implements Initializable {
                         logger.error("", e);
                     }
                 }
-                if (intToAdd != 0) {
+                if (!sudokuField.isEditable()) {
                     textField.setDisable(true);
                 }
                 grid1.add(textField, i, j);
@@ -331,8 +331,6 @@ public class SecondaryController implements Initializable {
     }
 
     public void readSudokuFromFile() {
-        // TODO: 05.05.2020 popraw wczytywanie rozpoczetej gry, zeby pola ktore wczensije
-        //  sie wpisalo przed zapisem a nie sa zerami dalo sie zmienic po wczytaniu
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -351,6 +349,7 @@ public class SecondaryController implements Initializable {
         }
     }
 
+    // TODO: 02.06.2020 Zapis z bazy danych i odczyt trzeba zmienic zeby zapisywał sie tez ten bool
     public void readSudokuFromDb() {
         TextInputDialog td = new TextInputDialog(resourceBundle.getString("nameReadDB"));
         td.setTitle(resourceBundle.getString(loadGame));
