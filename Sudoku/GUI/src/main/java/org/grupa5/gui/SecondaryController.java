@@ -168,23 +168,17 @@ public class SecondaryController implements Initializable {
                 this.integerPropertyArrayListForSudokuFieldBinding.add(integerProperty);
                 textField.textProperty().bindBidirectional(integerProperty, converter);
 
-                textField.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent event) {
-                        textField.clear();
-                        String character = event.getCharacter();
-                        if (!checkNumeric(character)) {
-                            textField.setText("");
-                            event.consume();
-                        }
+                textField.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+                    textField.clear();
+                    String character = event.getCharacter();
+                    if (!checkNumeric(character)) {
+                        textField.setText("");
+                        event.consume();
                     }
                 });
-                textField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent event) {
-                        if (!sudokuBoard.isWholeBoardValid()) {
-                            textField.setText("");
-                        }
+                textField.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+                    if (!sudokuBoard.isWholeBoardValid()) {
+                        textField.setText("");
                     }
                 });
                 if (!sudokuField.isEditable()) {
