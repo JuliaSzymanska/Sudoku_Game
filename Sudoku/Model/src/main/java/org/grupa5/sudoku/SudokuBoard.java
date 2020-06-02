@@ -61,6 +61,11 @@ public class SudokuBoard implements Cloneable, Serializable {
 
     public void solveGame() {
         SudokuSolver sudokuSolver = new BacktrackingSudokuSolver();
+        for (List<SudokuField> i : this.board) {
+            for (SudokuField j : i) {
+                j.setEditable(false);
+            }
+        }
         sudokuSolver.solve(this);
     }
 

@@ -19,6 +19,10 @@ public class VariablesCollection {
     private VariablesCollection() {
     }
 
+    public static void newBoard() {
+        VariablesCollection.sudokuBoard = new SudokuBoard();
+    }
+
     public static VariablesCollection getInstance() {
         return INSTANCE;
     }
