@@ -6,7 +6,7 @@ public class DaoException extends Exception {
 
     static final String defaultMsgKey = "daoException";
 
-    private static ResourceBundle bundle = ResourceBundle.getBundle("SudokuExceptions");
+    private ResourceBundle bundle = ResourceBundle.getBundle("SudokuExceptions");
 
     public DaoException(String s) {
         super(s);

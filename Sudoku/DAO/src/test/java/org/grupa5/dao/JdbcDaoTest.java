@@ -17,7 +17,7 @@ public class JdbcDaoTest {
 
     @Test
     void localizedMessagesTestReadDBDao() {
-        try (Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STR'ING", url);) {
+        try (Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STR'ING", url)) {
             Locale.setDefault(new Locale("en", "en"));
             DaoReadException exceptionEN = assertThrows(
                     DaoReadException.class,
@@ -42,22 +42,18 @@ public class JdbcDaoTest {
 
     @Test
     void localizedMessagesTestWriteDBDao() {
-        try (Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STRING", url);) {
+        try (Dao<SudokuBoard> failureDaoDB = SudokuBoardDaoFactory.getJdbcDao("STRI'NG", url)) {
             Locale.setDefault(new Locale("en", "en"));
             DaoWriteException exceptionEN = assertThrows(
                     DaoWriteException.class,
-                    () -> {
-                        failureDaoDB.write(this.board);
-                    }
+                    () -> failureDaoDB.write(this.board)
             );
             assertEquals(exceptionEN.getLocalizedMessage(), "SudokuBoard DBDao write encountered an Issue");
 
             Locale.setDefault(new Locale("pl", "pl"));
             DaoWriteException exceptionPL = assertThrows(
                     DaoWriteException.class,
-                    () -> {
-                        failureDaoDB.write(this.board);
-                    }
+                    () -> failureDaoDB.write(this.board)
             );
             assertEquals(exceptionPL.getLocalizedMessage(), "Blad przy zapisie do Planszy do bazy danych (DBDao)");
         } catch (Exception e) {

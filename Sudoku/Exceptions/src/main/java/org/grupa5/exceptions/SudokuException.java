@@ -6,7 +6,7 @@ public class SudokuException extends RuntimeException {
 
     static final String defaultMsgKey = "sudokuException";
 
-    private static ResourceBundle bundle = ResourceBundle.getBundle("SudokuExceptions");
+    private ResourceBundle bundle = ResourceBundle.getBundle("SudokuExceptions");
 
     public SudokuException(String s) {
         super(s);
