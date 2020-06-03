@@ -132,7 +132,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
         if (connection != null) {
             DatabaseMetaData dbmd = connection.getMetaData();
             try (ResultSet rs = dbmd.getTables(null, null, tableName.toUpperCase(), null);
-                 Statement statement = connection.createStatement();) {
+                 Statement statement = connection.createStatement()) {
                 boolean rsbool = rs.next();
                 if (!rsbool && type) {
                     statement.executeUpdate("CREATE TABLE " + tableName

@@ -151,7 +151,7 @@ public class SecondaryController implements Initializable {
                 textField.setAlignment(Pos.CENTER);
                 textField.setMaxWidth(45);
                 textField.setMaxHeight(45);
-                textField.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1);" +
+                textField.setStyle("-fx-background-color: rgba(255, 255, 255, 0.15);" +
                         "-fx-text-fill: white");
                 textField.setTextFormatter(new TextFormatter<>(c -> {
                     if (c.isContentChange()) {
@@ -270,6 +270,7 @@ public class SecondaryController implements Initializable {
             this.alertNotAbleToSaveGame();
             return;
         }
+
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
