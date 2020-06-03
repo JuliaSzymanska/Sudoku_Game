@@ -315,6 +315,7 @@ public class SecondaryController implements Initializable {
         String inputString = td.getEditor().getText();
         if (!inputString.equals("")) {
             try {
+                // TODO: 04.06.2020 autocloseable
                 SudokuBoardDaoFactory.getJdbcDao(inputString).write(this.sudokuBoard);
             } catch (DaoException e) {
                 this.alertNotAbleToSaveGame();
@@ -364,6 +365,7 @@ public class SecondaryController implements Initializable {
             return;
         }
         String inputString = td.getEditor().getText();
+        // TODO: 04.06.2020 autocloseable
         try {
             this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao(inputString).read();
             switchStartAndEndButtons();
