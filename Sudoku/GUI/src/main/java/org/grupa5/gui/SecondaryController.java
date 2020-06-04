@@ -24,6 +24,7 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.grupa5.dao.Dao;
 import org.grupa5.exceptions.*;
 import org.grupa5.dao.SudokuBoardDaoFactory;
 import org.grupa5.sudoku.SudokuBoard;
@@ -135,6 +136,10 @@ public class SecondaryController implements Initializable {
             }
             return;
         }
+        this.setButtonsFuncDuringGame();
+    }
+
+    private void setButtonsFuncDuringGame() {
         secondaryButton.setText(resourceBundle.getString(end));
         buttonFile.setText(resourceBundle.getString(saveGame));
         buttonFile.setOnAction(e -> saveSudokuToFile());
@@ -257,6 +262,9 @@ public class SecondaryController implements Initializable {
         if (VariablesCollection.getIsGameInProgress()) {
             try {
                 this.fillGrid();
+                this.level.setVisible(false);
+                this.boxLevel.setVisible(false);
+                setButtonsFuncDuringGame();
             } catch (NoSuchMethodException e) {
                 if (logger.isTraceEnabled()) {
                     logger.trace("", e);
@@ -278,8 +286,8 @@ public class SecondaryController implements Initializable {
         File file = fileChooser.showSaveDialog(new Stage());
 
         if (file != null) {
-            try {
-                SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).write(this.sudokuBoard);
+            try (var boardDao = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath())){
+                boardDao.write(this.sudokuBoard);
             } catch (DaoException e) {
                 this.alertNotAbleToSaveGame();
                 if (this.logger.isInfoEnabled()) {
@@ -314,9 +322,8 @@ public class SecondaryController implements Initializable {
         }
         String inputString = td.getEditor().getText();
         if (!inputString.equals("")) {
-            try {
-                // TODO: 04.06.2020 autocloseable
-                SudokuBoardDaoFactory.getJdbcDao(inputString).write(this.sudokuBoard);
+            try (var dao = SudokuBoardDaoFactory.getJdbcDao(inputString)) {
+                dao.write(this.sudokuBoard);
             } catch (DaoException e) {
                 this.alertNotAbleToSaveGame();
                 if (this.logger.isInfoEnabled()) {
@@ -332,8 +339,8 @@ public class SecondaryController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
-            try {
-                this.sudokuBoard = SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath()).read();
+            try (var dao =  SudokuBoardDaoFactory.getFileDao(file.getAbsolutePath())){
+                this.sudokuBoard = dao.read();
                 switchStartAndEndButtons();
                 this.fillGrid();
             } catch (DaoException | NoSuchMethodException e) {
@@ -366,8 +373,8 @@ public class SecondaryController implements Initializable {
         }
         String inputString = td.getEditor().getText();
         // TODO: 04.06.2020 autocloseable
-        try {
-            this.sudokuBoard = SudokuBoardDaoFactory.getJdbcDao(inputString).read();
+        try (var dao = SudokuBoardDaoFactory.getJdbcDao(inputString)) {
+            this.sudokuBoard = dao.read();
             switchStartAndEndButtons();
             this.fillGrid();
         } catch (NoSuchMethodException | DaoException e) {

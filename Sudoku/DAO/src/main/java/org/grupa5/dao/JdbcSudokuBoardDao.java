@@ -15,6 +15,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
     private static final String DB_DRIVER = "org.apache.derby.jdbc.ClientDriver";
     private static final String DBRead = "DBRead";
     private static final String DBWrite = "DBWrite";
+    private static final String generic = "daoGeneric";
 
     private final String fileName;
     private final String tableName = "boards";
@@ -38,7 +39,7 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             //this.dropTable();
         } catch (SQLException e) {
-            throw new DaoException(e.getLocalizedMessage());
+            throw new DaoException(generic, e);
         }
     }
 
@@ -144,15 +145,18 @@ class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 }
                 return true;
             } catch (Exception e) {
-                throw new DaoException(e.getLocalizedMessage());
+                throw new DaoException(generic, e);
             }
         }
         return false;
     }
 
     @Override
-    public void close() throws Exception {
-        connection.close();
+    public void close() throws DaoException {
+        try {
+            connection.close();
+        } catch (SQLException throwables) {
+            throw new DaoException(generic, throwables);
+        }
     }
-
 }

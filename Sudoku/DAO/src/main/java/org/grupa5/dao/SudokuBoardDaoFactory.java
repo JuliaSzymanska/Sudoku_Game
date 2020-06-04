@@ -3,7 +3,7 @@ package org.grupa5.dao;
 import org.grupa5.exceptions.DaoException;
 import org.grupa5.sudoku.SudokuBoard;
 
-public class SudokuBoardDaoFactory {
+public class SudokuBoardDaoFactory implements AutoCloseable {
     public static Dao<SudokuBoard> getFileDao(String fileName) {
         return new FileSudokuBoardDao(fileName);
     }
@@ -17,6 +17,11 @@ public class SudokuBoardDaoFactory {
     }
 
     private SudokuBoardDaoFactory() {
+
+    }
+
+    @Override
+    public void close() {
 
     }
 }
