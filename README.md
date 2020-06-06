@@ -2,7 +2,7 @@
 GUI Java implementation of the popular game [Sudoku](https://en.wikipedia.org/wiki/Sudoku/). 
 
 ## Gameplay
-![GamePlay.png](https://github.com/JuliaSzymanska/Sudoku_Game/blob/master/GamePlay.png)
+![GamePlay.png](https://github.com/ZdrzalikPrzemyslaw/Sudoku_Game/blob/master/GamePlay.png)
 
 ## Team Members
 * [Julia Szymańska](https://github.com/JuliaSzymanska)
