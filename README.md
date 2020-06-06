@@ -14,6 +14,9 @@ Using Maven from Terminal while in the parent project dir execute the following 
 * ```mvn -pl GUI javafx:compile javafx:run```
 
 ## Features
+* Save game to database
+* Save game to file
+* Polish and English localizations
 
 
 ## Built With
