@@ -2,11 +2,11 @@
 Implementing sudoku game using Java.
 
 ## Built With
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [JavaFX](https://openjfx.io/) - GUI Framework
 * [Apache Derby](https://db.apache.org/derby/) - Relational Database 
+* [JavaFX](https://openjfx.io/) - GUI Framework
 * [JUnit5](https://junit.org/junit5/) - Testing Framework
 * [Logback](http://logback.qos.ch/) - Logging Framework
+* [Maven](https://maven.apache.org/) - Dependency Management
 * [SLF4J](http://www.slf4j.org/) - Logging API
 
 ## Usage
