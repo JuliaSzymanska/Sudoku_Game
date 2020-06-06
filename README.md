@@ -1,6 +1,6 @@
 # Sudoku_Game
-Implementing sudoku game using Java.
-
+GUI Java implementation of the popular game [Sudoku](https://en.wikipedia.org/wiki/Sudoku). 
+/
 ## Built With
 * [Apache Derby](https://db.apache.org/derby/) - Relational Database 
 * [JavaFX](https://openjfx.io/) - GUI Framework
