@@ -1,5 +1,5 @@
 # Sudoku_Game
-GUI Java implementation of the popular game [Sudoku](https://en.wikipedia.org/wiki/Sudoku). 
+GUI Java implementation of the popular game [Sudoku](https://en.wikipedia.org/wiki/Sudoku/). 
 /
 ## Built With
 * [Apache Derby](https://db.apache.org/derby/) - Relational Database 
