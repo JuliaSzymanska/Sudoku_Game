@@ -10,7 +10,7 @@ GUI Java implementation of the popular game [Sudoku](https://en.wikipedia.org/wi
 
 ## Usage
 Using Maven from Terminal while in the parent project dir execute the following commands:
-* ```mvn clean package install```
+* ```mvn clean install```
 * ```mvn -pl GUI javafx:compile javafx:run```
 
 ## Features
