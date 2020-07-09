@@ -3,6 +3,7 @@ package org.grupa5.sudoku;
 import com.jparams.verifier.tostring.ToStringVerifier;
 import org.grupa5.exceptions.SetException;
 import org.grupa5.exceptions.GetException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class SudokuBoardTest {
                 assertNotEquals(sudoku.getBoard().get(i).get(j).getValue(), 0);
             }
         }
+//        Assertions.fail();
     }
 
     @Test
