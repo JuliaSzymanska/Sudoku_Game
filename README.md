@@ -31,5 +31,5 @@ Using Maven from Terminal while in the parent project dir execute the following 
 [Background](https://www.micestro.com/work-imagery?lightbox=dataItem-jk9abbp7)
 
 ## License
-[Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/)
+[Apache License 2.0](https://github.com/JuliaSzymanska/Sudoku_Game/blob/master/LICENSE)
 
