@@ -2,7 +2,7 @@
 GUI Java implementation of the popular game [Sudoku](https://en.wikipedia.org/wiki/Sudoku/). 
 
 ## Gameplay
-![GamePlay.png](https://github.com/ZdrzalikPrzemyslaw/Sudoku_Game/blob/master/GamePlay.png)
+![GamePlay.png](https://github.com/JuliaSzymanska/Sudoku_Game/blob/master/GamePlay.png)
 
 ## Team Members
 * [Julia Szymańska](https://github.com/JuliaSzymanska)
@@ -10,7 +10,7 @@ GUI Java implementation of the popular game [Sudoku](https://en.wikipedia.org/wi
 
 ## Usage
 Using Maven from Terminal while in the parent project dir execute the following commands:
-* ```mvn clean install```
+* ```mvn clean package install```
 * ```mvn -pl GUI javafx:compile javafx:run```
 
 ## Features
